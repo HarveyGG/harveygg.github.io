@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
     
-  MAC环境 - Harvey's Tech Site
+  (1) MAC开发环境——软件包管理 - Harvey's Tech Site
   
   </title>
   
@@ -77,7 +77,7 @@
     <li><label>Categories</label></li>
 
         
-            <li><a href="mac-dev.html">Mac开发</a></li>
+            <li><a href="mac-dev-env.html">Mac开发环境</a></li>
          
 
       </ul>
@@ -100,14 +100,14 @@
       <div class="markdown-body article-wrap">
        <div class="article">
           
-          <h1>MAC环境</h1>
+          <h1>(1) MAC开发环境——软件包管理</h1>
      
         <div class="read-more clearfix">
           <span class="date">2019/5/25</span>
 
           <span>posted in&nbsp;</span> 
           
-              <span class="posted-in"><a href='mac-dev.html'>Mac开发</a></span>
+              <span class="posted-in"><a href='mac-dev-env.html'>Mac开发环境</a></span>
            
          
           <span class="comments">
@@ -120,85 +120,62 @@
       </div><!-- article -->
 
       <div class="article-content">
-      <h2 id="toc_0">软件包管理<a href="https://brew.sh/">Homebrew</a></h2>
+      <hr/>
+
+<h2 id="toc_0"><a href="https://brew.sh/">Homebrew</a></h2>
+
+<p><img src="http://ps2an8zfo.bkt.clouddn.com/mweb/homebrew-256x256.png" alt="homebrew-256x256"/></p>
 
 <ul>
-<li>brew管理命令行工具，三方库，会先下载源码，编译，安装，最后link到/usr/local/bin中，如：brew install wget</li>
-<li>brew cask管理Mac应用，会直接下载二进制，然后安装，是AppStore的补充，如：brew cask install chrome</li>
-<li>推荐所有软件先考虑AppStore，如果没有先考虑Homebrew，再没有再去官网下载，方便后面管理</li>
+<li>使用 Homebrew 安装 Apple 没有预装，但你需要的东西。</li>
+<li>brew管理命令行工具，三方库，会先下载源码，编译，安装，最后link到/usr/local/bin中，如：<code>brew install wget</code></li>
+<li>brew cask管理Mac应用，会直接下载二进制，然后安装，是AppStore的补充，如：<code>brew cask install chrome</code></li>
+<li>推荐所有软件<strong>先考虑AppStore</strong>，如果没有<strong>再考虑Homebrew</strong>，再没有<strong>再去官网下载</strong>，方便后面管理</li>
 </ul>
 
 <h3 id="toc_1">Install Homebrew</h3>
 
-<pre class="line-numbers"><code class="language-text">/usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;
+<pre class="line-numbers"><code class="language-shell">$ /usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;
 </code></pre>
 
 <h3 id="toc_2">Homebrew 常用命令</h3>
 
-<pre class="line-numbers"><code class="language-text">brew search /wge*/  # 搜索软件,后面是正则表达式
-brew info wget    # 查看软件信息
-brew install wget  # 安装 wget
-brew list wget    # 列出该软件安装后的文件
-brew uninstall wget  # 卸载 wget
+<pre class="line-numbers"><code class="language-shell">$ brew search /wge*/  # 搜索软件,后面是正则表达式
+$ brew info wget    # 查看软件信息
+$ brew install wget  # 安装 wget
+$ brew list wget    # 列出该软件安装后的文件
+$ brew uninstall wget  # 卸载 wget
 </code></pre>
 
 <h3 id="toc_3">获取Homebrew-Cask</h3>
 
-<pre class="line-numbers"><code class="language-text">brew tap caskroom/cask
+<pre class="line-numbers"><code class="language-shell">$ brew tap caskroom/cask
 </code></pre>
 
 <h3 id="toc_4">Homebrew Cask常用命令</h3>
 
-<pre class="line-numbers"><code class="language-text"># brew cask 和 brew 的命令基本一致，search, info, list, install, uninstall 子命令都一样
-brew cask install java  # 安装 Java
-brew cask uninstall java  # 卸载 Java
-brew cask install --force $(brew cask outdated | awk &#39;{print $1}&#39; | xargs)  # 更新Cask
+<pre class="line-numbers"><code class="language-shell"># brew cask 和 brew 的命令基本一致，search, info, list, install, uninstall 子命令都一样
+$ brew cask install java  # 安装 Java
+$ brew cask uninstall java  # 卸载 Java
+$ brew cask install --force $(brew cask outdated | awk &#39;{print $1}&#39; | xargs)  # 更新Cask
 </code></pre>
 
 <h3 id="toc_5">Homebrew 更多命令</h3>
 
-<pre class="line-numbers"><code class="language-text">brew cleanup  # 卸载旧版本软件，Homebrew升级时是全新安装，不卸载旧版，需要手动卸载旧版本软件
-brew update  # 更新Homebrew
-brew upgrade  # 更新所有过期软件
-brew doctor  # brew自检
-brew outdated  # 列出所有过期软件
-brew --cache  # 打印brew下载包存放位置
+<pre class="line-numbers"><code class="language-shell">$ brew cleanup  # 卸载旧版本软件，Homebrew升级时是全新安装，不卸载旧版，需要手动卸载旧版本软件
+$ brew update  # 更新Homebrew
+$ brew upgrade  # 更新所有过期软件
+$ brew doctor  # brew自检
+$ brew outdated  # 列出所有过期软件
+$ brew --cache  # 打印brew下载包存放位置
 </code></pre>
 
 <h3 id="toc_6">卸载Homebrew</h3>
 
-<pre class="line-numbers"><code class="language-text">ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/uninstall)
+<pre class="line-numbers"><code class="language-shell">$ ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/uninstall)
 </code></pre>
 
 <p>Download the uninstall script and run ./uninstall --help to view more uninstall options.</p>
-
-<h2 id="toc_7"><a href="https://zhuanlan.zhihu.com/p/19556676">ZSH</a></h2>
-
-<p>MAC默认自带终极shell!</p>
-
-<h3 id="toc_8">切换默认shell</h3>
-
-<pre class="line-numbers"><code class="language-text">chsh -s $(which zsh)
-</code></pre>
-
-<h3 id="toc_9"><a href="https://ohmyz.sh/">Oh My ZSH</a></h3>
-
-<blockquote>
-<p>Oh My Zsh is a delightful, open source, community-driven framework for managing your Zsh configuration. It comes bundled with thousands of helpful functions, helpers, plugins, themes, and a few things that make you shout...</p>
-
-<p>“Oh My ZSH!”</p>
-</blockquote>
-
-<p>安装</p>
-
-<pre class="line-numbers"><code class="language-text">sh -c &quot;$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)&quot;
-</code></pre>
-
-<h3 id="toc_10">配置oh my zsh</h3>
-
-<blockquote>
-<p><a href="https://github.com/robbyrussell/oh-my-zsh">oh-my-zsh github</a></p>
-</blockquote>
 
 
     
@@ -208,6 +185,9 @@ brew --cache  # 打印brew下载包存放位置
       <div class="row">
         <div class="large-6 columns">
         <p class="text-left" style="padding:15px 0px;">
+      
+          <a href="15588383364141.html" 
+          title="Previous Post: (2) MAC开发环境——Shell和终端">&laquo; (2) MAC开发环境——Shell和终端</a>
       
         </p>
         </div>
@@ -266,7 +246,7 @@ brew --cache  # 打印brew下载包存放位置
 
       	<p class="cat-list">
         
-            <a href="mac-dev.html"><strong>Mac开发</strong></a>
+            <a href="mac-dev-env.html"><strong>Mac开发环境</strong></a>
          
         </p>
 
@@ -283,7 +263,13 @@ brew --cache  # 打印brew下载包存放位置
 	      
 		      
 			      <li class="post">
-			        <a href="15587920075778.html">MAC环境</a>
+			        <a href="15588383364141.html">(2) MAC开发环境——Shell和终端</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15587920075778.html">(1) MAC开发环境——软件包管理</a>
 			      </li>
 		     
 		   

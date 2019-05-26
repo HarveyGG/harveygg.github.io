@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
     
-  Archives - Harvey's Tech Site
+  (2) MAC开发环境——Shell和终端 - Harvey's Tech Site
   
   </title>
   
@@ -92,50 +92,165 @@
 
  <script type="text/javascript">
   $(function(){
-    $('#menu_item_archives').addClass('is_active');
+    $('#menu_item_index').addClass('is_active');
   });
 </script>
 <div class="row">
   <div class="large-8 medium-8 columns">
-    <div id="archives-page-wrap">
-        <h1>Archives</h1>
-        <div class="markdown-body archives-wrap">
+      <div class="markdown-body article-wrap">
+       <div class="article">
           
-             
-                <h1>2019</h1>
-            
-            <div class="article">
-              <a class="clearlink" href="15588383364141.html">
-                <h1>(2) MAC开发环境——Shell和终端</h1>
-              </a>
-              <div class="read-more clearfix">
-                <span class="date">2019/5/26</span>
-                <span>posted in&nbsp;</span> 
-                
-                    <span class="posted-in"><a href='mac-dev-env.html'>Mac开发环境</a></span>
-                 
-              </div>
-            </div><!-- article -->
+          <h1>(2) MAC开发环境——Shell和终端</h1>
+     
+        <div class="read-more clearfix">
+          <span class="date">2019/5/26</span>
 
+          <span>posted in&nbsp;</span> 
           
-            
-            <div class="article">
-              <a class="clearlink" href="15587920075778.html">
-                <h1>(1) MAC开发环境——软件包管理</h1>
-              </a>
-              <div class="read-more clearfix">
-                <span class="date">2019/5/25</span>
-                <span>posted in&nbsp;</span> 
-                
-                    <span class="posted-in"><a href='mac-dev-env.html'>Mac开发环境</a></span>
-                 
-              </div>
-            </div><!-- article -->
-
+              <span class="posted-in"><a href='mac-dev-env.html'>Mac开发环境</a></span>
            
+         
+          <span class="comments">
+            
+
+            
+          </span>
+
+        </div>
+      </div><!-- article -->
+
+      <div class="article-content">
+      <h2 id="toc_0"><a href="https://iterm2.com/">iTerm2</a></h2>
+
+<p><img src="http://ps2an8zfo.bkt.clouddn.com/mweb/iterm2.jpg" alt="iter"/></p>
+
+<p>iTerm2 是 MAC 下最好的终端工具。</p>
+
+<p>iTerm2 的一些特色功能如下。</p>
+
+<h3 id="toc_1">标签变色</h3>
+
+<p>iTerm2的tab会通过变色来提示当前tab下的任务有新活动，有新的输出时tab会变成洋红色，新的输出长时间没看，tab会变成红色。</p>
+
+<h3 id="toc_2">智能选中</h3>
+
+<p>在 iTerm2 中，双击选中，三击选中整行，四击智能选中（智能规则可配置），可以识别网址，引号引起的字符串，邮箱地址等。（很多时候双击的选中就已经很智能了）</p>
+
+<p>在 iTerm2 中，选中即复制。即任何选中状态的字符串都被放到了系统剪切板中。</p>
+
+<h3 id="toc_3">巧用⌘(CMD)键</h3>
+
+<p>按住⌘键:</p>
+
+<ul>
+<li>可以拖拽选中的字符串；</li>
+<li>点击url：调用默认浏览器访问该网址；</li>
+<li>点击文件：调用默认程序打开文件；</li>
+<li>如果文件名是filename:42，且默认文本编辑器是 Macvim、Textmate或BBEdit，将会直接打开到这一行；</li>
+<li>点击文件夹：在 finder 中打开该文件夹；</li>
+</ul>
+
+<h3 id="toc_4">常用快捷键</h3>
+
+<ul>
+<li>切换tab：<code>⌘+←</code>, <code>⌘+→</code>, <code>⌘+{</code>, <code>⌘+}</code>。⌘+数字直接定位到该tab；</li>
+<li>新建 tab：<code>⌘+t</code>；</li>
+<li>顺序切换pane：<code>⌘+[</code>, <code>⌘+]</code>；</li>
+<li>切分屏幕：<code>⌘+d</code>水平切分，<code>⌘+shift+d</code> 垂直切分；</li>
+<li>按方向切换pane：<code>⌘+Option+方向键</code>；</li>
+<li>智能查找，支持正则查找：<code>⌘+f</code>；</li>
+</ul>
+
+<h3 id="toc_5">自动完成</h3>
+
+<p>iTerm2可以自动补齐命令，输入若干字符，按<code>⌘+;</code>弹出自动补齐窗口，列出曾经使用过的命令。</p>
+
+<p><img src="http://ps2an8zfo.bkt.clouddn.com/mweb/15588406950071.jpg" alt=""/></p>
+
+<h3 id="toc_6">配色</h3>
+
+<p>你可以自由定制喜欢的配色，<a href="https://iterm2colorschemes.com/">这里</a>收集了大量iTerm2的主题。在其github repo里下载对应的xxx.itermcolors文件安装，安装方法如下：</p>
+
+<ul>
+<li>打开iTerm2</li>
+<li>按<code>⌘+i</code></li>
+<li>选中<code>Colors</code>tab</li>
+<li>点击<code>Load Presets</code></li>
+<li>点击<code>Import</code></li>
+<li>选择你需要的<code>.itermcolors</code>文件</li>
+<li>再次点击<code>Load Presets</code>选择刚刚导入的主题</li>
+</ul>
+
+<p><img src="http://ps2an8zfo.bkt.clouddn.com/mweb/15588413609523.jpg" alt=""/></p>
+
+<h2 id="toc_7"><a href="https://zhuanlan.zhihu.com/p/19556676">ZSH</a></h2>
+
+<p>MAC默认自带终极shell!</p>
+
+<blockquote>
+<p><a href="https://www.zhihu.com/question/21418449">为什么说zsh是shell中的极品</a></p>
+</blockquote>
+
+<h3 id="toc_8">切换默认shell</h3>
+
+<pre class="line-numbers"><code class="language-shell">$ chsh -s $(which zsh)
+</code></pre>
+
+<h3 id="toc_9"><a href="https://ohmyz.sh/">Oh My ZSH</a></h3>
+
+<p><img src="http://ps2an8zfo.bkt.clouddn.com/mweb/omzsh.png" alt="omzsh"/></p>
+
+<blockquote>
+<p>Oh My Zsh is a delightful, open source, community-driven framework for managing your Zsh configuration. It comes bundled with thousands of helpful functions, helpers, plugins, themes, and a few things that make you shout...</p>
+
+<p>“Oh My ZSH!”</p>
+</blockquote>
+
+<p>安装</p>
+
+<pre class="line-numbers"><code class="language-text">sh -c &quot;$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)&quot;
+</code></pre>
+
+<h3 id="toc_10">配置oh my zsh</h3>
+
+<blockquote>
+<p><a href="https://github.com/robbyrussell/oh-my-zsh">oh-my-zsh github</a></p>
+</blockquote>
+
+
+    
+
+      </div>
+
+      <div class="row">
+        <div class="large-6 columns">
+        <p class="text-left" style="padding:15px 0px;">
+      
+        </p>
+        </div>
+        <div class="large-6 columns">
+      <p class="text-right" style="padding:15px 0px;">
+      
+          <a  href="15587920075778.html" 
+          title="Next Post: (1) MAC开发环境——软件包管理">(1) MAC开发环境——软件包管理 &raquo;</a>
+      
+      </p>
         </div>
       </div>
-  </div>
+      <div class="comments-wrap">
+        <div class="share-comments">
+          
+
+          
+
+          
+        </div>
+      </div>
+    </div><!-- article-wrap -->
+  </div><!-- large 8 -->
+
+
+
 
  <div class="large-4 medium-4 columns">
   <div class="hide-for-small">
