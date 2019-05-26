@@ -102,16 +102,25 @@
 			<div class="article">
                 <a class="clearlink" href="15588383364141.html">
                 
-                  <h1>(2) MAC开发环境——Shell和终端</h1>
+                  <h1>(2) MAC开发环境——终端+Shell</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	<h2 id="toc_0"><a href="https://iterm2.com/">iTerm2</a></h2>
+                        	<p><img src="http://ps2an8zfo.bkt.clouddn.com/mweb/Jietu20190526-225814.jpg" alt="Jietu20190526-225814"/><br/>
+最终效果！</p>
+
+<h2 id="toc_0"><a href="https://iterm2.com/">iTerm2</a></h2>
 
 <p><img src="http://ps2an8zfo.bkt.clouddn.com/mweb/iterm2.jpg" alt="iter"/></p>
 
-<p>iTerm2 是 MAC 下最好的终端工具。</p>
+<p>iTerm2 是 MAC 下最好的终端工具。<br/>
+可以使用Homebrew来安装：</p>
+
+<pre class="line-numbers"><code class="language-shell">$ brew cask install iterm2
+</code></pre>
+
+<hr/>
 
 <p>iTerm2 的一些特色功能如下。</p>
 
@@ -152,7 +161,7 @@
 
 <p>iTerm2可以自动补齐命令，输入若干字符，按<code>⌘+;</code>弹出自动补齐窗口，列出曾经使用过的命令。</p>
 
-<p><img src="http://ps2an8zfo.bkt.clouddn.com/mweb/15588406950071.jpg" alt=""/></p>
+<p><img src="http://ps2an8zfo.bkt.clouddn.com/mweb/15588871124877.jpg" alt="" style="width:617px;"/></p>
 
 <h3 id="toc_6">配色</h3>
 
@@ -168,7 +177,21 @@
 <li>再次点击<code>Load Presets</code>选择刚刚导入的主题</li>
 </ul>
 
-<p><img src="http://ps2an8zfo.bkt.clouddn.com/mweb/15588413609523.jpg" alt=""/></p>
+<p><img src="http://ps2an8zfo.bkt.clouddn.com/mweb/15588872205753.jpg" alt="" style="width:609px;"/></p>
+
+<hr/>
+
+<p>但是最理想的配色方案在这里<a href="https://github.com/altercation/solarized">https://github.com/altercation/solarized</a></p>
+
+<pre class="line-numbers"><code class="language-shell">$ git clone https://github.com/altercation/solarized.git
+</code></pre>
+
+<ol>
+<li>进入solarized/iterm2-colors-solarized 下双击<code>Solarized Dark.itermcolors</code>和<code>Solarized Light.itermcolors</code>两个文件就可以把明暗两种配置文件导入到iTerm2里</li>
+<li>通过load presets选择刚刚安装的配色主题即可</li>
+</ol>
+
+<p><img src="http://ps2an8zfo.bkt.clouddn.com/mweb/Jietu20190527-001007.jpg" alt="Jietu20190527-001007"/></p>
 
 <h2 id="toc_7"><a href="https://zhuanlan.zhihu.com/p/19556676">ZSH</a></h2>
 
@@ -178,12 +201,12 @@
 <p><a href="https://www.zhihu.com/question/21418449">为什么说zsh是shell中的极品</a></p>
 </blockquote>
 
-<h3 id="toc_8">切换默认shell</h3>
+<p>修改默认bash</p>
 
-<pre class="line-numbers"><code class="language-shell">$ chsh -s $(which zsh)
+<pre class="line-numbers"><code class="language-shell">$ chsh -s /bin/zsh
 </code></pre>
 
-<h3 id="toc_9"><a href="https://ohmyz.sh/">Oh My ZSH</a></h3>
+<h3 id="toc_8"><a href="https://ohmyz.sh/">Oh My ZSH</a></h3>
 
 <p><img src="http://ps2an8zfo.bkt.clouddn.com/mweb/omzsh.png" alt="omzsh"/></p>
 
@@ -193,16 +216,64 @@
 <p>“Oh My ZSH!”</p>
 </blockquote>
 
-<p>安装</p>
+<h4 id="toc_9">安装</h4>
 
 <pre class="line-numbers"><code class="language-text">sh -c &quot;$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)&quot;
 </code></pre>
 
-<h3 id="toc_10">配置oh my zsh</h3>
+<h4 id="toc_10">配置oh my zsh</h4>
 
 <blockquote>
 <p><a href="https://github.com/robbyrussell/oh-my-zsh">oh-my-zsh github</a></p>
 </blockquote>
+
+<h3 id="toc_11"><a href="https://github.com/fcamblor/oh-my-zsh-agnoster-fcamblor">agnoster主题</a></h3>
+
+<p>agnoster是一个zsh主题，特别为使用iTerm2 + Solarized Dark主题，又经常使用Git的用户定制。</p>
+
+<h4 id="toc_12">安装</h4>
+
+<pre class="line-numbers"><code class="language-shell">$ git clone https://github.com/fcamblor/oh-my-zsh-agnoster-fcamblor.git
+</code></pre>
+
+<p>执行工程里的install脚本，主题将安装到~/.oh-my-zsh/themes目录下</p>
+
+<h4 id="toc_13">设置该主题</h4>
+
+<p>打开~/.zshrc文件，然后将ZSH_THEME后面的字段改为agnoster。<br/>
+<img src="http://ps2an8zfo.bkt.clouddn.com/mweb/15588877098383.jpg" alt="" style="width:618px;"/></p>
+
+<h3 id="toc_14">增加指令高亮效果</h3>
+
+<p>指令高亮效果作用是当用户输入正确命令时指令会绿色高亮，错误时命令红色高亮</p>
+
+<h4 id="toc_15">安装<a href="https://github.com/zsh-users/zsh-syntax-highlighting">zsh-syntax-highlighting</a></h4>
+
+<pre class="line-numbers"><code class="language-shell">$ git clone git://github.com/zsh-users/zsh-syntax-highlighting.git
+$ echo &quot;source ${(q-)PWD}/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh&quot; &gt;&gt; ${ZDOTDIR:-$HOME}/.zshrc
+</code></pre>
+
+<h3 id="toc_16"><a href="http://powerline.readthedocs.io/en/latest/installation.html">安装Powerline</a></h3>
+
+<pre class="line-numbers"><code class="language-shell">$ pip install powerline-status --user
+</code></pre>
+
+<h3 id="toc_17">安装<a href="https://link.jianshu.com/?t=https%3A%2F%2Fgithub.com%2Fpowerline%2Ffonts">Powerline字体库</a></h3>
+
+<p>使用zsh主题需要配合Powerline字体</p>
+
+<ol>
+<li>将工程clone下来</li>
+<li>执行install.sh脚本安装所有Powerline字体</li>
+</ol>
+
+<p>安装完成后提示所有字体均已下载到/Users/{username}/Library/Fonts路径下</p>
+
+<h4 id="toc_18">设置iTerm2的字体</h4>
+
+<p>具体的操作是iTerm2 -&gt; Preferences -&gt; Profiles -&gt; Text，在Font区域选中Change Font，选择for Powerline的字体</p>
+
+<p><img src="http://ps2an8zfo.bkt.clouddn.com/mweb/15588954739813.jpg" alt="" style="width:830px;"/></p>
 
                         
                       </div>
@@ -384,7 +455,7 @@ $ brew --cache  # 打印brew下载包存放位置
 	      
 		      
 			      <li class="post">
-			        <a href="15588383364141.html">(2) MAC开发环境——Shell和终端</a>
+			        <a href="15588383364141.html">(2) MAC开发环境——终端+Shell</a>
 			      </li>
 		     
 		  
