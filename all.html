@@ -88,6 +88,8 @@
             <li><a href="mac-dev-env.html">Mac开发环境</a></li>
         
             <li><a href="%E4%BA%92%E8%81%94%E7%BD%91%E6%8A%80%E6%9C%AF.html">互联网技术</a></li>
+        
+            <li><a href="%E4%B8%AD%E9%97%B4%E4%BB%B6.html">中间件</a></li>
          
 
       </ul>
@@ -109,6 +111,192 @@
 	<div class="large-8 medium-8 columns">
 		<div class="markdown-body home-categories">
 		
+			<div class="article">
+                <a class="clearlink" href="15621674595097.html">
+                
+                  <h1>Kafka学习笔记</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<h2 id="toc_0">Kafka名字来源</h2>
+
+<p>Kafka作者之一Jay Kreps曾经谈及过命名的原因：</p>
+
+<blockquote>
+<p>因为 Kafka 系统的写性能很强，所以找了个作家的名字来命名似乎是一个好主意。大学期间我上了很多文学课，非常喜欢 Franz Kafka 这个作家，另外为开源软件起这个名字听上去很酷。</p>
+</blockquote>
+
+<h2 id="toc_1">Kafka的定位</h2>
+
+<p>Kafka 是 LinkedIn 公司内部孵化的项目。</p>
+
+<p>Kafka 在设计之初就旨在提供三个方面的特性：</p>
+
+<ul>
+<li>提供一套 API 实现生产者和消费者；</li>
+<li>降低网络传输和磁盘存储开销；</li>
+<li>实现高伸缩性架构。</li>
+</ul>
+
+<p>Kafka既是消息引擎系统，也是一个分布式流处理平台。</p>
+
+<h3 id="toc_2">Kafka作为流处理平台和其他主流计算框架相比的优势</h3>
+
+<ul>
+<li>更容易实现端到端的正确性（精确一次处理语义）</li>
+<li>Kafka Streams宣称自己是一个用于搭建流处理的客户端库，而非完整功能系统，有利于区别其他框架的目标市场（瞄准小公司）</li>
+</ul>
+
+<h2 id="toc_3">Kafka术语</h2>
+
+<h3 id="toc_4">一张图说明Kafka术语</h3>
+
+<p><img src="http://image.harveygg.wang/mweb/15621685649048.jpg" alt="" style="width:1171px;"/></p>
+
+<ul>
+<li>消息（Record）：消息引擎处理的主要对象</li>
+<li>主题（Topic）：承载消息的逻辑容器，具体使用中用于区分业务</li>
+<li>分区（Partition）：一个有序的消息队列，一个主题下可以有多个分区</li>
+<li>消息位移（Offset）：表示分区中每条消息的位置，是一个单调递增不变的值</li>
+<li>副本（Replica）：Kafka中一条消息可以被复制到多个地方实现数据冗余，这些地方就是副本。副本还分leader副本和follower副本。副本在分区的层级下，一个分区可以配置多个副本实现数据高可靠</li>
+<li>生产者（Producer）：向主题发布新消息的应用程序</li>
+<li>消费者（Consumer）：从主题订阅新消息的应用程序</li>
+<li>消费者位移（Consumer Offset）：表征消费者的消费进度，每个消费者都有自己的消费者位移</li>
+<li>消费者组（Consumer Group）：多个消费者实例共同构成一个组，同时消费多个分区实现高吞吐</li>
+<li>重平衡（Rebalance）：消费者组内一个消费者实例挂掉后，其他消费者自动重新分配订阅主题分区的过程。Rebalance是Kafka实现消费者端高可用的手段</li>
+</ul>
+
+<h2 id="toc_5">不能保持默认值的参数</h2>
+
+<h3 id="toc_6">Broker端参数</h3>
+
+<ul>
+<li>log.dirs：没有默认值，必须手动指定。CVS格式指定多个路径，且多个路径最好分布在不同磁盘上，提供读写性能和提高可用性</li>
+<li>listeners：监听器，告诉外部连接者要用什么协议访问主机和端口开放的Kafka服务</li>
+<li>advertised.listeners：这组监听器是Broker用于对外发布的</li>
+<li>auto.create.topics.enable：配置为true时表示，当收到消息，发现所属主题不存在时则自动创建，建议生产配置false</li>
+<li>unclean.leader.election.enable：是否允许unclean leader选举。是指落后最新消息的partition被选举为leader的许可。若配置为true，则有可能导致消息丢失</li>
+<li>auto.leader.rebalance.enable：是否允许定期重新选举leader，没必要，且对生产环境影响非常大，建议配置false</li>
+<li>log.retention.{hour|minutes|ms}：三个配置都是用来控制一条消息被保存多长时间，ms优先级最高，hour最低</li>
+<li>log.retention.bytes：指Broker为消息保存的总磁盘容量大小，默认值-1，标识存多少都行</li>
+<li>message.max.bytes：Broker能接收的最大消息大小</li>
+</ul>
+
+<h3 id="toc_7">Topic级参数</h3>
+
+<ul>
+<li>retention.ms：规定了该topic消息被保存的时长，默认7天，优先级高于Broker配置</li>
+<li>retention.bytes：规定了该topic预留多少磁盘空间</li>
+<li>message.max.bytes：该topic下单条消息最大尺寸，可用于不同业务不同配置</li>
+</ul>
+
+<h3 id="toc_8">Producer端参数</h3>
+
+<h3 id="toc_9">Consumer端参数</h3>
+
+<h3 id="toc_10">JVM参数</h3>
+
+<blockquote>
+<p>设置环境变量，提高JVM堆大小，业界公认最佳配置为6G，修改GC算法</p>
+</blockquote>
+
+<ul>
+<li>KAFKA_HEAP_OPTS：堆大小</li>
+<li>KAFKA_JVM_PERFORMANCE_OPTS：GC算法</li>
+</ul>
+
+<pre class="line-numbers"><code class="language-shell">$&gt; export KAFKA_HEAP_OPTS=--Xms6g  --Xmx6g
+$&gt; export  KAFKA_JVM_PERFORMANCE_OPTS= -server -XX:+UseG1GC -XX:MaxGCPauseMillis=20 -XX:InitiatingHeapOccupancyPercent=35 -XX:+ExplicitGCInvokesConcurrent -Djava.awt.headless=true
+$&gt; bin/kafka-server-start.sh config/server.properties
+
+</code></pre>
+
+<h3 id="toc_11">操作系统参数</h3>
+
+<ul>
+<li>文件描述符限制调大</li>
+<li>文件系统类型：根据官网的测试报告，XFS 的性能要强于 ext4，<a href="https://www.confluent.io/kafka-summit-sf18/kafka-on-zfs">ZFS</a>性能貌似更好</li>
+<li>Swap修改成1：改成0容易导致内存溢出来不及处理</li>
+<li>文件刷盘时间间隔：消息写到页缓存上即算成功，减小刷盘间隔可以提高可用性，但是降低吞吐量</li>
+</ul>
+
+<h2 id="toc_12">实现无消息丢失</h2>
+
+<h3 id="toc_13">配置最佳实践</h3>
+
+<ol>
+<li>不要使用 producer.send(msg)，而要使用 producer.send(msg, callback)。</li>
+<li>设置 acks = all。acks 是 Producer的一个参数，代表了你对“已提交”消息的定义。如果设置成 all，则表明所有副本 Broker 都要接收到消息，该消息才算是“已提交”。这是最高等级的“已提交”定义。</li>
+<li>设置 retries 为一个较大的值。这里的 retries同样是 Producer 的参数，对应前面提到的 Producer 自动重试。当出现网络的瞬时抖动时，消息发送可能会失败，此时配置了 retries &gt; 0 的 Producer 能够自动重试消息发送，避免消息丢失。</li>
+<li>设置 unclean.leader.election.enable = false。这是 Broker 端的参数，它控制的是哪些 Broker 有资格竞选分区的 Leader。如果一个 Broker 落后原先的 Leader 太多，那么它一旦成为新的 Leader，必然会造成消息的丢失。故一般都要将该参数设置成 false，即不允许这种情况的发生。</li>
+<li>设置 replication.factor &gt;= 3。这也是Broker 端的参数。其实这里想表述的是，最好将消息多保存几份，毕竟目前防止消息丢失的主要机制就是冗余。</li>
+<li>设置 min.insync.replicas &gt; 1。这依然是 Broker 端参数，控制的是消息至少要被写入到多少个副本才算是“已提交”。设置成大于 1 可以提升消息持久性。在实际环境中千万不要使用默认值 1。</li>
+<li>确保 replication.factor &gt; min.insync.replicas。如果两者相等，那么只要有一个副本挂机，整个分区就无法正常工作了。我们不仅要改善消息的持久性，防止数据丢失，还要在不降低可用性的基础上完成。推荐设置成 replication.factor = min.insync.replicas + 1。</li>
+<li>确保消息消费完成再提交。Consumer 端有个参数 enable.auto.commit，最好把它设置成 false，并采用手动提交位移的方式。就像前面说的，这对于单 Consumer 多线程处理的场景而言是至关重要的。</li>
+</ol>
+
+<h3 id="toc_14">常见丢消息案例</h3>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2019/7/3</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='%E4%B8%AD%E9%97%B4%E4%BB%B6.html'>中间件</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="15616863130414.html">
+                
+                  <h1>(3) MAC使用技巧</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<ul>
+<li>Command+Shift+. 可以显示隐藏文件、文件夹，再按一次，恢复隐藏；</li>
+<li>finder下使用Command+Shift+G 可以前往任何文件夹，包括隐藏文件夹；</li>
+</ul>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2019/6/28</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='mac-dev-env.html'>Mac开发环境</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
 			<div class="article">
                 <a class="clearlink" href="15611719436274.html">
                 
@@ -137,7 +325,7 @@
 <li><strong>通用顶级域名gTLD</strong>：最常见的通用顶级域名有7个，即：com(公司企业)，net(网络服务机构)，org(非营利组织)，int(国际组织)，gov(美国的政府部门)，mil(美国的军事部门)</li>
 <li><strong>基础结构域名(infrastructure domain)</strong>：只有一个arpa，用于反向域名解析，因此成为反向域名</li>
 </ul>
-<p><img src="media/15611719436274/15611724903244.jpg" alt=""/></p></li>
+<p><img src="http://image.harveygg.wang/mweb/15611724903244.jpg" alt="xxx"/></p></li>
 </ul>
 
 <h2 id="toc_2">域名服务器的分类</h2>
@@ -207,12 +395,12 @@
                       
                       <div class="a-content-text">
                         
-                        	<p><img src="http://ps2an8zfo.bkt.clouddn.com/mweb/Jietu20190526-225814.jpg" alt="Jietu20190526-225814"/><br/>
+                        	<p><img src="http://image.harveygg.wang/mweb/Jietu20190526-225814.jpg" alt="Jietu20190526-225814"/><br/>
 最终效果！</p>
 
 <h2 id="toc_0"><a href="https://iterm2.com/">iTerm2</a></h2>
 
-<p><img src="http://ps2an8zfo.bkt.clouddn.com/mweb/iterm2.jpg" alt="iter"/></p>
+<p><img src="http://image.harveygg.wang/mweb/iterm2.jpg" alt="iter"/></p>
 
 <p>iTerm2 是 MAC 下最好的终端工具。<br/>
 可以使用Homebrew来安装：</p>
@@ -261,7 +449,7 @@
 
 <p>iTerm2可以自动补齐命令，输入若干字符，按<code>⌘+;</code>弹出自动补齐窗口，列出曾经使用过的命令。</p>
 
-<p><img src="http://ps2an8zfo.bkt.clouddn.com/mweb/15588871124877.jpg" alt="" style="width:617px;"/></p>
+<p><img src="http://image.harveygg.wang/mweb/15588871124877.jpg" alt="" style="width:617px;"/></p>
 
 <h3 id="toc_6">配色</h3>
 
@@ -277,7 +465,7 @@
 <li>再次点击<code>Load Presets</code>选择刚刚导入的主题</li>
 </ul>
 
-<p><img src="http://ps2an8zfo.bkt.clouddn.com/mweb/15588872205753.jpg" alt="" style="width:609px;"/></p>
+<p><img src="http://image.harveygg.wang/mweb/15588872205753.jpg" alt="" style="width:609px;"/></p>
 
 <hr/>
 
@@ -291,7 +479,7 @@
 <li>通过load presets选择刚刚安装的配色主题即可</li>
 </ol>
 
-<p><img src="http://ps2an8zfo.bkt.clouddn.com/mweb/Jietu20190527-001007.jpg" alt="Jietu20190527-001007"/></p>
+<p><img src="http://image.harveygg.wang/mweb/Jietu20190527-001007.jpg" alt="Jietu20190527-001007"/></p>
 
 <h2 id="toc_7"><a href="https://zhuanlan.zhihu.com/p/19556676">ZSH</a></h2>
 
@@ -308,7 +496,7 @@
 
 <h3 id="toc_8"><a href="https://ohmyz.sh/">Oh My ZSH</a></h3>
 
-<p><img src="http://ps2an8zfo.bkt.clouddn.com/mweb/omzsh.png" alt="omzsh"/></p>
+<p><img src="http://image.harveygg.wang/mweb/omzsh.png" alt="omzsh"/></p>
 
 <blockquote>
 <p>Oh My Zsh is a delightful, open source, community-driven framework for managing your Zsh configuration. It comes bundled with thousands of helpful functions, helpers, plugins, themes, and a few things that make you shout...</p>
@@ -341,7 +529,7 @@
 <h4 id="toc_13">设置该主题</h4>
 
 <p>打开~/.zshrc文件，然后将ZSH_THEME后面的字段改为agnoster。<br/>
-<img src="http://ps2an8zfo.bkt.clouddn.com/mweb/15588877098383.jpg" alt="" style="width:618px;"/></p>
+<img src="http://image.harveygg.wang/mweb/15588877098383.jpg" alt="" style="width:618px;"/></p>
 
 <h3 id="toc_14">增加指令高亮效果</h3>
 
@@ -373,7 +561,7 @@ $ echo &quot;source ${(q-)PWD}/zsh-syntax-highlighting/zsh-syntax-highlighting.z
 
 <p>具体的操作是iTerm2 -&gt; Preferences -&gt; Profiles -&gt; Text，在Font区域选中Change Font，选择for Powerline的字体</p>
 
-<p><img src="http://ps2an8zfo.bkt.clouddn.com/mweb/15588954739813.jpg" alt="" style="width:830px;"/></p>
+<p><img src="http://image.harveygg.wang/mweb/15588954739813.jpg" alt="" style="width:830px;"/></p>
 
                         
                       </div>
@@ -410,7 +598,7 @@ $ echo &quot;source ${(q-)PWD}/zsh-syntax-highlighting/zsh-syntax-highlighting.z
 
 <h2 id="toc_0"><a href="https://brew.sh/">Homebrew</a></h2>
 
-<p><img src="http://ps2an8zfo.bkt.clouddn.com/mweb/homebrew-256x256.png" alt="homebrew-256x256"/></p>
+<p><img src="http://image.harveygg.wang/mweb/homebrew-256x256.png" alt="homebrew-256x256"/></p>
 
 <ul>
 <li>使用 Homebrew 安装 Apple 没有预装，但你需要的东西。</li>
@@ -541,6 +729,8 @@ $ brew --cache  # 打印brew下载包存放位置
             <a href="mac-dev-env.html"><strong>Mac开发环境</strong></a>
         
             <a href="%E4%BA%92%E8%81%94%E7%BD%91%E6%8A%80%E6%9C%AF.html"><strong>互联网技术</strong></a>
+        
+            <a href="%E4%B8%AD%E9%97%B4%E4%BB%B6.html"><strong>中间件</strong></a>
          
         </p>
 
@@ -555,6 +745,18 @@ $ brew --cache  # 打印brew下载包存放位置
                 <div class="side-content">
                 <ul class="posts-list">
 	      
+		      
+			      <li class="post">
+			        <a href="15621674595097.html">Kafka学习笔记</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15616863130414.html">(3) MAC使用技巧</a>
+			      </li>
+		     
+		  
 		      
 			      <li class="post">
 			        <a href="15611719436274.html">域名解析</a>
