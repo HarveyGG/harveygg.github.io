@@ -131,7 +131,7 @@
 
 <h2 id="toc_1">什么是Immutable Infrastructure</h2>
 
-<p>到了虚拟化时代，虚拟服务器变得可以被轻易替换(disposable)，整个服务器可以在秒级被重新构建。这使得使用服务器被整体替换的方式更新服务器比原地升级服务器来的更划算。服务器不再被修改，而是整体替换。这使得服务器的复制，替换变得轻而易举。这种服务器也叫<a href="https://martinfowler.com/bliki/PhoenixServer.html">PhoenixServer</a>。这样的基础架构无疑更加健壮，可维护。</p>
+<p>到了虚拟化时代，虚拟服务器变得可以被轻易替换(disposable)，整个服务器可以在秒级被重新构建。这使得使用服务器被整体替换的方式更新服务器比原地升级服务器来的更划算。服务器一旦部署完就不再被修改，服务器需要升级时，是基于一个基线重新构建然后替换原有服务器。这使得服务器的复制，替换变得轻而易举。这种服务器也叫<a href="https://martinfowler.com/bliki/PhoenixServer.html">PhoenixServer</a>。这样的基础架构无疑更加健壮，可维护。</p>
 
 <h2 id="toc_2">如何实现Immutable Infrastructure</h2>
 
@@ -154,6 +154,12 @@
 <li>开发和运维无间合作(DevOps)</li>
 <li>使用混沌工程工具验证服务的健壮性</li>
 </ul>
+
+<h2 id="toc_3">理想很丰满，现实很骨感</h2>
+
+<p>如果在物理服务器上利用严格规范和自动化工具是否能打造Immutable Infrastructure呢？理论上可以，但现实是物理服务器很多场景下难以实现批量统一的更新，因为物理服务器太大，上面跑的东西太多。<br/>
+那么是不是使用了虚拟化技术，就一定能实现Immutable Infrastructure？答案是否定的。国内很多大厂，甚至是云计算提供商，其内部服务虽然使用了虚拟机，甚至容器，但是其运维范式仍然遵循传统原地升级模式，仍然会登录到虚拟机或容器内部做一些修改，或者只有部分技术栈（如服务软件包，基础软件包）实现了基线化管理，而其他技术栈（如操作系统配置，网络配置）还是通过其他途径手动升级，整体效果仍然和传统Mutable Infrastructure一样。举个例子，应用扩容一台机器，而防火墙没有同步更新，导致新扩容的服务器和其他服务器之间网络不通，需要人工修改网络配置才能打通网络。<br/>
+所以说，真正的Immutable Infrastructure的落地，是依赖强有力的运维能力的，而这样的运维能力又依赖配套的组织架构关系和DevOps文化和极强的规范化。</p>
 
                         
                       </div>
@@ -202,7 +208,7 @@
           <div id="site-info" class="site-info">
             
                 <h1>Harvey's Tech Site</h1>
-                <div class="site-des">多年互联网电商行业开发经验、云计算SRE开发经验。关注DDD，微服务，DevOps。正在学习机器学习、人工智能</div>
+                <div class="site-des">多年互联网电商行业开发经验、云计算SRE开发经验。关注DDD，云原生，DevOps。正在学习机器学习、人工智能</div>
                 <div class="social">
 <a target="_blank" class="facebook" href="https://www.facebook.com/profile.php?id=100000085231645" title="Facebook">Facebook</a>
 
