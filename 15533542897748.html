@@ -1,0 +1,745 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+    
+  架构设计方法 - Harvey's Tech Site
+  
+  </title>
+  
+  
+  <link href="atom.xml" rel="alternate" title="Harvey's Tech Site" type="application/atom+xml">
+    <link rel="stylesheet" href="asset/css/foundation.min.css" />
+    <link rel="stylesheet" href="asset/css/docs.css" />
+    <script src="asset/js/vendor/modernizr.js"></script>
+    <script src="asset/js/vendor/jquery.js"></script>
+  <script src="asset/highlightjs/highlight.pack.js"></script>
+  <link href="asset/highlightjs/styles/github.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script>hljs.initHighlightingOnLoad();</script>
+<script type="text/javascript">
+  function before_search(){
+    var searchVal = 'site: ' + document.getElementById('search_input').value;
+    document.getElementById('search_q').value = searchVal;
+    return true;
+  }
+</script>
+  </head>
+  <body class="antialiased hide-extras">
+    
+    <div class="marketing off-canvas-wrap" data-offcanvas>
+      <div class="inner-wrap">
+
+
+<nav class="top-bar docs-bar hide-for-small" data-topbar>
+
+
+  <section class="top-bar-section">
+  <div class="row">
+      <div style="position: relative;width:100%;"><div style="position: absolute; width:100%;">
+        <ul id="main-menu" class="left">
+        
+        <li id=""><a target="_self" href="index.html">Home</a></li>
+        
+        <li id=""><a target="_self" href="archives.html">Archives</a></li>
+        
+        <li id=""><a target="_self" href="mac-dev-env.html">MAC开发环境</a></li>
+        
+        <li id=""><a target="_self" href="%E4%BA%92%E8%81%94%E7%BD%91%E6%8A%80%E6%9C%AF.html">互联网技术</a></li>
+        
+        </ul>
+
+        <ul class="right" id="search-wrap">
+          <li>
+<form target="_blank" onsubmit="return before_search();" action="https://google.com/search" method="get">
+    <input type="hidden" id="search_q" name="q" value="" />
+    <input tabindex="1" type="search" id="search_input"  placeholder="Search"/>
+</form>
+</li>
+          </ul>
+      </div></div>
+  </div>
+  </section>
+
+</nav>
+
+        <nav class="tab-bar show-for-small">
+  <a href="javascript:void(0)" class="left-off-canvas-toggle menu-icon">
+    <span> &nbsp; Harvey's Tech Site</span>
+  </a>
+</nav>
+
+<aside class="left-off-canvas-menu">
+      <ul class="off-canvas-list">
+        
+        <li><a target="_self" href="index.html">Home</a></li>
+        
+        <li><a target="_self" href="archives.html">Archives</a></li>
+        
+        <li><a target="_self" href="mac-dev-env.html">MAC开发环境</a></li>
+        
+        <li><a target="_self" href="%E4%BA%92%E8%81%94%E7%BD%91%E6%8A%80%E6%9C%AF.html">互联网技术</a></li>
+        
+
+    <li><label>Categories</label></li>
+
+        
+            <li><a href="mac-dev-env.html">Mac开发环境</a></li>
+        
+            <li><a href="%E4%BA%92%E8%81%94%E7%BD%91%E6%8A%80%E6%9C%AF.html">互联网技术</a></li>
+        
+            <li><a href="%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1.html">架构设计</a></li>
+        
+            <li><a href="CloudNative.html">CloudNative</a></li>
+        
+            <li><a href="%E4%B8%AD%E9%97%B4%E4%BB%B6.html">中间件</a></li>
+        
+            <li><a href="%E6%98%93%E7%BB%8F.html">易经</a></li>
+         
+
+      </ul>
+    </aside>
+
+<a class="exit-off-canvas" href="#"></a>
+
+
+        <section id="main-content" role="main" class="scroll-container">
+        
+       
+
+ <script type="text/javascript">
+  $(function(){
+    $('#menu_item_index').addClass('is_active');
+  });
+</script>
+<div class="row">
+  <div class="large-8 medium-8 columns">
+      <div class="markdown-body article-wrap">
+       <div class="article">
+          
+          <h1>架构设计方法</h1>
+     
+        <div class="read-more clearfix">
+          <span class="date">2019/3/23</span>
+
+          <span>posted in&nbsp;</span> 
+          
+              <span class="posted-in"><a href='%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1.html'>架构设计</a></span>
+           
+         
+          <span class="comments">
+            
+
+            
+          </span>
+
+        </div>
+      </div><!-- article -->
+
+      <div class="article-content">
+      <ul>
+<li>
+<a href="#toc_0">一、六大设计原则</a>
+<ul>
+<li>
+<a href="#toc_1">1.1 开闭原则（Open-Closed Principle, OCP）</a>
+<ul>
+<li>
+<a href="#toc_2">1.1.1 解释</a>
+</li>
+<li>
+<a href="#toc_3">1.1.2 好处</a>
+</li>
+<li>
+<a href="#toc_4">1.1.3 不遵守有什么坏处</a>
+</li>
+<li>
+<a href="#toc_5">1.1.4 出现违反原则的原因</a>
+</li>
+<li>
+<a href="#toc_6">1.1.5 实际运用中的取舍</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="#toc_7">1.2 依赖反转原则（Dependency Inversion  Principle, DIP）</a>
+<ul>
+<li>
+<a href="#toc_8">1.2.1 解释</a>
+</li>
+<li>
+<a href="#toc_9">1.2.2 好处</a>
+</li>
+<li>
+<a href="#toc_10">1.2.3 不遵守有什么坏处</a>
+</li>
+<li>
+<a href="#toc_11">1.2.4 出现违反原则的原因</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="#toc_12">1.3 职责单一原则（Single Responsibility Principle, SRP）</a>
+<ul>
+<li>
+<a href="#toc_13">1.3.1 解释</a>
+</li>
+<li>
+<a href="#toc_14">1.3.2 好处</a>
+</li>
+<li>
+<a href="#toc_15">1.3.3 不遵守有什么坏处</a>
+</li>
+<li>
+<a href="#toc_16">1.3.4 出现违反原则的原因</a>
+</li>
+<li>
+<a href="#toc_17">1.3.5 实际运用中的取舍</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="#toc_18">1.4 里氏替换原则（Liskov Substitution Principle, LSP）</a>
+<ul>
+<li>
+<a href="#toc_19">1.4.1 解释</a>
+</li>
+<li>
+<a href="#toc_20">1.4.2 好处</a>
+</li>
+<li>
+<a href="#toc_21">1.3.3 不遵守有什么坏处</a>
+</li>
+<li>
+<a href="#toc_22">1.3.4 出现违反原则的原因</a>
+</li>
+<li>
+<a href="#toc_23">1.3.5 实际运用中的取舍</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="#toc_24">1.5 接口隔离原则（Interface  Segregation Principle, ISP）</a>
+<ul>
+<li>
+<a href="#toc_25">1.5.1 解释</a>
+</li>
+<li>
+<a href="#toc_26">1.5.2 好处</a>
+</li>
+<li>
+<a href="#toc_27">1.5.3 不遵守有什么坏处</a>
+</li>
+<li>
+<a href="#toc_28">1.5.4 出现违反原则的原因</a>
+</li>
+<li>
+<a href="#toc_29">1.5.5 实际运用中的取舍</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="#toc_30">1.6 迪米特法则（Law of  Demeter, LoD）</a>
+<ul>
+<li>
+<a href="#toc_31">1.6.1 解释</a>
+</li>
+<li>
+<a href="#toc_32">1.6.2 好处</a>
+</li>
+<li>
+<a href="#toc_33">1.6.3 不遵守有什么坏处</a>
+</li>
+<li>
+<a href="#toc_34">1.6.4 出现违反原则的原因</a>
+</li>
+<li>
+<a href="#toc_35">1.6.5 实际运用中的取舍</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<a href="#toc_36">二、GoF的23个设计模式</a>
+</li>
+<li>
+<a href="#toc_37">三、DDD</a>
+<ul>
+<li>
+<a href="#toc_38">3.1 《实现领域驱动设计》里的9种组织模式和集成模式</a>
+<ul>
+<li>
+<a href="#toc_39">①合作关系（Partnership）</a>
+</li>
+<li>
+<a href="#toc_40">②共享内核（Shared Kernel）</a>
+</li>
+<li>
+<a href="#toc_41">③客户方——供应方（Customer-Supplier Development）</a>
+</li>
+<li>
+<a href="#toc_42">④遵奉者（Conformist）</a>
+</li>
+<li>
+<a href="#toc_43">⑤防腐层（Anticorruption Layer）</a>
+</li>
+<li>
+<a href="#toc_44">⑥开放主机服务（Open Host Service）</a>
+</li>
+<li>
+<a href="#toc_45">⑦发布语言（Published Language）</a>
+</li>
+<li>
+<a href="#toc_46">⑧另谋他路（SeparateWay）</a>
+</li>
+<li>
+<a href="#toc_47">⑨大泥球（Big Ball of Mud）</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="#toc_48">3.2 分层架构设计模式</a>
+<ul>
+<li>
+<a href="#toc_49">3.2.1 四层架构</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<a href="#toc_50">四、微服务架构设计</a>
+</li>
+</ul>
+
+
+<h2 id="toc_0">一、六大设计原则</h2>
+
+<h3 id="toc_1">1.1 开闭原则（Open-Closed Principle, OCP）</h3>
+
+<h4 id="toc_2">1.1.1 解释</h4>
+
+<p>开闭原则由Bertrand Meyer于1988年提出，其定义如下：</p>
+
+<ul>
+<li>一个软件实体应当对扩展开放，对修改关闭。即软件实体应尽量在不修改原有代码的情况下进行扩展。</li>
+</ul>
+
+<h4 id="toc_3">1.1.2 好处</h4>
+
+<p>好处显而易见，不修改源码的情况下进行扩展，对已有逻辑没有影响。</p>
+
+<h4 id="toc_4">1.1.3 不遵守有什么坏处</h4>
+
+<p>随着软件规模越来越大，软件寿命越来越长，若系统设计不满足开闭原则，则维护成本变得越来越大。修一个bug，又引出10个新bug，最终变得无法维护。</p>
+
+<h4 id="toc_5">1.1.4 出现违反原则的原因</h4>
+
+<p>职责不单一是主要影响开闭原则的原因之一；缺乏抽象也会造成开闭原则的破坏。</p>
+
+<h4 id="toc_6">1.1.5 实际运用中的取舍</h4>
+
+<p>为了满足开闭原则，需要对系统进行抽象化设计，针对具体业务领域识别出抽象层并抽象化是开闭原则的关键。应用层基于上下文参数识别业务场景，针对不同场景选择不同的实现。</p>
+
+<h3 id="toc_7">1.2 依赖反转原则（Dependency Inversion  Principle, DIP）</h3>
+
+<h4 id="toc_8">1.2.1 解释</h4>
+
+<p>依赖反转原则是Robert C. Martin在1996年为“C++Reporter”所写的专栏Engineering Notebook的第三篇，后来加入到他在2002年出版的经典著作“Agile Software Development, Principles, Patterns, and Practices”一书中。依赖反转原则定义如下：</p>
+
+<ul>
+<li>抽象不应该依赖于细节，细节应当依赖于抽象。换言之，要针对接口编程，而不是针对实现编程。</li>
+</ul>
+
+<p>要求我们在程序代码中传递参数时或在关联关系中，尽量引用层次高的抽象层类，即使用接口和抽象类进行变量类型声明、参数类型声明、方法返回类型声明，以及数据类型的转换等，而不要用具体类来做这些事情。</p>
+
+<p>因为正常的依赖顺序是，A依赖B，而为了避免依赖具体实现，引入了抽象层C，使A依赖C，B成为C的具体实现。因为继承、实现关系本身是特殊的依赖关系，所以变成被依赖的实现B反过来依赖C这个抽象层，所以叫依赖反转。</p>
+
+<h4 id="toc_9">1.2.2 好处</h4>
+
+<p>依赖反转是实现开闭原则目标的另一个重要手段。</p>
+
+<h4 id="toc_10">1.2.3 不遵守有什么坏处</h4>
+
+<p>少了抽象层，很多设计原则都无法做到，后果可想而知。</p>
+
+<h4 id="toc_11">1.2.4 出现违反原则的原因</h4>
+
+<p>这个原则基本上不会违反，因为有了Spring框架提供的依赖注入。</p>
+
+<h3 id="toc_12">1.3 职责单一原则（Single Responsibility Principle, SRP）</h3>
+
+<h4 id="toc_13">1.3.1 解释</h4>
+
+<p>把因相同原因而变化的东西聚在一起，把因不同原因而变化的东西分离开来。</p>
+
+<h4 id="toc_14">1.3.2 好处</h4>
+
+<p>如果单一职责原则遵守的好，当修改一个功能时，可以显著降低对其他功能的影响。</p>
+
+<h4 id="toc_15">1.3.3 不遵守有什么坏处</h4>
+
+<p>修改一段代码，在实现了一个feature升级的同时，影响了另一个feature的功能。</p>
+
+<h4 id="toc_16">1.3.4 出现违反原则的原因</h4>
+
+<p>职责不单一不是从第一天写代码就开始的，往往是需求变更导致职责拆分后引起的。此时应该将一个方法拆成两个方法，一个类拆成两个类。</p>
+
+<h4 id="toc_17">1.3.5 实际运用中的取舍</h4>
+
+<p>代码结构并不能随着需求的变更每次都做出重构，会影响团队协作效率，需要把握一个度：</p>
+
+<ul>
+<li>只有逻辑足够简单，才可以在方法级别上违反单一职责原则</li>
+<li>只有类中方法数量足够少，才可以在方法级别上违反单一职责原则</li>
+<li>在职责扩散到我们无法控制的程度之前，立刻对代码进行重构。</li>
+</ul>
+
+<h3 id="toc_18">1.4 里氏替换原则（Liskov Substitution Principle, LSP）</h3>
+
+<h4 id="toc_19">1.4.1 解释</h4>
+
+<p>里氏代换原则由2008年图灵奖得主、美国第一位计算机科学女博士Barbara Liskov教授和卡内基·梅隆大学Jeannette Wing教授于1994年提出。</p>
+
+<ul>
+<li>定义1：如果对每一个类型为 T1的对象 o1，都有类型为 T2 的对象o2，使得以 T1定义的所有程序 P 在所有的对象 o1 都代换成 o2 时，程序 P 的行为没有发生变化，那么类型 T2 是类型 T1 的子类型。</li>
+<li>定义2：所有引用父类的地方必须能透明地使用其子类的对象。</li>
+</ul>
+
+<p>可以简单理解为：如果在软件中将一个用父类声明的对象，运行期替换成它的某个子类对象，程序没有产生任何错误和异常，则这个子类的实现是符合里氏替换原则的。</p>
+
+<h4 id="toc_20">1.4.2 好处</h4>
+
+<p>里氏代换原则是实现开闭原则的重要方式之一。由于使用父类对象的地方都可以使用子类对象，因此在程序中尽量使用父类类型来对对象进行定义，而在运行时再确定其子类类型，用子类对象来替换父类对象。从而实现对原有系统的扩展的同时，不影响原有功能。</p>
+
+<h4 id="toc_21">1.3.3 不遵守有什么坏处</h4>
+
+<p>如果子类集成父类后，又增加了特定的方法，那么只有使用子类来声明对象，这个对象才能使用子类特有的方法，导致后续扩展的时候，必须打开子类来修改代码，没办法替换为父类的其他子类。</p>
+
+<h4 id="toc_22">1.3.4 出现违反原则的原因</h4>
+
+<p>代码设计初期没有考虑将来复杂性的可能，没有预留好扩展点，直接依赖具体实现，没有使用接口隔离实现。</p>
+
+<h4 id="toc_23">1.3.5 实际运用中的取舍</h4>
+
+<p>软件架构往往是分层的，层与层之间必须使用接口隔离实现，层内的具体业务逻辑如果看不到有多种场景下使用多种实现的可能性，暂时可以直接依赖实现。当出现第二种实现时，立即使用接口隔离。<br/>
+声明对象时，必须使用集成结构中适合当前场景的某一个层级的抽象来声明，不要直接使用子类来声明对象。如：当前需要一个有序可重复队列，则使用List来声明对象，因为Collection过于抽象，无法表达有序可重复的要求，直接使用ArrayList声明，则将来传入LinkedList对象会出错。</p>
+
+<h3 id="toc_24">1.5 接口隔离原则（Interface  Segregation Principle, ISP）</h3>
+
+<h4 id="toc_25">1.5.1 解释</h4>
+
+<p>使用多个专门的接口，而不使用单一的总接口，即客户端不应该依赖那些它不需要的接口。</p>
+
+<ul>
+<li>当把“接口”理解成一个类型所提供的所有方法特征的集合的时候，这就是一种逻辑上的概念，接口的划分将直接带来类型的划分。可以把接口理解成角色，一个接口只能代表一个角色，每个角色都有它特定的一个接口，此时，这个原则可以叫做“角色隔离原则”。</li>
+<li>如果把“接口”理解成狭义的特定语言的接口，那么ISP表达的意思是指接口仅仅提供客户端需要的行为，客户端不需要的行为则隐藏起来，应当为客户端提供尽可能小的单独的接口，而不要提供大的总接口。</li>
+</ul>
+
+<h4 id="toc_26">1.5.2 好处</h4>
+
+<p>容易实现职责单一原则，客户端更容易灵活选择合适的实现，扩展性增强。</p>
+
+<h4 id="toc_27">1.5.3 不遵守有什么坏处</h4>
+
+<p>接口太大，降低了扩展的灵活性。有时，一个接口中仅仅一个方法在不同场景有不同实现，此时增加一个全新的实现，则新的实现中有大部分代码和已有实现是代码重复的。而且客户端面对一个大接口，失去了根据场景灵活组合实现的可能性，只能定制一个全新的实现来适应当前场景，导致复用变得难以实现。</p>
+
+<h4 id="toc_28">1.5.4 出现违反原则的原因</h4>
+
+<p>往往初期系统中接口并不大，随着需求的变化，增加了方法，或增加了角色的职责，而没有及时拆分接口。</p>
+
+<h4 id="toc_29">1.5.5 实际运用中的取舍</h4>
+
+<p>在使用接口隔离原则时，我们需要注意控制接口的粒度，接口不能太小，如果太小会导致系统中接口泛滥，不利于维护；接口也不能太大，太大的接口将违背接口隔离原则，灵活性较差，使用起来很不方便。一般而言，接口中仅包含为某一类用户定制的方法即可，不应该强迫客户依赖于那些它们不用的方法。</p>
+
+<h3 id="toc_30">1.6 迪米特法则（Law of  Demeter, LoD）</h3>
+
+<h4 id="toc_31">1.6.1 解释</h4>
+
+<p>迪米特法则来自于1987年美国东北大学(Northeastern University)一个名为“Demeter”的研究项目。迪米特法则又称为最少知识原则(LeastKnowledge Principle, LKP)，其定义如下：</p>
+
+<ul>
+<li>一个软件实体应当尽可能少地与其他实体发生相互作用。</li>
+</ul>
+
+<h4 id="toc_32">1.6.2 好处</h4>
+
+<p>如果一个系统符合迪米特法则，那么当其中某一个模块发生修改时，就会尽量少地影响其他模块，扩展会相对容易，这是对软件实体之间通信的限制，迪米特法则要求限制软件实体之间通信的宽度和深度。迪米特法则可降低系统的耦合度，使类与类之间保持松散的耦合关系。</p>
+
+<h4 id="toc_33">1.6.3 不遵守有什么坏处</h4>
+
+<p>不遵守迪米特法则，会使对象间过渡耦合，其结果就是对象间关系过于复杂，而破坏了扩展性和可维护性。</p>
+
+<h4 id="toc_34">1.6.4 出现违反原则的原因</h4>
+
+<p>不要和“陌生人”说话。除以下类型的对象外，其他的都是“陌生人”。缺乏经验的开发，很容易把“陌生人”之间建立起通信关系，使得系统对象间出现不该有的耦合。</p>
+
+<ol>
+<li>当前对象本身(this)；</li>
+<li>以参数形式传入到当前对象方法中的对象；</li>
+<li>当前对象的成员对象；</li>
+<li>如果当前对象的成员对象是一个集合，集合中的元素；</li>
+<li>当前对象所创建的对象。</li>
+</ol>
+
+<p>比如A的某个状态的变化，会导致B,C的状态变化，此时如果在A中硬编码引入了B,C状态变化的代码逻辑，则建立起了A与B,C之间的耦合关系。当D的状态变化也会引起B,C状态变化时，彼此容易互相影响。</p>
+
+<h4 id="toc_35">1.6.5 实际运用中的取舍</h4>
+
+<p>实际开发中，为了避免对象间的直接耦合，往往借助“Mediator”、“Proxy”等设计模式，引入中间人，拆开耦合。</p>
+
+<h2 id="toc_36">二、GoF的23个设计模式</h2>
+
+<blockquote>
+<p>《Design Patterns Elements of Reusable Object-Oriented Software》</p>
+</blockquote>
+
+<p>作者介绍：</p>
+
+<ul>
+<li>Erich Gamma博士是瑞士苏黎士国际面向对象技术软件中心的技术主管。</li>
+<li>Richard Helm博士是澳大利亚悉尼IBM顾问集团公司面向对象技术公司的成员。</li>
+<li>Ralph Johnson博士是Urbana-Champaign伊利诺大学计算机科学系成员。</li>
+<li>John Vlissides博士是位于纽约Hawthorne的IBN托马斯J.沃森研究中心的研究人员。</li>
+</ul>
+
+<h2 id="toc_37">三、DDD</h2>
+
+<h3 id="toc_38">3.1 《实现领域驱动设计》里的9种组织模式和集成模式</h3>
+
+<h4 id="toc_39">①合作关系（Partnership）</h4>
+
+<p>如果2个限界上下文的团队要么一起成功，要么一起失败，此时就是这种关系。应该为相互关联的软件功能制定好计划表，这样可以确保这些功能在同一个发布中完成。</p>
+
+<h4 id="toc_40">②共享内核（Shared Kernel）</h4>
+
+<p>对模型和代码的共享将产生一种紧密的依赖性，对于设计来说，这种依赖性可好可坏。我们需要为共享的部分模型指定一个显式边界，并保持共享内核的小型化。共享内核具有特殊的状态，在没有与另一个团队协商的情况下，这种状态是不能改变的。我们应该引入一种持续集成过程来保证共享内核与通用语言的一致性。</p>
+
+<h4 id="toc_41">③客户方——供应方（Customer-Supplier Development）</h4>
+
+<p>当2个团队处于一种上游——下游关系时，上游团队可能独立于下游团队完成开发，此时下游团队的开发可能会受到很大的影响。因此，在上游团队的计划中，我们应该顾及到下游团队的需求。</p>
+
+<h4 id="toc_42">④遵奉者（Conformist）</h4>
+
+<p>在存在上游——下游关系的2个团队中，如果上游团队已经没有动力提供下游团队之需，下游团队便孤军无助了。处于利他主义，上游团队可能向下游团队做出种种承诺，但是有很大的可能是：这些承诺是无法实现的。下游团队只能盲目地使用上游团队模型。</p>
+
+<h4 id="toc_43">⑤防腐层（Anticorruption Layer）</h4>
+
+<p>在集成2个设计良好的限界上下文时，翻译层可能很简单，甚至可以很优雅的实现。但是，当共享内核，合作关系或客户方——供应方关系无法顺利实现时，此时的翻译将变得复杂。对于下游客户来说，你需要根据自己的领域模型创建一个单独的层，该层作为上游系统的委派向你的系统提供功能。防腐层通过已有的接口与其他系统交互，而其他系统只需要做很小的修改，甚至无需修改。在防腐层内部，它在你自己的模型和他方模型之间进行翻译转换。【为每个防腐层定义相应的领域服务】</p>
+
+<h4 id="toc_44">⑥开放主机服务（Open Host Service）</h4>
+
+<p>定义一种协议，让你的子系统通过该协议来访问你的服务。并且需要将协议公开。</p>
+
+<h4 id="toc_45">⑦发布语言（Published Language）</h4>
+
+<p>在2个限界上下文之间翻译模型需要一种公用的语言。此时你应该使用一种发布出来的共享语言来完成集成交流。发布语言通常与开放主机服务一起使用。</p>
+
+<h4 id="toc_46">⑧另谋他路（SeparateWay）</h4>
+
+<p>在确定需求时，我们应该做到坚持彻底。如果2套功能没有显著的关系，那么它们是可以被完全解耦的。集成总是昂贵的，有时带给你的好处也不大。声明2个限界上下文之间不存在任何关系，这样使得开发者去另外寻找简单的、专门的方法来解决问题。</p>
+
+<h4 id="toc_47">⑨大泥球（Big Ball of Mud）</h4>
+
+<p>当我们检查已有系统时，经常会发现系统中存在混杂在一起的模型，它们之间的边界是非常模糊的。此时你应该为整个系统绘制一个边界，然后将其归纳在大泥球范围之列。在这个边界内，不要试图使用复杂的建模手段来化解问题。同时，这样的系统有可能会向其他系统蔓延，应该对此保持警觉。</p>
+
+<h3 id="toc_48">3.2 分层架构设计模式</h3>
+
+<h4 id="toc_49">3.2.1 四层架构</h4>
+
+<p>Eric Evans在《领域驱动设计－软件核心复杂性应对之道》这本书中提出了传统的四层架构模式，如下图所示：</p>
+
+<p><img src="media/15533542897748/%E5%9B%9B%E5%B1%82%E6%9E%B6%E6%9E%84.png" alt="四层架构"/></p>
+
+<h2 id="toc_50">四、微服务架构设计</h2>
+
+<ul>
+<li>微服务中应该首先建立UL，然后再讨论领域模型。</li>
+<li>一个微服务最大不要超过一个BC，否则微服务内会存在有歧义的领域概念。</li>
+<li>一个微服务最小不要小于一个聚合，否则会引入分布式事务的复杂度。</li>
+<li>微服务的划分过程类似于BC的划分过程，每个微服务都有一个领域模型。</li>
+<li>微服务间的集成可以通过Context Map来完成，比如ACL（Anticorruption Layer，防腐层）。</li>
+<li>微服务间最好采用Domain Event（领域事件）来进行交互，使得微服务可以保持松耦合。</li>
+</ul>
+
+
+    
+
+      </div>
+
+      <div class="row">
+        <div class="large-6 columns">
+        <p class="text-left" style="padding:15px 0px;">
+      
+          <a href="15587920075778.html" 
+          title="Previous Post: (1) MAC开发环境——软件包管理">&laquo; (1) MAC开发环境——软件包管理</a>
+      
+        </p>
+        </div>
+        <div class="large-6 columns">
+      <p class="text-right" style="padding:15px 0px;">
+      
+      </p>
+        </div>
+      </div>
+      <div class="comments-wrap">
+        <div class="share-comments">
+          
+
+          
+
+          
+        </div>
+      </div>
+    </div><!-- article-wrap -->
+  </div><!-- large 8 -->
+
+
+
+
+ <div class="large-4 medium-4 columns">
+  <div class="hide-for-small">
+    <div id="sidebar" class="sidebar">
+          <div id="site-info" class="site-info">
+            
+                <h1>Harvey's Tech Site</h1>
+                <div class="site-des">多年互联网电商行业开发经验、云计算SRE开发经验。关注DDD，微服务，DevOps。正在学习机器学习、人工智能</div>
+                <div class="social">
+<a target="_blank" class="facebook" href="https://www.facebook.com/profile.php?id=100000085231645" title="Facebook">Facebook</a>
+
+
+
+<a target="_blank" class="pinterest" href="https://www.pinterest.com/harveywanghy/" title="Pinterest">Pinterest</a>
+
+
+
+<a target="_blank" class="twitter" target="_blank" href="https://twitter.com/HarveyWanghy" title="Twitter">Twitter</a>
+<a target="_blank" class="github" target="_blank" href="https://github.com/HarveyGG" title="GitHub">GitHub</a>
+<a target="_blank" class="email" href="mailto:harvey.wanghy@gmail.com" title="Email">Email</a>
+  <a target="_blank" class="rss" href="atom.xml" title="RSS">RSS</a>
+                
+              	 </div>
+          	</div>
+
+             
+
+              <div id="site-categories" class="side-item ">
+                <div class="side-header">
+                  <h2>Categories</h2>
+                </div>
+                <div class="side-content">
+
+      	<p class="cat-list">
+        
+            <a href="mac-dev-env.html"><strong>Mac开发环境</strong></a>
+        
+            <a href="%E4%BA%92%E8%81%94%E7%BD%91%E6%8A%80%E6%9C%AF.html"><strong>互联网技术</strong></a>
+        
+            <a href="%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1.html"><strong>架构设计</strong></a>
+        
+            <a href="CloudNative.html"><strong>CloudNative</strong></a>
+        
+            <a href="%E4%B8%AD%E9%97%B4%E4%BB%B6.html"><strong>中间件</strong></a>
+        
+            <a href="%E6%98%93%E7%BB%8F.html"><strong>易经</strong></a>
+         
+        </p>
+
+
+                </div>
+              </div>
+
+              <div id="site-categories" class="side-item">
+                <div class="side-header">
+                  <h2>Recent Posts</h2>
+                </div>
+                <div class="side-content">
+                <ul class="posts-list">
+	      
+		      
+			      <li class="post">
+			        <a href="15749287286754.html">Immutable Infrastructure</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15667991314468.html">后天八卦</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15667988442443.html">先天八卦</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15621674595097.html">Kafka学习笔记</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="15616863130414.html">(3) MAC使用技巧</a>
+			      </li>
+		     
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		   
+		  		</ul>
+                </div>
+              </div>
+        </div><!-- sidebar -->
+      </div><!-- hide for small -->
+</div><!-- large 4 -->
+
+</div><!-- row -->
+
+ <div class="page-bottom clearfix">
+  <div class="row">
+   <p class="copyright">Copyright &copy; 2015
+Powered by <a target="_blank" href="http://www.mweb.im">MWeb</a>,&nbsp; 
+Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
+  </div>
+</div>
+
+        </section>
+      </div>
+    </div>
+
+  
+    
+
+    <script src="asset/js/foundation.min.js"></script>
+    <script>
+      $(document).foundation();
+      function fixSidebarHeight(){
+        var w1 = $('.markdown-body').height();
+          var w2 = $('#sidebar').height();
+          if (w1 > w2) { $('#sidebar').height(w1); };
+      }
+      $(function(){
+        fixSidebarHeight();
+      })
+      $(window).load(function(){
+          fixSidebarHeight();
+      });
+     
+    </script>
+
+    
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
+
+
+  </body>
+</html>

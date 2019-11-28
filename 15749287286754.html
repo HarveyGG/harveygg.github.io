@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
     
-  (3) MAC使用技巧 - Harvey's Tech Site
+  Immutable Infrastructure - Harvey's Tech Site
   
   </title>
   
@@ -118,14 +118,14 @@
       <div class="markdown-body article-wrap">
        <div class="article">
           
-          <h1>(3) MAC使用技巧</h1>
+          <h1>Immutable Infrastructure</h1>
      
         <div class="read-more clearfix">
-          <span class="date">2019/6/28</span>
+          <span class="date">2019/11/28</span>
 
           <span>posted in&nbsp;</span> 
           
-              <span class="posted-in"><a href='mac-dev-env.html'>Mac开发环境</a></span>
+              <span class="posted-in"><a href='CloudNative.html'>CloudNative</a></span>
            
          
           <span class="comments">
@@ -138,10 +138,34 @@
       </div><!-- article -->
 
       <div class="article-content">
-      <ul>
-<li>Command+Shift+. 可以显示隐藏文件、文件夹，再按一次，恢复隐藏；</li>
-<li>finder下使用Command+Shift+G 可以前往任何文件夹，包括隐藏文件夹；</li>
-<li>恢复备份时的默认密码是：</li>
+      <h2 id="toc_0">什么是Mutable Infrastructure</h2>
+
+<p>传统物理服务器时代，企业倾向于对服务器做修改以实现商业目的。如，更换配件，原地更新软件包(upgrade app)，修改配置(update configuration)，打补丁(ad-hoc fixes)，微调(tweaks)。这些操作渐渐把一个服务器变得独一无二(<a href="https://martinfowler.com/bliki/SnowflakeServer.html">SnowflakeServer</a>)。这使得它难以被替换，难以维护，难以复制。你越来越无法理解其上面的某个配置这样配的原因。而这一切之所以会这样发展，是因为物理服务器时代服务器更新的难度大，成本高，周期长。所以企业在服务器更新上发展出很多技术，但都是围绕着原地升级的思路发展的。</p>
+
+<h2 id="toc_1">什么是Immutable Infrastructure</h2>
+
+<p>到了虚拟化时代，虚拟服务器变得可以被轻易替换(disposable)，整个服务器可以在秒级被重新构建。这使得使用服务器被整体替换的方式更新服务器比原地升级服务器来的更划算。服务器不再被修改，而是整体替换。这使得服务器的复制，替换变得轻而易举。这种服务器也叫<a href="https://martinfowler.com/bliki/PhoenixServer.html">PhoenixServer</a>。这样的基础架构无疑更加健壮，可维护。</p>
+
+<h2 id="toc_2">如何实现Immutable Infrastructure</h2>
+
+<ul>
+<li>禁止人工登录服务器做任何修改</li>
+<li>使用虚拟化技术</li>
+<li>服务器可以基于镜像快速构建，</li>
+<li>服务器的生命周期管理由软件自动化实现
+<ul>
+<li>服务器目标状态由文档定义</li>
+<li>文档由VCS管理</li>
+<li>服务器更新由自动化工具基于VCS里文档的更新触发，并最终实现目标状态</li>
+</ul></li>
+<li>一个无状态，变化频繁的应用层</li>
+<li>一个数据持久层
+<ul>
+<li>日志中心，记录服务器的每次变更</li>
+<li>外部数据存储，无状态应用层服务器被频繁替换，数据必须存储在外部</li>
+</ul></li>
+<li>开发和运维无间合作(DevOps)</li>
+<li>使用混沌工程工具验证服务的健壮性</li>
 </ul>
 
 
@@ -153,16 +177,13 @@
         <div class="large-6 columns">
         <p class="text-left" style="padding:15px 0px;">
       
-          <a href="15621674595097.html" 
-          title="Previous Post: Kafka学习笔记">&laquo; Kafka学习笔记</a>
-      
         </p>
         </div>
         <div class="large-6 columns">
       <p class="text-right" style="padding:15px 0px;">
       
-          <a  href="15611719436274.html" 
-          title="Next Post: 域名解析">域名解析 &raquo;</a>
+          <a  href="15667991314468.html" 
+          title="Next Post: 后天八卦">后天八卦 &raquo;</a>
       
       </p>
         </div>
