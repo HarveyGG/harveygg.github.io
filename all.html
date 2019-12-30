@@ -91,11 +91,13 @@
         
             <li><a href="%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1.html">架构设计</a></li>
         
-            <li><a href="CloudNative.html">CloudNative</a></li>
-        
             <li><a href="%E4%B8%AD%E9%97%B4%E4%BB%B6.html">中间件</a></li>
         
             <li><a href="%E6%98%93%E7%BB%8F.html">易经</a></li>
+        
+            <li><a href="DevOps.html">DevOps</a></li>
+        
+            <li><a href="Java.html">Java</a></li>
          
 
       </ul>
@@ -117,6 +119,530 @@
 	<div class="large-8 medium-8 columns">
 		<div class="markdown-body home-categories">
 		
+			<div class="article">
+                <a class="clearlink" href="15771545679019.html">
+                
+                  <h1>CMDB领域DDD培训</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<h2 id="toc_0">什么是领域驱动</h2>
+
+<ul>
+<li>问题域——客户的需求</li>
+<li>解决方案域——需求的实现</li>
+</ul>
+
+<pre class="line-numbers"><code class="language-text">问题-&gt;领域-&gt;业务逻辑-&gt;规模-&gt;结构-&gt;实现
+</code></pre>
+
+<h2 id="toc_1">DDD为什么突然火了</h2>
+
+<p>微服务</p>
+
+<blockquote>
+<p>纵观软件设计的历史，不是分久必合、合久必分，而是不断拆分、持续拆分的微型化过程。</p>
+</blockquote>
+
+<p>限界上下文(Bounded Context)有利于确定微服务的划分</p>
+
+<h2 id="toc_2">DDD的价值</h2>
+
+<blockquote>
+<p>应对软件复杂度</p>
+</blockquote>
+
+<ul>
+<li>从领域出发，保证软件分析模型和设计模型一致，业务人员和开发协作，保证软件质量</li>
+<li>提出统一语言，确保所有概念在各自的上下文中清晰无歧义</li>
+<li>提出分层架构，有效分离业务和技术，同时从垂直方向上做分隔职责边界</li>
+<li>战略设计通过拆分子域和限界上下文，从横向上分隔离职责边界</li>
+<li>战术设计通过引入多种领域模型概念帮助领域模型设计落地</li>
+</ul>
+
+<h3 id="toc_3">软件为什么会复杂</h3>
+
+<p>主观可控：</p>
+
+<ul>
+<li>业务规则 <u>复杂</u></li>
+<li>需求变化 <u>不可预测</u></li>
+<li>规模变 <u>大</u></li>
+<li>结构变 <u>复杂</u></li>
+<li>技术选型 <u>升级</u></li>
+</ul>
+
+<p>主观不可控：</p>
+
+<ul>
+<li>人不够</li>
+<li>人员流动</li>
+<li>时间紧</li>
+<li>组织架构不合理</li>
+</ul>
+
+<h3 id="toc_4">如何应对软件复杂</h3>
+
+<p><strong>关注点分离（Separation of Concern）</strong></p>
+
+<ul>
+<li>分离业务和技术
+<ul>
+<li>六边形架构</li>
+<li>整洁架构</li>
+<li>DIP (Dependency inversion principle) </li>
+<li>Interface-Oriented Programming</li>
+<li>Dependency Injection</li>
+</ul></li>
+<li>分离职责
+<ul>
+<li>分层
+<ul>
+<li>UI层（User Interface Layer）</li>
+<li>应用层（Application Layer）</li>
+<li>领域层（Domain Layer）</li>
+<li>技术设施层（Infrastructure Layer）</li>
+</ul></li>
+<li>限界上下文</li>
+<li>领域</li>
+</ul></li>
+</ul>
+
+<p><img src="media/15771545679019/15771737688932.jpg" alt=""/></p>
+
+<p><img src="media/15771545679019/15771749354517.jpg" alt=""/></p>
+
+<h2 id="toc_5">DDD的设计过程</h2>
+
+<p><img src="media/15771545679019/15771554676189.jpg" alt=""/></p>
+
+<h3 id="toc_6">战略设计阶段</h3>
+
+<ul>
+<li>问题域
+<ul>
+<li>限界上下文（Bounded Context）</li>
+<li>上下文映射（Context Map）</li>
+<li>核心域（Core Domain）</li>
+<li>子域（Subdomain）</li>
+</ul></li>
+<li>架构
+<ul>
+<li>六边形架构</li>
+<li>整洁架构</li>
+<li>CQRS</li>
+<li>Event Sourcing</li>
+</ul></li>
+</ul>
+
+<h3 id="toc_7">战术设计阶段</h3>
+
+<ul>
+<li>值对象（Value Object）</li>
+<li>实体（Entity）</li>
+<li>领域服务（Domain Service）</li>
+<li>领域事件（Domain Event）</li>
+<li>资源库（Repository）</li>
+<li>工厂（Factory）</li>
+<li>聚合（Aggregate）</li>
+<li>应用服务（Application Service） </li>
+</ul>
+
+<p><img src="media/15771545679019/15771569102713.jpg" alt=""/></p>
+
+<h3 id="toc_8">一个完整的生命周期</h3>
+
+<table>
+<thead>
+<tr>
+<th>阶段</th>
+<th>参与者</th>
+<th>产出物</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>需求</td>
+<td>产品经理、客户</td>
+<td>需求文档</td>
+</tr>
+<tr>
+<td>KickOff</td>
+<td>产品经理、客户、开发负责人、测试负责人</td>
+<td>明确利益相关人、对业务的共同理解、识别主要用户故事</td>
+</tr>
+<tr>
+<td>事件风暴</td>
+<td>领域专家、产品经理、DDD专家、架构师、相关开发</td>
+<td>统一语言、领域模型</td>
+</tr>
+<tr>
+<td>架构设计</td>
+<td>架构师、DDD专家</td>
+<td>代码包结构、技术选型、系统间通信方式</td>
+</tr>
+<tr>
+<td>开发</td>
+<td>架构师、开发</td>
+<td>单元测试、代码实现</td>
+</tr>
+<tr>
+<td>演示</td>
+<td>产品经理、开发负责人、测试负责人、领域专家、客户</td>
+<td>客服意见</td>
+</tr>
+<tr>
+<td>测试</td>
+<td>测试</td>
+<td>测试报告</td>
+</tr>
+<tr>
+<td>交付</td>
+<td>运维、开发、测试</td>
+<td>服务</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="toc_9">领域模型的提炼</h2>
+
+<p><img src="media/15771545679019/15776877632436.jpg" alt=""/></p>
+
+<h3 id="toc_10">6W模型</h3>
+
+<ul>
+<li>Who: 角色，一个场景中参与的用户是什么角色</li>
+<li>Why: 价值，解决用户什么问题</li>
+<li>What: 功能，需要做什么</li>
+<li>When: 流程，具体的业务逻辑是什么</li>
+<li>Where: 边界，场景的边界</li>
+<li>How: 实现，具体的技术实现</li>
+</ul>
+
+<h3 id="toc_11">如何实施6W模型</h3>
+
+<h4 id="toc_12">1. 用例</h4>
+
+<pre class="line-numbers"><code class="language-text">用例名称：批量增加主机
+用例目的（Why）：本用例可以帮助「角色（Who）」为其微服务一次性关联（What）符合「条件」的主机
+参与者（Who）：「角色」
+前置条件：微服务已经被纳管
+
+基础流程（When）：
+1. ……
+2. ……
+3. ……
+
+替代流程：异常情况一
+替代流程：异常情况二
+</code></pre>
+
+<h4 id="toc_13">2. TDD</h4>
+
+<pre class="line-numbers"><code class="language-java">@Autowared
+private HostAppService hostAppService;
+
+@Test
+// 测试方法以描述业务的形式命名
+// 不要对被测试方法写单元测试，要对领域场景编写，驱动我们识别场景分解任务
+public void should_return_100_when_100_valid_hosts_registered_successfully() {
+    // given 驱动我们思考对象的创建，与其他对象的协作，领域对象的命名（统一语言）
+    Microservice microservice = Mock.one(Microservice.class);
+    List&lt;Host&gt; validHosts = validHosts(100);
+    
+    // when 驱动我们思考职责边界、方法的命名、入参
+    int successAmount = hostAppService.registerHostsForMicroservice(microservice, validHosts)
+}
+    
+    // then 驱动我们思考方法的返回值、对系统的其他影响
+    AssertThat(successAmount, is(100));
+</code></pre>
+
+<h2 id="toc_14">统一语言</h2>
+
+<ul>
+<li>通过事件风暴获得统一语言的中文</li>
+<li>标注对应英文</li>
+<li>引入局外人对用例的阐述进行提问</li>
+<li>统一语言要具备专业性（水，H2O）</li>
+</ul>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2019/12/24</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1.html'>架构设计</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="15771157345073.html">
+                
+                  <h1>问题定位</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<h2 id="toc_0">查找问题线程</h2>
+
+<ul>
+<li>top 查看问题进程 pid</li>
+<li>top -Hp pid 查看进程中有问题线程pid tid</li>
+<li>printf &#39;%x/n&#39; tid 转化为十六进制</li>
+<li>jstack pid |grep tid的十六进制 -A 30 查看线程堆栈信息</li>
+</ul>
+
+<h2 id="toc_1">内存溢出问题</h2>
+
+<ul>
+<li>jstat -gcutil java_pid 刷新时间间隔 查看分区占用情况和gc状况</li>
+<li>jmap -dump:format=b,file=name.dump java_pid  导出dump文件</li>
+<li>用visualVM分析dump文件</li>
+</ul>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2019/12/23</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='Java.html'>Java</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="15769237630512.html">
+                
+                  <h1>Docker Desktop for Mac 启动Kubernetes时查看日志方法</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<pre class="line-numbers"><code class="language-shell">pred=&#39;process matches &quot;.*(ocker|vpnkit).*&quot;
+  || (process in {&quot;taskgated-helper&quot;, &quot;launchservicesd&quot;, &quot;kernel&quot;} &amp;&amp; eventMessage contains[c] &quot;docker&quot;)&#39;
+/usr/bin/log stream --style syslog --level=debug --color=always --predicate &quot;$pred&quot;
+</code></pre>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2019/12/21</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='DevOps.html'>DevOps</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="15764895526219.html">
+                
+                  <h1>中国大陆地区安装minikube</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<p>由于众所周知的原因官方minikube在中国大陆地区运行会碰到网络问题。</p>
+
+<p>阿里云对官方minikube做了修改，使它默认使用国内镜像仓库。安装和启动参考文档如下：</p>
+
+<blockquote>
+<p><a href="https://yq.aliyun.com/articles/221687">Minikube - Kubernetes本地实验环境</a></p>
+</blockquote>
+
+<p>但是文中的参数任然有问题，如下命令可以正常启动，操作系统Mac</p>
+
+<pre class="line-numbers"><code class="language-shell">minikube start --image-mirror-country cn \
+    --iso-url=https://kubernetes.oss-cn-hangzhou.aliyuncs.com/minikube/iso/minikube-v1.5.1.iso \
+    --registry-mirror=https://xxxxxx.mirror.aliyuncs.com \
+    --image-repository=registry.cn-hangzhou.aliyuncs.com/google_containers
+</code></pre>
+
+<p>其中<code>--registry-mirror</code>参数中的&quot;xxxxxx&quot;是个人阿里云镜像加速地址，查询地址：</p>
+
+<pre class="line-numbers"><code class="language-text">https://cr.console.aliyun.com/cn-hangzhou/instances/mirrors
+</code></pre>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2019/12/16</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='DevOps.html'>DevOps</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="15763252898733.html">
+                
+                  <h1>人类能否造出真正智能的机器人？</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<p>机器人是什么？<br/>
+是计算机。<br/>
+计算机是什么？<br/>
+冯诺依曼结构的计算机可以抽象为“输入”、“计算”和“输出”三部分。<br/>
+计算机的智能体现在其扩展能力上。<br/>
+其输入从最早的打孔纸带扩展到现在的键盘，鼠标、语音，传感器等。<br/>
+其计算能力可以通过编程来扩展。<br/>
+其输出从最初的显示器扩展到现在的扬声器、打印机、投影仪等。</p>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2019/12/14</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1.html'>架构设计</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="15750802883724.html">
+                
+                  <h1>平台到底是什么概念</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<h2 id="toc_0">一般定义</h2>
+
+<p>平台能为产品团队提供可复用能力支撑（赋能），它是一个操作环境，可以让产品团队在其上把产品特性快速交付到客户手中。ThoughtWorks开发出一个五维模型来描述平台的重要特征：</p>
+
+<ul>
+<li>支持端到端交付的基础设施</li>
+<li>API和架构自愈</li>
+<li>提供自助服务</li>
+<li>支持实验的基础设施</li>
+<li>提供用户触点技术</li>
+</ul>
+
+<h2 id="toc_1">先来看看什么不是一个平台</h2>
+
+<h3 id="toc_2">按技术领域划分团队</h3>
+
+<p>有的企业花大力气构建自动化能力，但是往往会根据技术划分团队。比如，负责中间件管理的团队，负责操作系统管理的团队，负责DB管理的团队，负责LB管理的团队，另外还会有一个专门负责自动化的效能团队，往往能力上只是负责编排。</p>
+
+<p>这些团队，每个都在自己的管理架构下有独立的工作方式，每个团队都在各自的技术领域范围内实现高效率管理，集中专业化，外包非差异化功能，应用治理，并降低成本。但就是没人去衡量客户需求端到端的交付效率。</p>
+
+<p>一个客户需求的交付往往穿越多个团队，端到端交付效率极差。</p>
+
+<p>时间长了，产品和基础设施的质量逐渐下降。环境和配置上会出现很多细微的不一致。产品团队不得不降低交付速度，减少一次交付包含的特性。甚至不敢去做任何改动较大的提升动作或重构动作，而这些动作本来是用来改善问题的。</p>
+
+<h3 id="toc_3">彼此依赖的待办事项</h3>
+
+<p>一个特性的交付往往在一个团队内无法独立完成，于是一个团队的待办事项会依赖其他团队的待办事项，彼此耦合。而往往不同团队有不同的目标，各自的待办事项优先级不同。于是一个团队的待办事项无法落地的原因往往就是依赖另一个团队的待办事项，而另一个团队迟迟不能完成。这就造成了团队之间的隔阂和互相之间的不信任，甚至扯皮、推诿，丧失责任感和创造力。最终使端到端交付的效率变得极低。</p>
+
+<p>显然，一个好的平台的一个重要特征是，他必须能减少待办事项耦合。该平台必须能够支持自助服务。</p>
+
+<h2 id="toc_4">什么是一个平台</h2>
+
+<p>AWS就是一个平台。</p>
+
+<h2 id="toc_5">如何构建一个平台</h2>
+
+<ol>
+<li>调整组织架构，给每个产品团队增加5%的运维职责，节省平台团队200%的运维职责。&quot;you build it, you run it.&quot;</li>
+<li>平台自己也要承担从开发到运行的所有责任，避免平台自身的开发团队只管开发，运维团队管运行。同样要坚守：&quot;you build it, you run it.&quot;</li>
+<li>划清平台和产品团队的职责边界，产品团队负责自己产品的构建，部署，监控等；平台团队负责平台的构建，部署，监控等；设计抽象，对外暴露自助服务；平台不应该关心它上面跑的是什么业务，产品不应该关心平台使用的技术。</li>
+<li>除了提供API之外，还要提供文档，guideline, template code, on call, 布道等。</li>
+<li>最初落地时不知道需要提供哪些能力，可以从产品团队了解需求，从解决最迫切的需求开始。</li>
+</ol>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2019/11/30</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='DevOps.html'>DevOps</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
 			<div class="article">
                 <a class="clearlink" href="15750321018543.html">
                 
@@ -209,7 +735,7 @@
                     <span class="date">2019/11/28</span>
                     <span>posted in&nbsp;</span> 
           				  
-          					    <span class="posted-in"><a href='CloudNative.html'>CloudNative</a></span>
+          					    <span class="posted-in"><a href='DevOps.html'>DevOps</a></span>
           				   
                   </div>
                   <div class="more-right right">
@@ -1415,11 +1941,13 @@ $ brew --cache  # 打印brew下载包存放位置
         
             <a href="%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1.html"><strong>架构设计</strong></a>
         
-            <a href="CloudNative.html"><strong>CloudNative</strong></a>
-        
             <a href="%E4%B8%AD%E9%97%B4%E4%BB%B6.html"><strong>中间件</strong></a>
         
             <a href="%E6%98%93%E7%BB%8F.html"><strong>易经</strong></a>
+        
+            <a href="DevOps.html"><strong>DevOps</strong></a>
+        
+            <a href="Java.html"><strong>Java</strong></a>
          
         </p>
 
@@ -1436,33 +1964,45 @@ $ brew --cache  # 打印brew下载包存放位置
 	      
 		      
 			      <li class="post">
-			        <a href="15750321018543.html">安全和隐私中“任何来源”找回办法</a>
+			        <a href="15771545679019.html">CMDB领域DDD培训</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15749287286754.html">Immutable Infrastructure</a>
+			        <a href="15771157345073.html">问题定位</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15667991314468.html">后天八卦</a>
+			        <a href="15769237630512.html">Docker Desktop for Mac 启动Kubernetes时查看日志方法</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15667988442443.html">先天八卦</a>
+			        <a href="15764895526219.html">中国大陆地区安装minikube</a>
 			      </li>
 		     
 		  
 		      
 			      <li class="post">
-			        <a href="15621674595097.html">Kafka学习笔记</a>
+			        <a href="15763252898733.html">人类能否造出真正智能的机器人？</a>
 			      </li>
 		     
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
 		  
 		      
 		  
@@ -1516,7 +2056,7 @@ Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
     </script>
 
     
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
 
 
   </body>

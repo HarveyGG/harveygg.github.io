@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
     
-  安全和隐私中“任何来源”找回办法 - Harvey's Tech Site
+  CMDB领域DDD培训 - Harvey's Tech Site
   
   </title>
   
@@ -120,14 +120,14 @@
       <div class="markdown-body article-wrap">
        <div class="article">
           
-          <h1>安全和隐私中“任何来源”找回办法</h1>
+          <h1>CMDB领域DDD培训</h1>
      
         <div class="read-more clearfix">
-          <span class="date">2019/11/29</span>
+          <span class="date">2019/12/24</span>
 
           <span>posted in&nbsp;</span> 
           
-              <span class="posted-in"><a href='mac-dev-env.html'>Mac开发环境</a></span>
+              <span class="posted-in"><a href='%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1.html'>架构设计</a></span>
            
          
           <span class="comments">
@@ -140,12 +140,247 @@
       </div><!-- article -->
 
       <div class="article-content">
-      <p>苹果发布了<code>MacOS Sierra 10.12</code>版本之后，原来需要用于安装从网上下载的软件的功能不见了，即系统中“任何来源”选项。可以使用如下方法找回“任何来源”的选项。</p>
+      <h2 id="toc_0">什么是领域驱动</h2>
 
-<p>在终端中输入</p>
+<ul>
+<li>问题域——客户的需求</li>
+<li>解决方案域——需求的实现</li>
+</ul>
 
-<pre class="line-numbers"><code class="language-shell">sudo spctl --master-disable
+<pre class="line-numbers"><code class="language-text">问题-&gt;领域-&gt;业务逻辑-&gt;规模-&gt;结构-&gt;实现
 </code></pre>
+
+<h2 id="toc_1">DDD为什么突然火了</h2>
+
+<p>微服务</p>
+
+<blockquote>
+<p>纵观软件设计的历史，不是分久必合、合久必分，而是不断拆分、持续拆分的微型化过程。</p>
+</blockquote>
+
+<p>限界上下文(Bounded Context)有利于确定微服务的划分</p>
+
+<h2 id="toc_2">DDD的价值</h2>
+
+<blockquote>
+<p>应对软件复杂度</p>
+</blockquote>
+
+<ul>
+<li>从领域出发，保证软件分析模型和设计模型一致，业务人员和开发协作，保证软件质量</li>
+<li>提出统一语言，确保所有概念在各自的上下文中清晰无歧义</li>
+<li>提出分层架构，有效分离业务和技术，同时从垂直方向上做分隔职责边界</li>
+<li>战略设计通过拆分子域和限界上下文，从横向上分隔离职责边界</li>
+<li>战术设计通过引入多种领域模型概念帮助领域模型设计落地</li>
+</ul>
+
+<h3 id="toc_3">软件为什么会复杂</h3>
+
+<p>主观可控：</p>
+
+<ul>
+<li>业务规则 <u>复杂</u></li>
+<li>需求变化 <u>不可预测</u></li>
+<li>规模变 <u>大</u></li>
+<li>结构变 <u>复杂</u></li>
+<li>技术选型 <u>升级</u></li>
+</ul>
+
+<p>主观不可控：</p>
+
+<ul>
+<li>人不够</li>
+<li>人员流动</li>
+<li>时间紧</li>
+<li>组织架构不合理</li>
+</ul>
+
+<h3 id="toc_4">如何应对软件复杂</h3>
+
+<p><strong>关注点分离（Separation of Concern）</strong></p>
+
+<ul>
+<li>分离业务和技术
+<ul>
+<li>六边形架构</li>
+<li>整洁架构</li>
+<li>DIP (Dependency inversion principle) </li>
+<li>Interface-Oriented Programming</li>
+<li>Dependency Injection</li>
+</ul></li>
+<li>分离职责
+<ul>
+<li>分层
+<ul>
+<li>UI层（User Interface Layer）</li>
+<li>应用层（Application Layer）</li>
+<li>领域层（Domain Layer）</li>
+<li>技术设施层（Infrastructure Layer）</li>
+</ul></li>
+<li>限界上下文</li>
+<li>领域</li>
+</ul></li>
+</ul>
+
+<p><img src="media/15771545679019/15771737688932.jpg" alt=""/></p>
+
+<p><img src="media/15771545679019/15771749354517.jpg" alt=""/></p>
+
+<h2 id="toc_5">DDD的设计过程</h2>
+
+<p><img src="media/15771545679019/15771554676189.jpg" alt=""/></p>
+
+<h3 id="toc_6">战略设计阶段</h3>
+
+<ul>
+<li>问题域
+<ul>
+<li>限界上下文（Bounded Context）</li>
+<li>上下文映射（Context Map）</li>
+<li>核心域（Core Domain）</li>
+<li>子域（Subdomain）</li>
+</ul></li>
+<li>架构
+<ul>
+<li>六边形架构</li>
+<li>整洁架构</li>
+<li>CQRS</li>
+<li>Event Sourcing</li>
+</ul></li>
+</ul>
+
+<h3 id="toc_7">战术设计阶段</h3>
+
+<ul>
+<li>值对象（Value Object）</li>
+<li>实体（Entity）</li>
+<li>领域服务（Domain Service）</li>
+<li>领域事件（Domain Event）</li>
+<li>资源库（Repository）</li>
+<li>工厂（Factory）</li>
+<li>聚合（Aggregate）</li>
+<li>应用服务（Application Service） </li>
+</ul>
+
+<p><img src="media/15771545679019/15771569102713.jpg" alt=""/></p>
+
+<h3 id="toc_8">一个完整的生命周期</h3>
+
+<table>
+<thead>
+<tr>
+<th>阶段</th>
+<th>参与者</th>
+<th>产出物</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>需求</td>
+<td>产品经理、客户</td>
+<td>需求文档</td>
+</tr>
+<tr>
+<td>KickOff</td>
+<td>产品经理、客户、开发负责人、测试负责人</td>
+<td>明确利益相关人、对业务的共同理解、识别主要用户故事</td>
+</tr>
+<tr>
+<td>事件风暴</td>
+<td>领域专家、产品经理、DDD专家、架构师、相关开发</td>
+<td>统一语言、领域模型</td>
+</tr>
+<tr>
+<td>架构设计</td>
+<td>架构师、DDD专家</td>
+<td>代码包结构、技术选型、系统间通信方式</td>
+</tr>
+<tr>
+<td>开发</td>
+<td>架构师、开发</td>
+<td>单元测试、代码实现</td>
+</tr>
+<tr>
+<td>演示</td>
+<td>产品经理、开发负责人、测试负责人、领域专家、客户</td>
+<td>客服意见</td>
+</tr>
+<tr>
+<td>测试</td>
+<td>测试</td>
+<td>测试报告</td>
+</tr>
+<tr>
+<td>交付</td>
+<td>运维、开发、测试</td>
+<td>服务</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="toc_9">领域模型的提炼</h2>
+
+<p><img src="media/15771545679019/15776877632436.jpg" alt=""/></p>
+
+<h3 id="toc_10">6W模型</h3>
+
+<ul>
+<li>Who: 角色，一个场景中参与的用户是什么角色</li>
+<li>Why: 价值，解决用户什么问题</li>
+<li>What: 功能，需要做什么</li>
+<li>When: 流程，具体的业务逻辑是什么</li>
+<li>Where: 边界，场景的边界</li>
+<li>How: 实现，具体的技术实现</li>
+</ul>
+
+<h3 id="toc_11">如何实施6W模型</h3>
+
+<h4 id="toc_12">1. 用例</h4>
+
+<pre class="line-numbers"><code class="language-text">用例名称：批量增加主机
+用例目的（Why）：本用例可以帮助「角色（Who）」为其微服务一次性关联（What）符合「条件」的主机
+参与者（Who）：「角色」
+前置条件：微服务已经被纳管
+
+基础流程（When）：
+1. ……
+2. ……
+3. ……
+
+替代流程：异常情况一
+替代流程：异常情况二
+</code></pre>
+
+<h4 id="toc_13">2. TDD</h4>
+
+<pre class="line-numbers"><code class="language-java">@Autowared
+private HostAppService hostAppService;
+
+@Test
+// 测试方法以描述业务的形式命名
+// 不要对被测试方法写单元测试，要对领域场景编写，驱动我们识别场景分解任务
+public void should_return_100_when_100_valid_hosts_registered_successfully() {
+    // given 驱动我们思考对象的创建，与其他对象的协作，领域对象的命名（统一语言）
+    Microservice microservice = Mock.one(Microservice.class);
+    List&lt;Host&gt; validHosts = validHosts(100);
+    
+    // when 驱动我们思考职责边界、方法的命名、入参
+    int successAmount = hostAppService.registerHostsForMicroservice(microservice, validHosts)
+}
+    
+    // then 驱动我们思考方法的返回值、对系统的其他影响
+    AssertThat(successAmount, is(100));
+</code></pre>
+
+<h2 id="toc_14">统一语言</h2>
+
+<ul>
+<li>通过事件风暴获得统一语言的中文</li>
+<li>标注对应英文</li>
+<li>引入局外人对用例的阐述进行提问</li>
+<li>统一语言要具备专业性（水，H2O）</li>
+</ul>
 
 
     
@@ -156,16 +391,13 @@
         <div class="large-6 columns">
         <p class="text-left" style="padding:15px 0px;">
       
-          <a href="15750802883724.html" 
-          title="Previous Post: 平台到底是什么概念">&laquo; 平台到底是什么概念</a>
-      
         </p>
         </div>
         <div class="large-6 columns">
       <p class="text-right" style="padding:15px 0px;">
       
-          <a  href="15749287286754.html" 
-          title="Next Post: Immutable Infrastructure">Immutable Infrastructure &raquo;</a>
+          <a  href="15771157345073.html" 
+          title="Next Post: 问题定位">问题定位 &raquo;</a>
       
       </p>
         </div>

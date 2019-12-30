@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
     
-  安全和隐私中“任何来源”找回办法 - Harvey's Tech Site
+  问题定位 - Harvey's Tech Site
   
   </title>
   
@@ -120,14 +120,14 @@
       <div class="markdown-body article-wrap">
        <div class="article">
           
-          <h1>安全和隐私中“任何来源”找回办法</h1>
+          <h1>问题定位</h1>
      
         <div class="read-more clearfix">
-          <span class="date">2019/11/29</span>
+          <span class="date">2019/12/23</span>
 
           <span>posted in&nbsp;</span> 
           
-              <span class="posted-in"><a href='mac-dev-env.html'>Mac开发环境</a></span>
+              <span class="posted-in"><a href='Java.html'>Java</a></span>
            
          
           <span class="comments">
@@ -140,12 +140,22 @@
       </div><!-- article -->
 
       <div class="article-content">
-      <p>苹果发布了<code>MacOS Sierra 10.12</code>版本之后，原来需要用于安装从网上下载的软件的功能不见了，即系统中“任何来源”选项。可以使用如下方法找回“任何来源”的选项。</p>
+      <h2 id="toc_0">查找问题线程</h2>
 
-<p>在终端中输入</p>
+<ul>
+<li>top 查看问题进程 pid</li>
+<li>top -Hp pid 查看进程中有问题线程pid tid</li>
+<li>printf &#39;%x/n&#39; tid 转化为十六进制</li>
+<li>jstack pid |grep tid的十六进制 -A 30 查看线程堆栈信息</li>
+</ul>
 
-<pre class="line-numbers"><code class="language-shell">sudo spctl --master-disable
-</code></pre>
+<h2 id="toc_1">内存溢出问题</h2>
+
+<ul>
+<li>jstat -gcutil java_pid 刷新时间间隔 查看分区占用情况和gc状况</li>
+<li>jmap -dump:format=b,file=name.dump java_pid  导出dump文件</li>
+<li>用visualVM分析dump文件</li>
+</ul>
 
 
     
@@ -156,16 +166,16 @@
         <div class="large-6 columns">
         <p class="text-left" style="padding:15px 0px;">
       
-          <a href="15750802883724.html" 
-          title="Previous Post: 平台到底是什么概念">&laquo; 平台到底是什么概念</a>
+          <a href="15771545679019.html" 
+          title="Previous Post: CMDB领域DDD培训">&laquo; CMDB领域DDD培训</a>
       
         </p>
         </div>
         <div class="large-6 columns">
       <p class="text-right" style="padding:15px 0px;">
       
-          <a  href="15749287286754.html" 
-          title="Next Post: Immutable Infrastructure">Immutable Infrastructure &raquo;</a>
+          <a  href="15769237630512.html" 
+          title="Next Post: Docker Desktop for Mac 启动Kubernetes时查看日志方法">Docker Desktop for Mac 启动Kubernetes时查看日志方法 &raquo;</a>
       
       </p>
         </div>

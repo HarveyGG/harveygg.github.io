@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
     
-  安全和隐私中“任何来源”找回办法 - Harvey's Tech Site
+  Docker Desktop for Mac 启动Kubernetes时查看日志方法 - Harvey's Tech Site
   
   </title>
   
@@ -120,14 +120,14 @@
       <div class="markdown-body article-wrap">
        <div class="article">
           
-          <h1>安全和隐私中“任何来源”找回办法</h1>
+          <h1>Docker Desktop for Mac 启动Kubernetes时查看日志方法</h1>
      
         <div class="read-more clearfix">
-          <span class="date">2019/11/29</span>
+          <span class="date">2019/12/21</span>
 
           <span>posted in&nbsp;</span> 
           
-              <span class="posted-in"><a href='mac-dev-env.html'>Mac开发环境</a></span>
+              <span class="posted-in"><a href='DevOps.html'>DevOps</a></span>
            
          
           <span class="comments">
@@ -140,11 +140,9 @@
       </div><!-- article -->
 
       <div class="article-content">
-      <p>苹果发布了<code>MacOS Sierra 10.12</code>版本之后，原来需要用于安装从网上下载的软件的功能不见了，即系统中“任何来源”选项。可以使用如下方法找回“任何来源”的选项。</p>
-
-<p>在终端中输入</p>
-
-<pre class="line-numbers"><code class="language-shell">sudo spctl --master-disable
+      <pre class="line-numbers"><code class="language-shell">pred=&#39;process matches &quot;.*(ocker|vpnkit).*&quot;
+  || (process in {&quot;taskgated-helper&quot;, &quot;launchservicesd&quot;, &quot;kernel&quot;} &amp;&amp; eventMessage contains[c] &quot;docker&quot;)&#39;
+/usr/bin/log stream --style syslog --level=debug --color=always --predicate &quot;$pred&quot;
 </code></pre>
 
 
@@ -156,16 +154,16 @@
         <div class="large-6 columns">
         <p class="text-left" style="padding:15px 0px;">
       
-          <a href="15750802883724.html" 
-          title="Previous Post: 平台到底是什么概念">&laquo; 平台到底是什么概念</a>
+          <a href="15771157345073.html" 
+          title="Previous Post: 问题定位">&laquo; 问题定位</a>
       
         </p>
         </div>
         <div class="large-6 columns">
       <p class="text-right" style="padding:15px 0px;">
       
-          <a  href="15749287286754.html" 
-          title="Next Post: Immutable Infrastructure">Immutable Infrastructure &raquo;</a>
+          <a  href="15764895526219.html" 
+          title="Next Post: 中国大陆地区安装minikube">中国大陆地区安装minikube &raquo;</a>
       
       </p>
         </div>
