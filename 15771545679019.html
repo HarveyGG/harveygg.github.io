@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
     
-  CMDB领域DDD培训 - Harvey's Tech Site
+  DDD学习笔记 - Harvey's Tech Site
   
   </title>
   
@@ -120,7 +120,7 @@
       <div class="markdown-body article-wrap">
        <div class="article">
           
-          <h1>CMDB领域DDD培训</h1>
+          <h1>DDD学习笔记</h1>
      
         <div class="read-more clearfix">
           <span class="date">2019/12/24</span>
@@ -142,6 +142,8 @@
       <div class="article-content">
       <h2 id="toc_0">什么是领域驱动</h2>
 
+<p>领域建模驱动是相对于数据建模驱动的，所以要先识别出领域，确定领域模型，然后再确定技术实现方案。而识别领域确定领域模型的过程就需要分析清楚问题域，理清业务。所以领域驱动设计倡导的是从问题出发，先分析业务，然后结合业务、规模、系统结构进行设计，然后再编码实现。</p>
+
 <ul>
 <li>问题域——客户的需求</li>
 <li>解决方案域——需求的实现</li>
@@ -152,13 +154,28 @@
 
 <h2 id="toc_1">DDD为什么突然火了</h2>
 
-<p>微服务</p>
+<p>微服务的划分粒度如何把握。</p>
 
 <blockquote>
 <p>纵观软件设计的历史，不是分久必合、合久必分，而是不断拆分、持续拆分的微型化过程。</p>
 </blockquote>
 
-<p>限界上下文(Bounded Context)有利于确定微服务的划分</p>
+<p>限界上下文(Bounded Context)有利于确定微服务的划分。</p>
+
+<p>理论上：</p>
+
+<ul>
+<li>一个微服务不要小于一个聚合</li>
+<li>一个微服务不要大于一个限界上下文</li>
+</ul>
+
+<p>如果出现如下情况说明微服务划分不合理：</p>
+
+<ul>
+<li>微服务间经常需要分布式事务来支持业务数据一致性</li>
+<li>对于微服务A来说，处理一个请求总是依赖另一个微服务B</li>
+<li>一个微服务中出现多个名字相同的领域实体</li>
+</ul>
 
 <h2 id="toc_2">DDD的价值</h2>
 
@@ -172,6 +189,7 @@
 <li>提出分层架构，有效分离业务和技术，同时从垂直方向上做分隔职责边界</li>
 <li>战略设计通过拆分子域和限界上下文，从横向上分隔离职责边界</li>
 <li>战术设计通过引入多种领域模型概念帮助领域模型设计落地</li>
+<li>引入微服务间协作的设计模式</li>
 </ul>
 
 <h3 id="toc_3">软件为什么会复杂</h3>
@@ -202,14 +220,11 @@
 <ul>
 <li>分离业务和技术
 <ul>
+<li>分层架构
+<ul>
 <li>六边形架构</li>
 <li>整洁架构</li>
-<li>DIP (Dependency inversion principle) </li>
-<li>Interface-Oriented Programming</li>
-<li>Dependency Injection</li>
 </ul></li>
-<li>分离职责
-<ul>
 <li>分层
 <ul>
 <li>UI层（User Interface Layer）</li>
@@ -217,7 +232,18 @@
 <li>领域层（Domain Layer）</li>
 <li>技术设施层（Infrastructure Layer）</li>
 </ul></li>
+<li>设计原则
+<ul>
+<li>SRP (Single-Responsibility Principle)</li>
+<li>DIP (Dependency inversion principle) </li>
+<li>Interface-Oriented Programming</li>
+<li>Dependency Injection</li>
+</ul></li>
+</ul></li>
+<li>分离职责
+<ul>
 <li>限界上下文</li>
+<li>聚合</li>
 <li>领域</li>
 </ul></li>
 </ul>
@@ -382,6 +408,90 @@ public void should_return_100_when_100_valid_hosts_registered_successfully() {
 <li>统一语言要具备专业性（水，H2O）</li>
 </ul>
 
+<h2 id="toc_15">限界上下文</h2>
+
+<p>限界上下文需要满足四个特征：</p>
+
+<ul>
+<li>最小完备：要完备，而且要最小；不依赖外部</li>
+<li>自我履行：知识专家，基于掌握的知识决定需要履行的职责，不做边界外的职责</li>
+<li>稳定空间：分离内外，外部变化对内不影响</li>
+<li>独立进化：自身进化对外不影响</li>
+</ul>
+
+<h3 id="toc_16">识别限界上下文</h3>
+
+<p>识别限界上下文就是寻找边界：基于业务边界、技术边界，找到限界上下文的边界，进而找到工作边界、应用边界。</p>
+
+<p><img src="media/15771545679019/15785351896389.jpg" alt=""/></p>
+
+<h3 id="toc_17">验证识别结果</h3>
+
+<ul>
+<li>是否能给限界上下文轻松的命名</li>
+<li>限界上下文之间是否容易协作</li>
+</ul>
+
+<h3 id="toc_18">上下文协作关系</h3>
+
+<p><img src="media/15771545679019/15794115154549.jpg" alt=""/></p>
+
+<p>上下文映射模式：</p>
+
+<ol>
+<li>合作关系（Partnership）</li>
+<li>共享内核（Shared Kernel）</li>
+<li>客户方-供应方开发（Customer-Supplier Development）</li>
+<li>遵奉者（Conformist）</li>
+<li>分离方式（Separate Ways）</li>
+</ol>
+
+<p>降低上下文之间耦合的模式：</p>
+
+<ol>
+<li>防腐层（Anticorruption Layer）</li>
+<li>开放主机服务（Open Host Service）</li>
+<li>发布/订阅事件</li>
+</ol>
+
+<h3 id="toc_19">划分团队和应用</h3>
+
+<ul>
+<li>基于语义相关性和功能相关性识别出限界上下文</li>
+<li>基于<code>2PTs规则</code>、<code>特性团队</code>、<code>康威定律</code>思想划分团队，找到工作边界</li>
+<li>基于<code>重用性</code>、<code>业务变化</code>、<code>质量属性</code>、<code>技术选型</code>等技术考虑划分应用边界，并持续重构</li>
+</ul>
+
+<h2 id="toc_20">实体</h2>
+
+<h2 id="toc_21">值对象</h2>
+
+<h2 id="toc_22">聚合</h2>
+
+<p>引入聚合来划分对象之间的边界，保证边界内所有对象的一致性。其中作为主体的实体对象是聚合根。</p>
+
+<h3 id="toc_23">聚合边界的识别</h3>
+
+<ul>
+<li>是否多实体同生命周期，同生同死组合关系（完整性）</li>
+<li>是否单实体有独立性需求，外界需要直接和他交互（独立性）</li>
+<li>是否存在不变量</li>
+<li>是否处于一个事务中</li>
+</ul>
+
+<h3 id="toc_24">规则</h3>
+
+<ul>
+<li>外界只能和聚合根交互</li>
+<li>聚合根可以向外部传递内部实体的引用，但外部对象只能临时使用</li>
+<li>聚合根可以向外部传递值对象的副本</li>
+<li>只有聚合根才能直接通过数据库获得，其他实体通过聚合根获得</li>
+</ul>
+
+<h2 id="toc_25">领域服务</h2>
+
+<p>存在跨聚合的业务场景时需要使用领域服务</p>
+
 
     
 
@@ -480,7 +590,7 @@ public void should_return_100_when_100_valid_hosts_registered_successfully() {
 	      
 		      
 			      <li class="post">
-			        <a href="15771545679019.html">CMDB领域DDD培训</a>
+			        <a href="15771545679019.html">DDD学习笔记</a>
 			      </li>
 		     
 		  
