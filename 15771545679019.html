@@ -462,15 +462,76 @@ public void should_return_100_when_100_valid_hosts_registered_successfully() {
 <li>基于<code>重用性</code>、<code>业务变化</code>、<code>质量属性</code>、<code>技术选型</code>等技术考虑划分应用边界，并持续重构</li>
 </ul>
 
-<h2 id="toc_20">实体</h2>
+<h2 id="toc_20">战略设计阶段产出物</h2>
 
-<h2 id="toc_21">值对象</h2>
+<ol>
+<li>利益相关人</li>
+<li>业务期望和愿景</li>
+<li>项目业务范围</li>
+<li>业务流程</li>
+<li>史诗级故事和主故事</li>
+<li>根据核心参与者识别用例，输出每个参与者的用例图</li>
+<li>根据语义相关性和功能相关性识别出用例主题边界，输出用例主题</li>
+<li>根据主题之间的相关性识别限界上下文</li>
+<li>上下文映射图或表</li>
+<li>输出架构4+1视图
+<ol>
+<li>逻辑视图：限界上下文图；上下文映射图；分层架构</li>
+<li>进程视图：限界上下文图；六边形架构；上下文映射</li>
+<li>物理视图：六边形架构</li>
+<li>开发视图：分层架构；代码模型</li>
+<li>场景视图：领域场景分析；用例图</li>
+</ol></li>
+</ol>
 
-<h2 id="toc_22">聚合</h2>
+<h3 id="toc_21">架构4+1视图举例</h3>
+
+<h4 id="toc_22">1. 逻辑视图</h4>
+
+<p><img src="media/15771545679019/15833010184246.jpg" alt=""/></p>
+
+<p>视图说明</p>
+
+<ul>
+<li>系统层次的分层架构</li>
+<li>限界上下文层次的分层架构</li>
+</ul>
+
+<h4 id="toc_23">2. 进程视图</h4>
+
+<p><img src="media/15771545679019/15833010852284.jpg" alt=""/></p>
+
+<p>视图说明</p>
+
+<ul>
+<li>在绘制系统的进程视图时，不需要将每个牵涉到进程间调用的用例场景都展现出来，而是将这些参与协作的组件以抽象方式表达一个典型的全场景即可。</li>
+<li>整个进程视图非常清晰地表达了部署在不同进程之上的组件或子系统之间的协作关系，同时通过图例体现了领域驱动设计中的北向网关和南向网关与外部资源之间的协作。调用的方式是同步还是异步，也一目了然。</li>
+</ul>
+
+<h4 id="toc_24">3. 物理视图</h4>
+
+<p><img src="media/15771545679019/15833011711307.jpg" alt=""/></p>
+
+<p>物理视图与进程视图虽然都以进程边界为主要的设计单元，但二者的关注点不同。进程视图是动态的，体现的是外部环境、系统各个组件在进程之间的协作方式与通信机制；物理视图是静态的，主要体现系统各个模块以及系统外部环境的部署位置与部署方式。</p>
+
+<h4 id="toc_25">4. 开发视图</h4>
+
+<p><img src="media/15771545679019/15833012202839.jpg" alt=""/></p>
+
+<ul>
+<li>给出代码分层结构</li>
+<li>分别体现出系统级代码分层结构和限界上下文内的代码分层结构</li>
+</ul>
+
+<h2 id="toc_26">实体</h2>
+
+<h2 id="toc_27">值对象</h2>
+
+<h2 id="toc_28">聚合</h2>
 
 <p>引入聚合来划分对象之间的边界，保证边界内所有对象的一致性。其中作为主体的实体对象是聚合根。</p>
 
-<h3 id="toc_23">聚合边界的识别</h3>
+<h3 id="toc_29">聚合边界的识别</h3>
 
 <ul>
 <li>是否多实体同生命周期，同生同死组合关系（完整性）</li>
@@ -479,7 +540,7 @@ public void should_return_100_when_100_valid_hosts_registered_successfully() {
 <li>是否处于一个事务中</li>
 </ul>
 
-<h3 id="toc_24">规则</h3>
+<h3 id="toc_30">规则</h3>
 
 <ul>
 <li>外界只能和聚合根交互</li>
@@ -488,9 +549,103 @@ public void should_return_100_when_100_valid_hosts_registered_successfully() {
 <li>只有聚合根才能直接通过数据库获得，其他实体通过聚合根获得</li>
 </ul>
 
-<h2 id="toc_25">领域服务</h2>
+<h2 id="toc_31">领域服务</h2>
 
 <p>存在跨聚合的业务场景时需要使用领域服务</p>
+
+<h2 id="toc_32">分层架构</h2>
+
+<p>传统三层架构和领域驱动经典四层架构的对比：</p>
+
+<p><img src="media/15771545679019/15802181588889.jpg" alt=""/><br/>
+经典三层架构</p>
+
+<p><img src="media/15771545679019/15802181811457.jpg" alt=""/><br/>
+Eric Evans 在其经典著作《领域驱动设计》中的四层架构</p>
+
+<ul>
+<li>领域驱动四层架构多引入了<code>Application Layer</code></li>
+<li><code>业务逻辑层</code>改名为<code>Domain Layer</code>，定位更具体</li>
+<li><code>数据访问层</code>的名字变为<code>Infrastructure Layer</code>，职责扩大</li>
+</ul>
+
+<h3 id="toc_33">对比分析</h3>
+
+<p>优化后的分层架构通过引入<code>Application Layer</code>，使<code>Domain Layer</code>可以专注业务逻辑，不依赖外部环境，更内聚。<br/>
+<code>Infrastructure Layer</code>用来分离业务和技术关注点，并不只用来请求数据。</p>
+
+<h3 id="toc_34">传统三层架构升级到DDD四层架构</h3>
+
+<p><img src="media/15771545679019/15802218910157.jpg" alt=""/><br/>
+三层架构代码模型</p>
+
+<p><img src="media/15771545679019/15802220571963.jpg" alt=""/><br/>
+把Java Beans变成充血模型的POJO，并迁移到业务逻辑层。此时POJO对应DDD的Entity和Value Object，业务逻辑层变为领域层。此时领域层和基础设施层相互依赖。</p>
+
+<p><img src="media/15771545679019/15802221495986.jpg" alt=""/><br/>
+通过依赖反转和依赖注入解耦领域层到基础设施层的依赖。但多了一层基础设施的抽象层。</p>
+
+<p><img src="media/15771545679019/15802223804941.jpg" alt=""/><br/>
+通过DDD的Repository概念，使基础设施抽象层进入领域层。此时用户展现层仍然直接依赖领域层，领域层对外暴露太多细节。</p>
+
+<p><img src="media/15771545679019/15802224971320.jpg" alt=""/><br/>
+通过引入开放主机服务，隔离开前端对领域层的直接依赖。但此时通过Controller暴露出去的服务仍然过细。</p>
+
+<p><img src="media/15771545679019/15802226450442.jpg" alt=""/><br/>
+引入应用层，封装如批量查询、请求跳转、跨领域聚合的业务编排等逻辑。通过Facade模式提供高层接口。到此迁移完毕。</p>
+
+<h3 id="toc_35">整洁架构</h3>
+
+<p><img src="media/15771545679019/15802197310420.jpg" alt=""/><br/>
+ Robert Martin 提出的整洁架构</p>
+
+<ul>
+<li>层次越靠内的组件依赖的内容越少，处于核心的 Entities 没有任何依赖。</li>
+<li>层次越靠内的组件与业务的关系越紧密，因而越不可能形成通用的框架。</li>
+<li>Entities 层封装了企业业务规则，准确地讲，它应该是一个面向业务的领域模型。</li>
+<li>Use Cases 层是打通内部业务与外部资源的一个通道，因而提供了输出端口（Output Port）与输入端口（Input Port），但它对外的接口展现的其实是应用逻辑，或者说是一个用例。</li>
+<li>Gateways、Controllers 与 Presenters 其本质都是适配器（Adapter），用于打通应用业务逻辑与外层的框架和驱动器，实现逻辑的适配以访问外部资源。</li>
+<li>系统最外层包括框架和驱动器，负责对接外部资源，不属于系统（仅指限界上下文而言）开发的范畴，但选择这些框架和驱动器，是属于设计决策要考虑的内容。这一层的一些组件甚至与要设计的系统不处于同一个进程边界。</li>
+</ul>
+
+<h3 id="toc_36">微服务架构</h3>
+
+<p><img src="media/15771545679019/15802207740226.jpg" alt=""/><br/>
+Martin Fowler的微服务架构</p>
+
+<p>整幅图的架构其实蕴含了两个方向：自顶向下和由内至外。</p>
+
+<ul>
+<li>外部请求通过代表协议（Protocol）的 Resources 组件调用 Service Layer、Domain 或 Repositories，如果需要执行持久化任务，则通过 Repositories 将请求委派给 ORM，进而访问网络边界外的数据库。所谓“外部请求”可以是前端 UI 或第三方服务，而 Resource 组件就是我们通常定义的 Controller，对应于上下文映射中的开放主机服务。之所以命名为 Resources，则是因为 REST 架构是一种面向资源的架构，它将服务操作的模型抽象为资源（Resource），这是自顶向下的方向。</li>
+<li>若当前微服务需要调用外部服务（External Service），且外部服务籍由 HTTP 协议通信，就需要提供一个 HTTP Client 组件完成对外部服务的调用。为了避免当前微服务对外部服务的强依赖，又或者对客户端的强依赖，需要引入 Gateways 来隔离。事实上，这里的 Gateways 即为上下文映射中的防腐层，这是由内至外的方向。</li>
+</ul>
+
+<h2 id="toc_37">DDD的代码模型</h2>
+
+<p>以电商下单业务为例：</p>
+
+<p><img src="media/15771545679019/15803904268910.jpg" alt=""/></p>
+
+<p>代码结构如下所示：</p>
+
+<pre class="line-numbers"><code class="language-text">ordercontext.infrastructure
+    - OrderController
+    - OrderMapper
+    - EmailSender
+    - RabbitEventBus
+ordercontext.application
+    - OrderAppService
+    - NotificationService
+    - EventBus
+ordercontext.domain
+    - OrderRepository
+    - PlaceOrderService
+    - Order
+    - Notification
+    - OrderConfirmed
+    - NotificationComposer
+    - OrderConfirmedComposer
+</code></pre>
 
 
     
@@ -682,7 +837,7 @@ Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
     </script>
 
     
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS_SVG-full"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
 
 
   </body>
