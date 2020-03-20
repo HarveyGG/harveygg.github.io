@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
     
-  Mac开发环境 - Harvey's Tech Site
+  DevOps - Harvey's Tech Site
   
   </title>
   
@@ -140,18 +140,16 @@
 		<div class="markdown-body home-categories">
 		
 			<div class="article">
-                <a class="clearlink" href="15750321018543.html">
+                <a class="clearlink" href="15769237630512.html">
                 
-                  <h1>安全和隐私中“任何来源”找回办法</h1>
+                  <h1>Docker Desktop for Mac 启动Kubernetes时查看日志方法</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	<p>苹果发布了<code>MacOS Sierra 10.12</code>版本之后，原来需要用于安装从网上下载的软件的功能不见了，即系统中“任何来源”选项。可以使用如下方法找回“任何来源”的选项。</p>
-
-<p>在终端中输入</p>
-
-<pre class="line-numbers"><code class="language-shell">sudo spctl --master-disable
+                        	<pre class="line-numbers"><code class="language-shell">pred=&#39;process matches &quot;.*(ocker|vpnkit).*&quot;
+  || (process in {&quot;taskgated-helper&quot;, &quot;launchservicesd&quot;, &quot;kernel&quot;} &amp;&amp; eventMessage contains[c] &quot;docker&quot;)&#39;
+/usr/bin/log stream --style syslog --level=debug --color=always --predicate &quot;$pred&quot;
 </code></pre>
 
                         
@@ -161,10 +159,10 @@
                 <div class="read-more clearfix">
                   <div class="more-left left">
                   
-                    <span class="date">2019/11/29</span>
+                    <span class="date">2019/12/21</span>
                     <span>posted in&nbsp;</span> 
           				  
-          					    <span class="posted-in"><a href='mac-dev-env.html'>Mac开发环境</a></span>
+          					    <span class="posted-in"><a href='dev-ops.html'>DevOps</a></span>
           				   
                   </div>
                   <div class="more-right right">
@@ -178,186 +176,108 @@
               </div><!-- article -->
         
 			<div class="article">
-                <a class="clearlink" href="15588383364141.html">
+                <a class="clearlink" href="15764895526219.html">
                 
-                  <h1>(2) MAC开发环境——终端+Shell</h1>
+                  <h1>中国大陆地区安装minikube</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	<p><img src="http://image.harveygg.wang/mweb/Jietu20190526-225814.jpg" alt="Jietu20190526-225814"/><br/>
-最终效果！</p>
+                        	<p>由于众所周知的原因官方minikube在中国大陆地区运行会碰到网络问题。</p>
 
-<h2 id="toc_0"><a href="https://iterm2.com/">iTerm2</a></h2>
+<p>阿里云对官方minikube做了修改，使它默认使用国内镜像仓库。安装和启动参考文档如下：</p>
 
-<p><img src="http://image.harveygg.wang/mweb/iterm2.jpg" alt="iter"/></p>
+<blockquote>
+<p><a href="https://yq.aliyun.com/articles/221687">Minikube - Kubernetes本地实验环境</a></p>
+</blockquote>
 
-<p>iTerm2 是 MAC 下最好的终端工具。<br/>
-可以使用Homebrew来安装：</p>
+<p>但是文中的参数任然有问题，如下命令可以正常启动，操作系统Mac</p>
 
-<pre class="line-numbers"><code class="language-shell">$ brew cask install iterm2
+<pre class="line-numbers"><code class="language-shell">minikube start --image-mirror-country cn \
+    --iso-url=https://kubernetes.oss-cn-hangzhou.aliyuncs.com/minikube/iso/minikube-v1.5.1.iso \
+    --registry-mirror=https://xxxxxx.mirror.aliyuncs.com \
+    --image-repository=registry.cn-hangzhou.aliyuncs.com/google_containers
 </code></pre>
 
-<hr/>
+<p>其中<code>--registry-mirror</code>参数中的&quot;xxxxxx&quot;是个人阿里云镜像加速地址，查询地址：</p>
 
-<p>iTerm2 的一些特色功能如下。</p>
-
-<h3 id="toc_1">标签变色</h3>
-
-<p>iTerm2的tab会通过变色来提示当前tab下的任务有新活动，有新的输出时tab会变成洋红色，新的输出长时间没看，tab会变成红色。</p>
-
-<h3 id="toc_2">智能选中</h3>
-
-<p>在 iTerm2 中，双击选中，三击选中整行，四击智能选中（智能规则可配置），可以识别网址，引号引起的字符串，邮箱地址等。（很多时候双击的选中就已经很智能了）</p>
-
-<p>在 iTerm2 中，选中即复制。即任何选中状态的字符串都被放到了系统剪切板中。</p>
-
-<h3 id="toc_3">巧用⌘(CMD)键</h3>
-
-<p>按住⌘键:</p>
-
-<ul>
-<li>可以拖拽选中的字符串；</li>
-<li>点击url：调用默认浏览器访问该网址；</li>
-<li>点击文件：调用默认程序打开文件；</li>
-<li>如果文件名是filename:42，且默认文本编辑器是 Macvim、Textmate或BBEdit，将会直接打开到这一行；</li>
-<li>点击文件夹：在 finder 中打开该文件夹；</li>
-</ul>
-
-<h3 id="toc_4">常用快捷键</h3>
-
-<ul>
-<li>切换tab：<code>⌘+←</code>, <code>⌘+→</code>, <code>⌘+{</code>, <code>⌘+}</code>。⌘+数字直接定位到该tab；</li>
-<li>新建 tab：<code>⌘+t</code>；</li>
-<li>顺序切换pane：<code>⌘+[</code>, <code>⌘+]</code>；</li>
-<li>切分屏幕：<code>⌘+d</code>水平切分，<code>⌘+shift+d</code> 垂直切分；</li>
-<li>按方向切换pane：<code>⌘+Option+方向键</code>；</li>
-<li>智能查找，支持正则查找：<code>⌘+f</code>；</li>
-</ul>
-
-<h3 id="toc_5">自动完成</h3>
-
-<p>iTerm2可以自动补齐命令，输入若干字符，按<code>⌘+;</code>弹出自动补齐窗口，列出曾经使用过的命令。</p>
-
-<p><img src="http://image.harveygg.wang/mweb/15588871124877.jpg" alt="" style="width:617px;"/></p>
-
-<h3 id="toc_6">配色</h3>
-
-<p>你可以自由定制喜欢的配色，<a href="https://iterm2colorschemes.com/">这里</a>收集了大量iTerm2的主题。在其github repo里下载对应的xxx.itermcolors文件安装，安装方法如下：</p>
-
-<ul>
-<li>打开iTerm2</li>
-<li>按<code>⌘+i</code></li>
-<li>选中<code>Colors</code>tab</li>
-<li>点击<code>Load Presets</code></li>
-<li>点击<code>Import</code></li>
-<li>选择你需要的<code>.itermcolors</code>文件</li>
-<li>再次点击<code>Load Presets</code>选择刚刚导入的主题</li>
-</ul>
-
-<p><img src="http://image.harveygg.wang/mweb/15588872205753.jpg" alt="" style="width:609px;"/></p>
-
-<hr/>
-
-<p>但是最理想的配色方案在这里<a href="https://github.com/altercation/solarized">https://github.com/altercation/solarized</a></p>
-
-<pre class="line-numbers"><code class="language-shell">$ git clone https://github.com/altercation/solarized.git
+<pre class="line-numbers"><code class="language-text">https://cr.console.aliyun.com/cn-hangzhou/instances/mirrors
 </code></pre>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2019/12/16</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='dev-ops.html'>DevOps</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="15750802883724.html">
+                
+                  <h1>平台到底是什么概念</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<h2 id="toc_0">一般定义</h2>
+
+<p>平台能为产品团队提供可复用能力支撑（赋能），它是一个操作环境，可以让产品团队在其上把产品特性快速交付到客户手中。ThoughtWorks开发出一个五维模型来描述平台的重要特征：</p>
+
+<ul>
+<li>支持端到端交付的基础设施</li>
+<li>API和架构自愈</li>
+<li>提供自助服务</li>
+<li>支持实验的基础设施</li>
+<li>提供用户触点技术</li>
+</ul>
+
+<h2 id="toc_1">先来看看什么不是一个平台</h2>
+
+<h3 id="toc_2">按技术领域划分团队</h3>
+
+<p>有的企业花大力气构建自动化能力，但是往往会根据技术划分团队。比如，负责中间件管理的团队，负责操作系统管理的团队，负责DB管理的团队，负责LB管理的团队，另外还会有一个专门负责自动化的效能团队，往往能力上只是负责编排。</p>
+
+<p>这些团队，每个都在自己的管理架构下有独立的工作方式，每个团队都在各自的技术领域范围内实现高效率管理，集中专业化，外包非差异化功能，应用治理，并降低成本。但就是没人去衡量客户需求端到端的交付效率。</p>
+
+<p>一个客户需求的交付往往穿越多个团队，端到端交付效率极差。</p>
+
+<p>时间长了，产品和基础设施的质量逐渐下降。环境和配置上会出现很多细微的不一致。产品团队不得不降低交付速度，减少一次交付包含的特性。甚至不敢去做任何改动较大的提升动作或重构动作，而这些动作本来是用来改善问题的。</p>
+
+<h3 id="toc_3">彼此依赖的待办事项</h3>
+
+<p>一个特性的交付往往在一个团队内无法独立完成，于是一个团队的待办事项会依赖其他团队的待办事项，彼此耦合。而往往不同团队有不同的目标，各自的待办事项优先级不同。于是一个团队的待办事项无法落地的原因往往就是依赖另一个团队的待办事项，而另一个团队迟迟不能完成。这就造成了团队之间的隔阂和互相之间的不信任，甚至扯皮、推诿，丧失责任感和创造力。最终使端到端交付的效率变得极低。</p>
+
+<p>显然，一个好的平台的一个重要特征是，他必须能减少待办事项耦合。该平台必须能够支持自助服务。</p>
+
+<h2 id="toc_4">什么是一个平台</h2>
+
+<p>AWS就是一个平台。</p>
+
+<h2 id="toc_5">如何构建一个平台</h2>
 
 <ol>
-<li>进入solarized/iterm2-colors-solarized 下双击<code>Solarized Dark.itermcolors</code>和<code>Solarized Light.itermcolors</code>两个文件就可以把明暗两种配置文件导入到iTerm2里</li>
-<li>通过load presets选择刚刚安装的配色主题即可</li>
+<li>调整组织架构，给每个产品团队增加5%的运维职责，节省平台团队200%的运维职责。&quot;you build it, you run it.&quot;</li>
+<li>平台自己也要承担从开发到运行的所有责任，避免平台自身的开发团队只管开发，运维团队管运行。同样要坚守：&quot;you build it, you run it.&quot;</li>
+<li>划清平台和产品团队的职责边界，产品团队负责自己产品的构建，部署，监控等；平台团队负责平台的构建，部署，监控等；设计抽象，对外暴露自助服务；平台不应该关心它上面跑的是什么业务，产品不应该关心平台使用的技术。</li>
+<li>除了提供API之外，还要提供文档，guideline, template code, on call, 布道等。</li>
+<li>最初落地时不知道需要提供哪些能力，可以从产品团队了解需求，从解决最迫切的需求开始。</li>
 </ol>
-
-<p><img src="http://image.harveygg.wang/mweb/Jietu20190527-001007.jpg" alt="Jietu20190527-001007"/></p>
-
-<h2 id="toc_7"><a href="https://zhuanlan.zhihu.com/p/19556676">ZSH</a></h2>
-
-<p>MAC默认自带终极shell!</p>
-
-<blockquote>
-<p><a href="https://www.zhihu.com/question/21418449">为什么说zsh是shell中的极品</a></p>
-</blockquote>
-
-<p>修改默认bash</p>
-
-<pre class="line-numbers"><code class="language-shell">$ chsh -s /bin/zsh
-</code></pre>
-
-<h3 id="toc_8"><a href="https://ohmyz.sh/">Oh My ZSH</a></h3>
-
-<p><img src="http://image.harveygg.wang/mweb/omzsh.png" alt="omzsh"/></p>
-
-<blockquote>
-<p>Oh My Zsh is a delightful, open source, community-driven framework for managing your Zsh configuration. It comes bundled with thousands of helpful functions, helpers, plugins, themes, and a few things that make you shout...</p>
-
-<p>“Oh My ZSH!”</p>
-</blockquote>
-
-<h4 id="toc_9">安装</h4>
-
-<pre class="line-numbers"><code class="language-text">sh -c &quot;$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)&quot;
-</code></pre>
-
-<h4 id="toc_10">配置oh my zsh</h4>
-
-<blockquote>
-<p><a href="https://github.com/robbyrussell/oh-my-zsh">oh-my-zsh github</a></p>
-</blockquote>
-
-<h3 id="toc_11"><a href="https://github.com/fcamblor/oh-my-zsh-agnoster-fcamblor">agnoster主题</a></h3>
-
-<p>agnoster是一个zsh主题，特别为使用iTerm2 + Solarized Dark主题，又经常使用Git的用户定制。</p>
-
-<h4 id="toc_12">安装</h4>
-
-<pre class="line-numbers"><code class="language-shell">$ git clone https://github.com/fcamblor/oh-my-zsh-agnoster-fcamblor.git
-</code></pre>
-
-<p>执行工程里的install脚本，主题将安装到~/.oh-my-zsh/themes目录下</p>
-
-<h4 id="toc_13">设置该主题</h4>
-
-<p>打开~/.zshrc文件，然后将ZSH_THEME后面的字段改为agnoster。<br/>
-<img src="http://image.harveygg.wang/mweb/15588877098383.jpg" alt="" style="width:618px;"/></p>
-
-<h3 id="toc_14">增加指令高亮效果</h3>
-
-<p>指令高亮效果作用是当用户输入正确命令时指令会绿色高亮，错误时命令红色高亮</p>
-
-<h4 id="toc_15">安装<a href="https://github.com/zsh-users/zsh-syntax-highlighting">zsh-syntax-highlighting</a></h4>
-
-<pre class="line-numbers"><code class="language-shell">$ git clone git://github.com/zsh-users/zsh-syntax-highlighting.git
-$ echo &quot;source ${(q-)PWD}/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh&quot; &gt;&gt; ${ZDOTDIR:-$HOME}/.zshrc
-</code></pre>
-
-<h3 id="toc_16"><a href="http://powerline.readthedocs.io/en/latest/installation.html">安装Powerline</a></h3>
-
-<pre class="line-numbers"><code class="language-shell">$ pip install powerline-status --user
-</code></pre>
-
-<h3 id="toc_17">安装<a href="https://link.jianshu.com/?t=https%3A%2F%2Fgithub.com%2Fpowerline%2Ffonts">Powerline字体库</a></h3>
-
-<p>使用zsh主题需要配合Powerline字体</p>
-
-<ol>
-<li>将工程clone下来</li>
-<li>执行install.sh脚本安装所有Powerline字体</li>
-</ol>
-
-<p>安装完成后提示所有字体均已下载到/Users/{username}/Library/Fonts路径下</p>
-
-<h4 id="toc_18">设置iTerm2的字体</h4>
-
-<p>具体的操作是iTerm2 -&gt; Preferences -&gt; Profiles -&gt; Text，在Font区域选中Change Font，选择for Powerline的字体</p>
-
-<p><img src="http://image.harveygg.wang/mweb/15588954739813.jpg" alt="" style="width:830px;"/></p>
-
-<hr/>
-
-<blockquote>
-<p>Maybe you also want to try <a href="https://jmolivas.weknowinc.com/improve-your-shell-using-fish-and-oh-my-fish">this</a></p>
-</blockquote>
 
                         
                       </div>
@@ -366,10 +286,10 @@ $ echo &quot;source ${(q-)PWD}/zsh-syntax-highlighting/zsh-syntax-highlighting.z
                 <div class="read-more clearfix">
                   <div class="more-left left">
                   
-                    <span class="date">2019/5/26</span>
+                    <span class="date">2019/11/30</span>
                     <span>posted in&nbsp;</span> 
           				  
-          					    <span class="posted-in"><a href='mac-dev-env.html'>Mac开发环境</a></span>
+          					    <span class="posted-in"><a href='dev-ops.html'>DevOps</a></span>
           				   
                   </div>
                   <div class="more-right right">
@@ -383,106 +303,48 @@ $ echo &quot;source ${(q-)PWD}/zsh-syntax-highlighting/zsh-syntax-highlighting.z
               </div><!-- article -->
         
 			<div class="article">
-                <a class="clearlink" href="15616863130414.html">
+                <a class="clearlink" href="15749287286754.html">
                 
-                  <h1>(3) MAC使用技巧</h1>
+                  <h1>Immutable Infrastructure</h1>
                   <div class="a-content">
                       
                       <div class="a-content-text">
                         
-                        	<ul>
-<li>Command+Shift+. 可以显示隐藏文件、文件夹，再按一次，恢复隐藏；</li>
-<li>finder下使用Command+Shift+G 可以前往任何文件夹，包括隐藏文件夹；</li>
-<li>恢复备份时的默认密码是：</li>
-</ul>
+                        	<h2 id="toc_0">什么是Mutable Infrastructure</h2>
 
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                  
-                    <span class="date">2019/6/28</span>
-                    <span>posted in&nbsp;</span> 
-          				  
-          					    <span class="posted-in"><a href='mac-dev-env.html'>Mac开发环境</a></span>
-          				   
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
+<p>传统物理服务器时代，企业倾向于对服务器做修改以实现商业目的。如，更换配件，原地更新软件包(upgrade app)，修改配置(update configuration)，打补丁(ad-hoc fixes)，微调(tweaks)。这些操作渐渐把一个服务器变得独一无二(<a href="https://martinfowler.com/bliki/SnowflakeServer.html">SnowflakeServer</a>)。这使得它难以被替换，难以维护，难以复制。你越来越无法理解其上面的某个配置这样配的原因。而这一切之所以会这样发展，是因为物理服务器时代服务器更新的难度大，成本高，周期长。所以企业在服务器更新上发展出很多技术，但都是围绕着原地升级的思路发展的。</p>
 
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
-			<div class="article">
-                <a class="clearlink" href="15587920075778.html">
-                
-                  <h1>(1) MAC开发环境——软件包管理</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<hr/>
+<h2 id="toc_1">什么是Immutable Infrastructure</h2>
 
-<h2 id="toc_0"><a href="https://brew.sh/">Homebrew</a></h2>
+<p>到了虚拟化时代，虚拟服务器变得可以被轻易替换(disposable)，整个服务器可以在秒级被重新构建。这使得使用服务器被整体替换的方式更新服务器比原地升级服务器来的更划算。服务器一旦部署完就不再被修改，服务器需要升级时，是基于一个基线重新构建然后替换原有服务器。这使得服务器的复制，替换变得轻而易举。这种服务器也叫<a href="https://martinfowler.com/bliki/PhoenixServer.html">PhoenixServer</a>。这样的基础架构无疑更加健壮，可维护。</p>
 
-<p><img src="http://image.harveygg.wang/mweb/homebrew-256x256.png" alt="homebrew-256x256"/></p>
+<h2 id="toc_2">如何实现Immutable Infrastructure</h2>
 
 <ul>
-<li>使用 Homebrew 安装 Apple 没有预装，但你需要的东西。</li>
-<li>brew管理命令行工具，三方库，会先下载源码，编译，安装，最后link到/usr/local/bin中，如：<code>brew install wget</code></li>
-<li>brew cask管理Mac应用，会直接下载二进制，然后安装，是AppStore的补充，如：<code>brew cask install chrome</code></li>
-<li>推荐所有软件<strong>先考虑AppStore</strong>，如果没有<strong>再考虑Homebrew</strong>，再没有<strong>再去官网下载</strong>，方便后面管理</li>
+<li>禁止人工登录服务器做任何修改</li>
+<li>使用虚拟化技术</li>
+<li>服务器可以基于镜像快速构建，</li>
+<li>服务器的生命周期管理由软件自动化实现
+<ul>
+<li>服务器目标状态由文档定义</li>
+<li>文档由VCS管理</li>
+<li>服务器更新由自动化工具基于VCS里文档的更新触发，并最终实现目标状态</li>
+</ul></li>
+<li>一个无状态，变化频繁的应用层</li>
+<li>一个数据持久层
+<ul>
+<li>日志中心，记录服务器的每次变更</li>
+<li>外部数据存储，无状态应用层服务器被频繁替换，数据必须存储在外部</li>
+</ul></li>
+<li>开发和运维无间合作(DevOps)</li>
+<li>使用混沌工程工具验证服务的健壮性</li>
 </ul>
 
-<h3 id="toc_1">Install Homebrew</h3>
+<h2 id="toc_3">理想很丰满，现实很骨感</h2>
 
-<pre class="line-numbers"><code class="language-shell">$ /usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;
-</code></pre>
-
-<h3 id="toc_2">Homebrew 常用命令</h3>
-
-<pre class="line-numbers"><code class="language-shell">$ brew search /wge*/  # 搜索软件,后面是正则表达式
-$ brew info wget    # 查看软件信息
-$ brew install wget  # 安装 wget
-$ brew list wget    # 列出该软件安装后的文件
-$ brew uninstall wget  # 卸载 wget
-</code></pre>
-
-<h3 id="toc_3">获取Homebrew-Cask</h3>
-
-<pre class="line-numbers"><code class="language-shell">$ brew tap caskroom/cask
-</code></pre>
-
-<h3 id="toc_4">Homebrew Cask常用命令</h3>
-
-<pre class="line-numbers"><code class="language-shell"># brew cask 和 brew 的命令基本一致，search, info, list, install, uninstall 子命令都一样
-$ brew cask install java  # 安装 Java
-$ brew cask uninstall java  # 卸载 Java
-$ brew cask install --force $(brew cask outdated | awk &#39;{print $1}&#39; | xargs)  # 更新Cask
-</code></pre>
-
-<h3 id="toc_5">Homebrew 更多命令</h3>
-
-<pre class="line-numbers"><code class="language-shell">$ brew cleanup  # 卸载旧版本软件，Homebrew升级时是全新安装，不卸载旧版，需要手动卸载旧版本软件
-$ brew update  # 更新Homebrew
-$ brew upgrade  # 更新所有过期软件
-$ brew doctor  # brew自检
-$ brew outdated  # 列出所有过期软件
-$ brew --cache  # 打印brew下载包存放位置
-</code></pre>
-
-<h3 id="toc_6">卸载Homebrew</h3>
-
-<pre class="line-numbers"><code class="language-shell">$ ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/uninstall)
-</code></pre>
-
-<p>Download the uninstall script and run ./uninstall --help to view more uninstall options.</p>
+<p>如果在物理服务器上利用严格规范和自动化工具是否能打造Immutable Infrastructure呢？理论上可以，但现实是物理服务器很多场景下难以实现批量统一的更新，因为物理服务器太大，上面跑的东西太多。<br/>
+那么是不是使用了虚拟化技术，就一定能实现Immutable Infrastructure？答案是否定的。国内很多大厂，甚至是云计算提供商，其内部服务虽然使用了虚拟机，甚至容器，但是其运维范式仍然遵循传统原地升级模式，仍然会登录到虚拟机或容器内部做一些修改，或者只有部分技术栈（如服务软件包，基础软件包）实现了基线化管理，而其他技术栈（如操作系统配置，网络配置）还是通过其他途径手动升级，整体效果仍然和传统Mutable Infrastructure一样。举个例子，应用扩容一台机器，而防火墙没有同步更新，导致新扩容的服务器和其他服务器之间网络不通，需要人工修改网络配置才能打通网络。<br/>
+所以说，真正的Immutable Infrastructure的落地，是依赖强有力的运维能力的，而这样的运维能力又依赖配套的组织架构关系和DevOps文化和极强的规范化。</p>
 
                         
                       </div>
@@ -491,10 +353,10 @@ $ brew --cache  # 打印brew下载包存放位置
                 <div class="read-more clearfix">
                   <div class="more-left left">
                   
-                    <span class="date">2019/5/25</span>
+                    <span class="date">2019/11/28</span>
                     <span>posted in&nbsp;</span> 
           				  
-          					    <span class="posted-in"><a href='mac-dev-env.html'>Mac开发环境</a></span>
+          					    <span class="posted-in"><a href='dev-ops.html'>DevOps</a></span>
           				   
                   </div>
                   <div class="more-right right">
