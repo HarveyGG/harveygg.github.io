@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
     
-  人类能否造出真正智能的机器人？ - Harvey's Tech Site
+  一些终端下更好用的替代工具 - Harvey's Tech Site
   
   </title>
   
@@ -140,14 +140,14 @@
       <div class="markdown-body article-wrap">
        <div class="article">
           
-          <h1>人类能否造出真正智能的机器人？</h1>
+          <h1>一些终端下更好用的替代工具</h1>
      
         <div class="read-more clearfix">
-          <span class="date">2019/12/14</span>
+          <span class="date">2020/7/16</span>
 
           <span>posted in&nbsp;</span> 
           
-              <span class="posted-in"><a href='architecture-designing.html'>架构设计</a></span>
+              <span class="posted-in"><a href='mac-dev-env.html'>Mac开发环境</a></span>
            
          
           <span class="comments">
@@ -160,30 +160,65 @@
       </div><!-- article -->
 
       <div class="article-content">
-      <p>机器人是什么？<br/>
-是计算机。<br/>
-计算机是什么？<br/>
-冯诺依曼结构的计算机可以抽象为“输入”、“计算”和“输出”三部分。<br/>
-计算机的智能体现在其扩展能力上。<br/>
-其输入从最早的打孔纸带扩展到现在的键盘，鼠标、语音，传感器等。<br/>
-其计算能力可以通过编程来扩展。<br/>
-其输出从最初的显示器扩展到现在的扬声器、打印机、投影仪等。<br/>
-机器人的智能体现在，对于不同输入都可以给出“智能”的输出。这个“智能”体现在其处理逻辑会随着处理其他输入而自动升级。表现出会学习的特征。<br/>
-何为非真正智能的机器人？<br/>
-不会主动“思考”、“学习”的机器人就不是真正智能的机器人。<br/>
-如果机器人能够主动的“思考”、“学习”了之后，他和人类有什么区别？<br/>
-他应该从能力上超过人类。<br/>
-为了想清楚机器人是否可能最终成为真正“智能”的机器人，我们需要把机器人和人类做一下对比。<br/>
-然而我认为人类其实也是遵循冯诺依曼结构工作的！<br/>
-人类刚出生时对于绝大多数输入是没有反应的，即还不具备对输入的计算能力。<br/>
-随着被动学习，对于固定输入的计算逻辑建立起来了。此时开始模仿，即对于给定的输入，其计算逻辑始终不变，只是越算越快，这是一个熟练过程。<br/>
-然而人类刚出生也不是对所有输入都没有计算能力的，比如对于疼痛的计算，对于饥饿的计算，对于光线的计算……<br/>
-随着年龄长大，逐渐体现出对于一些输入会输出嫉妒、气愤、喜欢……<br/>
-这些其实是人类的基因决定的。<br/>
-那基因是什么？<br/>
-其实就是随着人类从远古到现代的进化中积累下来的计算逻辑。比如，人类有攀比心，其实是对于比自己好这个输入的计算，其输出是我要超过他的激素刺激。<br/>
-正是因为人类天生具备七宗罪的天性基因，才让人类得以主动思考，主动学习。<br/>
-所以，如果可以破解人类基因，并且给机器人输入这些基因程序，则机器人就可以和人类一样智能。在不给机器人任何输入的情况下，机器人也会基于这个“没有任何输入”的信号，并结合之前的记忆去计算然后表现出机器人在“思考”……</p>
+      <h2 id="toc_0">ls的替代工具</h2>
+
+<pre class="line-numbers"><code class="language-text"># brew info exa
+</code></pre>
+
+<pre class="line-numbers"><code class="language-text"># exa -l --tree -L 1
+</code></pre>
+
+<p>用列表加树状展示一级目录下的目录和文件</p>
+
+<h2 id="toc_1">cat的替代工具</h2>
+
+<pre class="line-numbers"><code class="language-text"># brew info bat
+</code></pre>
+
+<pre class="line-numbers"><code class="language-text"># bat README.md
+</code></pre>
+
+<p>比cat增加高亮和对git状态的支持</p>
+
+<h2 id="toc_2">find的替代工具</h2>
+
+<pre class="line-numbers"><code class="language-text"># brew info fd
+</code></pre>
+
+<pre class="line-numbers"><code class="language-text"># fd README.md
+</code></pre>
+
+<p>语法比find简单，默认忽略.gitignore里的文件和隐藏文件</p>
+
+<h2 id="toc_3">grep的替代工具</h2>
+
+<pre class="line-numbers"><code class="language-text"># brew info rg
+</code></pre>
+
+<pre class="line-numbers"><code class="language-text"># rg xxx
+</code></pre>
+
+<p>显示漂亮，默认忽略.gitignore文件和隐藏文件，默认递归所有子文件夹，可以指定文件类型</p>
+
+<h2 id="toc_4">cd的替代工具</h2>
+
+<pre class="line-numbers"><code class="language-text"># brew info z
+</code></pre>
+
+<pre class="line-numbers"><code class="language-text"># z de [Tab]
+</code></pre>
+
+<p>自动基于历史访问过的以de开头的目录进行补全</p>
+
+<pre class="line-numbers"><code class="language-text"># brew info fzf
+</code></pre>
+
+<pre class="line-numbers"><code class="language-text"># cd $(find * -type d | fzf)
+</code></pre>
+
+<p>通过上下键选择需要访问的目录，回车进入。</p>
+
+<p>fzf会把标准输出变成交互式下拉列表共用户选择。</p>
 
 
     
@@ -194,16 +229,13 @@
         <div class="large-6 columns">
         <p class="text-left" style="padding:15px 0px;">
       
-          <a href="15750321018543.html" 
-          title="Previous Post: 安全和隐私中“任何来源”找回办法">&laquo; 安全和隐私中“任何来源”找回办法</a>
-      
         </p>
         </div>
         <div class="large-6 columns">
       <p class="text-right" style="padding:15px 0px;">
       
-          <a  href="15771545679019.html" 
-          title="Next Post: DDD学习笔记">DDD学习笔记 &raquo;</a>
+          <a  href="15588383364141.html" 
+          title="Next Post: (2) MAC开发环境——终端+Shell">(2) MAC开发环境——终端+Shell &raquo;</a>
       
       </p>
         </div>

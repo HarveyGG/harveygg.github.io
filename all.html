@@ -140,6 +140,97 @@
 		<div class="markdown-body home-categories">
 		
 			<div class="article">
+                <a class="clearlink" href="15949090783980.html">
+                
+                  <h1>一些终端下更好用的替代工具</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<h2 id="toc_0">ls的替代工具</h2>
+
+<pre class="line-numbers"><code class="language-text"># brew info exa
+</code></pre>
+
+<pre class="line-numbers"><code class="language-text"># exa -l --tree -L 1
+</code></pre>
+
+<p>用列表加树状展示一级目录下的目录和文件</p>
+
+<h2 id="toc_1">cat的替代工具</h2>
+
+<pre class="line-numbers"><code class="language-text"># brew info bat
+</code></pre>
+
+<pre class="line-numbers"><code class="language-text"># bat README.md
+</code></pre>
+
+<p>比cat增加高亮和对git状态的支持</p>
+
+<h2 id="toc_2">find的替代工具</h2>
+
+<pre class="line-numbers"><code class="language-text"># brew info fd
+</code></pre>
+
+<pre class="line-numbers"><code class="language-text"># fd README.md
+</code></pre>
+
+<p>语法比find简单，默认忽略.gitignore里的文件和隐藏文件</p>
+
+<h2 id="toc_3">grep的替代工具</h2>
+
+<pre class="line-numbers"><code class="language-text"># brew info rg
+</code></pre>
+
+<pre class="line-numbers"><code class="language-text"># rg xxx
+</code></pre>
+
+<p>显示漂亮，默认忽略.gitignore文件和隐藏文件，默认递归所有子文件夹，可以指定文件类型</p>
+
+<h2 id="toc_4">cd的替代工具</h2>
+
+<pre class="line-numbers"><code class="language-text"># brew info z
+</code></pre>
+
+<pre class="line-numbers"><code class="language-text"># z de [Tab]
+</code></pre>
+
+<p>自动基于历史访问过的以de开头的目录进行补全</p>
+
+<pre class="line-numbers"><code class="language-text"># brew info fzf
+</code></pre>
+
+<pre class="line-numbers"><code class="language-text"># cd $(find * -type d | fzf)
+</code></pre>
+
+<p>通过上下键选择需要访问的目录，回车进入。</p>
+
+<p>fzf会把标准输出变成交互式下拉列表共用户选择。</p>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2020/7/16</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='mac-dev-env.html'>Mac开发环境</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
                 <a class="clearlink" href="15588383364141.html">
                 
                   <h1>(2) MAC开发环境——终端+Shell</h1>
@@ -2392,6 +2483,12 @@ $ brew --cache  # 打印brew下载包存放位置
 	      
 		      
 			      <li class="post">
+			        <a href="15949090783980.html">一些终端下更好用的替代工具</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
 			        <a href="15588383364141.html">(2) MAC开发环境——终端+Shell</a>
 			      </li>
 		     
@@ -2415,10 +2512,6 @@ $ brew --cache  # 打印brew下载包存放位置
 		     
 		  
 		      
-			      <li class="post">
-			        <a href="15533542897748.html">微服务设计规范</a>
-			      </li>
-		     
 		  
 		      
 		  
