@@ -140,6 +140,135 @@
 		<div class="markdown-body home-categories">
 		
 			<div class="article">
+                <a class="clearlink" href="15961083014557.html">
+                
+                  <h1>vim实用高级命令</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<h2 id="toc_0">光标移动</h2>
+
+<ul>
+<li>当前行迅速移动到下一个特定字符之前：t字符 till</li>
+<li>当前行迅速移动到上一个特定字符之后：T字符</li>
+<li>当前行迅速移动到下一个特定字符：f字符 find</li>
+<li>当前行迅速移动到上一个特定字符：F字符</li>
+<li>迅速移动到当前行最后一个非空字符上：g_</li>
+<li>迅速移动到下一句开头：）</li>
+<li>迅速移动到上一句开头：（</li>
+<li>迅速移动到下一段开头：}</li>
+<li>迅速移动到上一段开头：{</li>
+</ul>
+
+<h2 id="toc_1">滚动屏幕</h2>
+
+<ul>
+<li>向下翻页：<C+f> forward</li>
+<li>向上翻页：<C+b> backward</li>
+<li>向下翻半页：<C+d> down</li>
+<li>向上翻半页：<C+u> up</li>
+<li>光标不动，向下逐行滚动：<C+e> elder</li>
+<li>光标不动，向上逐行滚动：<C+y> younger</li>
+<li>光标不动，使光标所在行翻到屏幕最上方：zt title</li>
+<li>光标不动，使光标所在行翻到屏幕最下方：zb bottom</li>
+<li>光标不动，使光标所在行翻到屏幕中间：zz</li>
+<li>使光标移动到屏幕最上方：H high</li>
+<li>使光标移动到屏幕最下方：L low</li>
+<li>使光标移动到屏幕中间：M middle</li>
+</ul>
+
+<h2 id="toc_2">文本修改</h2>
+
+<ul>
+<li>d 加动作来进行删除（dd 删除整行）；D 则相当于 d$，删除到行尾。</li>
+<li>c 加动作来进行修改（cc 修改整行）；C 则相当于 c$，删除到行尾然后进入插入模式。</li>
+<li>s 相当于 cl，删除一个字符然后进入插入模式；S 相当于 cc，替换整行的内容。</li>
+<li>i 在当前字符前面进入插入模式；I 则相当于 <sup>i，把光标移到行首非空白字符上然后进入插入模式。</sup></li>
+<li>a 在当前字符后面进入插入模式；A 相当于 $a，把光标移到行尾然后进入插入模式。</li>
+<li>o 在当前行下方插入一个新行，然后在这行进入插入模式；O 在当前行上方插入一个新行，然后在这行进入插入模式。</li>
+<li>r 替换光标下的字符；R 则进入替换模式，每次按键（直到 ）替换一个字符。</li>
+<li>u 撤销最近的一个修改动作；U 撤销当前行上的所有修改。</li>
+<li>gU gu 使用v选中字符后，输入gU或gu可使选中文本变成大写或小写</li>
+</ul>
+
+<h2 id="toc_3">文本选择</h2>
+
+<ul>
+<li>i: 如：di), 删除()内所有内容，不包括()</li>
+<li>a: 如：ca&quot;, 修改&quot;&quot;内包括&quot;&quot;在内的所有内容</li>
+<li>用v选中后
+<ul>
+<li>&lt; &gt;, 左右缩进</li>
+<li>= 自动缩进</li>
+<li>J 内联成一行</li>
+</ul></li>
+<li>[C-v], 选中多行文本
+<ul>
+<li>用A或I插入文本，输入ESC，会在选中的多行文本重复执行相同插入文本操作</li>
+</ul></li>
+</ul>
+
+<h2 id="toc_4">重复执行</h2>
+
+<ul>
+<li>; 重复最近的字符查找（f、t 等）操作</li>
+<li>, 重复最近的字符查找操作，反方向</li>
+<li>n 重复最近的字符串查找操作（/ 和 ?）</li>
+<li>N 重复最近的字符串查找操作（/ 和 ?），反方向</li>
+<li>. 重复执行最近的修改操作</li>
+</ul>
+
+<h2 id="toc_5">多文件操作</h2>
+
+<ul>
+<li>:args 列出打开文件列表</li>
+<li>:n 打开下一个文件</li>
+<li>:N 打开上一个文件</li>
+<li>:ls 列出缓冲区列表</li>
+<li>:bnext 切换到下一个缓冲区</li>
+<li>:bprev 切换到前一个缓冲区</li>
+<li>:b 序号 切换到对应序号的缓冲区</li>
+<li>[C-<sup>]</sup> 在最近编辑的文件之间切换Aug 16, 2020S</li>
+</ul>
+
+<h2 id="toc_6">多窗口操作</h2>
+
+<ul>
+<li>:sp 或 [C+w]s 水平拆分</li>
+<li>:vs 或 [C+w]v 垂直拆分</li>
+<li>[C+w]w 窗口切换</li>
+<li>[C+w]c 关闭窗口，最后一个窗口无效</li>
+<li>[C+w]q 退出窗口，最后一个窗口退出整个vim</li>
+<li>[C+w]= 平均调整每个窗口大小</li>
+<li>:tabnew 新建标签页</li>
+<li>:gt, :gT 切换标签页</li>
+</ul>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2020/7/30</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='mac-dev-env.html'>Mac开发环境</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
                 <a class="clearlink" href="15949090783980.html">
                 
                   <h1>一些终端下更好用的替代工具</h1>
@@ -446,7 +575,7 @@ $ echo &quot;source ${(q-)PWD}/zsh-syntax-highlighting/zsh-syntax-highlighting.z
                 <div class="read-more clearfix">
                   <div class="more-left left">
                   
-                    <span class="date">2019/5/26</span>
+                    <span class="date">2019/5/25</span>
                     <span>posted in&nbsp;</span> 
           				  
           					    <span class="posted-in"><a href='mac-dev-env.html'>Mac开发环境</a></span>
@@ -1147,7 +1276,7 @@ ordercontext.domain
                 <div class="read-more clearfix">
                   <div class="more-left left">
                   
-                    <span class="date">2019/12/24</span>
+                    <span class="date">2019/12/23</span>
                     <span>posted in&nbsp;</span> 
           				  
           					    <span class="posted-in"><a href='architecture-designing.html'>架构设计</a></span>
@@ -1701,7 +1830,7 @@ ordercontext.domain
                 <div class="read-more clearfix">
                   <div class="more-left left">
                   
-                    <span class="date">2019/8/26</span>
+                    <span class="date">2019/8/25</span>
                     <span>posted in&nbsp;</span> 
           				  
           					    <span class="posted-in"><a href='yi.html'>易经</a></span>
@@ -1912,7 +2041,7 @@ ordercontext.domain
                 <div class="read-more clearfix">
                   <div class="more-left left">
                   
-                    <span class="date">2019/11/30</span>
+                    <span class="date">2019/11/29</span>
                     <span>posted in&nbsp;</span> 
           				  
           					    <span class="posted-in"><a href='dev-ops.html'>DevOps</a></span>
@@ -2042,7 +2171,7 @@ ordercontext.domain
                 <div class="read-more clearfix">
                   <div class="more-left left">
                   
-                    <span class="date">2019/8/26</span>
+                    <span class="date">2019/8/25</span>
                     <span>posted in&nbsp;</span> 
           				  
           					    <span class="posted-in"><a href='yi.html'>易经</a></span>
@@ -2079,7 +2208,7 @@ ordercontext.domain
                 <div class="read-more clearfix">
                   <div class="more-left left">
                   
-                    <span class="date">2019/6/28</span>
+                    <span class="date">2019/6/27</span>
                     <span>posted in&nbsp;</span> 
           				  
           					    <span class="posted-in"><a href='mac-dev-env.html'>Mac开发环境</a></span>
@@ -2319,7 +2448,7 @@ $&gt; bin/kafka-server-start.sh config/server.properties
                 <div class="read-more clearfix">
                   <div class="more-left left">
                   
-                    <span class="date">2019/6/22</span>
+                    <span class="date">2019/6/21</span>
                     <span>posted in&nbsp;</span> 
           				  
           					    <span class="posted-in"><a href='internet-tech.html'>互联网技术</a></span>
@@ -2504,6 +2633,12 @@ $ brew --cache  # 打印brew下载包存放位置
 	      
 		      
 			      <li class="post">
+			        <a href="15961083014557.html">vim实用高级命令</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
 			        <a href="15949090783980.html">一些终端下更好用的替代工具</a>
 			      </li>
 		     
@@ -2527,10 +2662,6 @@ $ brew --cache  # 打印brew下载包存放位置
 		     
 		  
 		      
-			      <li class="post">
-			        <a href="15771545679019.html">DDD学习笔记</a>
-			      </li>
-		     
 		  
 		      
 		  
