@@ -163,11 +163,25 @@
       <h2 id="toc_0">光标移动</h2>
 
 <ul>
-<li>当前行迅速移动到下一个特定字符之前：t字符 till</li>
-<li>当前行迅速移动到上一个特定字符之后：T字符</li>
-<li>当前行迅速移动到下一个特定字符：f字符 find</li>
-<li>当前行迅速移动到上一个特定字符：F字符</li>
-<li>迅速移动到当前行最后一个非空字符上：g_</li>
+<li>下一个当前单词：*</li>
+<li>上一个当前单词：#</li>
+<li>下一个单词第一个字符：w</li>
+<li>当前单词最后一个字符：e</li>
+<li>下一个以空白字符为分隔的单词第一个字符：W</li>
+<li>当前以空白字符为分隔的单词最后一个字符：E</li>
+<li>前一个单词第一个字符：b</li>
+<li>前一个以空白字符为分隔的单词第一个字符：B</li>
+<li>下一个特定字符之前：t+字符 till</li>
+<li>上一个特定字符之后：T+字符</li>
+<li>下一个特定字符之上：f+字符 find</li>
+<li>上一个特定字符之上：F+字符</li>
+<li>当前行最后一个字符上：$</li>
+<li>当前行最后一个非空字符上：g_</li>
+<li>当前行第一个字符上：0</li>
+<li>当前行第一个非空字符上：^</li>
+<li>第一行：gg 或 :1</li>
+<li>最后一行：G</li>
+<li>第N行： :N</li>
 <li>迅速移动到下一句开头：）</li>
 <li>迅速移动到上一句开头：（</li>
 <li>迅速移动到下一段开头：}</li>
@@ -177,12 +191,12 @@
 <h2 id="toc_1">滚动屏幕</h2>
 
 <ul>
-<li>向下翻页：<C+f> forward</li>
-<li>向上翻页：<C+b> backward</li>
-<li>向下翻半页：<C+d> down</li>
-<li>向上翻半页：<C+u> up</li>
-<li>光标不动，向下逐行滚动：<C+e> elder</li>
-<li>光标不动，向上逐行滚动：<C+y> younger</li>
+<li>向下翻页：<code>&lt;C+f&gt;</code> forward</li>
+<li>向上翻页：<code>&lt;C+b&gt;</code> backward</li>
+<li>向下翻半页：<code>&lt;C+d&gt;</code> down</li>
+<li>向上翻半页：<code>&lt;C+u&gt;</code> up</li>
+<li>光标不动，向下逐行滚动：<code>&lt;C+e&gt;</code> elder</li>
+<li>光标不动，向上逐行滚动：<code>&lt;C+y&gt;</code> younger</li>
 <li>光标不动，使光标所在行翻到屏幕最上方：zt title</li>
 <li>光标不动，使光标所在行翻到屏幕最下方：zb bottom</li>
 <li>光标不动，使光标所在行翻到屏幕中间：zz</li>
