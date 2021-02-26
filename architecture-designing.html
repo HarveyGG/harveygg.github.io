@@ -140,6 +140,148 @@
 		<div class="markdown-body home-categories">
 		
 			<div class="article">
+                <a class="clearlink" href="16143819545361.html">
+                
+                  <h1>各种Branching Model，workflow的比较思路和推荐小团队使用的精简有效的workflow</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<h2 id="toc_0">一、分支管理模型选型</h2>
+
+<p>Branching Model在业界有多种规范，如：<a href="https://nvie.com/posts/a-successful-git-branching-model/">Gitflow</a>、AoneFlow、<a href="https://www.endoflineblog.com/oneflow-a-git-branching-model-and-workflow">OneFlow</a>等，Branching Model的复杂程度取决于实际开发团队规模，自动化程度等因素，实际使用时需要结合当前团队规模精简。但随着团队规模变化，当前的Model可能会不适用，需要定期Review并优化。</p>
+
+<h3 id="toc_1">1.1 Branching Model的选型依据</h3>
+
+<ol>
+<li>是否一个Repository同时有多人在分别开发不同feature，或者做bugfix，且需要同时deploy到不同环境。eg. dev, pre, production, grayscale etc.
+<ul>
+<li>解决方案：每个环境需要一个对应的branch或tag</li>
+</ul></li>
+<li>是否需要同时维护多个长期版本
+<ul>
+<li>解决方案：需要多个base branch</li>
+</ul></li>
+<li>是否需要一个branch来记录latest stable version，这个version和production environment上deploy的内容完全一致
+<ul>
+<li>解决方案：需要一个mark branch</li>
+</ul></li>
+<li>是否需要对在deploy前冻结代码进行控制
+<ul>
+<li>解决方案：需要对应一个branch，此branch开发无权限merge，代码被merge到此branch之后开始做集成测试</li>
+</ul></li>
+<li>是否有CI/CD自动化工具
+<ul>
+<li>解决方案：CI/CD自动化工具可以简化branching model</li>
+</ul></li>
+</ol>
+
+<h3 id="toc_2">1.2 小团队选型结论</h3>
+
+<ol>
+<li>存在多个开发在一个Repository上开发不同feature然后合并到一起测试和同时deploy到production environment的场景</li>
+<li>不需要维护多个长期版本</li>
+<li>不需要一个单端的branch来记录production environment上deploy的内容</li>
+<li>不必要deploy前冻结代码</li>
+<li>无CI/CD自动化工具</li>
+</ol>
+
+<p>结论：</p>
+
+<p>用到的branch（尽量少）：</p>
+
+<ul>
+<li>feature branch</li>
+<li>develop branch</li>
+<li>release branch</li>
+</ul>
+
+<h2 id="toc_3">二 branching model &amp; workflow</h2>
+
+<ul>
+<li>使用long live的develop branch来记录最新的代码</li>
+<li>使用short live的release branch来记录next version的代码，并且使用release branch部署test和production environment</li>
+<li>使用Tag来记录latest的production environment内容</li>
+<li>在最新的Tag上创建short live的bugfix branch用来修production environment的bug</li>
+</ul>
+
+<p>具体的workflow如下：</p>
+
+<ol>
+<li><p>Starting a feature branch</p>
+<pre class="line-numbers"><code class="language-text">$ git checkout -b feature/my-feature develop
+</code></pre></li>
+<li><p>Implement feature、 Self-testing in the local environment</p></li>
+<li><p>Finishing a feature branch</p>
+<pre class="line-numbers"><code class="language-text">$ git checkout feature/my-feature
+$ git rebase -i develop<br/>
+$ git checkout develop<br/>
+$ git merge --ff-only feature/my-feature<br/>
+$ git push origin develop<br/>
+$ git branch -d feature/my-feature
+</code></pre></li>
+<li><p>Starting a release branch</p></li>
+</ol>
+
+<p>$ git checkout -b release/x.y.z hash</p>
+
+<ol>
+<li>Testing thoroughly</li>
+<li>Finishing a release branch</li>
+</ol>
+
+<p>\( git checkout release/x.y.z<br/>
+\) git tag x.y.z<br/>
+\( git checkout develop<br/>
+\) git merge release/x.y.z<br/>
+\( git push --tags origin develop<br/>
+\) git branch -d release/x.y.z</p>
+
+<ol>
+<li>Starting a bugfix branch
+<code>
+$ git checkout -b hotfix/x.y.1 x.y.0
+</code></li>
+<li>Finishing a bugfix branch</li>
+</ol>
+
+<p>\( git checkout hotfix/x.y.1<br/>
+\) git tag x.y.1<br/>
+\( git checkout develop<br/>
+\) git merge hotfix/x.y.1<br/>
+\( git push --tags origin develop<br/>
+\) git branch -d hotfix/x.y.1</p>
+
+<p>rebase -i用法参考</p>
+
+<blockquote>
+<p><a href="https://git-scm.com/book/en/v2/Git-Tools-Rewriting-History">Rewriting History Chapter from Pro Git SCM book</a></p>
+</blockquote>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2021/2/26</span>
+                    <span>posted in&nbsp;</span> 
+          				  
+          					    <span class="posted-in"><a href='architecture-designing.html'>架构设计</a></span>
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
                 <a class="clearlink" href="15763252898733.html">
                 
                   <h1>人类能否造出真正智能的机器人？</h1>
@@ -1395,6 +1537,18 @@ ordercontext.domain
 	      
 		      
 			      <li class="post">
+			        <a href="16143819545361.html">各种Branching Model，workflow的比较思路和推荐小团队使用的精简有效的workflow</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="16129809371350.html">(3) 我的MAC开发环境</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
 			        <a href="15961083014557.html">vim实用高级命令</a>
 			      </li>
 		     
@@ -1412,16 +1566,8 @@ ordercontext.domain
 		     
 		  
 		      
-			      <li class="post">
-			        <a href="15750321018543.html">安全和隐私中“任何来源”找回办法</a>
-			      </li>
-		     
 		  
 		      
-			      <li class="post">
-			        <a href="15763252898733.html">人类能否造出真正智能的机器人？</a>
-			      </li>
-		     
 		  
 		      
 		  
