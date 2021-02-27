@@ -236,11 +236,16 @@ $ git branch -d feature/my-feature
 <li><p>Starting a release branch</p>
 <pre class="line-numbers"><code class="language-text">$ git checkout -b release/x.y.z hash
 </code></pre></li>
-<li><p>Testing thoroughly</p></li>
-<li><p>Finishing a release branch</p>
+<li><p>Deploying to test environment based on release/x.y.z branch</p></li>
+<li><p>Testing thoroughly &amp; Bug fixing(There should be only one commit for all bugs)</p></li>
+<li><p>Deploying to production environment based on release/x.y.z branch&#39;s latest commit</p></li>
+<li><p>Squashing commits &amp; Tagging the commit</p>
 <pre class="line-numbers"><code class="language-text">$ git checkout release/x.y.z
-$ git tag x.y.z<br/>
-$ git checkout develop<br/>
+$ git rebase -i hash<br/>
+$ git tag x.y.z
+</code></pre></li>
+<li><p>Finishing a release branch</p>
+<pre class="line-numbers"><code class="language-text">$ git checkout develop
 $ git merge release/x.y.z<br/>
 $ git push --tags origin develop<br/>
 $ git branch -d release/x.y.z
@@ -248,10 +253,9 @@ $ git branch -d release/x.y.z
 <li><p>Starting a bugfix branch</p>
 <pre class="line-numbers"><code class="language-text">$ git checkout -b hotfix/x.y.1 x.y.0
 </code></pre></li>
+<li><p>repeat 5~8</p></li>
 <li><p>Finishing a bugfix branch</p>
-<pre class="line-numbers"><code class="language-text">$ git checkout hotfix/x.y.1
-$ git tag x.y.1<br/>
-$ git checkout develop<br/>
+<pre class="line-numbers"><code class="language-text">$ git checkout develop
 $ git merge hotfix/x.y.1<br/>
 $ git push --tags origin develop<br/>
 $ git branch -d hotfix/x.y.1
