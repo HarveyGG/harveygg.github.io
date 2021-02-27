@@ -233,37 +233,30 @@ $ git merge --ff-only feature/my-feature<br/>
 $ git push origin develop<br/>
 $ git branch -d feature/my-feature
 </code></pre></li>
-<li><p>Starting a release branch</p></li>
+<li><p>Starting a release branch</p>
+<pre class="line-numbers"><code class="language-text">$ git checkout -b release/x.y.z hash
+</code></pre></li>
+<li><p>Testing thoroughly</p></li>
+<li><p>Finishing a release branch</p>
+<pre class="line-numbers"><code class="language-text">$ git checkout release/x.y.z
+$ git tag x.y.z<br/>
+$ git checkout develop<br/>
+$ git merge release/x.y.z<br/>
+$ git push --tags origin develop<br/>
+$ git branch -d release/x.y.z
+</code></pre></li>
+<li><p>Starting a bugfix branch</p>
+<pre class="line-numbers"><code class="language-text">$ git checkout -b hotfix/x.y.1 x.y.0
+</code></pre></li>
+<li><p>Finishing a bugfix branch</p>
+<pre class="line-numbers"><code class="language-text">$ git checkout hotfix/x.y.1
+$ git tag x.y.1<br/>
+$ git checkout develop<br/>
+$ git merge hotfix/x.y.1<br/>
+$ git push --tags origin develop<br/>
+$ git branch -d hotfix/x.y.1
+</code></pre></li>
 </ol>
-
-<p>$ git checkout -b release/x.y.z hash</p>
-
-<ol>
-<li>Testing thoroughly</li>
-<li>Finishing a release branch</li>
-</ol>
-
-<p>\( git checkout release/x.y.z<br/>
-\) git tag x.y.z<br/>
-\( git checkout develop<br/>
-\) git merge release/x.y.z<br/>
-\( git push --tags origin develop<br/>
-\) git branch -d release/x.y.z</p>
-
-<ol>
-<li>Starting a bugfix branch
-<code>
-$ git checkout -b hotfix/x.y.1 x.y.0
-</code></li>
-<li>Finishing a bugfix branch</li>
-</ol>
-
-<p>\( git checkout hotfix/x.y.1<br/>
-\) git tag x.y.1<br/>
-\( git checkout develop<br/>
-\) git merge hotfix/x.y.1<br/>
-\( git push --tags origin develop<br/>
-\) git branch -d hotfix/x.y.1</p>
 
 <p>rebase -i用法参考</p>
 
