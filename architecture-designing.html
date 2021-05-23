@@ -214,6 +214,7 @@
 <li><p>Implement feature、 Self-testing in the local environment</p></li>
 <li><p>Finishing a feature branch</p>
 <pre class="line-numbers"><code class="language-text">$ git checkout feature/my-feature
+$ git fetch develop<br/>
 $ git rebase -i develop<br/>
 $ git checkout develop<br/>
 $ git merge --ff-only feature/my-feature<br/>
@@ -233,6 +234,7 @@ $ git tag x.y.z
 </code></pre></li>
 <li><p>Finishing a release branch</p>
 <pre class="line-numbers"><code class="language-text">$ git checkout develop
+$ git pull origin develop<br/>
 $ git merge release/x.y.z<br/>
 $ git push --tags origin develop<br/>
 $ git branch -d release/x.y.z
@@ -243,6 +245,7 @@ $ git branch -d release/x.y.z
 <li><p>repeat 5~8</p></li>
 <li><p>Finishing a bugfix branch</p>
 <pre class="line-numbers"><code class="language-text">$ git checkout develop
+$ git pull origin develop<br/>
 $ git merge hotfix/x.y.1<br/>
 $ git push --tags origin develop<br/>
 $ git branch -d hotfix/x.y.1
@@ -1476,18 +1479,20 @@ ordercontext.domain
     <div id="sidebar" class="sidebar">
           <div id="site-info" class="site-info">
             
+                <div class="site-a-logo"><img src="https://media-exp1.licdn.com/dms/image/C5103AQEbVyw8R1s-0Q/profile-displayphoto-shrink_200_200/0/1570421197030?e=1627516800&v=beta&t=BNSCoU699ikE6Jr9Vz0-wvTSAm7eykQSaL7ZwoEdGsM" /></div>
+            
                 <h1>Harvey's Tech Site</h1>
                 <div class="site-des">多年互联网电商行业开发经验、云计算SRE开发经验。关注DDD，云原生，DevOps。正在学习机器学习、人工智能</div>
                 <div class="social">
 <a target="_blank" class="facebook" href="https://www.facebook.com/profile.php?id=100000085231645" title="Facebook">Facebook</a>
 
-
-
+<a target="_blank" class="stackoverflow" href="https://stackoverflow.com/users/11747959/harvey-wang" title="StackOverflow"></a>
+<a target="_blank" class="linkedin" href="https://www.linkedin.com/in/harveywhy/" title="LinkedIn">LinkedIn</a>
 <a target="_blank" class="pinterest" href="https://www.pinterest.com/harveywanghy/" title="Pinterest">Pinterest</a>
 
+<a target="_blank" class="instagram" href="https://www.instagram.com/harveyvan82/" title="Instagram">Instagram</a>
 
-
-<a target="_blank" class="twitter" target="_blank" href="https://twitter.com/HarveyWanghy" title="Twitter">Twitter</a>
+<a target="_blank" class="twitter" target="_blank" href="https://twitter.com/Harvey_DDD" title="Twitter">Twitter</a>
 <a target="_blank" class="github" target="_blank" href="https://github.com/HarveyGG" title="GitHub">GitHub</a>
 <a target="_blank" class="email" href="mailto:harvey.wanghy@gmail.com" title="Email">Email</a>
   <a target="_blank" class="rss" href="atom.xml" title="RSS">RSS</a>
