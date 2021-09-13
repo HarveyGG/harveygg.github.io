@@ -160,8 +160,7 @@
       </div><!-- article -->
 
       <div class="article-content">
-      <h2 id="toc_0">DNS域名规范</h2>
-
+      <h2><a id="dns%E5%9F%9F%E5%90%8D%E8%A7%84%E8%8C%83" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>DNS域名规范</h2>
 <ul>
 <li>域名中的标号由英文和数字组成，标号中除连字符“-”外不能使用其他的标点符号，不区分大小写字母</li>
 <li>每一个标号不超过63个字符</li>
@@ -170,30 +169,26 @@
 <li>DNS既不规定一个域名需要包含多少个下级域名，也不规定每一级域名代表什么意思。</li>
 <li>各级域名由其上一级的域名管理机构管理，而最高的顶级域名则由ICANN进行管理</li>
 </ul>
-
-<h2 id="toc_1">域名管理</h2>
-
+<h2><a id="%E5%9F%9F%E5%90%8D%E7%AE%A1%E7%90%86" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>域名管理</h2>
 <ul>
-<li><p>顶级域名分三大类</p>
+<li>
+<p>顶级域名分三大类</p>
 <ul>
 <li><strong>国家顶级域名nTLD</strong>：采用ISO3166的规定。如：cn代表中国，us代表美国，uk代表英国，等等。国家域名又常记为ccTLD(cc表示国家代码contry-code)</li>
 <li><strong>通用顶级域名gTLD</strong>：最常见的通用顶级域名有7个，即：com(公司企业)，net(网络服务机构)，org(非营利组织)，int(国际组织)，gov(美国的政府部门)，mil(美国的军事部门)</li>
 <li><strong>基础结构域名(infrastructure domain)</strong>：只有一个arpa，用于反向域名解析，因此成为反向域名</li>
 </ul>
-<p><img src="http://image.harveygg.wang/mweb/15611724903244.jpg" alt="xxx"/></p></li>
+<p><img src="http://image.harveygg.wang/mweb/15611724903244.jpg" alt="xxx" /></p>
+</li>
 </ul>
-
-<h2 id="toc_2">域名服务器的分类</h2>
-
+<h2><a id="%E5%9F%9F%E5%90%8D%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E5%88%86%E7%B1%BB" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>域名服务器的分类</h2>
 <ul>
 <li>根域名服务器：记录顶级域名服务器</li>
 <li>顶级域名服务器：管理在该顶级域名服务器注册的二级域名</li>
 <li>权威域名服务器(authoritative domain name system)：负责一个zone的域名解析</li>
 <li>本地域名服务器：不在域名服务器树结构中，但是很重要，域名解析首先发给本地域名服务器</li>
 </ul>
-
-<h2 id="toc_3">域名解析过程</h2>
-
+<h2><a id="%E5%9F%9F%E5%90%8D%E8%A7%A3%E6%9E%90%E8%BF%87%E7%A8%8B" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>域名解析过程</h2>
 <ol>
 <li>请求本地域名服务器</li>
 <li>本地域名服务器返回解析结果或想根域名服务器请求</li>
@@ -204,9 +199,7 @@
 <li>权威域名服务器返回解析结果或报错</li>
 <li>本地域名服务器返回解析结果或报错</li>
 </ol>
-
-<h2 id="toc_4">DNS记录类型</h2>
-
+<h2><a id="dns%E8%AE%B0%E5%BD%95%E7%B1%BB%E5%9E%8B" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>DNS记录类型</h2>
 <ul>
 <li>A记录：将域名指向IPv4地址</li>
 <li>AAAA：将域名指向IPv6地址（例如：ff06:0:0:0:0:0:0:c3）</li>
@@ -322,6 +315,12 @@
 	      
 		      
 			      <li class="post">
+			        <a href="15616863130414.html">MAC使用技巧</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
 			        <a href="16143819545361.html">各种Branching Model，workflow的比较思路和推荐小团队使用的精简有效的workflow</a>
 			      </li>
 		     
@@ -334,19 +333,13 @@
 		  
 		      
 			      <li class="post">
+			        <a href="16237800130779.html">Linux运维常用命令组合</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
 			        <a href="15961083014557.html">vim实用高级命令</a>
-			      </li>
-		     
-		  
-		      
-			      <li class="post">
-			        <a href="15949090783980.html">一些终端下更好用的替代工具</a>
-			      </li>
-		     
-		  
-		      
-			      <li class="post">
-			        <a href="15588383364141.html">(2) MAC开发环境——终端+Shell</a>
 			      </li>
 		     
 		  
@@ -422,7 +415,7 @@ Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
     </script>
 
     
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS_SVG-full"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
 
 
   </body>

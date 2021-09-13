@@ -160,41 +160,28 @@
       </div><!-- article -->
 
       <div class="article-content">
-      <h2 id="toc_0">Kafka名字来源</h2>
-
+      <h2><a id="kafka%E5%90%8D%E5%AD%97%E6%9D%A5%E6%BA%90" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Kafka名字来源</h2>
 <p>Kafka作者之一Jay Kreps曾经谈及过命名的原因：</p>
-
 <blockquote>
 <p>因为 Kafka 系统的写性能很强，所以找了个作家的名字来命名似乎是一个好主意。大学期间我上了很多文学课，非常喜欢 Franz Kafka 这个作家，另外为开源软件起这个名字听上去很酷。</p>
 </blockquote>
-
-<h2 id="toc_1">Kafka的定位</h2>
-
+<h2><a id="kafka%E7%9A%84%E5%AE%9A%E4%BD%8D" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Kafka的定位</h2>
 <p>Kafka 是 LinkedIn 公司内部孵化的项目。</p>
-
 <p>Kafka 在设计之初就旨在提供三个方面的特性：</p>
-
 <ul>
 <li>提供一套 API 实现生产者和消费者；</li>
 <li>降低网络传输和磁盘存储开销；</li>
 <li>实现高伸缩性架构。</li>
 </ul>
-
 <p>Kafka既是消息引擎系统，也是一个分布式流处理平台。</p>
-
-<h3 id="toc_2">Kafka作为流处理平台和其他主流计算框架相比的优势</h3>
-
+<h3><a id="kafka%E4%BD%9C%E4%B8%BA%E6%B5%81%E5%A4%84%E7%90%86%E5%B9%B3%E5%8F%B0%E5%92%8C%E5%85%B6%E4%BB%96%E4%B8%BB%E6%B5%81%E8%AE%A1%E7%AE%97%E6%A1%86%E6%9E%B6%E7%9B%B8%E6%AF%94%E7%9A%84%E4%BC%98%E5%8A%BF" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Kafka作为流处理平台和其他主流计算框架相比的优势</h3>
 <ul>
 <li>更容易实现端到端的正确性（精确一次处理语义）</li>
 <li>Kafka Streams宣称自己是一个用于搭建流处理的客户端库，而非完整功能系统，有利于区别其他框架的目标市场（瞄准小公司）</li>
 </ul>
-
-<h2 id="toc_3">Kafka术语</h2>
-
-<h3 id="toc_4">一张图说明Kafka术语</h3>
-
-<p><img src="http://image.harveygg.wang/mweb/15621685649048.jpg" alt="" style="width:1171px;"/></p>
-
+<h2><a id="kafka%E6%9C%AF%E8%AF%AD" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Kafka术语</h2>
+<h3><a id="%E4%B8%80%E5%BC%A0%E5%9B%BE%E8%AF%B4%E6%98%8Ekafka%E6%9C%AF%E8%AF%AD" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>一张图说明Kafka术语</h3>
+<p><img src="http://image.harveygg.wang/mweb/15621685649048.jpg" alt="" style="width:1171px;" /></p>
 <ul>
 <li>消息（Record）：消息引擎处理的主要对象</li>
 <li>主题（Topic）：承载消息的逻辑容器，具体使用中用于区分业务</li>
@@ -207,11 +194,8 @@
 <li>消费者组（Consumer Group）：多个消费者实例共同构成一个组，同时消费多个分区实现高吞吐</li>
 <li>重平衡（Rebalance）：消费者组内一个消费者实例挂掉后，其他消费者自动重新分配订阅主题分区的过程。Rebalance是Kafka实现消费者端高可用的手段</li>
 </ul>
-
-<h2 id="toc_5">不能保持默认值的参数</h2>
-
-<h3 id="toc_6">Broker端参数</h3>
-
+<h2><a id="%E4%B8%8D%E8%83%BD%E4%BF%9D%E6%8C%81%E9%BB%98%E8%AE%A4%E5%80%BC%E7%9A%84%E5%8F%82%E6%95%B0" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>不能保持默认值的参数</h2>
+<h3><a id="broker%E7%AB%AF%E5%8F%82%E6%95%B0" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Broker端参数</h3>
 <ul>
 <li>log.dirs：没有默认值，必须手动指定。CVS格式指定多个路径，且多个路径最好分布在不同磁盘上，提供读写性能和提高可用性</li>
 <li>listeners：监听器，告诉外部连接者要用什么协议访问主机和端口开放的Kafka服务</li>
@@ -223,49 +207,36 @@
 <li>log.retention.bytes：指Broker为消息保存的总磁盘容量大小，默认值-1，标识存多少都行</li>
 <li>message.max.bytes：Broker能接收的最大消息大小</li>
 </ul>
-
-<h3 id="toc_7">Topic级参数</h3>
-
+<h3><a id="topic%E7%BA%A7%E5%8F%82%E6%95%B0" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Topic级参数</h3>
 <ul>
 <li>retention.ms：规定了该topic消息被保存的时长，默认7天，优先级高于Broker配置</li>
 <li>retention.bytes：规定了该topic预留多少磁盘空间</li>
 <li>message.max.bytes：该topic下单条消息最大尺寸，可用于不同业务不同配置</li>
 </ul>
-
-<h3 id="toc_8">Producer端参数</h3>
-
-<h3 id="toc_9">Consumer端参数</h3>
-
-<h3 id="toc_10">JVM参数</h3>
-
+<h3><a id="producer%E7%AB%AF%E5%8F%82%E6%95%B0" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Producer端参数</h3>
+<h3><a id="consumer%E7%AB%AF%E5%8F%82%E6%95%B0" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Consumer端参数</h3>
+<h3><a id="jvm%E5%8F%82%E6%95%B0" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>JVM参数</h3>
 <blockquote>
 <p>设置环境变量，提高JVM堆大小，业界公认最佳配置为6G，修改GC算法</p>
 </blockquote>
-
 <ul>
 <li>KAFKA_HEAP_OPTS：堆大小</li>
 <li>KAFKA_JVM_PERFORMANCE_OPTS：GC算法</li>
 </ul>
-
 <pre class="line-numbers"><code class="language-shell">$&gt; export KAFKA_HEAP_OPTS=--Xms6g  --Xmx6g
 $&gt; export  KAFKA_JVM_PERFORMANCE_OPTS= -server -XX:+UseG1GC -XX:MaxGCPauseMillis=20 -XX:InitiatingHeapOccupancyPercent=35 -XX:+ExplicitGCInvokesConcurrent -Djava.awt.headless=true
 $&gt; bin/kafka-server-start.sh config/server.properties
 
 </code></pre>
-
-<h3 id="toc_11">操作系统参数</h3>
-
+<h3><a id="%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8F%82%E6%95%B0" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>操作系统参数</h3>
 <ul>
 <li>文件描述符限制调大</li>
 <li>文件系统类型：根据官网的测试报告，XFS 的性能要强于 ext4，<a href="https://www.confluent.io/kafka-summit-sf18/kafka-on-zfs">ZFS</a>性能貌似更好</li>
 <li>Swap修改成1：改成0容易导致内存溢出来不及处理</li>
 <li>文件刷盘时间间隔：消息写到页缓存上即算成功，减小刷盘间隔可以提高可用性，但是降低吞吐量</li>
 </ul>
-
-<h2 id="toc_12">实现无消息丢失</h2>
-
-<h3 id="toc_13">配置最佳实践</h3>
-
+<h2><a id="%E5%AE%9E%E7%8E%B0%E6%97%A0%E6%B6%88%E6%81%AF%E4%B8%A2%E5%A4%B1" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>实现无消息丢失</h2>
+<h3><a id="%E9%85%8D%E7%BD%AE%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>配置最佳实践</h3>
 <ol>
 <li>不要使用 producer.send(msg)，而要使用 producer.send(msg, callback)。</li>
 <li>设置 acks = all。acks 是 Producer的一个参数，代表了你对“已提交”消息的定义。如果设置成 all，则表明所有副本 Broker 都要接收到消息，该消息才算是“已提交”。这是最高等级的“已提交”定义。</li>
@@ -276,8 +247,7 @@ $&gt; bin/kafka-server-start.sh config/server.properties
 <li>确保 replication.factor &gt; min.insync.replicas。如果两者相等，那么只要有一个副本挂机，整个分区就无法正常工作了。我们不仅要改善消息的持久性，防止数据丢失，还要在不降低可用性的基础上完成。推荐设置成 replication.factor = min.insync.replicas + 1。</li>
 <li>确保消息消费完成再提交。Consumer 端有个参数 enable.auto.commit，最好把它设置成 false，并采用手动提交位移的方式。就像前面说的，这对于单 Consumer 多线程处理的场景而言是至关重要的。</li>
 </ol>
-
-<h3 id="toc_14">常见丢消息案例</h3>
+<h3><a id="%E5%B8%B8%E8%A7%81%E4%B8%A2%E6%B6%88%E6%81%AF%E6%A1%88%E4%BE%8B" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>常见丢消息案例</h3>
 
 
     
@@ -288,8 +258,8 @@ $&gt; bin/kafka-server-start.sh config/server.properties
         <div class="large-6 columns">
         <p class="text-left" style="padding:15px 0px;">
       
-          <a href="15616863130414.html" 
-          title="Previous Post: (3) MAC使用技巧">&laquo; (3) MAC使用技巧</a>
+          <a href="15667991314468.html" 
+          title="Previous Post: 后天八卦">&laquo; 后天八卦</a>
       
         </p>
         </div>
@@ -382,6 +352,12 @@ $&gt; bin/kafka-server-start.sh config/server.properties
 	      
 		      
 			      <li class="post">
+			        <a href="15616863130414.html">MAC使用技巧</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
 			        <a href="16143819545361.html">各种Branching Model，workflow的比较思路和推荐小团队使用的精简有效的workflow</a>
 			      </li>
 		     
@@ -394,19 +370,13 @@ $&gt; bin/kafka-server-start.sh config/server.properties
 		  
 		      
 			      <li class="post">
+			        <a href="16237800130779.html">Linux运维常用命令组合</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
 			        <a href="15961083014557.html">vim实用高级命令</a>
-			      </li>
-		     
-		  
-		      
-			      <li class="post">
-			        <a href="15949090783980.html">一些终端下更好用的替代工具</a>
-			      </li>
-		     
-		  
-		      
-			      <li class="post">
-			        <a href="15588383364141.html">(2) MAC开发环境——终端+Shell</a>
 			      </li>
 		     
 		  
@@ -482,7 +452,7 @@ Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
     </script>
 
     
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS_SVG-full"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
 
 
   </body>

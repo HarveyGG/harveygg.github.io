@@ -160,17 +160,14 @@
       </div><!-- article -->
 
       <div class="article-content">
-      <h2 id="toc_0">查找问题线程</h2>
-
+      <h2><a id="%E6%9F%A5%E6%89%BE%E9%97%AE%E9%A2%98%E7%BA%BF%E7%A8%8B" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>查找问题线程</h2>
 <ul>
 <li>top 查看问题进程 pid</li>
 <li>top -Hp pid 查看进程中有问题线程pid tid</li>
-<li>printf &#39;%x/n&#39; tid 转化为十六进制</li>
+<li>printf '%x/n' tid 转化为十六进制</li>
 <li>jstack pid |grep tid的十六进制 -A 30 查看线程堆栈信息</li>
 </ul>
-
-<h2 id="toc_1">内存溢出问题</h2>
-
+<h2><a id="%E5%86%85%E5%AD%98%E6%BA%A2%E5%87%BA%E9%97%AE%E9%A2%98" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>内存溢出问题</h2>
 <ul>
 <li>jstat -gcutil java_pid 刷新时间间隔 查看分区占用情况和gc状况</li>
 <li>jmap -dump:format=b,file=name.dump java_pid  导出dump文件</li>
@@ -280,6 +277,12 @@
 	      
 		      
 			      <li class="post">
+			        <a href="15616863130414.html">MAC使用技巧</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
 			        <a href="16143819545361.html">各种Branching Model，workflow的比较思路和推荐小团队使用的精简有效的workflow</a>
 			      </li>
 		     
@@ -292,19 +295,13 @@
 		  
 		      
 			      <li class="post">
+			        <a href="16237800130779.html">Linux运维常用命令组合</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
 			        <a href="15961083014557.html">vim实用高级命令</a>
-			      </li>
-		     
-		  
-		      
-			      <li class="post">
-			        <a href="15949090783980.html">一些终端下更好用的替代工具</a>
-			      </li>
-		     
-		  
-		      
-			      <li class="post">
-			        <a href="15588383364141.html">(2) MAC开发环境——终端+Shell</a>
 			      </li>
 		     
 		  
@@ -380,7 +377,7 @@ Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
     </script>
 
     
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS_SVG-full"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
 
 
   </body>

@@ -160,86 +160,54 @@
       </div><!-- article -->
 
       <div class="article-content">
-      <h2 id="toc_0">ls的替代工具</h2>
-
-<pre class="line-numbers"><code class="language-text"># brew info exa
+      <h2><a id="ls%E7%9A%84%E6%9B%BF%E4%BB%A3%E5%B7%A5%E5%85%B7" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>ls的替代工具</h2>
+<pre class="line-numbers"><code class="language-plain_text"># brew info exa
 </code></pre>
-
-<pre class="line-numbers"><code class="language-text"># exa -l --tree -L 1
+<pre class="line-numbers"><code class="language-plain_text"># exa -l --tree -L 1
 </code></pre>
-
 <p>用列表加树状展示一级目录下的目录和文件</p>
-
-<h2 id="toc_1">cat的替代工具</h2>
-
-<pre class="line-numbers"><code class="language-text"># brew info bat
+<h2><a id="cat%E7%9A%84%E6%9B%BF%E4%BB%A3%E5%B7%A5%E5%85%B7" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>cat的替代工具</h2>
+<pre class="line-numbers"><code class="language-plain_text"># brew info bat
 </code></pre>
-
-<pre class="line-numbers"><code class="language-text"># bat README.md
+<pre class="line-numbers"><code class="language-plain_text"># bat README.md
 </code></pre>
-
 <p>比cat增加高亮和对git状态的支持</p>
-
-<h2 id="toc_2">find的替代工具</h2>
-
-<pre class="line-numbers"><code class="language-text"># brew info fd
+<h2><a id="find%E7%9A%84%E6%9B%BF%E4%BB%A3%E5%B7%A5%E5%85%B7" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>find的替代工具</h2>
+<pre class="line-numbers"><code class="language-plain_text"># brew info fd
 </code></pre>
-
-<pre class="line-numbers"><code class="language-text"># fd README.md
+<pre class="line-numbers"><code class="language-plain_text"># fd README.md
 </code></pre>
-
 <p>语法比find简单，默认忽略.gitignore里的文件和隐藏文件</p>
-
-<h2 id="toc_3">grep的替代工具</h2>
-
-<pre class="line-numbers"><code class="language-text"># brew info rg
+<h2><a id="grep%E7%9A%84%E6%9B%BF%E4%BB%A3%E5%B7%A5%E5%85%B7" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>grep的替代工具</h2>
+<pre class="line-numbers"><code class="language-plain_text"># brew info rg
 </code></pre>
-
-<pre class="line-numbers"><code class="language-text"># rg xxx
+<pre class="line-numbers"><code class="language-plain_text"># rg xxx
 </code></pre>
-
 <p>显示漂亮，默认忽略.gitignore文件和隐藏文件，默认递归所有子文件夹，可以指定文件类型</p>
-
-<h2 id="toc_4">cd的替代工具</h2>
-
-<pre class="line-numbers"><code class="language-text"># brew info z
+<h2><a id="cd%E7%9A%84%E6%9B%BF%E4%BB%A3%E5%B7%A5%E5%85%B7" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>cd的替代工具</h2>
+<pre class="line-numbers"><code class="language-plain_text"># brew info z
 </code></pre>
-
-<pre class="line-numbers"><code class="language-text"># z de [Tab]
+<pre class="line-numbers"><code class="language-plain_text"># z de [Tab]
 </code></pre>
-
 <p>自动基于历史访问过的以de开头的目录进行补全</p>
-
-<pre class="line-numbers"><code class="language-text"># brew info fzf
+<pre class="line-numbers"><code class="language-plain_text"># brew info fzf
 </code></pre>
-
-<pre class="line-numbers"><code class="language-text"># cd $(find * -type d | fzf)
+<pre class="line-numbers"><code class="language-plain_text"># cd $(find * -type d | fzf)
 </code></pre>
-
 <p>通过上下键选择需要访问的目录，回车进入。</p>
-
 <p>fzf会把标准输出变成交互式下拉列表共用户选择。</p>
-
-<h2 id="toc_5">文件管理的替代工具</h2>
-
-<pre class="line-numbers"><code class="language-text"># brew info nnn
+<h2><a id="%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E7%9A%84%E6%9B%BF%E4%BB%A3%E5%B7%A5%E5%85%B7" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>文件管理的替代工具</h2>
+<pre class="line-numbers"><code class="language-plain_text"># brew info nnn
 </code></pre>
-
-<h2 id="toc_6">看日志tail的替代工具</h2>
-
-<pre class="line-numbers"><code class="language-text"># brew info lnav
+<h2><a id="%E7%9C%8B%E6%97%A5%E5%BF%97tail%E7%9A%84%E6%9B%BF%E4%BB%A3%E5%B7%A5%E5%85%B7" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>看日志tail的替代工具</h2>
+<pre class="line-numbers"><code class="language-plain_text"># brew info lnav
 </code></pre>
-
 <p>支持各种日志的高亮显示，支持正则匹配</p>
-
-<h2 id="toc_7">man的替代工具</h2>
-
-<pre class="line-numbers"><code class="language-text"># brew info
+<h2><a id="man%E7%9A%84%E6%9B%BF%E4%BB%A3%E5%B7%A5%E5%85%B7" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>man的替代工具</h2>
+<pre class="line-numbers"><code class="language-plain_text"># brew info
 </code></pre>
-
-<hr/>
-
-<p><img src="http://image.harveygg.wang/mweb/15951458383567.jpg" alt=""/></p>
+<hr />
+<p><img src="http://image.harveygg.wang/mweb/15951458383567.jpg" alt="" /></p>
 
 
     
@@ -344,6 +312,12 @@
 	      
 		      
 			      <li class="post">
+			        <a href="15616863130414.html">MAC使用技巧</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
 			        <a href="16143819545361.html">各种Branching Model，workflow的比较思路和推荐小团队使用的精简有效的workflow</a>
 			      </li>
 		     
@@ -356,19 +330,13 @@
 		  
 		      
 			      <li class="post">
+			        <a href="16237800130779.html">Linux运维常用命令组合</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
 			        <a href="15961083014557.html">vim实用高级命令</a>
-			      </li>
-		     
-		  
-		      
-			      <li class="post">
-			        <a href="15949090783980.html">一些终端下更好用的替代工具</a>
-			      </li>
-		     
-		  
-		      
-			      <li class="post">
-			        <a href="15588383364141.html">(2) MAC开发环境——终端+Shell</a>
 			      </li>
 		     
 		  
@@ -444,7 +412,7 @@ Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
     </script>
 
     
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS_SVG-full"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
 
 
   </body>

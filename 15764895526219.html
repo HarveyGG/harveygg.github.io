@@ -161,24 +161,18 @@
 
       <div class="article-content">
       <p>由于众所周知的原因官方minikube在中国大陆地区运行会碰到网络问题。</p>
-
 <p>阿里云对官方minikube做了修改，使它默认使用国内镜像仓库。安装和启动参考文档如下：</p>
-
 <blockquote>
 <p><a href="https://yq.aliyun.com/articles/221687">Minikube - Kubernetes本地实验环境</a></p>
 </blockquote>
-
 <p>但是文中的参数任然有问题，如下命令可以正常启动，操作系统Mac</p>
-
 <pre class="line-numbers"><code class="language-shell">minikube start --image-mirror-country cn \
     --iso-url=https://kubernetes.oss-cn-hangzhou.aliyuncs.com/minikube/iso/minikube-v1.5.1.iso \
     --registry-mirror=https://xxxxxx.mirror.aliyuncs.com \
     --image-repository=registry.cn-hangzhou.aliyuncs.com/google_containers
 </code></pre>
-
 <p>其中<code>--registry-mirror</code>参数中的&quot;xxxxxx&quot;是个人阿里云镜像加速地址，查询地址：</p>
-
-<pre class="line-numbers"><code class="language-text">https://cr.console.aliyun.com/cn-hangzhou/instances/mirrors
+<pre class="line-numbers"><code class="language-plain_text">https://cr.console.aliyun.com/cn-hangzhou/instances/mirrors
 </code></pre>
 
 
@@ -284,6 +278,12 @@
 	      
 		      
 			      <li class="post">
+			        <a href="15616863130414.html">MAC使用技巧</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
 			        <a href="16143819545361.html">各种Branching Model，workflow的比较思路和推荐小团队使用的精简有效的workflow</a>
 			      </li>
 		     
@@ -296,19 +296,13 @@
 		  
 		      
 			      <li class="post">
+			        <a href="16237800130779.html">Linux运维常用命令组合</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
 			        <a href="15961083014557.html">vim实用高级命令</a>
-			      </li>
-		     
-		  
-		      
-			      <li class="post">
-			        <a href="15949090783980.html">一些终端下更好用的替代工具</a>
-			      </li>
-		     
-		  
-		      
-			      <li class="post">
-			        <a href="15588383364141.html">(2) MAC开发环境——终端+Shell</a>
 			      </li>
 		     
 		  
@@ -384,7 +378,7 @@ Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
     </script>
 
     
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS_SVG-full"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
 
 
   </body>
