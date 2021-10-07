@@ -152,6 +152,8 @@
 <pre class="line-numbers"><code class="language-plain_text">COMMAND   PID USER   FD   TYPE    DEVICE SIZE/OFF NODE NAME
 node    14374 root   12u  IPv6 376449654      0t0  TCP *:8957 (LISTEN)
 </code></pre>
+<h3><a id="lsof-grep-deleted" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>lsof |grep deleted</h3>
+<p>如果一个文件正在被一个运行中的进程读取，此时删除次文件，此文件空间不会被释放，使用du -sh无法统计此文件占用的空间；可以通过此命令查看已经被删除过仍然占用空间的文件清单，然后通过kill进程释放文件占用空间</p>
 
                         
                       </div>
@@ -463,6 +465,12 @@ node    14374 root   12u  IPv6 376449654      0t0  TCP *:8957 (LISTEN)
 	      
 		      
 			      <li class="post">
+			        <a href="16237800130779.html">Linux运维常用命令组合</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
 			        <a href="15616863130414.html">MAC使用技巧</a>
 			      </li>
 		     
@@ -476,12 +484,6 @@ node    14374 root   12u  IPv6 376449654      0t0  TCP *:8957 (LISTEN)
 		      
 			      <li class="post">
 			        <a href="16129809371350.html">(3) 我的MAC开发环境</a>
-			      </li>
-		     
-		  
-		      
-			      <li class="post">
-			        <a href="16237800130779.html">Linux运维常用命令组合</a>
 			      </li>
 		     
 		  
