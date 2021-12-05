@@ -15,9 +15,7 @@
     <link rel="stylesheet" href="asset/css/docs.css" />
     <script src="asset/js/vendor/modernizr.js"></script>
     <script src="asset/js/vendor/jquery.js"></script>
-  <script src="asset/highlightjs/highlight.pack.js"></script>
-  <link href="asset/highlightjs/styles/github.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <script>hljs.initHighlightingOnLoad();</script>
+ 
 <script type="text/javascript">
   function before_search(){
     var searchVal = 'site: ' + document.getElementById('search_input').value;
@@ -166,7 +164,7 @@
 <p><img src="http://image.harveygg.wang/mweb/iterm2.jpg" alt="iter" /></p>
 <p>iTerm2 是 MAC 下最好的终端工具。<br />
 可以使用Homebrew来安装：</p>
-<pre class="line-numbers"><code class="language-shell">$ brew cask install iterm2
+<pre><code class="language-shell">$ brew cask install iterm2
 </code></pre>
 <hr />
 <p>iTerm2 的一些特色功能如下。</p>
@@ -215,7 +213,7 @@
 <p><img src="http://image.harveygg.wang/mweb/15588872205753.jpg" alt="" style="width:609px;" /></p>
 <hr />
 <p>但是最理想的配色方案在这里<a href="https://github.com/altercation/solarized">https://github.com/altercation/solarized</a></p>
-<pre class="line-numbers"><code class="language-shell">$ git clone https://github.com/altercation/solarized.git
+<pre><code class="language-shell">$ git clone https://github.com/altercation/solarized.git
 </code></pre>
 <ol>
 <li>进入solarized/iterm2-colors-solarized 下双击<code>Solarized Dark.itermcolors</code>和<code>Solarized Light.itermcolors</code>两个文件就可以把明暗两种配置文件导入到iTerm2里</li>
@@ -228,7 +226,7 @@
 <p><a href="https://www.zhihu.com/question/21418449">为什么说zsh是shell中的极品</a></p>
 </blockquote>
 <p>修改默认bash</p>
-<pre class="line-numbers"><code class="language-shell">$ chsh -s /bin/zsh
+<pre><code class="language-shell">$ chsh -s /bin/zsh
 </code></pre>
 <h3><a id="oh-my-zsh-https-ohmyz-sh" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="https://ohmyz.sh/">Oh My ZSH</a></h3>
 <p><img src="http://image.harveygg.wang/mweb/omzsh.png" alt="omzsh" /></p>
@@ -239,7 +237,7 @@
 <p>“Oh My ZSH!”</p>
 </blockquote>
 <h4><a id="%E5%AE%89%E8%A3%85" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>安装</h4>
-<pre class="line-numbers"><code class="language-plain_text">sh -c &quot;$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)&quot;
+<pre><code class="language-plain_text">sh -c &quot;$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)&quot;
 </code></pre>
 <h4><a id="%E9%85%8D%E7%BD%AEoh-my-zsh" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>配置oh my zsh</h4>
 <blockquote>
@@ -248,7 +246,7 @@
 <h3><a id="agnoster%E4%B8%BB%E9%A2%98-https-github-comfcambloroh-my-zsh-agnoster-fcamblor" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="https://github.com/fcamblor/oh-my-zsh-agnoster-fcamblor">agnoster主题</a></h3>
 <p>agnoster是一个zsh主题，特别为使用iTerm2 + Solarized Dark主题，又经常使用Git的用户定制。</p>
 <h4><a id="%E5%AE%89%E8%A3%85" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>安装</h4>
-<pre class="line-numbers"><code class="language-shell">$ git clone https://github.com/fcamblor/oh-my-zsh-agnoster-fcamblor.git
+<pre><code class="language-shell">$ git clone https://github.com/fcamblor/oh-my-zsh-agnoster-fcamblor.git
 </code></pre>
 <p>执行工程里的install脚本，主题将安装到~/.oh-my-zsh/themes目录下</p>
 <h4><a id="%E8%AE%BE%E7%BD%AE%E8%AF%A5%E4%B8%BB%E9%A2%98" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>设置该主题</h4>
@@ -257,11 +255,11 @@
 <h3><a id="%E5%A2%9E%E5%8A%A0%E6%8C%87%E4%BB%A4%E9%AB%98%E4%BA%AE%E6%95%88%E6%9E%9C" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>增加指令高亮效果</h3>
 <p>指令高亮效果作用是当用户输入正确命令时指令会绿色高亮，错误时命令红色高亮</p>
 <h4><a id="%E5%AE%89%E8%A3%85zsh-syntax-highlighting-https-github-comzsh-userszsh-syntax-highlighting" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>安装<a href="https://github.com/zsh-users/zsh-syntax-highlighting">zsh-syntax-highlighting</a></h4>
-<pre class="line-numbers"><code class="language-shell">$ git clone git://github.com/zsh-users/zsh-syntax-highlighting.git
+<pre><code class="language-shell">$ git clone git://github.com/zsh-users/zsh-syntax-highlighting.git
 $ echo &quot;source ${(q-)PWD}/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh&quot; &gt;&gt; ${ZDOTDIR:-$HOME}/.zshrc
 </code></pre>
 <h3><a id="%E5%AE%89%E8%A3%85powerline-http-powerline-readthedocs-ioenlatestinstallation-html" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="http://powerline.readthedocs.io/en/latest/installation.html">安装Powerline</a></h3>
-<pre class="line-numbers"><code class="language-shell">$ pip install powerline-status --user
+<pre><code class="language-shell">$ pip install powerline-status --user
 </code></pre>
 <h3><a id="%E5%AE%89%E8%A3%85powerline%E5%AD%97%E4%BD%93%E5%BA%93-https-link-jianshu-com-t-https-3a-2f-2fgithub-com-2fpowerline-2ffonts" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>安装<a href="https://link.jianshu.com/?t=https%3A%2F%2Fgithub.com%2Fpowerline%2Ffonts">Powerline字体库</a></h3>
 <p>使用zsh主题需要配合Powerline字体</p>
@@ -460,6 +458,215 @@ Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
       </div>
     </div>
 
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="asset/prism.js"></script>
+
+
+<style type="text/css">
+figure{margin: 0;padding: 0;}
+figcaption{text-align:center;}
+
+/* PrismJS 1.14.0
+ http://prismjs.com/download.html#themes=prism&languages=markup+css+clike+javascript */
+/**
+ * prism.js default theme for JavaScript, CSS and HTML
+ * Based on dabblet (http://dabblet.com)
+ * @author Lea Verou
+ */
+
+code[class*="language-"],
+pre[class*="language-"] {
+    color: black;
+    background: none;
+    text-shadow: 0 1px white;
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+    text-align: left;
+    white-space: pre;
+    word-spacing: normal;
+    word-break: normal;
+    word-wrap: normal;
+    line-height: 1.5;
+    
+    -moz-tab-size: 4;
+    -o-tab-size: 4;
+    tab-size: 4;
+    
+    -webkit-hyphens: none;
+    -moz-hyphens: none;
+    -ms-hyphens: none;
+    hyphens: none;
+}
+
+pre[class*="language-"]::-moz-selection, pre[class*="language-"] ::-moz-selection,
+code[class*="language-"]::-moz-selection, code[class*="language-"] ::-moz-selection {
+    text-shadow: none;
+    background:#b3d4fc;
+}
+
+pre[class*="language-"]::selection, pre[class*="language-"] ::selection,
+code[class*="language-"]::selection, code[class*="language-"] ::selection {
+    text-shadow: none;
+    background: #b3d4fc;
+}
+
+@media print {
+    code[class*="language-"],
+    pre[class*="language-"] {
+        text-shadow: none;
+    }
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+    padding: 1em;
+    margin: .5em 0;
+    overflow: auto;
+}
+
+:not(pre) > code[class*="language-"],
+pre[class*="language-"] {
+    background: #F7F7F7;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+    padding: .1em;
+    border-radius: .3em;
+    white-space: normal;
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+    color: slategray;
+}
+
+.token.punctuation {
+    color: #999;
+}
+
+.namespace {
+    opacity: .7;
+}
+
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.deleted {
+    color: #905;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+    color: #690;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+    color: #9a6e3a;
+    background: hsla(0, 0%, 100%, .5);
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+    color: #07a;
+}
+
+.token.function,
+.token.class-name {
+    color: #DD4A68;
+}
+
+.token.regex,
+.token.important,
+.token.variable {
+    color: #e90;
+}
+
+.token.important,
+.token.bold {
+    font-weight: bold;
+}
+.token.italic {
+    font-style: italic;
+}
+
+.token.entity {
+    cursor: help;
+}
+
+
+pre[class*="language-"].line-numbers {
+    position: relative;
+    padding-left: 3.8em;
+    counter-reset: linenumber;
+}
+
+pre[class*="language-"].line-numbers > code {
+    position: relative;
+    white-space: inherit;
+}
+
+.line-numbers .line-numbers-rows {
+    position: absolute;
+    pointer-events: none;
+    top: 0;
+    font-size: 100%;
+    left: -3.8em;
+    width: 3em; /* works for line-numbers below 1000 lines */
+    letter-spacing: -1px;
+    border-right: 1px solid #999;
+
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+}
+
+    .line-numbers-rows > span {
+        pointer-events: none;
+        display: block;
+        counter-increment: linenumber;
+    }
+
+        .line-numbers-rows > span:before {
+            content: counter(linenumber);
+            color: #999;
+            display: block;
+            padding-right: 0.8em;
+            text-align: right;
+        }
+
+</style>
+
   
     
 
@@ -480,8 +687,6 @@ Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
      
     </script>
 
-    
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
 
 
   </body>

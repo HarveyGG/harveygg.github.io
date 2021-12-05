@@ -15,9 +15,7 @@
     <link rel="stylesheet" href="asset/css/docs.css" />
     <script src="asset/js/vendor/modernizr.js"></script>
     <script src="asset/js/vendor/jquery.js"></script>
-  <script src="asset/highlightjs/highlight.pack.js"></script>
-  <link href="asset/highlightjs/styles/github.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <script>hljs.initHighlightingOnLoad();</script>
+ 
 <script type="text/javascript">
   function before_search(){
     var searchVal = 'site: ' + document.getElementById('search_input').value;
@@ -204,29 +202,29 @@
 <ol>
 <li>Fetch develop branch so as to make it up to date</li>
 </ol>
-<pre class="line-numbers"><code class="language-plain_text">$ git fetch develop
+<pre><code class="language-plain_text">$ git fetch develop
 </code></pre>
 <ol start="2">
 <li>Start a new feature branch</li>
 </ol>
-<pre class="line-numbers"><code class="language-plain_text">$ git checkout -b feature/${customized_feature_name} origin/develop
+<pre><code class="language-plain_text">$ git checkout -b feature/${customized_feature_name} origin/develop
 </code></pre>
 <ol start="3">
 <li>Implement feature and commit several times</li>
 </ol>
-<pre class="line-numbers"><code class="language-plain_text">$ git commit -a --amend
+<pre><code class="language-plain_text">$ git commit -a --amend
 </code></pre>
 <ol start="4">
 <li>Merge with latest develop branch</li>
 </ol>
-<pre class="line-numbers"><code class="language-plain_text">$ git fetch develop
+<pre><code class="language-plain_text">$ git fetch develop
 $ git rebase origin/develop
 </code></pre>
 <ol start="5">
 <li>Self-testing</li>
 <li>Push your branch. Make sure you have only one commit for your feature before push</li>
 </ol>
-<pre class="line-numbers"><code class="language-plain_text">$ git log
+<pre><code class="language-plain_text">$ git log
 $ git rebase -i hash
 $ git push origin feature/${customized_feature_name}
 </code></pre>
@@ -238,12 +236,12 @@ $ git push origin feature/${customized_feature_name}
 <ol>
 <li>Fetch develop branch so as to make it up to date</li>
 </ol>
-<pre class="line-numbers"><code class="language-plain_text">$ git fetch develop
+<pre><code class="language-plain_text">$ git fetch develop
 </code></pre>
 <ol start="2">
 <li>Start a release branch</li>
 </ol>
-<pre class="line-numbers"><code class="language-plain_text">$ git log origin/develop
+<pre><code class="language-plain_text">$ git log origin/develop
 $ git checkout -b release/x.y.z hash
 </code></pre>
 <ol start="3">
@@ -252,13 +250,13 @@ $ git checkout -b release/x.y.z hash
 <li>Deploy to production environment based on release/x.y.z branch's latest commit &amp; Test</li>
 <li>Squash commits &amp; Tag the commit</li>
 </ol>
-<pre class="line-numbers"><code class="language-plain_text">$ git rebase -i hash
+<pre><code class="language-plain_text">$ git rebase -i hash
 $ git tag x.y.z
 </code></pre>
 <ol start="7">
 <li>Merge to develop branch and push</li>
 </ol>
-<pre class="line-numbers"><code class="language-plain_text">$ git checkout develop
+<pre><code class="language-plain_text">$ git checkout develop
 $ git pull origin develop
 $ git merge release/x.y.z
 $ git push --tags origin develop
@@ -268,13 +266,13 @@ $ git branch -d release/x.y.z
 <ol>
 <li>Start a bugfix branch</li>
 </ol>
-<pre class="line-numbers"><code class="language-plain_text">$ git checkout -b hotfix/x.y.1 x.y.0
+<pre><code class="language-plain_text">$ git checkout -b hotfix/x.y.1 x.y.0
 </code></pre>
 <ol>
 <li>Code and fix bugs</li>
 <li>Finish a bugfix branch</li>
 </ol>
-<pre class="line-numbers"><code class="language-plain_text">$ git checkout develop
+<pre><code class="language-plain_text">$ git checkout develop
 $ git pull origin develop
 $ git merge hotfix/x.y.1
 $ git push --tags origin develop
@@ -297,6 +295,8 @@ $ git branch -d hotfix/x.y.1
           				  
           					    <span class="posted-in"><a href='architecture-designing.html'>架构设计</a></span>
           				   
+                    
+
                   </div>
                   <div class="more-right right">
                   <span class="comments">
@@ -353,6 +353,8 @@ $ git branch -d hotfix/x.y.1
           				  
           					    <span class="posted-in"><a href='architecture-designing.html'>架构设计</a></span>
           				   
+                    
+
                   </div>
                   <div class="more-right right">
                   <span class="comments">
@@ -398,7 +400,7 @@ $ git branch -d hotfix/x.y.1
 <li>问题域——客户的需求</li>
 <li>解决方案域——需求的实现</li>
 </ul>
-<pre class="line-numbers"><code class="language-plain_text">问题-&gt;领域-&gt;业务逻辑-&gt;规模-&gt;结构-&gt;实现
+<pre><code class="language-plain_text">问题-&gt;领域-&gt;业务逻辑-&gt;规模-&gt;结构-&gt;实现
 </code></pre>
 <h2><a id="ddd%E4%B8%BA%E4%BB%80%E4%B9%88%E7%AA%81%E7%84%B6%E7%81%AB%E4%BA%86" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>DDD为什么突然火了</h2>
 <p>微服务的划分粒度如何把握。</p>
@@ -582,7 +584,7 @@ $ git branch -d hotfix/x.y.1
 </ul>
 <h3><a id="%E5%A6%82%E4%BD%95%E5%AE%9E%E6%96%BD6w%E6%A8%A1%E5%9E%8B" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>如何实施6W模型</h3>
 <h4><a id="1%E7%94%A8%E4%BE%8B" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>1. 用例</h4>
-<pre class="line-numbers"><code class="language-plain_text">用例名称：批量增加主机
+<pre><code class="language-plain_text">用例名称：批量增加主机
 用例目的（Why）：本用例可以帮助「角色（Who）」为其微服务一次性关联（What）符合「条件」的主机
 参与者（Who）：「角色」
 前置条件：微服务已经被纳管
@@ -596,7 +598,7 @@ $ git branch -d hotfix/x.y.1
 替代流程：异常情况二
 </code></pre>
 <h4><a id="2-tdd" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>2. TDD</h4>
-<pre class="line-numbers"><code class="language-java">@Autowared
+<pre><code class="language-java">@Autowared
 private HostAppService hostAppService;
 
 @Test
@@ -654,7 +656,7 @@ public void should_return_100_when_100_valid_hosts_registered_successfully() {
 <li>发布/订阅事件</li>
 </ol>
 <p>附：《实现领域驱动设计》里的9种组织模式和集成模式</p>
-<pre class="line-numbers"><code class="language-plain_text">①合作关系（Partnership）
+<pre><code class="language-plain_text">①合作关系（Partnership）
 
 如果2个限界上下文的团队要么一起成功，要么一起失败，此时就是这种关系。应该为相互关联的软件功能制定好计划表，这样可以确保这些功能在同一个发布中完成。
 
@@ -811,7 +813,7 @@ Martin Fowler的微服务架构</p>
 <p>以电商下单业务为例：</p>
 <p><img src="media/15771545679019/15803904268910.jpg" alt="" /></p>
 <p>代码结构如下所示：</p>
-<pre class="line-numbers"><code class="language-plain_text">ordercontext.infrastructure
+<pre><code class="language-plain_text">ordercontext.infrastructure
     - OrderController
     - OrderMapper
     - EmailSender
@@ -842,6 +844,8 @@ ordercontext.domain
           				  
           					    <span class="posted-in"><a href='architecture-designing.html'>架构设计</a></span>
           				   
+                    
+
                   </div>
                   <div class="more-right right">
                   <span class="comments">
@@ -1194,6 +1198,8 @@ ordercontext.domain
           				  
           					    <span class="posted-in"><a href='architecture-designing.html'>架构设计</a></span>
           				   
+                    
+
                   </div>
                   <div class="more-right right">
                   <span class="comments">
@@ -1367,6 +1373,213 @@ Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
       </div>
     </div>
 
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+figure{margin: 0;padding: 0;}
+figcaption{text-align:center;}
+
+/* PrismJS 1.14.0
+ http://prismjs.com/download.html#themes=prism&languages=markup+css+clike+javascript */
+/**
+ * prism.js default theme for JavaScript, CSS and HTML
+ * Based on dabblet (http://dabblet.com)
+ * @author Lea Verou
+ */
+
+code[class*="language-"],
+pre[class*="language-"] {
+    color: black;
+    background: none;
+    text-shadow: 0 1px white;
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+    text-align: left;
+    white-space: pre;
+    word-spacing: normal;
+    word-break: normal;
+    word-wrap: normal;
+    line-height: 1.5;
+    
+    -moz-tab-size: 4;
+    -o-tab-size: 4;
+    tab-size: 4;
+    
+    -webkit-hyphens: none;
+    -moz-hyphens: none;
+    -ms-hyphens: none;
+    hyphens: none;
+}
+
+pre[class*="language-"]::-moz-selection, pre[class*="language-"] ::-moz-selection,
+code[class*="language-"]::-moz-selection, code[class*="language-"] ::-moz-selection {
+    text-shadow: none;
+    background:#b3d4fc;
+}
+
+pre[class*="language-"]::selection, pre[class*="language-"] ::selection,
+code[class*="language-"]::selection, code[class*="language-"] ::selection {
+    text-shadow: none;
+    background: #b3d4fc;
+}
+
+@media print {
+    code[class*="language-"],
+    pre[class*="language-"] {
+        text-shadow: none;
+    }
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+    padding: 1em;
+    margin: .5em 0;
+    overflow: auto;
+}
+
+:not(pre) > code[class*="language-"],
+pre[class*="language-"] {
+    background: #F7F7F7;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+    padding: .1em;
+    border-radius: .3em;
+    white-space: normal;
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+    color: slategray;
+}
+
+.token.punctuation {
+    color: #999;
+}
+
+.namespace {
+    opacity: .7;
+}
+
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.deleted {
+    color: #905;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+    color: #690;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+    color: #9a6e3a;
+    background: hsla(0, 0%, 100%, .5);
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+    color: #07a;
+}
+
+.token.function,
+.token.class-name {
+    color: #DD4A68;
+}
+
+.token.regex,
+.token.important,
+.token.variable {
+    color: #e90;
+}
+
+.token.important,
+.token.bold {
+    font-weight: bold;
+}
+.token.italic {
+    font-style: italic;
+}
+
+.token.entity {
+    cursor: help;
+}
+
+
+pre[class*="language-"].line-numbers {
+    position: relative;
+    padding-left: 3.8em;
+    counter-reset: linenumber;
+}
+
+pre[class*="language-"].line-numbers > code {
+    position: relative;
+    white-space: inherit;
+}
+
+.line-numbers .line-numbers-rows {
+    position: absolute;
+    pointer-events: none;
+    top: 0;
+    font-size: 100%;
+    left: -3.8em;
+    width: 3em; /* works for line-numbers below 1000 lines */
+    letter-spacing: -1px;
+    border-right: 1px solid #999;
+
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+}
+
+    .line-numbers-rows > span {
+        pointer-events: none;
+        display: block;
+        counter-increment: linenumber;
+    }
+
+        .line-numbers-rows > span:before {
+            content: counter(linenumber);
+            color: #999;
+            display: block;
+            padding-right: 0.8em;
+            text-align: right;
+        }
+
+</style>
+
   
     
 
@@ -1387,8 +1600,6 @@ Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
      
     </script>
 
-    
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
 
 
   </body>

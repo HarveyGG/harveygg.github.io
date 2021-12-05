@@ -15,9 +15,7 @@
     <link rel="stylesheet" href="asset/css/docs.css" />
     <script src="asset/js/vendor/modernizr.js"></script>
     <script src="asset/js/vendor/jquery.js"></script>
-  <script src="asset/highlightjs/highlight.pack.js"></script>
-  <link href="asset/highlightjs/styles/github.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <script>hljs.initHighlightingOnLoad();</script>
+ 
 <script type="text/javascript">
   function before_search(){
     var searchVal = 'site: ' + document.getElementById('search_input').value;
@@ -161,50 +159,50 @@
 
       <div class="article-content">
       <h2><a id="ls%E7%9A%84%E6%9B%BF%E4%BB%A3%E5%B7%A5%E5%85%B7" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>ls的替代工具</h2>
-<pre class="line-numbers"><code class="language-plain_text"># brew info exa
+<pre><code class="language-plain_text"># brew info exa
 </code></pre>
-<pre class="line-numbers"><code class="language-plain_text"># exa -l --tree -L 1
+<pre><code class="language-plain_text"># exa -l --tree -L 1
 </code></pre>
 <p>用列表加树状展示一级目录下的目录和文件</p>
 <h2><a id="cat%E7%9A%84%E6%9B%BF%E4%BB%A3%E5%B7%A5%E5%85%B7" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>cat的替代工具</h2>
-<pre class="line-numbers"><code class="language-plain_text"># brew info bat
+<pre><code class="language-plain_text"># brew info bat
 </code></pre>
-<pre class="line-numbers"><code class="language-plain_text"># bat README.md
+<pre><code class="language-plain_text"># bat README.md
 </code></pre>
 <p>比cat增加高亮和对git状态的支持</p>
 <h2><a id="find%E7%9A%84%E6%9B%BF%E4%BB%A3%E5%B7%A5%E5%85%B7" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>find的替代工具</h2>
-<pre class="line-numbers"><code class="language-plain_text"># brew info fd
+<pre><code class="language-plain_text"># brew info fd
 </code></pre>
-<pre class="line-numbers"><code class="language-plain_text"># fd README.md
+<pre><code class="language-plain_text"># fd README.md
 </code></pre>
 <p>语法比find简单，默认忽略.gitignore里的文件和隐藏文件</p>
 <h2><a id="grep%E7%9A%84%E6%9B%BF%E4%BB%A3%E5%B7%A5%E5%85%B7" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>grep的替代工具</h2>
-<pre class="line-numbers"><code class="language-plain_text"># brew info rg
+<pre><code class="language-plain_text"># brew info rg
 </code></pre>
-<pre class="line-numbers"><code class="language-plain_text"># rg xxx
+<pre><code class="language-plain_text"># rg xxx
 </code></pre>
 <p>显示漂亮，默认忽略.gitignore文件和隐藏文件，默认递归所有子文件夹，可以指定文件类型</p>
 <h2><a id="cd%E7%9A%84%E6%9B%BF%E4%BB%A3%E5%B7%A5%E5%85%B7" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>cd的替代工具</h2>
-<pre class="line-numbers"><code class="language-plain_text"># brew info z
+<pre><code class="language-plain_text"># brew info z
 </code></pre>
-<pre class="line-numbers"><code class="language-plain_text"># z de [Tab]
+<pre><code class="language-plain_text"># z de [Tab]
 </code></pre>
 <p>自动基于历史访问过的以de开头的目录进行补全</p>
-<pre class="line-numbers"><code class="language-plain_text"># brew info fzf
+<pre><code class="language-plain_text"># brew info fzf
 </code></pre>
-<pre class="line-numbers"><code class="language-plain_text"># cd $(find * -type d | fzf)
+<pre><code class="language-plain_text"># cd $(find * -type d | fzf)
 </code></pre>
 <p>通过上下键选择需要访问的目录，回车进入。</p>
 <p>fzf会把标准输出变成交互式下拉列表共用户选择。</p>
 <h2><a id="%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E7%9A%84%E6%9B%BF%E4%BB%A3%E5%B7%A5%E5%85%B7" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>文件管理的替代工具</h2>
-<pre class="line-numbers"><code class="language-plain_text"># brew info nnn
+<pre><code class="language-plain_text"># brew info nnn
 </code></pre>
 <h2><a id="%E7%9C%8B%E6%97%A5%E5%BF%97tail%E7%9A%84%E6%9B%BF%E4%BB%A3%E5%B7%A5%E5%85%B7" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>看日志tail的替代工具</h2>
-<pre class="line-numbers"><code class="language-plain_text"># brew info lnav
+<pre><code class="language-plain_text"># brew info lnav
 </code></pre>
 <p>支持各种日志的高亮显示，支持正则匹配</p>
 <h2><a id="man%E7%9A%84%E6%9B%BF%E4%BB%A3%E5%B7%A5%E5%85%B7" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>man的替代工具</h2>
-<pre class="line-numbers"><code class="language-plain_text"># brew info
+<pre><code class="language-plain_text"># brew info
 </code></pre>
 <hr />
 <p><img src="http://image.harveygg.wang/mweb/15951458383567.jpg" alt="" /></p>
@@ -391,6 +389,215 @@ Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
       </div>
     </div>
 
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="asset/prism.js"></script>
+
+
+<style type="text/css">
+figure{margin: 0;padding: 0;}
+figcaption{text-align:center;}
+
+/* PrismJS 1.14.0
+ http://prismjs.com/download.html#themes=prism&languages=markup+css+clike+javascript */
+/**
+ * prism.js default theme for JavaScript, CSS and HTML
+ * Based on dabblet (http://dabblet.com)
+ * @author Lea Verou
+ */
+
+code[class*="language-"],
+pre[class*="language-"] {
+    color: black;
+    background: none;
+    text-shadow: 0 1px white;
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+    text-align: left;
+    white-space: pre;
+    word-spacing: normal;
+    word-break: normal;
+    word-wrap: normal;
+    line-height: 1.5;
+    
+    -moz-tab-size: 4;
+    -o-tab-size: 4;
+    tab-size: 4;
+    
+    -webkit-hyphens: none;
+    -moz-hyphens: none;
+    -ms-hyphens: none;
+    hyphens: none;
+}
+
+pre[class*="language-"]::-moz-selection, pre[class*="language-"] ::-moz-selection,
+code[class*="language-"]::-moz-selection, code[class*="language-"] ::-moz-selection {
+    text-shadow: none;
+    background:#b3d4fc;
+}
+
+pre[class*="language-"]::selection, pre[class*="language-"] ::selection,
+code[class*="language-"]::selection, code[class*="language-"] ::selection {
+    text-shadow: none;
+    background: #b3d4fc;
+}
+
+@media print {
+    code[class*="language-"],
+    pre[class*="language-"] {
+        text-shadow: none;
+    }
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+    padding: 1em;
+    margin: .5em 0;
+    overflow: auto;
+}
+
+:not(pre) > code[class*="language-"],
+pre[class*="language-"] {
+    background: #F7F7F7;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+    padding: .1em;
+    border-radius: .3em;
+    white-space: normal;
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+    color: slategray;
+}
+
+.token.punctuation {
+    color: #999;
+}
+
+.namespace {
+    opacity: .7;
+}
+
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.deleted {
+    color: #905;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+    color: #690;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+    color: #9a6e3a;
+    background: hsla(0, 0%, 100%, .5);
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+    color: #07a;
+}
+
+.token.function,
+.token.class-name {
+    color: #DD4A68;
+}
+
+.token.regex,
+.token.important,
+.token.variable {
+    color: #e90;
+}
+
+.token.important,
+.token.bold {
+    font-weight: bold;
+}
+.token.italic {
+    font-style: italic;
+}
+
+.token.entity {
+    cursor: help;
+}
+
+
+pre[class*="language-"].line-numbers {
+    position: relative;
+    padding-left: 3.8em;
+    counter-reset: linenumber;
+}
+
+pre[class*="language-"].line-numbers > code {
+    position: relative;
+    white-space: inherit;
+}
+
+.line-numbers .line-numbers-rows {
+    position: absolute;
+    pointer-events: none;
+    top: 0;
+    font-size: 100%;
+    left: -3.8em;
+    width: 3em; /* works for line-numbers below 1000 lines */
+    letter-spacing: -1px;
+    border-right: 1px solid #999;
+
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+}
+
+    .line-numbers-rows > span {
+        pointer-events: none;
+        display: block;
+        counter-increment: linenumber;
+    }
+
+        .line-numbers-rows > span:before {
+            content: counter(linenumber);
+            color: #999;
+            display: block;
+            padding-right: 0.8em;
+            text-align: right;
+        }
+
+</style>
+
   
     
 
@@ -411,8 +618,6 @@ Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
      
     </script>
 
-    
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
 
 
   </body>
