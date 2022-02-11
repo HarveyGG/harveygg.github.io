@@ -132,6 +132,77 @@
 	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
 		<div class="meta">
 			<div class="date">
+				<time datetime="2020-07-16T07:17:58-07:00" itemprop="datePublished">07/16/2020</time>
+			</div>
+			<div class="tags">posted in 
+			
+			    <a class='category' href='mac-dev-env.html'>Mac开发环境</a>&nbsp;
+			 
+			</div>
+		</div>
+		<h1 class="title" itemprop="name"><a href="15949090783980.html" itemprop="url">
+		一些终端下更好用的替代工具</a></h1>
+		<div class="entry-content" itemprop="articleBody">
+			
+			<h2><a id="ls%E7%9A%84%E6%9B%BF%E4%BB%A3%E5%B7%A5%E5%85%B7" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>ls的替代工具</h2>
+<pre><code class="language-plain_text"># brew info exa
+</code></pre>
+<pre><code class="language-plain_text"># exa -l --tree -L 1
+</code></pre>
+<p>用列表加树状展示一级目录下的目录和文件</p>
+<h2><a id="cat%E7%9A%84%E6%9B%BF%E4%BB%A3%E5%B7%A5%E5%85%B7" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>cat的替代工具</h2>
+<pre><code class="language-plain_text"># brew info bat
+</code></pre>
+<pre><code class="language-plain_text"># bat README.md
+</code></pre>
+<p>比cat增加高亮和对git状态的支持</p>
+<h2><a id="find%E7%9A%84%E6%9B%BF%E4%BB%A3%E5%B7%A5%E5%85%B7" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>find的替代工具</h2>
+<pre><code class="language-plain_text"># brew info fd
+</code></pre>
+<pre><code class="language-plain_text"># fd README.md
+</code></pre>
+<p>语法比find简单，默认忽略.gitignore里的文件和隐藏文件</p>
+<h2><a id="grep%E7%9A%84%E6%9B%BF%E4%BB%A3%E5%B7%A5%E5%85%B7" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>grep的替代工具</h2>
+<pre><code class="language-plain_text"># brew info rg
+</code></pre>
+<pre><code class="language-plain_text"># rg xxx
+</code></pre>
+<p>显示漂亮，默认忽略.gitignore文件和隐藏文件，默认递归所有子文件夹，可以指定文件类型</p>
+<h2><a id="cd%E7%9A%84%E6%9B%BF%E4%BB%A3%E5%B7%A5%E5%85%B7" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>cd的替代工具</h2>
+<pre><code class="language-plain_text"># brew info z
+</code></pre>
+<pre><code class="language-plain_text"># z de [Tab]
+</code></pre>
+<p>自动基于历史访问过的以de开头的目录进行补全</p>
+<pre><code class="language-plain_text"># brew info fzf
+</code></pre>
+<pre><code class="language-plain_text"># cd $(find * -type d | fzf)
+</code></pre>
+<p>通过上下键选择需要访问的目录，回车进入。</p>
+<p>fzf会把标准输出变成交互式下拉列表共用户选择。</p>
+<h2><a id="%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E7%9A%84%E6%9B%BF%E4%BB%A3%E5%B7%A5%E5%85%B7" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>文件管理的替代工具</h2>
+<pre><code class="language-plain_text"># brew info nnn
+</code></pre>
+<h2><a id="%E7%9C%8B%E6%97%A5%E5%BF%97tail%E7%9A%84%E6%9B%BF%E4%BB%A3%E5%B7%A5%E5%85%B7" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>看日志tail的替代工具</h2>
+<pre><code class="language-plain_text"># brew info lnav
+</code></pre>
+<p>支持各种日志的高亮显示，支持正则匹配</p>
+<h2><a id="man%E7%9A%84%E6%9B%BF%E4%BB%A3%E5%B7%A5%E5%85%B7" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>man的替代工具</h2>
+<pre><code class="language-plain_text"># brew info
+</code></pre>
+<hr />
+<p><img src="http://image.harveygg.wang/mweb/15951458383567.jpg" alt="" /></p>
+
+
+			
+			
+		</div>
+
+	</article>
+ 
+	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+		<div class="meta">
+			<div class="date">
 				<time datetime="2019-05-25T19:38:56-07:00" itemprop="datePublished">05/25/2019</time>
 			</div>
 			<div class="tags">posted in 
@@ -144,9 +215,10 @@
 		(2) MAC开发环境——终端+Shell</a></h1>
 		<div class="entry-content" itemprop="articleBody">
 			
-			<p><img src="media/15588383364141/16445534586435.jpg" alt="" /><br />
-最终效果！</p>
+			<p><img src="https://i.imgur.com/YQ9qFFq.jpg" alt="Jietu20190526-225814" /></p>
+<p>最终效果！</p>
 <h2><a id="iterm2-https-iterm2-com" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="https://iterm2.com/">iTerm2</a></h2>
+<p><img src="https://i.imgur.com/psy3faV.jpg" alt="iter" /></p>
 <p>iTerm2 是 MAC 下最好的终端工具。<br />
 可以使用Homebrew来安装：</p>
 <pre><code class="language-shell">$ brew cask install iterm2
@@ -202,6 +274,7 @@
 <li>进入solarized/iterm2-colors-solarized 下双击<code>Solarized Dark.itermcolors</code>和<code>Solarized Light.itermcolors</code>两个文件就可以把明暗两种配置文件导入到iTerm2里</li>
 <li>通过load presets选择刚刚安装的配色主题即可</li>
 </ol>
+<p><img src="https://i.imgur.com/eaxfX0N.jpg" alt="Jietu20190527-001007" /></p>
 <h2><a id="zsh-https-zhuanlan-zhihu-comp19556676" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="https://zhuanlan.zhihu.com/p/19556676">ZSH</a></h2>
 <p>MAC默认自带终极shell!</p>
 <blockquote>
@@ -211,6 +284,7 @@
 <pre><code class="language-shell">$ chsh -s /bin/zsh
 </code></pre>
 <h3><a id="oh-my-zsh-https-ohmyz-sh" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="https://ohmyz.sh/">Oh My ZSH</a></h3>
+<p><img src="https://i.imgur.com/XZa8j9Q.png" alt="omzsh" /></p>
 <blockquote>
 <p>Oh My Zsh is a delightful, open source, community-driven framework for managing your Zsh configuration. It comes bundled with thousands of helpful functions, helpers, plugins, themes, and a few things that make you shout...</p>
 </blockquote>
@@ -544,77 +618,6 @@ yarn global add react-devtools</p>
 <li>:tabnew 新建标签页</li>
 <li>:gt, :gT 切换标签页</li>
 </ul>
-
-
-			
-			
-		</div>
-
-	</article>
- 
-	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-		<div class="meta">
-			<div class="date">
-				<time datetime="2020-07-16T07:17:58-07:00" itemprop="datePublished">07/16/2020</time>
-			</div>
-			<div class="tags">posted in 
-			
-			    <a class='category' href='mac-dev-env.html'>Mac开发环境</a>&nbsp;
-			 
-			</div>
-		</div>
-		<h1 class="title" itemprop="name"><a href="15949090783980.html" itemprop="url">
-		一些终端下更好用的替代工具</a></h1>
-		<div class="entry-content" itemprop="articleBody">
-			
-			<h2><a id="ls%E7%9A%84%E6%9B%BF%E4%BB%A3%E5%B7%A5%E5%85%B7" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>ls的替代工具</h2>
-<pre><code class="language-plain_text"># brew info exa
-</code></pre>
-<pre><code class="language-plain_text"># exa -l --tree -L 1
-</code></pre>
-<p>用列表加树状展示一级目录下的目录和文件</p>
-<h2><a id="cat%E7%9A%84%E6%9B%BF%E4%BB%A3%E5%B7%A5%E5%85%B7" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>cat的替代工具</h2>
-<pre><code class="language-plain_text"># brew info bat
-</code></pre>
-<pre><code class="language-plain_text"># bat README.md
-</code></pre>
-<p>比cat增加高亮和对git状态的支持</p>
-<h2><a id="find%E7%9A%84%E6%9B%BF%E4%BB%A3%E5%B7%A5%E5%85%B7" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>find的替代工具</h2>
-<pre><code class="language-plain_text"># brew info fd
-</code></pre>
-<pre><code class="language-plain_text"># fd README.md
-</code></pre>
-<p>语法比find简单，默认忽略.gitignore里的文件和隐藏文件</p>
-<h2><a id="grep%E7%9A%84%E6%9B%BF%E4%BB%A3%E5%B7%A5%E5%85%B7" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>grep的替代工具</h2>
-<pre><code class="language-plain_text"># brew info rg
-</code></pre>
-<pre><code class="language-plain_text"># rg xxx
-</code></pre>
-<p>显示漂亮，默认忽略.gitignore文件和隐藏文件，默认递归所有子文件夹，可以指定文件类型</p>
-<h2><a id="cd%E7%9A%84%E6%9B%BF%E4%BB%A3%E5%B7%A5%E5%85%B7" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>cd的替代工具</h2>
-<pre><code class="language-plain_text"># brew info z
-</code></pre>
-<pre><code class="language-plain_text"># z de [Tab]
-</code></pre>
-<p>自动基于历史访问过的以de开头的目录进行补全</p>
-<pre><code class="language-plain_text"># brew info fzf
-</code></pre>
-<pre><code class="language-plain_text"># cd $(find * -type d | fzf)
-</code></pre>
-<p>通过上下键选择需要访问的目录，回车进入。</p>
-<p>fzf会把标准输出变成交互式下拉列表共用户选择。</p>
-<h2><a id="%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E7%9A%84%E6%9B%BF%E4%BB%A3%E5%B7%A5%E5%85%B7" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>文件管理的替代工具</h2>
-<pre><code class="language-plain_text"># brew info nnn
-</code></pre>
-<h2><a id="%E7%9C%8B%E6%97%A5%E5%BF%97tail%E7%9A%84%E6%9B%BF%E4%BB%A3%E5%B7%A5%E5%85%B7" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>看日志tail的替代工具</h2>
-<pre><code class="language-plain_text"># brew info lnav
-</code></pre>
-<p>支持各种日志的高亮显示，支持正则匹配</p>
-<h2><a id="man%E7%9A%84%E6%9B%BF%E4%BB%A3%E5%B7%A5%E5%85%B7" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>man的替代工具</h2>
-<pre><code class="language-plain_text"># brew info
-</code></pre>
-<hr />
-<p><img src="http://image.harveygg.wang/mweb/15951458383567.jpg" alt="" /></p>
 
 
 			
