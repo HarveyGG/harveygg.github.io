@@ -146,15 +146,50 @@
 			
 			<ul>
 <li>Uses <a href="https://yarnpkg.com/">yarn</a></li>
+<li>Organize code structure with Clean Architecturef</li>
 <li>ES2017 latest features like Async/Await</li>
+<li>Watch code changes and restart for development using <a href="https://nodemon.io/">nodemon</a>
+<ul>
+<li><code>yarn add nodemon --dev</code></li>
+</ul>
+</li>
 <li>Load environment variables from .env files with <a href="https://www.npmjs.com/package/dotenv">dotenv</a></li>
-<li>Web framework using <a href="https://expressjs.com/">Express</a></li>
+<li>Web framework using <a href="https://expressjs.com/">Express</a> with middlewares as follows
+<ul>
+<li><code>yarn add express</code></li>
 <li>Support CORS with express middleware <a href="https://expressjs.com/en/resources/middleware/cors.html">cors</a></li>
 <li>Gzip compression with express middleware <a href="http://expressjs.com/en/resources/middleware/compression.html">compression</a></li>
-<li>set some HTTP headers for security with <a href="https://github.com/helmetjs/helmet">helmet</a></li>
+<li>Parsing cookies with express middleware <a href="https://www.npmjs.com/package/cookie-parser">cookie-parser</a>
+<ul>
+<li><code>yarn add cookie-parser</code></li>
+</ul>
+</li>
+<li>Customize request logs with express middleware <a href="https://expressjs.com/en/resources/middleware/morgan.html">morgan</a>, which can be integrated with Winston.</li>
+<li>Validate input with express middleware <a href="https://express-validator.github.io/docs/">express-validator</a>
+<ul>
+<li><code>yarn install express-validator</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Set some HTTP headers for security with <a href="https://github.com/helmetjs/helmet">helmet</a></li>
 <li>Request validation with <a href="https://joi.dev/">joi</a></li>
-<li>Authentication and Authorization with <a href="https://www.passportjs.org/">Passport</a></li>
-<li>MongoDB Modeling Lib with <a href="https://mongoosejs.com/">Mongoose</a></li>
+<li>Authentication and Authorization with <a href="https://www.passportjs.org/">Passport</a>
+<ul>
+<li><code>yarn add passport</code></li>
+</ul>
+</li>
+<li>MongoDB Modeling Lib with <a href="https://mongoosejs.com/">Mongoose</a>
+<ul>
+<li><code>yarn add mongoose</code></li>
+</ul>
+</li>
+<li>Support pagination with <a href="https://www.npmjs.com/package/mongoose-aggregate-paginate-v2">Mongoose-aggregate-paginate-v2</a>
+<ul>
+<li><code>yarn add mongoose-aggregate-paginate-v2</code></li>
+</ul>
+</li>
+<li>Deal with Date Object with <a href="https://day.js.org/">Day.js</a></li>
 <li>Git hooks with <a href="https://typicode.github.io/husky/#/">husky</a></li>
 <li>Linting with <a href="http://eslint.org/">ESLint</a></li>
 <li>Format with <a href="https://prettier.io/">Prettier</a></li>
@@ -164,13 +199,46 @@
 <li>Continuous integration support with <a href="https://travis-ci.org/">Travis CI</a></li>
 <li>Docker support</li>
 <li>Monitoring with <a href="https://pm2.keymetrics.io/">pm2</a></li>
-<li>Logging with express middleware <a href="https://expressjs.com/en/resources/middleware/morgan.html">morgan</a></li>
+<li>Logging system using <a href="https://github.com/winstonjs/winston">Winston</a>
+<ul>
+<li><code>yarn add winston</code></li>
+<li>With Winston, you can have multiple transports configured at different levels.</li>
+</ul>
+</li>
 <li>API documentation generation with <a href="https://apidocjs.com/">apidoc</a></li>
 <li></li>
 <li>Image uploading with <a href="https://aws.amazon.com/tr/s3/">AWS S3 Client</a></li>
 <li>Email sending by using <a href="https://sendgrid.com/">SendGrid</a> and <a href="https://aws.amazon.com/tr/ses/">AWS SES</a></li>
 <li>SMS sending by using <a href="https://www.twilio.com/">Twilio</a></li>
 <li>Multilanguage Support using <a href="https://www.npmjs.com/package/i18n-js">i18n</a></li>
+</ul>
+
+
+			
+			
+		</div>
+
+	</article>
+ 
+	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+		<div class="meta">
+			<div class="date">
+				<time datetime="2022-01-30T23:25:54-08:00" itemprop="datePublished">01/30/2022</time>
+			</div>
+			<div class="tags">posted in 
+			
+			    <a class='category' href='internet-tech.html'>后端技术</a>&nbsp;
+			 
+			</div>
+		</div>
+		<h1 class="title" itemprop="name"><a href="16436139545729.html" itemprop="url">
+		Node.js 后端代码架构最佳实践</a></h1>
+		<div class="entry-content" itemprop="articleBody">
+			
+			<ul>
+<li>routes按业务分成多个文件，index.js通过router.use()组合多个业务routes</li>
+<li>各业务routes文件中只做把路由映射到controller的动作</li>
+<li>routes按版本组织</li>
 </ul>
 
 

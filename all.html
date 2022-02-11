@@ -132,6 +132,201 @@
 	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
 		<div class="meta">
 			<div class="date">
+				<time datetime="2019-05-25T19:38:56-07:00" itemprop="datePublished">05/25/2019</time>
+			</div>
+			<div class="tags">posted in 
+			
+			    <a class='category' href='mac-dev-env.html'>Mac开发环境</a>&nbsp;
+			 
+			</div>
+		</div>
+		<h1 class="title" itemprop="name"><a href="15588383364141.html" itemprop="url">
+		(2) MAC开发环境——终端+Shell</a></h1>
+		<div class="entry-content" itemprop="articleBody">
+			
+			<p><img src="media/15588383364141/16445534586435.jpg" alt="" /><br />
+最终效果！</p>
+<h2><a id="iterm2-https-iterm2-com" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="https://iterm2.com/">iTerm2</a></h2>
+<p>iTerm2 是 MAC 下最好的终端工具。<br />
+可以使用Homebrew来安装：</p>
+<pre><code class="language-shell">$ brew cask install iterm2
+</code></pre>
+<hr />
+<p>iTerm2 的一些特色功能如下。</p>
+<h3><a id="%E6%A0%87%E7%AD%BE%E5%8F%98%E8%89%B2" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>标签变色</h3>
+<p>iTerm2的tab会通过变色来提示当前tab下的任务有新活动，有新的输出时tab会变成洋红色，新的输出长时间没看，tab会变成红色。</p>
+<h3><a id="%E6%99%BA%E8%83%BD%E9%80%89%E4%B8%AD" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>智能选中</h3>
+<p>在 iTerm2 中，双击选中，三击选中整行，四击智能选中（智能规则可配置），可以识别网址，引号引起的字符串，邮箱地址等。（很多时候双击的选中就已经很智能了）</p>
+<p>在 iTerm2 中，选中即复制。即任何选中状态的字符串都被放到了系统剪切板中。</p>
+<p>使用CMD+F打开搜索，然后输入需要复制的内容开头关键字，如IP的第一节，搜到后按Tab键，智能选中需要复制的内容并且已经拷贝到剪贴板。</p>
+<h3><a id="%E5%B7%A7%E7%94%A8%E2%8C%98cmd%E9%94%AE" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>巧用⌘(CMD)键</h3>
+<p>按住⌘键:</p>
+<ul>
+<li>可以拖拽选中的字符串；</li>
+<li>点击url：调用默认浏览器访问该网址；</li>
+<li>点击文件：调用默认程序打开文件；</li>
+<li>如果文件名是filename:42，且默认文本编辑器是 Macvim、Textmate或BBEdit，将会直接打开到这一行；</li>
+<li>点击文件夹：在 finder 中打开该文件夹；</li>
+</ul>
+<h3><a id="%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>常用快捷键</h3>
+<ul>
+<li>切换tab：<code>⌘+←</code>, <code>⌘+→</code>, <code>⌘+{</code>, <code>⌘+}</code>。⌘+数字直接定位到该tab；</li>
+<li>新建 tab：<code>⌘+t</code>；</li>
+<li>顺序切换pane：<code>⌘+[</code>, <code>⌘+]</code>；</li>
+<li>切分屏幕：<code>⌘+d</code>水平切分，<code>⌘+shift+d</code> 垂直切分；</li>
+<li>按方向切换pane：<code>⌘+Option+方向键</code>；</li>
+<li>智能查找，支持正则查找：<code>⌘+f</code>；</li>
+<li>显示光标位置：<code>⌘+/</code></li>
+<li>增加标记，然后跳回标记：<code>⌘+shift+M</code>标记，<code>⌘+shift+J</code>跳回标记，<code>⌘+shift+up/down</code>在标记间切换</li>
+<li>显示历史剪贴板所有内容：<code>⌘+shift+H</code></li>
+<li>按时间轴显示快照：<code>⌘+option+B</code></li>
+</ul>
+<h3><a id="%E8%87%AA%E5%8A%A8%E5%AE%8C%E6%88%90" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>自动完成</h3>
+<p>iTerm2可以自动补齐命令，输入若干字符，按<code>⌘+;</code>弹出自动补齐窗口，列出曾经使用过的命令。</p>
+<h3><a id="%E9%85%8D%E8%89%B2" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>配色</h3>
+<p>你可以自由定制喜欢的配色，<a href="https://iterm2colorschemes.com/">这里</a>收集了大量iTerm2的主题。在其github repo里下载对应的xxx.itermcolors文件安装，安装方法如下：</p>
+<ul>
+<li>打开iTerm2</li>
+<li>按<code>⌘+i</code></li>
+<li>选中<code>Colors</code>tab</li>
+<li>点击<code>Load Presets</code></li>
+<li>点击<code>Import</code></li>
+<li>选择你需要的<code>.itermcolors</code>文件</li>
+<li>再次点击<code>Load Presets</code>选择刚刚导入的主题</li>
+</ul>
+<hr />
+<p>但是最理想的配色方案在这里<a href="https://github.com/altercation/solarized">https://github.com/altercation/solarized</a></p>
+<pre><code class="language-shell">$ git clone https://github.com/altercation/solarized.git
+</code></pre>
+<ol>
+<li>进入solarized/iterm2-colors-solarized 下双击<code>Solarized Dark.itermcolors</code>和<code>Solarized Light.itermcolors</code>两个文件就可以把明暗两种配置文件导入到iTerm2里</li>
+<li>通过load presets选择刚刚安装的配色主题即可</li>
+</ol>
+<h2><a id="zsh-https-zhuanlan-zhihu-comp19556676" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="https://zhuanlan.zhihu.com/p/19556676">ZSH</a></h2>
+<p>MAC默认自带终极shell!</p>
+<blockquote>
+<p><a href="https://www.zhihu.com/question/21418449">为什么说zsh是shell中的极品</a></p>
+</blockquote>
+<p>修改默认bash</p>
+<pre><code class="language-shell">$ chsh -s /bin/zsh
+</code></pre>
+<h3><a id="oh-my-zsh-https-ohmyz-sh" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="https://ohmyz.sh/">Oh My ZSH</a></h3>
+<blockquote>
+<p>Oh My Zsh is a delightful, open source, community-driven framework for managing your Zsh configuration. It comes bundled with thousands of helpful functions, helpers, plugins, themes, and a few things that make you shout...</p>
+</blockquote>
+<blockquote>
+<p>“Oh My ZSH!”</p>
+</blockquote>
+<h4><a id="%E5%AE%89%E8%A3%85" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>安装</h4>
+<pre><code class="language-plain_text">sh -c &quot;$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)&quot;
+</code></pre>
+<h4><a id="%E9%85%8D%E7%BD%AEoh-my-zsh" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>配置oh my zsh</h4>
+<blockquote>
+<p><a href="https://github.com/robbyrussell/oh-my-zsh">oh-my-zsh github</a></p>
+</blockquote>
+<h3><a id="agnoster%E4%B8%BB%E9%A2%98-https-github-comfcambloroh-my-zsh-agnoster-fcamblor" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="https://github.com/fcamblor/oh-my-zsh-agnoster-fcamblor">agnoster主题</a></h3>
+<p>agnoster是一个zsh主题，特别为使用iTerm2 + Solarized Dark主题，又经常使用Git的用户定制。</p>
+<h4><a id="%E5%AE%89%E8%A3%85" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>安装</h4>
+<pre><code class="language-shell">$ git clone https://github.com/fcamblor/oh-my-zsh-agnoster-fcamblor.git
+</code></pre>
+<p>执行工程里的install脚本，主题将安装到~/.oh-my-zsh/themes目录下</p>
+<h4><a id="%E8%AE%BE%E7%BD%AE%E8%AF%A5%E4%B8%BB%E9%A2%98" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>设置该主题</h4>
+<p>打开~/.zshrc文件，然后将ZSH_THEME后面的字段改为agnoster。</p>
+<h3><a id="%E5%A2%9E%E5%8A%A0%E6%8C%87%E4%BB%A4%E9%AB%98%E4%BA%AE%E6%95%88%E6%9E%9C" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>增加指令高亮效果</h3>
+<p>指令高亮效果作用是当用户输入正确命令时指令会绿色高亮，错误时命令红色高亮</p>
+<h4><a id="%E5%AE%89%E8%A3%85zsh-syntax-highlighting-https-github-comzsh-userszsh-syntax-highlighting" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>安装<a href="https://github.com/zsh-users/zsh-syntax-highlighting">zsh-syntax-highlighting</a></h4>
+<pre><code class="language-shell">$ git clone git://github.com/zsh-users/zsh-syntax-highlighting.git
+$ echo &quot;source ${(q-)PWD}/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh&quot; &gt;&gt; ${ZDOTDIR:-$HOME}/.zshrc
+</code></pre>
+<h3><a id="%E5%AE%89%E8%A3%85powerline-http-powerline-readthedocs-ioenlatestinstallation-html" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="http://powerline.readthedocs.io/en/latest/installation.html">安装Powerline</a></h3>
+<pre><code class="language-shell">$ pip install powerline-status --user
+</code></pre>
+<h3><a id="%E5%AE%89%E8%A3%85powerline%E5%AD%97%E4%BD%93%E5%BA%93-https-link-jianshu-com-t-https-3a-2f-2fgithub-com-2fpowerline-2ffonts" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>安装<a href="https://link.jianshu.com/?t=https%3A%2F%2Fgithub.com%2Fpowerline%2Ffonts">Powerline字体库</a></h3>
+<p>使用zsh主题需要配合Powerline字体</p>
+<ol>
+<li>将工程clone下来</li>
+<li>执行install.sh脚本安装所有Powerline字体</li>
+</ol>
+<p>安装完成后提示所有字体均已下载到/Users/{username}/Library/Fonts路径下</p>
+<h4><a id="%E8%AE%BE%E7%BD%AEiterm2%E7%9A%84%E5%AD%97%E4%BD%93" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>设置iTerm2的字体</h4>
+<p>具体的操作是iTerm2 -&gt; Preferences -&gt; Profiles -&gt; Text，在Font区域选中Change Font，选择for Powerline的字体</p>
+<hr />
+<blockquote>
+<p>Maybe you also want to try <a href="https://jmolivas.weknowinc.com/improve-your-shell-using-fish-and-oh-my-fish">this</a></p>
+</blockquote>
+
+
+			
+			
+		</div>
+
+	</article>
+ 
+	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+		<div class="meta">
+			<div class="date">
+				<time datetime="2019-05-25T06:46:47-07:00" itemprop="datePublished">05/25/2019</time>
+			</div>
+			<div class="tags">posted in 
+			
+			    <a class='category' href='mac-dev-env.html'>Mac开发环境</a>&nbsp;
+			 
+			</div>
+		</div>
+		<h1 class="title" itemprop="name"><a href="15587920075778.html" itemprop="url">
+		(1) MAC开发环境——软件包管理</a></h1>
+		<div class="entry-content" itemprop="articleBody">
+			
+			<hr />
+<h2><a id="homebrew-https-brew-sh" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="https://brew.sh/">Homebrew</a></h2>
+<ul>
+<li>使用 Homebrew 安装 Apple 没有预装，但你需要的东西。</li>
+<li>brew管理命令行工具，三方库，会先下载源码，编译，安装，最后link到/usr/local/bin中，如：<code>brew install wget</code></li>
+<li>brew cask管理Mac应用，会直接下载二进制，然后安装，是AppStore的补充，如：<code>brew cask install chrome</code></li>
+<li>推荐所有软件<strong>先考虑AppStore</strong>，如果没有<strong>再考虑Homebrew</strong>，再没有<strong>再去官网下载</strong>，方便后面管理</li>
+</ul>
+<h3><a id="install-homebrew" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Install Homebrew</h3>
+<pre><code class="language-shell">$ /usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;
+</code></pre>
+<h3><a id="homebrew%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Homebrew 常用命令</h3>
+<pre><code class="language-shell">$ brew search /wge*/  # 搜索软件,后面是正则表达式
+$ brew info wget    # 查看软件信息
+$ brew install wget  # 安装 wget
+$ brew list wget    # 列出该软件安装后的文件
+$ brew uninstall wget  # 卸载 wget
+</code></pre>
+<h3><a id="%E8%8E%B7%E5%8F%96homebrew-cask" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>获取Homebrew-Cask</h3>
+<pre><code class="language-shell">$ brew tap caskroom/cask
+</code></pre>
+<h3><a id="homebrew-cask%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Homebrew Cask常用命令</h3>
+<pre><code class="language-shell"># brew cask 和 brew 的命令基本一致，search, info, list, install, uninstall 子命令都一样
+$ brew cask install java  # 安装 Java
+$ brew cask uninstall java  # 卸载 Java
+$ brew cask install --force $(brew cask outdated | awk '{print $1}' | xargs)  # 更新Cask
+</code></pre>
+<h3><a id="homebrew%E6%9B%B4%E5%A4%9A%E5%91%BD%E4%BB%A4" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Homebrew 更多命令</h3>
+<pre><code class="language-shell">$ brew cleanup  # 卸载旧版本软件，Homebrew升级时是全新安装，不卸载旧版，需要手动卸载旧版本软件
+$ brew update  # 更新Homebrew
+$ brew upgrade  # 更新所有过期软件
+$ brew doctor  # brew自检
+$ brew outdated  # 列出所有过期软件
+$ brew --cache  # 打印brew下载包存放位置
+</code></pre>
+<h3><a id="%E5%8D%B8%E8%BD%BDhomebrew" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>卸载Homebrew</h3>
+<pre><code class="language-shell">$ ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/uninstall)
+</code></pre>
+<p>Download the uninstall script and run ./uninstall --help to view more uninstall options.</p>
+
+
+			
+			
+		</div>
+
+	</article>
+ 
+	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+		<div class="meta">
+			<div class="date">
 				<time datetime="2022-01-27T17:15:02-08:00" itemprop="datePublished">01/27/2022</time>
 			</div>
 			<div class="tags">posted in 
@@ -146,15 +341,50 @@
 			
 			<ul>
 <li>Uses <a href="https://yarnpkg.com/">yarn</a></li>
+<li>Organize code structure with Clean Architecturef</li>
 <li>ES2017 latest features like Async/Await</li>
+<li>Watch code changes and restart for development using <a href="https://nodemon.io/">nodemon</a>
+<ul>
+<li><code>yarn add nodemon --dev</code></li>
+</ul>
+</li>
 <li>Load environment variables from .env files with <a href="https://www.npmjs.com/package/dotenv">dotenv</a></li>
-<li>Web framework using <a href="https://expressjs.com/">Express</a></li>
+<li>Web framework using <a href="https://expressjs.com/">Express</a> with middlewares as follows
+<ul>
+<li><code>yarn add express</code></li>
 <li>Support CORS with express middleware <a href="https://expressjs.com/en/resources/middleware/cors.html">cors</a></li>
 <li>Gzip compression with express middleware <a href="http://expressjs.com/en/resources/middleware/compression.html">compression</a></li>
-<li>set some HTTP headers for security with <a href="https://github.com/helmetjs/helmet">helmet</a></li>
+<li>Parsing cookies with express middleware <a href="https://www.npmjs.com/package/cookie-parser">cookie-parser</a>
+<ul>
+<li><code>yarn add cookie-parser</code></li>
+</ul>
+</li>
+<li>Customize request logs with express middleware <a href="https://expressjs.com/en/resources/middleware/morgan.html">morgan</a>, which can be integrated with Winston.</li>
+<li>Validate input with express middleware <a href="https://express-validator.github.io/docs/">express-validator</a>
+<ul>
+<li><code>yarn install express-validator</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Set some HTTP headers for security with <a href="https://github.com/helmetjs/helmet">helmet</a></li>
 <li>Request validation with <a href="https://joi.dev/">joi</a></li>
-<li>Authentication and Authorization with <a href="https://www.passportjs.org/">Passport</a></li>
-<li>MongoDB Modeling Lib with <a href="https://mongoosejs.com/">Mongoose</a></li>
+<li>Authentication and Authorization with <a href="https://www.passportjs.org/">Passport</a>
+<ul>
+<li><code>yarn add passport</code></li>
+</ul>
+</li>
+<li>MongoDB Modeling Lib with <a href="https://mongoosejs.com/">Mongoose</a>
+<ul>
+<li><code>yarn add mongoose</code></li>
+</ul>
+</li>
+<li>Support pagination with <a href="https://www.npmjs.com/package/mongoose-aggregate-paginate-v2">Mongoose-aggregate-paginate-v2</a>
+<ul>
+<li><code>yarn add mongoose-aggregate-paginate-v2</code></li>
+</ul>
+</li>
+<li>Deal with Date Object with <a href="https://day.js.org/">Day.js</a></li>
 <li>Git hooks with <a href="https://typicode.github.io/husky/#/">husky</a></li>
 <li>Linting with <a href="http://eslint.org/">ESLint</a></li>
 <li>Format with <a href="https://prettier.io/">Prettier</a></li>
@@ -164,13 +394,46 @@
 <li>Continuous integration support with <a href="https://travis-ci.org/">Travis CI</a></li>
 <li>Docker support</li>
 <li>Monitoring with <a href="https://pm2.keymetrics.io/">pm2</a></li>
-<li>Logging with express middleware <a href="https://expressjs.com/en/resources/middleware/morgan.html">morgan</a></li>
+<li>Logging system using <a href="https://github.com/winstonjs/winston">Winston</a>
+<ul>
+<li><code>yarn add winston</code></li>
+<li>With Winston, you can have multiple transports configured at different levels.</li>
+</ul>
+</li>
 <li>API documentation generation with <a href="https://apidocjs.com/">apidoc</a></li>
 <li></li>
 <li>Image uploading with <a href="https://aws.amazon.com/tr/s3/">AWS S3 Client</a></li>
 <li>Email sending by using <a href="https://sendgrid.com/">SendGrid</a> and <a href="https://aws.amazon.com/tr/ses/">AWS SES</a></li>
 <li>SMS sending by using <a href="https://www.twilio.com/">Twilio</a></li>
 <li>Multilanguage Support using <a href="https://www.npmjs.com/package/i18n-js">i18n</a></li>
+</ul>
+
+
+			
+			
+		</div>
+
+	</article>
+ 
+	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+		<div class="meta">
+			<div class="date">
+				<time datetime="2022-01-30T23:25:54-08:00" itemprop="datePublished">01/30/2022</time>
+			</div>
+			<div class="tags">posted in 
+			
+			    <a class='category' href='internet-tech.html'>后端技术</a>&nbsp;
+			 
+			</div>
+		</div>
+		<h1 class="title" itemprop="name"><a href="16436139545729.html" itemprop="url">
+		Node.js 后端代码架构最佳实践</a></h1>
+		<div class="entry-content" itemprop="articleBody">
+			
+			<ul>
+<li>routes按业务分成多个文件，index.js通过router.use()组合多个业务routes</li>
+<li>各业务routes文件中只做把路由映射到controller的动作</li>
+<li>routes按版本组织</li>
 </ul>
 
 
@@ -446,235 +709,6 @@ $ git branch -d hotfix/x.y.1
 <blockquote>
 <p><a href="https://git-scm.com/book/en/v2/Git-Tools-Rewriting-History">Rewriting History Chapter from Pro Git SCM book</a></p>
 </blockquote>
-
-
-			
-			
-		</div>
-
-	</article>
- 
-	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-		<div class="meta">
-			<div class="date">
-				<time datetime="2021-02-10T10:15:37-08:00" itemprop="datePublished">02/10/2021</time>
-			</div>
-			<div class="tags">posted in 
-			
-			    <a class='category' href='mac-dev-env.html'>Mac开发环境</a>&nbsp;
-			 
-			</div>
-		</div>
-		<h1 class="title" itemprop="name"><a href="16129809371350.html" itemprop="url">
-		(3) 我的MAC开发环境</a></h1>
-		<div class="entry-content" itemprop="articleBody">
-			
-			<p>iterm2<br />
-brew<br />
-yarn<br />
-jenv<br />
-nvm<br />
-npm<br />
-Intellij IDEA<br />
-PyCharm<br />
-GoLand<br />
-Visual Studio Code<br />
-Android Studio<br />
-yarn global add react-devtools</p>
-
-
-			
-			
-		</div>
-
-	</article>
- 
-	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-		<div class="meta">
-			<div class="date">
-				<time datetime="2020-07-30T04:25:01-07:00" itemprop="datePublished">07/30/2020</time>
-			</div>
-			<div class="tags">posted in 
-			
-			    <a class='category' href='mac-dev-env.html'>Mac开发环境</a>&nbsp;
-			 
-			</div>
-		</div>
-		<h1 class="title" itemprop="name"><a href="15961083014557.html" itemprop="url">
-		vim实用高级命令</a></h1>
-		<div class="entry-content" itemprop="articleBody">
-			
-			<h2><a id="%E5%85%89%E6%A0%87%E7%A7%BB%E5%8A%A8" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>光标移动</h2>
-<ul>
-<li>下一个当前单词：*</li>
-<li>上一个当前单词：#</li>
-<li>下一个单词第一个字符：w</li>
-<li>当前单词最后一个字符：e</li>
-<li>下一个以空白字符为分隔的单词第一个字符：W</li>
-<li>当前以空白字符为分隔的单词最后一个字符：E</li>
-<li>前一个单词第一个字符：b</li>
-<li>前一个以空白字符为分隔的单词第一个字符：B</li>
-<li>下一个特定字符之前：t+字符 till</li>
-<li>上一个特定字符之后：T+字符</li>
-<li>下一个特定字符之上：f+字符 find</li>
-<li>上一个特定字符之上：F+字符</li>
-<li>当前行最后一个字符上：$</li>
-<li>当前行最后一个非空字符上：g_</li>
-<li>当前行第一个字符上：0</li>
-<li>当前行第一个非空字符上：^</li>
-<li>第一行：gg 或 :1</li>
-<li>最后一行：G</li>
-<li>第N行： :N</li>
-<li>迅速移动到下一句开头：）</li>
-<li>迅速移动到上一句开头：（</li>
-<li>迅速移动到下一段开头：}</li>
-<li>迅速移动到上一段开头：{</li>
-</ul>
-<h2><a id="%E6%BB%9A%E5%8A%A8%E5%B1%8F%E5%B9%95" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>滚动屏幕</h2>
-<ul>
-<li>向下翻页：<code>&lt;C+f&gt;</code> forward</li>
-<li>向上翻页：<code>&lt;C+b&gt;</code> backward</li>
-<li>向下翻半页：<code>&lt;C+d&gt;</code> down</li>
-<li>向上翻半页：<code>&lt;C+u&gt;</code> up</li>
-<li>光标不动，向下逐行滚动：<code>&lt;C+e&gt;</code> elder</li>
-<li>光标不动，向上逐行滚动：<code>&lt;C+y&gt;</code> younger</li>
-<li>光标不动，使光标所在行翻到屏幕最上方：zt title</li>
-<li>光标不动，使光标所在行翻到屏幕最下方：zb bottom</li>
-<li>光标不动，使光标所在行翻到屏幕中间：zz</li>
-<li>使光标移动到屏幕最上方：H high</li>
-<li>使光标移动到屏幕最下方：L low</li>
-<li>使光标移动到屏幕中间：M middle</li>
-</ul>
-<h2><a id="%E6%96%87%E6%9C%AC%E4%BF%AE%E6%94%B9" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>文本修改</h2>
-<ul>
-<li>d 加动作来进行删除（dd 删除整行）；D 则相当于 d$，删除到行尾。</li>
-<li>c 加动作来进行修改（cc 修改整行）；C 则相当于 c$，删除到行尾然后进入插入模式。</li>
-<li>s 相当于 cl，删除一个字符然后进入插入模式；S 相当于 cc，替换整行的内容。</li>
-<li>i 在当前字符前面进入插入模式；I 则相当于 ^i，把光标移到行首非空白字符上然后进入插入模式。</li>
-<li>a 在当前字符后面进入插入模式；A 相当于 $a，把光标移到行尾然后进入插入模式。</li>
-<li>o 在当前行下方插入一个新行，然后在这行进入插入模式；O 在当前行上方插入一个新行，然后在这行进入插入模式。</li>
-<li>r 替换光标下的字符；R 则进入替换模式，每次按键（直到 ）替换一个字符。</li>
-<li>u 撤销最近的一个修改动作；U 撤销当前行上的所有修改。</li>
-<li>gU gu 使用v选中字符后，输入gU或gu可使选中文本变成大写或小写</li>
-</ul>
-<h2><a id="%E6%96%87%E6%9C%AC%E9%80%89%E6%8B%A9" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>文本选择</h2>
-<ul>
-<li>i: 如：di), 删除()内所有内容，不包括()</li>
-<li>a: 如：ca&quot;, 修改&quot;&quot;内包括&quot;&quot;在内的所有内容</li>
-<li>用v选中后
-<ul>
-<li>&lt; &gt;, 左右缩进</li>
-<li>= 自动缩进</li>
-<li>J 内联成一行</li>
-</ul>
-</li>
-<li>[C-v], 选中多行文本
-<ul>
-<li>用A或I插入文本，输入ESC，会在选中的多行文本重复执行相同插入文本操作</li>
-</ul>
-</li>
-</ul>
-<h2><a id="%E9%87%8D%E5%A4%8D%E6%89%A7%E8%A1%8C" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>重复执行</h2>
-<ul>
-<li>; 重复最近的字符查找（f、t 等）操作</li>
-<li>, 重复最近的字符查找操作，反方向</li>
-<li>n 重复最近的字符串查找操作（/ 和 ?）</li>
-<li>N 重复最近的字符串查找操作（/ 和 ?），反方向</li>
-<li>. 重复执行最近的修改操作</li>
-</ul>
-<h2><a id="%E5%A4%9A%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>多文件操作</h2>
-<ul>
-<li>:args 列出打开文件列表</li>
-<li>:n 打开下一个文件</li>
-<li>:N 打开上一个文件</li>
-<li>:ls 列出缓冲区列表</li>
-<li>:bnext 切换到下一个缓冲区</li>
-<li>:bprev 切换到前一个缓冲区</li>
-<li>:b 序号 切换到对应序号的缓冲区</li>
-<li>[C-^] 在最近编辑的文件之间切换Aug 16, 2020S</li>
-</ul>
-<h2><a id="%E5%A4%9A%E7%AA%97%E5%8F%A3%E6%93%8D%E4%BD%9C" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>多窗口操作</h2>
-<ul>
-<li>:sp 或 [C+w]s 水平拆分</li>
-<li>:vs 或 [C+w]v 垂直拆分</li>
-<li>[C+w]w 窗口切换</li>
-<li>[C+w]c 关闭窗口，最后一个窗口无效</li>
-<li>[C+w]q 退出窗口，最后一个窗口退出整个vim</li>
-<li>[C+w]= 平均调整每个窗口大小</li>
-<li>:tabnew 新建标签页</li>
-<li>:gt, :gT 切换标签页</li>
-</ul>
-
-
-			
-			
-		</div>
-
-	</article>
- 
-	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-		<div class="meta">
-			<div class="date">
-				<time datetime="2020-07-16T07:17:58-07:00" itemprop="datePublished">07/16/2020</time>
-			</div>
-			<div class="tags">posted in 
-			
-			    <a class='category' href='mac-dev-env.html'>Mac开发环境</a>&nbsp;
-			 
-			</div>
-		</div>
-		<h1 class="title" itemprop="name"><a href="15949090783980.html" itemprop="url">
-		一些终端下更好用的替代工具</a></h1>
-		<div class="entry-content" itemprop="articleBody">
-			
-			<h2><a id="ls%E7%9A%84%E6%9B%BF%E4%BB%A3%E5%B7%A5%E5%85%B7" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>ls的替代工具</h2>
-<pre><code class="language-plain_text"># brew info exa
-</code></pre>
-<pre><code class="language-plain_text"># exa -l --tree -L 1
-</code></pre>
-<p>用列表加树状展示一级目录下的目录和文件</p>
-<h2><a id="cat%E7%9A%84%E6%9B%BF%E4%BB%A3%E5%B7%A5%E5%85%B7" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>cat的替代工具</h2>
-<pre><code class="language-plain_text"># brew info bat
-</code></pre>
-<pre><code class="language-plain_text"># bat README.md
-</code></pre>
-<p>比cat增加高亮和对git状态的支持</p>
-<h2><a id="find%E7%9A%84%E6%9B%BF%E4%BB%A3%E5%B7%A5%E5%85%B7" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>find的替代工具</h2>
-<pre><code class="language-plain_text"># brew info fd
-</code></pre>
-<pre><code class="language-plain_text"># fd README.md
-</code></pre>
-<p>语法比find简单，默认忽略.gitignore里的文件和隐藏文件</p>
-<h2><a id="grep%E7%9A%84%E6%9B%BF%E4%BB%A3%E5%B7%A5%E5%85%B7" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>grep的替代工具</h2>
-<pre><code class="language-plain_text"># brew info rg
-</code></pre>
-<pre><code class="language-plain_text"># rg xxx
-</code></pre>
-<p>显示漂亮，默认忽略.gitignore文件和隐藏文件，默认递归所有子文件夹，可以指定文件类型</p>
-<h2><a id="cd%E7%9A%84%E6%9B%BF%E4%BB%A3%E5%B7%A5%E5%85%B7" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>cd的替代工具</h2>
-<pre><code class="language-plain_text"># brew info z
-</code></pre>
-<pre><code class="language-plain_text"># z de [Tab]
-</code></pre>
-<p>自动基于历史访问过的以de开头的目录进行补全</p>
-<pre><code class="language-plain_text"># brew info fzf
-</code></pre>
-<pre><code class="language-plain_text"># cd $(find * -type d | fzf)
-</code></pre>
-<p>通过上下键选择需要访问的目录，回车进入。</p>
-<p>fzf会把标准输出变成交互式下拉列表共用户选择。</p>
-<h2><a id="%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E7%9A%84%E6%9B%BF%E4%BB%A3%E5%B7%A5%E5%85%B7" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>文件管理的替代工具</h2>
-<pre><code class="language-plain_text"># brew info nnn
-</code></pre>
-<h2><a id="%E7%9C%8B%E6%97%A5%E5%BF%97tail%E7%9A%84%E6%9B%BF%E4%BB%A3%E5%B7%A5%E5%85%B7" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>看日志tail的替代工具</h2>
-<pre><code class="language-plain_text"># brew info lnav
-</code></pre>
-<p>支持各种日志的高亮显示，支持正则匹配</p>
-<h2><a id="man%E7%9A%84%E6%9B%BF%E4%BB%A3%E5%B7%A5%E5%85%B7" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>man的替代工具</h2>
-<pre><code class="language-plain_text"># brew info
-</code></pre>
-<hr />
-<p><img src="http://image.harveygg.wang/mweb/15951458383567.jpg" alt="" /></p>
 
 
 			

@@ -132,6 +132,69 @@
 	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
 		<div class="meta">
 			<div class="date">
+				<time datetime="2019-12-23T07:42:14-08:00" itemprop="datePublished">12/23/2019</time>
+			</div>
+			<div class="tags">posted in 
+			
+			    <a class='category' href='java.html'>Java</a>&nbsp;
+			 
+			</div>
+		</div>
+		<h1 class="title" itemprop="name"><a href="15771157345073.html" itemprop="url">
+		问题定位</a></h1>
+		<div class="entry-content" itemprop="articleBody">
+			
+			<h2><a id="%E6%9F%A5%E6%89%BE%E9%97%AE%E9%A2%98%E7%BA%BF%E7%A8%8B" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>查找问题线程</h2>
+<ul>
+<li>top 查看问题进程 pid</li>
+<li>top -Hp pid 查看进程中有问题线程pid tid</li>
+<li>printf '%x/n' tid 转化为十六进制</li>
+<li>jstack pid |grep tid的十六进制 -A 30 查看线程堆栈信息</li>
+</ul>
+<h2><a id="%E5%86%85%E5%AD%98%E6%BA%A2%E5%87%BA%E9%97%AE%E9%A2%98" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>内存溢出问题</h2>
+<ul>
+<li>jstat -gcutil java_pid 刷新时间间隔 查看分区占用情况和gc状况</li>
+<li>jmap -dump:format=b,file=name.dump java_pid  导出dump文件</li>
+<li>用visualVM分析dump文件</li>
+</ul>
+
+
+			
+			
+		</div>
+
+	</article>
+ 
+	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+		<div class="meta">
+			<div class="date">
+				<time datetime="2019-12-21T02:22:43-08:00" itemprop="datePublished">12/21/2019</time>
+			</div>
+			<div class="tags">posted in 
+			
+			    <a class='category' href='dev-ops.html'>DevOps</a>&nbsp;
+			 
+			</div>
+		</div>
+		<h1 class="title" itemprop="name"><a href="15769237630512.html" itemprop="url">
+		Docker Desktop for Mac 启动Kubernetes时查看日志方法</a></h1>
+		<div class="entry-content" itemprop="articleBody">
+			
+			<pre><code class="language-shell">pred='process matches &quot;.*(ocker|vpnkit).*&quot;
+  || (process in {&quot;taskgated-helper&quot;, &quot;launchservicesd&quot;, &quot;kernel&quot;} &amp;&amp; eventMessage contains[c] &quot;docker&quot;)'
+/usr/bin/log stream --style syslog --level=debug --color=always --predicate &quot;$pred&quot;
+</code></pre>
+
+
+			
+			
+		</div>
+
+	</article>
+ 
+	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+		<div class="meta">
+			<div class="date">
 				<time datetime="2019-12-16T01:45:52-08:00" itemprop="datePublished">12/16/2019</time>
 			</div>
 			<div class="tags">posted in 
@@ -498,69 +561,6 @@ $&gt; bin/kafka-server-start.sh config/server.properties
 <li>SRV记录：记录提供特定服务的服务器，SRV记录了哪台计算机提供了哪个服务。格式为：服务的名字.协议的类型（例如：_example-server._tcp）</li>
 <li>PTR记录：PTR记录是A记录的逆向记录，又称做IP反查记录或指针记录，负责将IP反向解析为域名</li>
 </ul>
-
-
-			
-			
-		</div>
-
-	</article>
- 
-	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-		<div class="meta">
-			<div class="date">
-				<time datetime="2019-05-25T06:46:47-07:00" itemprop="datePublished">05/25/2019</time>
-			</div>
-			<div class="tags">posted in 
-			
-			    <a class='category' href='mac-dev-env.html'>Mac开发环境</a>&nbsp;
-			 
-			</div>
-		</div>
-		<h1 class="title" itemprop="name"><a href="15587920075778.html" itemprop="url">
-		(1) MAC开发环境——软件包管理</a></h1>
-		<div class="entry-content" itemprop="articleBody">
-			
-			<hr />
-<h2><a id="homebrew-https-brew-sh" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="https://brew.sh/">Homebrew</a></h2>
-<p><img src="http://image.harveygg.wang/mweb/homebrew-256x256.png" alt="homebrew-256x256" /></p>
-<ul>
-<li>使用 Homebrew 安装 Apple 没有预装，但你需要的东西。</li>
-<li>brew管理命令行工具，三方库，会先下载源码，编译，安装，最后link到/usr/local/bin中，如：<code>brew install wget</code></li>
-<li>brew cask管理Mac应用，会直接下载二进制，然后安装，是AppStore的补充，如：<code>brew cask install chrome</code></li>
-<li>推荐所有软件<strong>先考虑AppStore</strong>，如果没有<strong>再考虑Homebrew</strong>，再没有<strong>再去官网下载</strong>，方便后面管理</li>
-</ul>
-<h3><a id="install-homebrew" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Install Homebrew</h3>
-<pre><code class="language-shell">$ /usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;
-</code></pre>
-<h3><a id="homebrew%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Homebrew 常用命令</h3>
-<pre><code class="language-shell">$ brew search /wge*/  # 搜索软件,后面是正则表达式
-$ brew info wget    # 查看软件信息
-$ brew install wget  # 安装 wget
-$ brew list wget    # 列出该软件安装后的文件
-$ brew uninstall wget  # 卸载 wget
-</code></pre>
-<h3><a id="%E8%8E%B7%E5%8F%96homebrew-cask" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>获取Homebrew-Cask</h3>
-<pre><code class="language-shell">$ brew tap caskroom/cask
-</code></pre>
-<h3><a id="homebrew-cask%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Homebrew Cask常用命令</h3>
-<pre><code class="language-shell"># brew cask 和 brew 的命令基本一致，search, info, list, install, uninstall 子命令都一样
-$ brew cask install java  # 安装 Java
-$ brew cask uninstall java  # 卸载 Java
-$ brew cask install --force $(brew cask outdated | awk '{print $1}' | xargs)  # 更新Cask
-</code></pre>
-<h3><a id="homebrew%E6%9B%B4%E5%A4%9A%E5%91%BD%E4%BB%A4" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Homebrew 更多命令</h3>
-<pre><code class="language-shell">$ brew cleanup  # 卸载旧版本软件，Homebrew升级时是全新安装，不卸载旧版，需要手动卸载旧版本软件
-$ brew update  # 更新Homebrew
-$ brew upgrade  # 更新所有过期软件
-$ brew doctor  # brew自检
-$ brew outdated  # 列出所有过期软件
-$ brew --cache  # 打印brew下载包存放位置
-</code></pre>
-<h3><a id="%E5%8D%B8%E8%BD%BDhomebrew" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>卸载Homebrew</h3>
-<pre><code class="language-shell">$ ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/uninstall)
-</code></pre>
-<p>Download the uninstall script and run ./uninstall --help to view more uninstall options.</p>
 
 
 			

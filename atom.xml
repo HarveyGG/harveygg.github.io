@@ -4,7 +4,7 @@
   <title><![CDATA[Harvey's Tech Site]]></title>
   <link href="https://blog.luckyowl.tech/atom.xml" rel="self"/>
   <link href="https://blog.luckyowl.tech/"/>
-  <updated>2022-01-28T14:44:20-08:00</updated>
+  <updated>2022-02-10T20:26:38-08:00</updated>
   <id>https://blog.luckyowl.tech/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -14,6 +14,175 @@
 
   
   <entry>
+    <title type="html"><![CDATA[(2) MAC开发环境——终端+Shell]]></title>
+    <link href="https://blog.luckyowl.tech/15588383364141.html"/>
+    <updated>2019-05-25T19:38:56-07:00</updated>
+    <id>https://blog.luckyowl.tech/15588383364141.html</id>
+    <content type="html"><![CDATA[
+<p><img src="media/15588383364141/16445534586435.jpg" alt="" /><br />
+最终效果！</p>
+<h2><a id="iterm2-https-iterm2-com" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="https://iterm2.com/">iTerm2</a></h2>
+<p>iTerm2 是 MAC 下最好的终端工具。<br />
+可以使用Homebrew来安装：</p>
+<pre><code class="language-shell">$ brew cask install iterm2
+</code></pre>
+<hr />
+<p>iTerm2 的一些特色功能如下。</p>
+<h3><a id="%E6%A0%87%E7%AD%BE%E5%8F%98%E8%89%B2" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>标签变色</h3>
+<p>iTerm2的tab会通过变色来提示当前tab下的任务有新活动，有新的输出时tab会变成洋红色，新的输出长时间没看，tab会变成红色。</p>
+<h3><a id="%E6%99%BA%E8%83%BD%E9%80%89%E4%B8%AD" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>智能选中</h3>
+<p>在 iTerm2 中，双击选中，三击选中整行，四击智能选中（智能规则可配置），可以识别网址，引号引起的字符串，邮箱地址等。（很多时候双击的选中就已经很智能了）</p>
+<p>在 iTerm2 中，选中即复制。即任何选中状态的字符串都被放到了系统剪切板中。</p>
+<p>使用CMD+F打开搜索，然后输入需要复制的内容开头关键字，如IP的第一节，搜到后按Tab键，智能选中需要复制的内容并且已经拷贝到剪贴板。</p>
+<h3><a id="%E5%B7%A7%E7%94%A8%E2%8C%98cmd%E9%94%AE" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>巧用⌘(CMD)键</h3>
+<p>按住⌘键:</p>
+<ul>
+<li>可以拖拽选中的字符串；</li>
+<li>点击url：调用默认浏览器访问该网址；</li>
+<li>点击文件：调用默认程序打开文件；</li>
+<li>如果文件名是filename:42，且默认文本编辑器是 Macvim、Textmate或BBEdit，将会直接打开到这一行；</li>
+<li>点击文件夹：在 finder 中打开该文件夹；</li>
+</ul>
+<h3><a id="%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>常用快捷键</h3>
+<ul>
+<li>切换tab：<code>⌘+←</code>, <code>⌘+→</code>, <code>⌘+{</code>, <code>⌘+}</code>。⌘+数字直接定位到该tab；</li>
+<li>新建 tab：<code>⌘+t</code>；</li>
+<li>顺序切换pane：<code>⌘+[</code>, <code>⌘+]</code>；</li>
+<li>切分屏幕：<code>⌘+d</code>水平切分，<code>⌘+shift+d</code> 垂直切分；</li>
+<li>按方向切换pane：<code>⌘+Option+方向键</code>；</li>
+<li>智能查找，支持正则查找：<code>⌘+f</code>；</li>
+<li>显示光标位置：<code>⌘+/</code></li>
+<li>增加标记，然后跳回标记：<code>⌘+shift+M</code>标记，<code>⌘+shift+J</code>跳回标记，<code>⌘+shift+up/down</code>在标记间切换</li>
+<li>显示历史剪贴板所有内容：<code>⌘+shift+H</code></li>
+<li>按时间轴显示快照：<code>⌘+option+B</code></li>
+</ul>
+<h3><a id="%E8%87%AA%E5%8A%A8%E5%AE%8C%E6%88%90" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>自动完成</h3>
+<p>iTerm2可以自动补齐命令，输入若干字符，按<code>⌘+;</code>弹出自动补齐窗口，列出曾经使用过的命令。</p>
+<h3><a id="%E9%85%8D%E8%89%B2" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>配色</h3>
+<p>你可以自由定制喜欢的配色，<a href="https://iterm2colorschemes.com/">这里</a>收集了大量iTerm2的主题。在其github repo里下载对应的xxx.itermcolors文件安装，安装方法如下：</p>
+<ul>
+<li>打开iTerm2</li>
+<li>按<code>⌘+i</code></li>
+<li>选中<code>Colors</code>tab</li>
+<li>点击<code>Load Presets</code></li>
+<li>点击<code>Import</code></li>
+<li>选择你需要的<code>.itermcolors</code>文件</li>
+<li>再次点击<code>Load Presets</code>选择刚刚导入的主题</li>
+</ul>
+<hr />
+<p>但是最理想的配色方案在这里<a href="https://github.com/altercation/solarized">https://github.com/altercation/solarized</a></p>
+<pre><code class="language-shell">$ git clone https://github.com/altercation/solarized.git
+</code></pre>
+<ol>
+<li>进入solarized/iterm2-colors-solarized 下双击<code>Solarized Dark.itermcolors</code>和<code>Solarized Light.itermcolors</code>两个文件就可以把明暗两种配置文件导入到iTerm2里</li>
+<li>通过load presets选择刚刚安装的配色主题即可</li>
+</ol>
+<h2><a id="zsh-https-zhuanlan-zhihu-comp19556676" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="https://zhuanlan.zhihu.com/p/19556676">ZSH</a></h2>
+<p>MAC默认自带终极shell!</p>
+<blockquote>
+<p><a href="https://www.zhihu.com/question/21418449">为什么说zsh是shell中的极品</a></p>
+</blockquote>
+<p>修改默认bash</p>
+<pre><code class="language-shell">$ chsh -s /bin/zsh
+</code></pre>
+<h3><a id="oh-my-zsh-https-ohmyz-sh" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="https://ohmyz.sh/">Oh My ZSH</a></h3>
+<blockquote>
+<p>Oh My Zsh is a delightful, open source, community-driven framework for managing your Zsh configuration. It comes bundled with thousands of helpful functions, helpers, plugins, themes, and a few things that make you shout...</p>
+</blockquote>
+<blockquote>
+<p>“Oh My ZSH!”</p>
+</blockquote>
+<h4><a id="%E5%AE%89%E8%A3%85" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>安装</h4>
+<pre><code class="language-plain_text">sh -c &quot;$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)&quot;
+</code></pre>
+<h4><a id="%E9%85%8D%E7%BD%AEoh-my-zsh" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>配置oh my zsh</h4>
+<blockquote>
+<p><a href="https://github.com/robbyrussell/oh-my-zsh">oh-my-zsh github</a></p>
+</blockquote>
+<h3><a id="agnoster%E4%B8%BB%E9%A2%98-https-github-comfcambloroh-my-zsh-agnoster-fcamblor" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="https://github.com/fcamblor/oh-my-zsh-agnoster-fcamblor">agnoster主题</a></h3>
+<p>agnoster是一个zsh主题，特别为使用iTerm2 + Solarized Dark主题，又经常使用Git的用户定制。</p>
+<h4><a id="%E5%AE%89%E8%A3%85" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>安装</h4>
+<pre><code class="language-shell">$ git clone https://github.com/fcamblor/oh-my-zsh-agnoster-fcamblor.git
+</code></pre>
+<p>执行工程里的install脚本，主题将安装到~/.oh-my-zsh/themes目录下</p>
+<h4><a id="%E8%AE%BE%E7%BD%AE%E8%AF%A5%E4%B8%BB%E9%A2%98" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>设置该主题</h4>
+<p>打开~/.zshrc文件，然后将ZSH_THEME后面的字段改为agnoster。</p>
+<h3><a id="%E5%A2%9E%E5%8A%A0%E6%8C%87%E4%BB%A4%E9%AB%98%E4%BA%AE%E6%95%88%E6%9E%9C" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>增加指令高亮效果</h3>
+<p>指令高亮效果作用是当用户输入正确命令时指令会绿色高亮，错误时命令红色高亮</p>
+<h4><a id="%E5%AE%89%E8%A3%85zsh-syntax-highlighting-https-github-comzsh-userszsh-syntax-highlighting" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>安装<a href="https://github.com/zsh-users/zsh-syntax-highlighting">zsh-syntax-highlighting</a></h4>
+<pre><code class="language-shell">$ git clone git://github.com/zsh-users/zsh-syntax-highlighting.git
+$ echo &quot;source ${(q-)PWD}/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh&quot; &gt;&gt; ${ZDOTDIR:-$HOME}/.zshrc
+</code></pre>
+<h3><a id="%E5%AE%89%E8%A3%85powerline-http-powerline-readthedocs-ioenlatestinstallation-html" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="http://powerline.readthedocs.io/en/latest/installation.html">安装Powerline</a></h3>
+<pre><code class="language-shell">$ pip install powerline-status --user
+</code></pre>
+<h3><a id="%E5%AE%89%E8%A3%85powerline%E5%AD%97%E4%BD%93%E5%BA%93-https-link-jianshu-com-t-https-3a-2f-2fgithub-com-2fpowerline-2ffonts" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>安装<a href="https://link.jianshu.com/?t=https%3A%2F%2Fgithub.com%2Fpowerline%2Ffonts">Powerline字体库</a></h3>
+<p>使用zsh主题需要配合Powerline字体</p>
+<ol>
+<li>将工程clone下来</li>
+<li>执行install.sh脚本安装所有Powerline字体</li>
+</ol>
+<p>安装完成后提示所有字体均已下载到/Users/{username}/Library/Fonts路径下</p>
+<h4><a id="%E8%AE%BE%E7%BD%AEiterm2%E7%9A%84%E5%AD%97%E4%BD%93" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>设置iTerm2的字体</h4>
+<p>具体的操作是iTerm2 -&gt; Preferences -&gt; Profiles -&gt; Text，在Font区域选中Change Font，选择for Powerline的字体</p>
+<hr />
+<blockquote>
+<p>Maybe you also want to try <a href="https://jmolivas.weknowinc.com/improve-your-shell-using-fish-and-oh-my-fish">this</a></p>
+</blockquote>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[(1) MAC开发环境——软件包管理]]></title>
+    <link href="https://blog.luckyowl.tech/15587920075778.html"/>
+    <updated>2019-05-25T06:46:47-07:00</updated>
+    <id>https://blog.luckyowl.tech/15587920075778.html</id>
+    <content type="html"><![CDATA[
+<hr />
+<h2><a id="homebrew-https-brew-sh" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="https://brew.sh/">Homebrew</a></h2>
+<ul>
+<li>使用 Homebrew 安装 Apple 没有预装，但你需要的东西。</li>
+<li>brew管理命令行工具，三方库，会先下载源码，编译，安装，最后link到/usr/local/bin中，如：<code>brew install wget</code></li>
+<li>brew cask管理Mac应用，会直接下载二进制，然后安装，是AppStore的补充，如：<code>brew cask install chrome</code></li>
+<li>推荐所有软件<strong>先考虑AppStore</strong>，如果没有<strong>再考虑Homebrew</strong>，再没有<strong>再去官网下载</strong>，方便后面管理</li>
+</ul>
+<h3><a id="install-homebrew" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Install Homebrew</h3>
+<pre><code class="language-shell">$ /usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;
+</code></pre>
+<h3><a id="homebrew%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Homebrew 常用命令</h3>
+<pre><code class="language-shell">$ brew search /wge*/  # 搜索软件,后面是正则表达式
+$ brew info wget    # 查看软件信息
+$ brew install wget  # 安装 wget
+$ brew list wget    # 列出该软件安装后的文件
+$ brew uninstall wget  # 卸载 wget
+</code></pre>
+<h3><a id="%E8%8E%B7%E5%8F%96homebrew-cask" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>获取Homebrew-Cask</h3>
+<pre><code class="language-shell">$ brew tap caskroom/cask
+</code></pre>
+<h3><a id="homebrew-cask%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Homebrew Cask常用命令</h3>
+<pre><code class="language-shell"># brew cask 和 brew 的命令基本一致，search, info, list, install, uninstall 子命令都一样
+$ brew cask install java  # 安装 Java
+$ brew cask uninstall java  # 卸载 Java
+$ brew cask install --force $(brew cask outdated | awk '{print $1}' | xargs)  # 更新Cask
+</code></pre>
+<h3><a id="homebrew%E6%9B%B4%E5%A4%9A%E5%91%BD%E4%BB%A4" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Homebrew 更多命令</h3>
+<pre><code class="language-shell">$ brew cleanup  # 卸载旧版本软件，Homebrew升级时是全新安装，不卸载旧版，需要手动卸载旧版本软件
+$ brew update  # 更新Homebrew
+$ brew upgrade  # 更新所有过期软件
+$ brew doctor  # brew自检
+$ brew outdated  # 列出所有过期软件
+$ brew --cache  # 打印brew下载包存放位置
+</code></pre>
+<h3><a id="%E5%8D%B8%E8%BD%BDhomebrew" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>卸载Homebrew</h3>
+<pre><code class="language-shell">$ ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/uninstall)
+</code></pre>
+<p>Download the uninstall script and run ./uninstall --help to view more uninstall options.</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[What is a good Node.js Restful API Template in 2022]]></title>
     <link href="https://blog.luckyowl.tech/16433325024079.html"/>
     <updated>2022-01-27T17:15:02-08:00</updated>
@@ -21,15 +190,50 @@
     <content type="html"><![CDATA[
 <ul>
 <li>Uses <a href="https://yarnpkg.com/">yarn</a></li>
+<li>Organize code structure with Clean Architecturef</li>
 <li>ES2017 latest features like Async/Await</li>
+<li>Watch code changes and restart for development using <a href="https://nodemon.io/">nodemon</a>
+<ul>
+<li><code>yarn add nodemon --dev</code></li>
+</ul>
+</li>
 <li>Load environment variables from .env files with <a href="https://www.npmjs.com/package/dotenv">dotenv</a></li>
-<li>Web framework using <a href="https://expressjs.com/">Express</a></li>
+<li>Web framework using <a href="https://expressjs.com/">Express</a> with middlewares as follows
+<ul>
+<li><code>yarn add express</code></li>
 <li>Support CORS with express middleware <a href="https://expressjs.com/en/resources/middleware/cors.html">cors</a></li>
 <li>Gzip compression with express middleware <a href="http://expressjs.com/en/resources/middleware/compression.html">compression</a></li>
-<li>set some HTTP headers for security with <a href="https://github.com/helmetjs/helmet">helmet</a></li>
+<li>Parsing cookies with express middleware <a href="https://www.npmjs.com/package/cookie-parser">cookie-parser</a>
+<ul>
+<li><code>yarn add cookie-parser</code></li>
+</ul>
+</li>
+<li>Customize request logs with express middleware <a href="https://expressjs.com/en/resources/middleware/morgan.html">morgan</a>, which can be integrated with Winston.</li>
+<li>Validate input with express middleware <a href="https://express-validator.github.io/docs/">express-validator</a>
+<ul>
+<li><code>yarn install express-validator</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Set some HTTP headers for security with <a href="https://github.com/helmetjs/helmet">helmet</a></li>
 <li>Request validation with <a href="https://joi.dev/">joi</a></li>
-<li>Authentication and Authorization with <a href="https://www.passportjs.org/">Passport</a></li>
-<li>MongoDB Modeling Lib with <a href="https://mongoosejs.com/">Mongoose</a></li>
+<li>Authentication and Authorization with <a href="https://www.passportjs.org/">Passport</a>
+<ul>
+<li><code>yarn add passport</code></li>
+</ul>
+</li>
+<li>MongoDB Modeling Lib with <a href="https://mongoosejs.com/">Mongoose</a>
+<ul>
+<li><code>yarn add mongoose</code></li>
+</ul>
+</li>
+<li>Support pagination with <a href="https://www.npmjs.com/package/mongoose-aggregate-paginate-v2">Mongoose-aggregate-paginate-v2</a>
+<ul>
+<li><code>yarn add mongoose-aggregate-paginate-v2</code></li>
+</ul>
+</li>
+<li>Deal with Date Object with <a href="https://day.js.org/">Day.js</a></li>
 <li>Git hooks with <a href="https://typicode.github.io/husky/#/">husky</a></li>
 <li>Linting with <a href="http://eslint.org/">ESLint</a></li>
 <li>Format with <a href="https://prettier.io/">Prettier</a></li>
@@ -39,13 +243,33 @@
 <li>Continuous integration support with <a href="https://travis-ci.org/">Travis CI</a></li>
 <li>Docker support</li>
 <li>Monitoring with <a href="https://pm2.keymetrics.io/">pm2</a></li>
-<li>Logging with express middleware <a href="https://expressjs.com/en/resources/middleware/morgan.html">morgan</a></li>
+<li>Logging system using <a href="https://github.com/winstonjs/winston">Winston</a>
+<ul>
+<li><code>yarn add winston</code></li>
+<li>With Winston, you can have multiple transports configured at different levels.</li>
+</ul>
+</li>
 <li>API documentation generation with <a href="https://apidocjs.com/">apidoc</a></li>
 <li></li>
 <li>Image uploading with <a href="https://aws.amazon.com/tr/s3/">AWS S3 Client</a></li>
 <li>Email sending by using <a href="https://sendgrid.com/">SendGrid</a> and <a href="https://aws.amazon.com/tr/ses/">AWS SES</a></li>
 <li>SMS sending by using <a href="https://www.twilio.com/">Twilio</a></li>
 <li>Multilanguage Support using <a href="https://www.npmjs.com/package/i18n-js">i18n</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Node.js 后端代码架构最佳实践]]></title>
+    <link href="https://blog.luckyowl.tech/16436139545729.html"/>
+    <updated>2022-01-30T23:25:54-08:00</updated>
+    <id>https://blog.luckyowl.tech/16436139545729.html</id>
+    <content type="html"><![CDATA[
+<ul>
+<li>routes按业务分成多个文件，index.js通过router.use()组合多个业务routes</li>
+<li>各业务routes文件中只做把路由映射到controller的动作</li>
+<li>routes按版本组织</li>
 </ul>
 
 ]]></content>
@@ -507,133 +731,6 @@ yarn global add react-devtools</p>
 </code></pre>
 <hr />
 <p><img src="http://image.harveygg.wang/mweb/15951458383567.jpg" alt="" /></p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[(2) MAC开发环境——终端+Shell]]></title>
-    <link href="https://blog.luckyowl.tech/15588383364141.html"/>
-    <updated>2019-05-25T19:38:56-07:00</updated>
-    <id>https://blog.luckyowl.tech/15588383364141.html</id>
-    <content type="html"><![CDATA[
-<p><img src="http://image.harveygg.wang/mweb/Jietu20190526-225814.jpg" alt="Jietu20190526-225814" /><br />
-最终效果！</p>
-<h2><a id="iterm2-https-iterm2-com" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="https://iterm2.com/">iTerm2</a></h2>
-<p><img src="http://image.harveygg.wang/mweb/iterm2.jpg" alt="iter" /></p>
-<p>iTerm2 是 MAC 下最好的终端工具。<br />
-可以使用Homebrew来安装：</p>
-<pre><code class="language-shell">$ brew cask install iterm2
-</code></pre>
-<hr />
-<p>iTerm2 的一些特色功能如下。</p>
-<h3><a id="%E6%A0%87%E7%AD%BE%E5%8F%98%E8%89%B2" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>标签变色</h3>
-<p>iTerm2的tab会通过变色来提示当前tab下的任务有新活动，有新的输出时tab会变成洋红色，新的输出长时间没看，tab会变成红色。</p>
-<h3><a id="%E6%99%BA%E8%83%BD%E9%80%89%E4%B8%AD" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>智能选中</h3>
-<p>在 iTerm2 中，双击选中，三击选中整行，四击智能选中（智能规则可配置），可以识别网址，引号引起的字符串，邮箱地址等。（很多时候双击的选中就已经很智能了）</p>
-<p>在 iTerm2 中，选中即复制。即任何选中状态的字符串都被放到了系统剪切板中。</p>
-<p>使用CMD+F打开搜索，然后输入需要复制的内容开头关键字，如IP的第一节，搜到后按Tab键，智能选中需要复制的内容并且已经拷贝到剪贴板。</p>
-<h3><a id="%E5%B7%A7%E7%94%A8%E2%8C%98cmd%E9%94%AE" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>巧用⌘(CMD)键</h3>
-<p>按住⌘键:</p>
-<ul>
-<li>可以拖拽选中的字符串；</li>
-<li>点击url：调用默认浏览器访问该网址；</li>
-<li>点击文件：调用默认程序打开文件；</li>
-<li>如果文件名是filename:42，且默认文本编辑器是 Macvim、Textmate或BBEdit，将会直接打开到这一行；</li>
-<li>点击文件夹：在 finder 中打开该文件夹；</li>
-</ul>
-<h3><a id="%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>常用快捷键</h3>
-<ul>
-<li>切换tab：<code>⌘+←</code>, <code>⌘+→</code>, <code>⌘+{</code>, <code>⌘+}</code>。⌘+数字直接定位到该tab；</li>
-<li>新建 tab：<code>⌘+t</code>；</li>
-<li>顺序切换pane：<code>⌘+[</code>, <code>⌘+]</code>；</li>
-<li>切分屏幕：<code>⌘+d</code>水平切分，<code>⌘+shift+d</code> 垂直切分；</li>
-<li>按方向切换pane：<code>⌘+Option+方向键</code>；</li>
-<li>智能查找，支持正则查找：<code>⌘+f</code>；</li>
-<li>显示光标位置：<code>⌘+/</code></li>
-<li>增加标记，然后跳回标记：<code>⌘+shift+M</code>标记，<code>⌘+shift+J</code>跳回标记，<code>⌘+shift+up/down</code>在标记间切换</li>
-<li>显示历史剪贴板所有内容：<code>⌘+shift+H</code></li>
-<li>按时间轴显示快照：<code>⌘+option+B</code></li>
-</ul>
-<h3><a id="%E8%87%AA%E5%8A%A8%E5%AE%8C%E6%88%90" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>自动完成</h3>
-<p>iTerm2可以自动补齐命令，输入若干字符，按<code>⌘+;</code>弹出自动补齐窗口，列出曾经使用过的命令。</p>
-<p><img src="http://image.harveygg.wang/mweb/15588871124877.jpg" alt="" style="width:617px;" /></p>
-<h3><a id="%E9%85%8D%E8%89%B2" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>配色</h3>
-<p>你可以自由定制喜欢的配色，<a href="https://iterm2colorschemes.com/">这里</a>收集了大量iTerm2的主题。在其github repo里下载对应的xxx.itermcolors文件安装，安装方法如下：</p>
-<ul>
-<li>打开iTerm2</li>
-<li>按<code>⌘+i</code></li>
-<li>选中<code>Colors</code>tab</li>
-<li>点击<code>Load Presets</code></li>
-<li>点击<code>Import</code></li>
-<li>选择你需要的<code>.itermcolors</code>文件</li>
-<li>再次点击<code>Load Presets</code>选择刚刚导入的主题</li>
-</ul>
-<p><img src="http://image.harveygg.wang/mweb/15588872205753.jpg" alt="" style="width:609px;" /></p>
-<hr />
-<p>但是最理想的配色方案在这里<a href="https://github.com/altercation/solarized">https://github.com/altercation/solarized</a></p>
-<pre><code class="language-shell">$ git clone https://github.com/altercation/solarized.git
-</code></pre>
-<ol>
-<li>进入solarized/iterm2-colors-solarized 下双击<code>Solarized Dark.itermcolors</code>和<code>Solarized Light.itermcolors</code>两个文件就可以把明暗两种配置文件导入到iTerm2里</li>
-<li>通过load presets选择刚刚安装的配色主题即可</li>
-</ol>
-<p><img src="http://image.harveygg.wang/mweb/Jietu20190527-001007.jpg" alt="Jietu20190527-001007" /></p>
-<h2><a id="zsh-https-zhuanlan-zhihu-comp19556676" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="https://zhuanlan.zhihu.com/p/19556676">ZSH</a></h2>
-<p>MAC默认自带终极shell!</p>
-<blockquote>
-<p><a href="https://www.zhihu.com/question/21418449">为什么说zsh是shell中的极品</a></p>
-</blockquote>
-<p>修改默认bash</p>
-<pre><code class="language-shell">$ chsh -s /bin/zsh
-</code></pre>
-<h3><a id="oh-my-zsh-https-ohmyz-sh" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="https://ohmyz.sh/">Oh My ZSH</a></h3>
-<p><img src="http://image.harveygg.wang/mweb/omzsh.png" alt="omzsh" /></p>
-<blockquote>
-<p>Oh My Zsh is a delightful, open source, community-driven framework for managing your Zsh configuration. It comes bundled with thousands of helpful functions, helpers, plugins, themes, and a few things that make you shout...</p>
-</blockquote>
-<blockquote>
-<p>“Oh My ZSH!”</p>
-</blockquote>
-<h4><a id="%E5%AE%89%E8%A3%85" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>安装</h4>
-<pre><code class="language-plain_text">sh -c &quot;$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)&quot;
-</code></pre>
-<h4><a id="%E9%85%8D%E7%BD%AEoh-my-zsh" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>配置oh my zsh</h4>
-<blockquote>
-<p><a href="https://github.com/robbyrussell/oh-my-zsh">oh-my-zsh github</a></p>
-</blockquote>
-<h3><a id="agnoster%E4%B8%BB%E9%A2%98-https-github-comfcambloroh-my-zsh-agnoster-fcamblor" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="https://github.com/fcamblor/oh-my-zsh-agnoster-fcamblor">agnoster主题</a></h3>
-<p>agnoster是一个zsh主题，特别为使用iTerm2 + Solarized Dark主题，又经常使用Git的用户定制。</p>
-<h4><a id="%E5%AE%89%E8%A3%85" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>安装</h4>
-<pre><code class="language-shell">$ git clone https://github.com/fcamblor/oh-my-zsh-agnoster-fcamblor.git
-</code></pre>
-<p>执行工程里的install脚本，主题将安装到~/.oh-my-zsh/themes目录下</p>
-<h4><a id="%E8%AE%BE%E7%BD%AE%E8%AF%A5%E4%B8%BB%E9%A2%98" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>设置该主题</h4>
-<p>打开~/.zshrc文件，然后将ZSH_THEME后面的字段改为agnoster。<br />
-<img src="http://image.harveygg.wang/mweb/15588877098383.jpg" alt="" style="width:618px;" /></p>
-<h3><a id="%E5%A2%9E%E5%8A%A0%E6%8C%87%E4%BB%A4%E9%AB%98%E4%BA%AE%E6%95%88%E6%9E%9C" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>增加指令高亮效果</h3>
-<p>指令高亮效果作用是当用户输入正确命令时指令会绿色高亮，错误时命令红色高亮</p>
-<h4><a id="%E5%AE%89%E8%A3%85zsh-syntax-highlighting-https-github-comzsh-userszsh-syntax-highlighting" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>安装<a href="https://github.com/zsh-users/zsh-syntax-highlighting">zsh-syntax-highlighting</a></h4>
-<pre><code class="language-shell">$ git clone git://github.com/zsh-users/zsh-syntax-highlighting.git
-$ echo &quot;source ${(q-)PWD}/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh&quot; &gt;&gt; ${ZDOTDIR:-$HOME}/.zshrc
-</code></pre>
-<h3><a id="%E5%AE%89%E8%A3%85powerline-http-powerline-readthedocs-ioenlatestinstallation-html" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="http://powerline.readthedocs.io/en/latest/installation.html">安装Powerline</a></h3>
-<pre><code class="language-shell">$ pip install powerline-status --user
-</code></pre>
-<h3><a id="%E5%AE%89%E8%A3%85powerline%E5%AD%97%E4%BD%93%E5%BA%93-https-link-jianshu-com-t-https-3a-2f-2fgithub-com-2fpowerline-2ffonts" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>安装<a href="https://link.jianshu.com/?t=https%3A%2F%2Fgithub.com%2Fpowerline%2Ffonts">Powerline字体库</a></h3>
-<p>使用zsh主题需要配合Powerline字体</p>
-<ol>
-<li>将工程clone下来</li>
-<li>执行install.sh脚本安装所有Powerline字体</li>
-</ol>
-<p>安装完成后提示所有字体均已下载到/Users/{username}/Library/Fonts路径下</p>
-<h4><a id="%E8%AE%BE%E7%BD%AEiterm2%E7%9A%84%E5%AD%97%E4%BD%93" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>设置iTerm2的字体</h4>
-<p>具体的操作是iTerm2 -&gt; Preferences -&gt; Profiles -&gt; Text，在Font区域选中Change Font，选择for Powerline的字体</p>
-<p><img src="http://image.harveygg.wang/mweb/15588954739813.jpg" alt="" style="width:830px;" /></p>
-<hr />
-<blockquote>
-<p>Maybe you also want to try <a href="https://jmolivas.weknowinc.com/improve-your-shell-using-fish-and-oh-my-fish">this</a></p>
-</blockquote>
 
 ]]></content>
   </entry>
@@ -1597,84 +1694,6 @@ ordercontext.domain
 <li>除了提供API之外，还要提供文档，guideline, template code, on call, 布道等。</li>
 <li>最初落地时不知道需要提供哪些能力，可以从产品团队了解需求，从解决最迫切的需求开始。</li>
 </ol>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Immutable Infrastructure]]></title>
-    <link href="https://blog.luckyowl.tech/15749287286754.html"/>
-    <updated>2019-11-28T00:12:08-08:00</updated>
-    <id>https://blog.luckyowl.tech/15749287286754.html</id>
-    <content type="html"><![CDATA[
-<h2><a id="%E4%BB%80%E4%B9%88%E6%98%AFmutable-infrastructure" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>什么是Mutable Infrastructure</h2>
-<p>传统物理服务器时代，企业倾向于对服务器做修改以实现商业目的。如，更换配件，原地更新软件包(upgrade app)，修改配置(update configuration)，打补丁(ad-hoc fixes)，微调(tweaks)。这些操作渐渐把一个服务器变得独一无二(<a href="https://martinfowler.com/bliki/SnowflakeServer.html">SnowflakeServer</a>)。这使得它难以被替换，难以维护，难以复制。你越来越无法理解其上面的某个配置这样配的原因。而这一切之所以会这样发展，是因为物理服务器时代服务器更新的难度大，成本高，周期长。所以企业在服务器更新上发展出很多技术，但都是围绕着原地升级的思路发展的。</p>
-<h2><a id="%E4%BB%80%E4%B9%88%E6%98%AFimmutable-infrastructure" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>什么是Immutable Infrastructure</h2>
-<p>到了虚拟化时代，虚拟服务器变得可以被轻易替换(disposable)，整个服务器可以在秒级被重新构建。这使得使用服务器被整体替换的方式更新服务器比原地升级服务器来的更划算。服务器一旦部署完就不再被修改，服务器需要升级时，是基于一个基线重新构建然后替换原有服务器。这使得服务器的复制，替换变得轻而易举。这种服务器也叫<a href="https://martinfowler.com/bliki/PhoenixServer.html">PhoenixServer</a>。这样的基础架构无疑更加健壮，可维护。</p>
-<h2><a id="%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0immutable-infrastructure" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>如何实现Immutable Infrastructure</h2>
-<ul>
-<li>禁止人工登录服务器做任何修改</li>
-<li>使用虚拟化技术</li>
-<li>服务器可以基于镜像快速构建，</li>
-<li>服务器的生命周期管理由软件自动化实现
-<ul>
-<li>服务器目标状态由文档定义</li>
-<li>文档由VCS管理</li>
-<li>服务器更新由自动化工具基于VCS里文档的更新触发，并最终实现目标状态</li>
-</ul>
-</li>
-<li>一个无状态，变化频繁的应用层</li>
-<li>一个数据持久层
-<ul>
-<li>日志中心，记录服务器的每次变更</li>
-<li>外部数据存储，无状态应用层服务器被频繁替换，数据必须存储在外部</li>
-</ul>
-</li>
-<li>开发和运维无间合作(DevOps)</li>
-<li>使用混沌工程工具验证服务的健壮性</li>
-</ul>
-<h2><a id="%E7%90%86%E6%83%B3%E5%BE%88%E4%B8%B0%E6%BB%A1%EF%BC%8C%E7%8E%B0%E5%AE%9E%E5%BE%88%E9%AA%A8%E6%84%9F" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>理想很丰满，现实很骨感</h2>
-<p>如果在物理服务器上利用严格规范和自动化工具是否能打造Immutable Infrastructure呢？理论上可以，但现实是物理服务器很多场景下难以实现批量统一的更新，因为物理服务器太大，上面跑的东西太多。<br />
-那么是不是使用了虚拟化技术，就一定能实现Immutable Infrastructure？答案是否定的。国内很多大厂，甚至是云计算提供商，其内部服务虽然使用了虚拟机，甚至容器，但是其运维范式仍然遵循传统原地升级模式，仍然会登录到虚拟机或容器内部做一些修改，或者只有部分技术栈（如服务软件包，基础软件包）实现了基线化管理，而其他技术栈（如操作系统配置，网络配置）还是通过其他途径手动升级，整体效果仍然和传统Mutable Infrastructure一样。举个例子，应用扩容一台机器，而防火墙没有同步更新，导致新扩容的服务器和其他服务器之间网络不通，需要人工修改网络配置才能打通网络。<br />
-所以说，真正的Immutable Infrastructure的落地，是依赖强有力的运维能力的，而这样的运维能力又依赖配套的组织架构关系和DevOps文化和极强的规范化。</p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[后天八卦]]></title>
-    <link href="https://blog.luckyowl.tech/15667991314468.html"/>
-    <updated>2019-08-25T22:58:51-07:00</updated>
-    <id>https://blog.luckyowl.tech/15667991314468.html</id>
-    <content type="html"><![CDATA[
-<p>乾坎艮震巽离坤兑</p>
-<table>
-<thead>
-<tr>
-<th>食指</th>
-<th>中指</th>
-<th>无名指</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>巽4</td>
-<td>离9</td>
-<td>坤2</td>
-</tr>
-<tr>
-<td>震3</td>
-<td>5</td>
-<td>兑7</td>
-</tr>
-<tr>
-<td>艮8</td>
-<td>坎1</td>
-<td>乾6</td>
-</tr>
-</tbody>
-</table>
-<p>戴九履一，左三右七，二四为肩，六八为足，五居其中</p>
 
 ]]></content>
   </entry>
