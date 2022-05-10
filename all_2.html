@@ -132,6 +132,38 @@
 	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
 		<div class="meta">
 			<div class="date">
+				<time datetime="2019-08-25T22:54:04-07:00" itemprop="datePublished">08/25/2019</time>
+			</div>
+			<div class="tags">posted in 
+			
+			    <a class='category' href='yi.html'>易经</a>&nbsp;
+			 
+			</div>
+		</div>
+		<h1 class="title" itemprop="name"><a href="15667988442443.html" itemprop="url">
+		先天八卦</a></h1>
+		<div class="entry-content" itemprop="articleBody">
+			
+			<pre><code class="language-plain_text">            南
+            乾1
+        兑2      巽5
+   东 离3     9      坎6 西        
+        震4      艮7
+             坤8
+             北
+</code></pre>
+<p>乾三连、坤六段、震仰盂、艮覆碗、离中虚、坎中满、兑上缺、巽下断</p>
+
+
+			
+			
+		</div>
+
+	</article>
+ 
+	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+		<div class="meta">
+			<div class="date">
 				<time datetime="2019-12-23T07:42:14-08:00" itemprop="datePublished">12/23/2019</time>
 			</div>
 			<div class="tags">posted in 
@@ -494,86 +526,12 @@ $&gt; bin/kafka-server-start.sh config/server.properties
 		</div>
 
 	</article>
- 
-	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-		<div class="meta">
-			<div class="date">
-				<time datetime="2019-06-21T19:52:23-07:00" itemprop="datePublished">06/21/2019</time>
-			</div>
-			<div class="tags">posted in 
-			
-			    <a class='category' href='internet-tech.html'>后端技术</a>&nbsp;
-			 
-			</div>
-		</div>
-		<h1 class="title" itemprop="name"><a href="15611719436274.html" itemprop="url">
-		域名解析</a></h1>
-		<div class="entry-content" itemprop="articleBody">
-			
-			<h2><a id="dns%E5%9F%9F%E5%90%8D%E8%A7%84%E8%8C%83" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>DNS域名规范</h2>
-<ul>
-<li>域名中的标号由英文和数字组成，标号中除连字符“-”外不能使用其他的标点符号，不区分大小写字母</li>
-<li>每一个标号不超过63个字符</li>
-<li>级别最低的域名写在最左边，而级别最高的字符写在最右边</li>
-<li>由多个标号组成的完整域名总共不超过255个字符</li>
-<li>DNS既不规定一个域名需要包含多少个下级域名，也不规定每一级域名代表什么意思。</li>
-<li>各级域名由其上一级的域名管理机构管理，而最高的顶级域名则由ICANN进行管理</li>
-</ul>
-<h2><a id="%E5%9F%9F%E5%90%8D%E7%AE%A1%E7%90%86" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>域名管理</h2>
-<ul>
-<li>
-<p>顶级域名分三大类</p>
-<ul>
-<li><strong>国家顶级域名nTLD</strong>：采用ISO3166的规定。如：cn代表中国，us代表美国，uk代表英国，等等。国家域名又常记为ccTLD(cc表示国家代码contry-code)</li>
-<li><strong>通用顶级域名gTLD</strong>：最常见的通用顶级域名有7个，即：com(公司企业)，net(网络服务机构)，org(非营利组织)，int(国际组织)，gov(美国的政府部门)，mil(美国的军事部门)</li>
-<li><strong>基础结构域名(infrastructure domain)</strong>：只有一个arpa，用于反向域名解析，因此成为反向域名</li>
-</ul>
-<p><img src="http://image.harveygg.wang/mweb/15611724903244.jpg" alt="xxx" /></p>
-</li>
-</ul>
-<h2><a id="%E5%9F%9F%E5%90%8D%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E5%88%86%E7%B1%BB" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>域名服务器的分类</h2>
-<ul>
-<li>根域名服务器：记录顶级域名服务器</li>
-<li>顶级域名服务器：管理在该顶级域名服务器注册的二级域名</li>
-<li>权威域名服务器(authoritative domain name system)：负责一个zone的域名解析</li>
-<li>本地域名服务器：不在域名服务器树结构中，但是很重要，域名解析首先发给本地域名服务器</li>
-</ul>
-<h2><a id="%E5%9F%9F%E5%90%8D%E8%A7%A3%E6%9E%90%E8%BF%87%E7%A8%8B" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>域名解析过程</h2>
-<ol>
-<li>请求本地域名服务器</li>
-<li>本地域名服务器返回解析结果或想根域名服务器请求</li>
-<li>根域名服务器返回顶级域名服务器的地址</li>
-<li>本地域名服务器请求顶级域名服务器</li>
-<li>顶级域名服务器返回权威域名服务器的地址</li>
-<li>本地域名服务器请求权威域名服务器</li>
-<li>权威域名服务器返回解析结果或报错</li>
-<li>本地域名服务器返回解析结果或报错</li>
-</ol>
-<h2><a id="dns%E8%AE%B0%E5%BD%95%E7%B1%BB%E5%9E%8B" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>DNS记录类型</h2>
-<ul>
-<li>A记录：将域名指向IPv4地址</li>
-<li>AAAA：将域名指向IPv6地址（例如：ff06:0:0:0:0:0:0:c3）</li>
-<li>CNAME：将域名指向另一个域名</li>
-<li>TXT：在这里可以填写任何东西，长度限制255字符。绝大多数的TXT记录是用来做SPF记录（反垃圾邮件）</li>
-<li>NS：授权其他域名服务器解析域名</li>
-<li>MX：指向邮箱服务器</li>
-<li>SOA：SOA叫做起始授权机构记录，表明负责一个zone的多台权威DNS服务器（由NS记录标记）之间的关系，SOA指向的DNS有修改权，其他DNS从SOA同步数据</li>
-<li>SRV记录：记录提供特定服务的服务器，SRV记录了哪台计算机提供了哪个服务。格式为：服务的名字.协议的类型（例如：_example-server._tcp）</li>
-<li>PTR记录：PTR记录是A记录的逆向记录，又称做IP反查记录或指针记录，负责将IP反向解析为域名</li>
-</ul>
-
-
-			
-			
-		</div>
-
-	</article>
   
 
 </div>
 <nav id="pagenavi">
 	 <a class="prev" href="all_1.html">Prev</a>  
-	
+	 <a class="next" href="all_3.html">Next</a> 
 	<div class="center"><a href="archives.html">Blog Archives</a></div>
 
 </nav>

@@ -4,7 +4,7 @@
   <title><![CDATA[Harvey's Tech Site]]></title>
   <link href="https://blog.luckyowl.tech/atom.xml" rel="self"/>
   <link href="https://blog.luckyowl.tech/"/>
-  <updated>2022-02-10T20:43:42-08:00</updated>
+  <updated>2022-05-09T23:30:18-07:00</updated>
   <id>https://blog.luckyowl.tech/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -12,6 +12,135 @@
   </author>
   <generator uri="http://www.coderforart.com/">CoderForArt</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Setting up Windows Command-Line Working Env for Linux-like OS guys]]></title>
+    <link href="https://blog.luckyowl.tech/16521441223749.html"/>
+    <updated>2022-05-09T17:55:22-07:00</updated>
+    <id>https://blog.luckyowl.tech/16521441223749.html</id>
+    <content type="html"><![CDATA[
+<h2><a id="motivation" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Motivation</h2>
+<p>For developers who are accustomed to Linux-like OS systems, Windows 10 is not a productive working environment. This toolset will make their eyes shine. Because it is providing an equivalent experience to working in Mac OS with iTerms2+Oh-my-zsh equipped.</p>
+<h2><a id="final-result-screenshot" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Final Result Screenshot</h2>
+<p><img src="https://i.imgur.com/mSBv1Hy.png" alt="Xnip2022-05-09_14-52-38" /></p>
+<p>Explanation:</p>
+<ul>
+<li><code>cdcode</code> and <code>gst</code> are my aliases for entering the EMS project folder and executing <code>git status</code></li>
+<li><code>ipconfig</code> is a Windows built-in command-line tool used for showing information of network interfaces. Whereas <code>grep</code> is a Linux built-in command-line tool used for printing lines that match patterns which could not be used in Windows before, no matter how desperately a Linux-like OS developer wanted to use it. However, with <code>WSL</code> installed, it has become a reality to execute Linux commands directly in Windows now. <code>dig</code> is another similar example of executing Linux commands in Windows.</li>
+</ul>
+<h2><a id="features-at-a-glance" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Features at a glance</h2>
+<ul>
+<li>define command aliases</li>
+<li>use Linux built-in command-line tools directly</li>
+<li>mixed use Windows PowerShell and Linux command line directives</li>
+<li>selection as a copy</li>
+<li>git status support</li>
+<li>tabs</li>
+<li>split panes<br />
+...</li>
+</ul>
+<h2><a id="installation" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation</h2>
+<h3><a id="1-install-powershell" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>1. Install PowerShell</h3>
+<p>PowerShell is shipped with most Windows 10 distributions. If you already have it, don't bother to install it again, unless you want to use <a href="https://docs.microsoft.com/en-us/powershell/scripting/install/installing-powershell-on-windows?view=powershell-7.2">PowerShell 7.x</a> which is not installed by default.</p>
+<h3><a id="2-install-wsl" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>2. Install WSL</h3>
+<p>WSL is short for &quot;Windows subsystems for Linux&quot;. It will enable you to use Linux tools in Windows. To install it is quite easy, just execute <code>wsl --install</code> in PowerShell. Go to <a href="https://docs.microsoft.com/en-us/windows/wsl/install">here</a> for more details.</p>
+<h3><a id="3-install-windows-terminal" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>3. Install Windows Terminal</h3>
+<p>Microsoft’s new Windows Terminal is finally stable. Windows finally has a more modern terminal environment including features like tabs, split panes, multiple session types, and settings that let you configure everything from keyboard shortcuts to animated GIF backgrounds. This is an alternative tool to iTerm2 in Mac. It is a console enhancement tool, so it must run based on one of your existing command-line shell instances, such as PowerShell.<br />
+You can get it from <a href="https://www.microsoft.com/en-us/p/windows-terminal/9n0dx20hk701?activetab=pivot:overviewtab">Microsoft Store</a><br />
+Please google its configuration details. It's up to you how deeply custom configuration you like to do.</p>
+<h3><a id="4-install-oh-my-posh" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>4. Install Oh-My-Posh</h3>
+<p>With the previous 3 steps, you are now having a modern terminal in Windows. Now it's time that we customize the command line prompt to make the terminal working environment more powerful. Oh-My-Posh is a custom prompt engine for any shell that has the ability to adjust the prompt string with a function or variable.<br />
+Get Oh-My-Posh and its documentation from its <a href="https://ohmyposh.dev/">official website</a><br />
+Now, you can use the full-colour set of your terminal, adjust existing themes or create your own, and keep track of git status automatically.</p>
+<h2><a id="conclusion" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Conclusion</h2>
+<p>With the power of <code>WSL</code>, we can now use Linux tools in Windows directly.<br />
+Windows Terminal is a modern terminal tool enabling developers to use tabs, multiple panes, background images and much other advanced functionality. Windows Terminal is based on command-line shell instances, such as PowerShell.<br />
+Oh-My-Posh is an extension to the command-line shell. It enables developers to make good use of the command line prompt.<br />
+Enjoy this toolset!</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[What is a good Node.js Template in 2022]]></title>
+    <link href="https://blog.luckyowl.tech/16433325024079.html"/>
+    <updated>2022-01-27T17:15:02-08:00</updated>
+    <id>https://blog.luckyowl.tech/16433325024079.html</id>
+    <content type="html"><![CDATA[
+<ul>
+<li>Uses <a href="https://yarnpkg.com/">yarn</a></li>
+<li>Organize code structure with <a href="https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html">Clean Architecturef</a></li>
+<li>Demonstrates the <a href="https://12factor.net/">twelve-factor</a> methodology</li>
+<li>ES2017 latest features like Async/Await</li>
+<li>Watch code changes and restart for development using <a href="https://nodemon.io/">nodemon</a>
+<ul>
+<li><code>yarn add nodemon --dev</code></li>
+</ul>
+</li>
+<li>Load environment variables from .env files with <a href="https://www.npmjs.com/package/dotenv">dotenv</a></li>
+<li>Web framework using <a href="https://expressjs.com/">Express</a> with middlewares as follows
+<ul>
+<li><code>yarn add express</code></li>
+<li>Support CORS with express middleware <a href="https://expressjs.com/en/resources/middleware/cors.html">cors</a></li>
+<li>Gzip compression with express middleware <a href="http://expressjs.com/en/resources/middleware/compression.html">compression</a></li>
+<li>Parsing cookies with express middleware <a href="https://www.npmjs.com/package/cookie-parser">cookie-parser</a>
+<ul>
+<li><code>yarn add cookie-parser</code></li>
+</ul>
+</li>
+<li>Customize request logs with express middleware <a href="https://expressjs.com/en/resources/middleware/morgan.html">morgan</a>, which can be integrated with Winston.</li>
+<li>Set some HTTP headers for security with <a href="https://github.com/helmetjs/helmet">helmet</a>
+<ul>
+<li><code>yarn add helmet</code></li>
+<li><code>import helmet from 'helmet';</code></li>
+<li><code>const app = express();</code></li>
+<li><code>app.use(helmet());</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Request validation with <a href="https://joi.dev/">joi</a></li>
+<li>Authentication and Authorization with <a href="https://www.passportjs.org/">Passport</a>
+<ul>
+<li><code>yarn add passport</code></li>
+</ul>
+</li>
+<li>MongoDB Modeling Lib with <a href="https://mongoosejs.com/">Mongoose</a>
+<ul>
+<li><code>yarn add mongoose</code></li>
+</ul>
+</li>
+<li>Support pagination with <a href="https://www.npmjs.com/package/mongoose-aggregate-paginate-v2">Mongoose-aggregate-paginate-v2</a>
+<ul>
+<li><code>yarn add mongoose-aggregate-paginate-v2</code></li>
+</ul>
+</li>
+<li>Deal with Date Object with <a href="https://day.js.org/">Day.js</a></li>
+<li>Git hooks with <a href="https://typicode.github.io/husky/#/">husky</a></li>
+<li>Linting with <a href="http://eslint.org/">ESLint</a></li>
+<li>Format with <a href="https://prettier.io/">Prettier</a></li>
+<li>Consistent coding styles with <a href="https://editorconfig.org/">EditorConfig</a></li>
+<li>Tests with <a href="https://mochajs.org/">mocha</a>, <a href="https://www.chaijs.com/">chai</a> and <a href="https://sinonjs.org/">sinon</a></li>
+<li>Code coverage with <a href="https://istanbul.js.org/">Istanbul</a> and <a href="https://coveralls.io/">coveralls</a></li>
+<li>Continuous integration support with <a href="https://travis-ci.org/">Travis CI</a></li>
+<li>Docker support</li>
+<li>Monitoring with <a href="https://pm2.keymetrics.io/">pm2</a></li>
+<li>Logging system using <a href="https://github.com/winstonjs/winston">Winston</a>
+<ul>
+<li><code>yarn add winston</code></li>
+<li>With Winston, you can have multiple transports configured at different levels.</li>
+</ul>
+</li>
+<li>API documentation generation with <a href="https://apidocjs.com/">apidoc</a></li>
+<li></li>
+<li>Image uploading with <a href="https://aws.amazon.com/tr/s3/">AWS S3 Client</a></li>
+<li>Email sending by using <a href="https://sendgrid.com/">SendGrid</a> and <a href="https://aws.amazon.com/tr/ses/">AWS SES</a></li>
+<li>SMS sending by using <a href="https://www.twilio.com/">Twilio</a></li>
+<li>Multilanguage Support using <a href="https://www.npmjs.com/package/i18n-js">i18n</a></li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[一些终端下更好用的替代工具]]></title>
@@ -239,84 +368,6 @@ $ brew --cache  # 打印brew下载包存放位置
 <pre><code class="language-shell">$ ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/uninstall)
 </code></pre>
 <p>Download the uninstall script and run ./uninstall --help to view more uninstall options.</p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[What is a good Node.js Restful API Template in 2022]]></title>
-    <link href="https://blog.luckyowl.tech/16433325024079.html"/>
-    <updated>2022-01-27T17:15:02-08:00</updated>
-    <id>https://blog.luckyowl.tech/16433325024079.html</id>
-    <content type="html"><![CDATA[
-<ul>
-<li>Uses <a href="https://yarnpkg.com/">yarn</a></li>
-<li>Organize code structure with Clean Architecturef</li>
-<li>ES2017 latest features like Async/Await</li>
-<li>Watch code changes and restart for development using <a href="https://nodemon.io/">nodemon</a>
-<ul>
-<li><code>yarn add nodemon --dev</code></li>
-</ul>
-</li>
-<li>Load environment variables from .env files with <a href="https://www.npmjs.com/package/dotenv">dotenv</a></li>
-<li>Web framework using <a href="https://expressjs.com/">Express</a> with middlewares as follows
-<ul>
-<li><code>yarn add express</code></li>
-<li>Support CORS with express middleware <a href="https://expressjs.com/en/resources/middleware/cors.html">cors</a></li>
-<li>Gzip compression with express middleware <a href="http://expressjs.com/en/resources/middleware/compression.html">compression</a></li>
-<li>Parsing cookies with express middleware <a href="https://www.npmjs.com/package/cookie-parser">cookie-parser</a>
-<ul>
-<li><code>yarn add cookie-parser</code></li>
-</ul>
-</li>
-<li>Customize request logs with express middleware <a href="https://expressjs.com/en/resources/middleware/morgan.html">morgan</a>, which can be integrated with Winston.</li>
-<li>Validate input with express middleware <a href="https://express-validator.github.io/docs/">express-validator</a>
-<ul>
-<li><code>yarn install express-validator</code></li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Set some HTTP headers for security with <a href="https://github.com/helmetjs/helmet">helmet</a></li>
-<li>Request validation with <a href="https://joi.dev/">joi</a></li>
-<li>Authentication and Authorization with <a href="https://www.passportjs.org/">Passport</a>
-<ul>
-<li><code>yarn add passport</code></li>
-</ul>
-</li>
-<li>MongoDB Modeling Lib with <a href="https://mongoosejs.com/">Mongoose</a>
-<ul>
-<li><code>yarn add mongoose</code></li>
-</ul>
-</li>
-<li>Support pagination with <a href="https://www.npmjs.com/package/mongoose-aggregate-paginate-v2">Mongoose-aggregate-paginate-v2</a>
-<ul>
-<li><code>yarn add mongoose-aggregate-paginate-v2</code></li>
-</ul>
-</li>
-<li>Deal with Date Object with <a href="https://day.js.org/">Day.js</a></li>
-<li>Git hooks with <a href="https://typicode.github.io/husky/#/">husky</a></li>
-<li>Linting with <a href="http://eslint.org/">ESLint</a></li>
-<li>Format with <a href="https://prettier.io/">Prettier</a></li>
-<li>Consistent coding styles with <a href="https://editorconfig.org/">EditorConfig</a></li>
-<li>Tests with <a href="https://mochajs.org/">mocha</a>, <a href="https://www.chaijs.com/">chai</a> and <a href="https://sinonjs.org/">sinon</a></li>
-<li>Code coverage with <a href="https://istanbul.js.org/">Istanbul</a> and <a href="https://coveralls.io/">coveralls</a></li>
-<li>Continuous integration support with <a href="https://travis-ci.org/">Travis CI</a></li>
-<li>Docker support</li>
-<li>Monitoring with <a href="https://pm2.keymetrics.io/">pm2</a></li>
-<li>Logging system using <a href="https://github.com/winstonjs/winston">Winston</a>
-<ul>
-<li><code>yarn add winston</code></li>
-<li>With Winston, you can have multiple transports configured at different levels.</li>
-</ul>
-</li>
-<li>API documentation generation with <a href="https://apidocjs.com/">apidoc</a></li>
-<li></li>
-<li>Image uploading with <a href="https://aws.amazon.com/tr/s3/">AWS S3 Client</a></li>
-<li>Email sending by using <a href="https://sendgrid.com/">SendGrid</a> and <a href="https://aws.amazon.com/tr/ses/">AWS SES</a></li>
-<li>SMS sending by using <a href="https://www.twilio.com/">Twilio</a></li>
-<li>Multilanguage Support using <a href="https://www.npmjs.com/package/i18n-js">i18n</a></li>
-</ul>
 
 ]]></content>
   </entry>
@@ -1659,44 +1710,6 @@ ordercontext.domain
 <p>其中<code>--registry-mirror</code>参数中的&quot;xxxxxx&quot;是个人阿里云镜像加速地址，查询地址：</p>
 <pre><code class="language-plain_text">https://cr.console.aliyun.com/cn-hangzhou/instances/mirrors
 </code></pre>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[平台到底是什么概念]]></title>
-    <link href="https://blog.luckyowl.tech/15750802883724.html"/>
-    <updated>2019-11-29T18:18:08-08:00</updated>
-    <id>https://blog.luckyowl.tech/15750802883724.html</id>
-    <content type="html"><![CDATA[
-<h2><a id="%E4%B8%80%E8%88%AC%E5%AE%9A%E4%B9%89" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>一般定义</h2>
-<p>平台能为产品团队提供可复用能力支撑（赋能），它是一个操作环境，可以让产品团队在其上把产品特性快速交付到客户手中。ThoughtWorks开发出一个五维模型来描述平台的重要特征：</p>
-<ul>
-<li>支持端到端交付的基础设施</li>
-<li>API和架构自愈</li>
-<li>提供自助服务</li>
-<li>支持实验的基础设施</li>
-<li>提供用户触点技术</li>
-</ul>
-<h2><a id="%E5%85%88%E6%9D%A5%E7%9C%8B%E7%9C%8B%E4%BB%80%E4%B9%88%E4%B8%8D%E6%98%AF%E4%B8%80%E4%B8%AA%E5%B9%B3%E5%8F%B0" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>先来看看什么不是一个平台</h2>
-<h3><a id="%E6%8C%89%E6%8A%80%E6%9C%AF%E9%A2%86%E5%9F%9F%E5%88%92%E5%88%86%E5%9B%A2%E9%98%9F" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>按技术领域划分团队</h3>
-<p>有的企业花大力气构建自动化能力，但是往往会根据技术划分团队。比如，负责中间件管理的团队，负责操作系统管理的团队，负责DB管理的团队，负责LB管理的团队，另外还会有一个专门负责自动化的效能团队，往往能力上只是负责编排。</p>
-<p>这些团队，每个都在自己的管理架构下有独立的工作方式，每个团队都在各自的技术领域范围内实现高效率管理，集中专业化，外包非差异化功能，应用治理，并降低成本。但就是没人去衡量客户需求端到端的交付效率。</p>
-<p>一个客户需求的交付往往穿越多个团队，端到端交付效率极差。</p>
-<p>时间长了，产品和基础设施的质量逐渐下降。环境和配置上会出现很多细微的不一致。产品团队不得不降低交付速度，减少一次交付包含的特性。甚至不敢去做任何改动较大的提升动作或重构动作，而这些动作本来是用来改善问题的。</p>
-<h3><a id="%E5%BD%BC%E6%AD%A4%E4%BE%9D%E8%B5%96%E7%9A%84%E5%BE%85%E5%8A%9E%E4%BA%8B%E9%A1%B9" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>彼此依赖的待办事项</h3>
-<p>一个特性的交付往往在一个团队内无法独立完成，于是一个团队的待办事项会依赖其他团队的待办事项，彼此耦合。而往往不同团队有不同的目标，各自的待办事项优先级不同。于是一个团队的待办事项无法落地的原因往往就是依赖另一个团队的待办事项，而另一个团队迟迟不能完成。这就造成了团队之间的隔阂和互相之间的不信任，甚至扯皮、推诿，丧失责任感和创造力。最终使端到端交付的效率变得极低。</p>
-<p>显然，一个好的平台的一个重要特征是，他必须能减少待办事项耦合。该平台必须能够支持自助服务。</p>
-<h2><a id="%E4%BB%80%E4%B9%88%E6%98%AF%E4%B8%80%E4%B8%AA%E5%B9%B3%E5%8F%B0" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>什么是一个平台</h2>
-<p>AWS就是一个平台。</p>
-<h2><a id="%E5%A6%82%E4%BD%95%E6%9E%84%E5%BB%BA%E4%B8%80%E4%B8%AA%E5%B9%B3%E5%8F%B0" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>如何构建一个平台</h2>
-<ol>
-<li>调整组织架构，给每个产品团队增加5%的运维职责，节省平台团队200%的运维职责。&quot;you build it, you run it.&quot;</li>
-<li>平台自己也要承担从开发到运行的所有责任，避免平台自身的开发团队只管开发，运维团队管运行。同样要坚守：&quot;you build it, you run it.&quot;</li>
-<li>划清平台和产品团队的职责边界，产品团队负责自己产品的构建，部署，监控等；平台团队负责平台的构建，部署，监控等；设计抽象，对外暴露自助服务；平台不应该关心它上面跑的是什么业务，产品不应该关心平台使用的技术。</li>
-<li>除了提供API之外，还要提供文档，guideline, template code, on call, 布道等。</li>
-<li>最初落地时不知道需要提供哪些能力，可以从产品团队了解需求，从解决最迫切的需求开始。</li>
-</ol>
 
 ]]></content>
   </entry>

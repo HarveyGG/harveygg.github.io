@@ -132,6 +132,67 @@
 	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
 		<div class="meta">
 			<div class="date">
+				<time datetime="2022-05-09T17:55:22-07:00" itemprop="datePublished">05/09/2022</time>
+			</div>
+			<div class="tags">posted in 
+			
+			    <a class='category' href='mac-dev-env.html'>Mac开发环境</a>&nbsp;
+			 
+			</div>
+		</div>
+		<h1 class="title" itemprop="name"><a href="16521441223749.html" itemprop="url">
+		Setting up Windows Command-Line Working Env for Linux-like OS guys</a></h1>
+		<div class="entry-content" itemprop="articleBody">
+			
+			<h2><a id="motivation" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Motivation</h2>
+<p>For developers who are accustomed to Linux-like OS systems, Windows 10 is not a productive working environment. This toolset will make their eyes shine. Because it is providing an equivalent experience to working in Mac OS with iTerms2+Oh-my-zsh equipped.</p>
+<h2><a id="final-result-screenshot" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Final Result Screenshot</h2>
+<p><img src="https://i.imgur.com/mSBv1Hy.png" alt="Xnip2022-05-09_14-52-38" /></p>
+<p>Explanation:</p>
+<ul>
+<li><code>cdcode</code> and <code>gst</code> are my aliases for entering the EMS project folder and executing <code>git status</code></li>
+<li><code>ipconfig</code> is a Windows built-in command-line tool used for showing information of network interfaces. Whereas <code>grep</code> is a Linux built-in command-line tool used for printing lines that match patterns which could not be used in Windows before, no matter how desperately a Linux-like OS developer wanted to use it. However, with <code>WSL</code> installed, it has become a reality to execute Linux commands directly in Windows now. <code>dig</code> is another similar example of executing Linux commands in Windows.</li>
+</ul>
+<h2><a id="features-at-a-glance" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Features at a glance</h2>
+<ul>
+<li>define command aliases</li>
+<li>use Linux built-in command-line tools directly</li>
+<li>mixed use Windows PowerShell and Linux command line directives</li>
+<li>selection as a copy</li>
+<li>git status support</li>
+<li>tabs</li>
+<li>split panes<br />
+...</li>
+</ul>
+<h2><a id="installation" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation</h2>
+<h3><a id="1-install-powershell" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>1. Install PowerShell</h3>
+<p>PowerShell is shipped with most Windows 10 distributions. If you already have it, don't bother to install it again, unless you want to use <a href="https://docs.microsoft.com/en-us/powershell/scripting/install/installing-powershell-on-windows?view=powershell-7.2">PowerShell 7.x</a> which is not installed by default.</p>
+<h3><a id="2-install-wsl" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>2. Install WSL</h3>
+<p>WSL is short for &quot;Windows subsystems for Linux&quot;. It will enable you to use Linux tools in Windows. To install it is quite easy, just execute <code>wsl --install</code> in PowerShell. Go to <a href="https://docs.microsoft.com/en-us/windows/wsl/install">here</a> for more details.</p>
+<h3><a id="3-install-windows-terminal" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>3. Install Windows Terminal</h3>
+<p>Microsoft’s new Windows Terminal is finally stable. Windows finally has a more modern terminal environment including features like tabs, split panes, multiple session types, and settings that let you configure everything from keyboard shortcuts to animated GIF backgrounds. This is an alternative tool to iTerm2 in Mac. It is a console enhancement tool, so it must run based on one of your existing command-line shell instances, such as PowerShell.<br />
+You can get it from <a href="https://www.microsoft.com/en-us/p/windows-terminal/9n0dx20hk701?activetab=pivot:overviewtab">Microsoft Store</a><br />
+Please google its configuration details. It's up to you how deeply custom configuration you like to do.</p>
+<h3><a id="4-install-oh-my-posh" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>4. Install Oh-My-Posh</h3>
+<p>With the previous 3 steps, you are now having a modern terminal in Windows. Now it's time that we customize the command line prompt to make the terminal working environment more powerful. Oh-My-Posh is a custom prompt engine for any shell that has the ability to adjust the prompt string with a function or variable.<br />
+Get Oh-My-Posh and its documentation from its <a href="https://ohmyposh.dev/">official website</a><br />
+Now, you can use the full-colour set of your terminal, adjust existing themes or create your own, and keep track of git status automatically.</p>
+<h2><a id="conclusion" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Conclusion</h2>
+<p>With the power of <code>WSL</code>, we can now use Linux tools in Windows directly.<br />
+Windows Terminal is a modern terminal tool enabling developers to use tabs, multiple panes, background images and much other advanced functionality. Windows Terminal is based on command-line shell instances, such as PowerShell.<br />
+Oh-My-Posh is an extension to the command-line shell. It enables developers to make good use of the command line prompt.<br />
+Enjoy this toolset!</p>
+
+
+			
+			
+		</div>
+
+	</article>
+ 
+	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+		<div class="meta">
+			<div class="date">
 				<time datetime="2020-07-16T07:17:58-07:00" itemprop="datePublished">07/16/2020</time>
 			</div>
 			<div class="tags">posted in 
@@ -625,39 +686,12 @@ yarn global add react-devtools</p>
 		</div>
 
 	</article>
- 
-	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-		<div class="meta">
-			<div class="date">
-				<time datetime="2019-11-29T04:55:01-08:00" itemprop="datePublished">11/29/2019</time>
-			</div>
-			<div class="tags">posted in 
-			
-			    <a class='category' href='mac-dev-env.html'>Mac开发环境</a>&nbsp;
-			 
-			</div>
-		</div>
-		<h1 class="title" itemprop="name"><a href="15750321018543.html" itemprop="url">
-		安全和隐私中“任何来源”找回办法</a></h1>
-		<div class="entry-content" itemprop="articleBody">
-			
-			<p>苹果发布了<code>MacOS Sierra 10.12</code>版本之后，原来需要用于安装从网上下载的软件的功能不见了，即系统中“任何来源”选项。可以使用如下方法找回“任何来源”的选项。</p>
-<p>在终端中输入</p>
-<pre><code class="language-shell">sudo spctl --master-disable
-</code></pre>
-
-
-			
-			
-		</div>
-
-	</article>
   
 
 </div>
 <nav id="pagenavi">
 	 
-	
+	 <a class="next" href="mac-dev-env_1.html">Next</a> 
 	<div class="center"><a href="archives.html">Blog Archives</a></div>
 
 </nav>

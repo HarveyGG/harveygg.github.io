@@ -132,6 +132,161 @@
 	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
 		<div class="meta">
 			<div class="date">
+				<time datetime="2022-05-09T17:55:22-07:00" itemprop="datePublished">05/09/2022</time>
+			</div>
+			<div class="tags">posted in 
+			
+			    <a class='category' href='mac-dev-env.html'>Mac开发环境</a>&nbsp;
+			 
+			</div>
+		</div>
+		<h1 class="title" itemprop="name"><a href="16521441223749.html" itemprop="url">
+		Setting up Windows Command-Line Working Env for Linux-like OS guys</a></h1>
+		<div class="entry-content" itemprop="articleBody">
+			
+			<h2><a id="motivation" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Motivation</h2>
+<p>For developers who are accustomed to Linux-like OS systems, Windows 10 is not a productive working environment. This toolset will make their eyes shine. Because it is providing an equivalent experience to working in Mac OS with iTerms2+Oh-my-zsh equipped.</p>
+<h2><a id="final-result-screenshot" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Final Result Screenshot</h2>
+<p><img src="https://i.imgur.com/mSBv1Hy.png" alt="Xnip2022-05-09_14-52-38" /></p>
+<p>Explanation:</p>
+<ul>
+<li><code>cdcode</code> and <code>gst</code> are my aliases for entering the EMS project folder and executing <code>git status</code></li>
+<li><code>ipconfig</code> is a Windows built-in command-line tool used for showing information of network interfaces. Whereas <code>grep</code> is a Linux built-in command-line tool used for printing lines that match patterns which could not be used in Windows before, no matter how desperately a Linux-like OS developer wanted to use it. However, with <code>WSL</code> installed, it has become a reality to execute Linux commands directly in Windows now. <code>dig</code> is another similar example of executing Linux commands in Windows.</li>
+</ul>
+<h2><a id="features-at-a-glance" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Features at a glance</h2>
+<ul>
+<li>define command aliases</li>
+<li>use Linux built-in command-line tools directly</li>
+<li>mixed use Windows PowerShell and Linux command line directives</li>
+<li>selection as a copy</li>
+<li>git status support</li>
+<li>tabs</li>
+<li>split panes<br />
+...</li>
+</ul>
+<h2><a id="installation" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation</h2>
+<h3><a id="1-install-powershell" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>1. Install PowerShell</h3>
+<p>PowerShell is shipped with most Windows 10 distributions. If you already have it, don't bother to install it again, unless you want to use <a href="https://docs.microsoft.com/en-us/powershell/scripting/install/installing-powershell-on-windows?view=powershell-7.2">PowerShell 7.x</a> which is not installed by default.</p>
+<h3><a id="2-install-wsl" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>2. Install WSL</h3>
+<p>WSL is short for &quot;Windows subsystems for Linux&quot;. It will enable you to use Linux tools in Windows. To install it is quite easy, just execute <code>wsl --install</code> in PowerShell. Go to <a href="https://docs.microsoft.com/en-us/windows/wsl/install">here</a> for more details.</p>
+<h3><a id="3-install-windows-terminal" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>3. Install Windows Terminal</h3>
+<p>Microsoft’s new Windows Terminal is finally stable. Windows finally has a more modern terminal environment including features like tabs, split panes, multiple session types, and settings that let you configure everything from keyboard shortcuts to animated GIF backgrounds. This is an alternative tool to iTerm2 in Mac. It is a console enhancement tool, so it must run based on one of your existing command-line shell instances, such as PowerShell.<br />
+You can get it from <a href="https://www.microsoft.com/en-us/p/windows-terminal/9n0dx20hk701?activetab=pivot:overviewtab">Microsoft Store</a><br />
+Please google its configuration details. It's up to you how deeply custom configuration you like to do.</p>
+<h3><a id="4-install-oh-my-posh" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>4. Install Oh-My-Posh</h3>
+<p>With the previous 3 steps, you are now having a modern terminal in Windows. Now it's time that we customize the command line prompt to make the terminal working environment more powerful. Oh-My-Posh is a custom prompt engine for any shell that has the ability to adjust the prompt string with a function or variable.<br />
+Get Oh-My-Posh and its documentation from its <a href="https://ohmyposh.dev/">official website</a><br />
+Now, you can use the full-colour set of your terminal, adjust existing themes or create your own, and keep track of git status automatically.</p>
+<h2><a id="conclusion" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Conclusion</h2>
+<p>With the power of <code>WSL</code>, we can now use Linux tools in Windows directly.<br />
+Windows Terminal is a modern terminal tool enabling developers to use tabs, multiple panes, background images and much other advanced functionality. Windows Terminal is based on command-line shell instances, such as PowerShell.<br />
+Oh-My-Posh is an extension to the command-line shell. It enables developers to make good use of the command line prompt.<br />
+Enjoy this toolset!</p>
+
+
+			
+			
+		</div>
+
+	</article>
+ 
+	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+		<div class="meta">
+			<div class="date">
+				<time datetime="2022-01-27T17:15:02-08:00" itemprop="datePublished">01/27/2022</time>
+			</div>
+			<div class="tags">posted in 
+			
+			    <a class='category' href='internet-tech.html'>后端技术</a>&nbsp;
+			 
+			</div>
+		</div>
+		<h1 class="title" itemprop="name"><a href="16433325024079.html" itemprop="url">
+		What is a good Node.js Template in 2022</a></h1>
+		<div class="entry-content" itemprop="articleBody">
+			
+			<ul>
+<li>Uses <a href="https://yarnpkg.com/">yarn</a></li>
+<li>Organize code structure with <a href="https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html">Clean Architecturef</a></li>
+<li>Demonstrates the <a href="https://12factor.net/">twelve-factor</a> methodology</li>
+<li>ES2017 latest features like Async/Await</li>
+<li>Watch code changes and restart for development using <a href="https://nodemon.io/">nodemon</a>
+<ul>
+<li><code>yarn add nodemon --dev</code></li>
+</ul>
+</li>
+<li>Load environment variables from .env files with <a href="https://www.npmjs.com/package/dotenv">dotenv</a></li>
+<li>Web framework using <a href="https://expressjs.com/">Express</a> with middlewares as follows
+<ul>
+<li><code>yarn add express</code></li>
+<li>Support CORS with express middleware <a href="https://expressjs.com/en/resources/middleware/cors.html">cors</a></li>
+<li>Gzip compression with express middleware <a href="http://expressjs.com/en/resources/middleware/compression.html">compression</a></li>
+<li>Parsing cookies with express middleware <a href="https://www.npmjs.com/package/cookie-parser">cookie-parser</a>
+<ul>
+<li><code>yarn add cookie-parser</code></li>
+</ul>
+</li>
+<li>Customize request logs with express middleware <a href="https://expressjs.com/en/resources/middleware/morgan.html">morgan</a>, which can be integrated with Winston.</li>
+<li>Set some HTTP headers for security with <a href="https://github.com/helmetjs/helmet">helmet</a>
+<ul>
+<li><code>yarn add helmet</code></li>
+<li><code>import helmet from 'helmet';</code></li>
+<li><code>const app = express();</code></li>
+<li><code>app.use(helmet());</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Request validation with <a href="https://joi.dev/">joi</a></li>
+<li>Authentication and Authorization with <a href="https://www.passportjs.org/">Passport</a>
+<ul>
+<li><code>yarn add passport</code></li>
+</ul>
+</li>
+<li>MongoDB Modeling Lib with <a href="https://mongoosejs.com/">Mongoose</a>
+<ul>
+<li><code>yarn add mongoose</code></li>
+</ul>
+</li>
+<li>Support pagination with <a href="https://www.npmjs.com/package/mongoose-aggregate-paginate-v2">Mongoose-aggregate-paginate-v2</a>
+<ul>
+<li><code>yarn add mongoose-aggregate-paginate-v2</code></li>
+</ul>
+</li>
+<li>Deal with Date Object with <a href="https://day.js.org/">Day.js</a></li>
+<li>Git hooks with <a href="https://typicode.github.io/husky/#/">husky</a></li>
+<li>Linting with <a href="http://eslint.org/">ESLint</a></li>
+<li>Format with <a href="https://prettier.io/">Prettier</a></li>
+<li>Consistent coding styles with <a href="https://editorconfig.org/">EditorConfig</a></li>
+<li>Tests with <a href="https://mochajs.org/">mocha</a>, <a href="https://www.chaijs.com/">chai</a> and <a href="https://sinonjs.org/">sinon</a></li>
+<li>Code coverage with <a href="https://istanbul.js.org/">Istanbul</a> and <a href="https://coveralls.io/">coveralls</a></li>
+<li>Continuous integration support with <a href="https://travis-ci.org/">Travis CI</a></li>
+<li>Docker support</li>
+<li>Monitoring with <a href="https://pm2.keymetrics.io/">pm2</a></li>
+<li>Logging system using <a href="https://github.com/winstonjs/winston">Winston</a>
+<ul>
+<li><code>yarn add winston</code></li>
+<li>With Winston, you can have multiple transports configured at different levels.</li>
+</ul>
+</li>
+<li>API documentation generation with <a href="https://apidocjs.com/">apidoc</a></li>
+<li></li>
+<li>Image uploading with <a href="https://aws.amazon.com/tr/s3/">AWS S3 Client</a></li>
+<li>Email sending by using <a href="https://sendgrid.com/">SendGrid</a> and <a href="https://aws.amazon.com/tr/ses/">AWS SES</a></li>
+<li>SMS sending by using <a href="https://www.twilio.com/">Twilio</a></li>
+<li>Multilanguage Support using <a href="https://www.npmjs.com/package/i18n-js">i18n</a></li>
+</ul>
+
+
+			
+			
+		</div>
+
+	</article>
+ 
+	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+		<div class="meta">
+			<div class="date">
 				<time datetime="2020-07-16T07:17:58-07:00" itemprop="datePublished">07/16/2020</time>
 			</div>
 			<div class="tags">posted in 
@@ -401,97 +556,6 @@ $ brew --cache  # 打印brew下载包存放位置
 	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
 		<div class="meta">
 			<div class="date">
-				<time datetime="2022-01-27T17:15:02-08:00" itemprop="datePublished">01/27/2022</time>
-			</div>
-			<div class="tags">posted in 
-			
-			    <a class='category' href='internet-tech.html'>后端技术</a>&nbsp;
-			 
-			</div>
-		</div>
-		<h1 class="title" itemprop="name"><a href="16433325024079.html" itemprop="url">
-		What is a good Node.js Restful API Template in 2022</a></h1>
-		<div class="entry-content" itemprop="articleBody">
-			
-			<ul>
-<li>Uses <a href="https://yarnpkg.com/">yarn</a></li>
-<li>Organize code structure with Clean Architecturef</li>
-<li>ES2017 latest features like Async/Await</li>
-<li>Watch code changes and restart for development using <a href="https://nodemon.io/">nodemon</a>
-<ul>
-<li><code>yarn add nodemon --dev</code></li>
-</ul>
-</li>
-<li>Load environment variables from .env files with <a href="https://www.npmjs.com/package/dotenv">dotenv</a></li>
-<li>Web framework using <a href="https://expressjs.com/">Express</a> with middlewares as follows
-<ul>
-<li><code>yarn add express</code></li>
-<li>Support CORS with express middleware <a href="https://expressjs.com/en/resources/middleware/cors.html">cors</a></li>
-<li>Gzip compression with express middleware <a href="http://expressjs.com/en/resources/middleware/compression.html">compression</a></li>
-<li>Parsing cookies with express middleware <a href="https://www.npmjs.com/package/cookie-parser">cookie-parser</a>
-<ul>
-<li><code>yarn add cookie-parser</code></li>
-</ul>
-</li>
-<li>Customize request logs with express middleware <a href="https://expressjs.com/en/resources/middleware/morgan.html">morgan</a>, which can be integrated with Winston.</li>
-<li>Validate input with express middleware <a href="https://express-validator.github.io/docs/">express-validator</a>
-<ul>
-<li><code>yarn install express-validator</code></li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Set some HTTP headers for security with <a href="https://github.com/helmetjs/helmet">helmet</a></li>
-<li>Request validation with <a href="https://joi.dev/">joi</a></li>
-<li>Authentication and Authorization with <a href="https://www.passportjs.org/">Passport</a>
-<ul>
-<li><code>yarn add passport</code></li>
-</ul>
-</li>
-<li>MongoDB Modeling Lib with <a href="https://mongoosejs.com/">Mongoose</a>
-<ul>
-<li><code>yarn add mongoose</code></li>
-</ul>
-</li>
-<li>Support pagination with <a href="https://www.npmjs.com/package/mongoose-aggregate-paginate-v2">Mongoose-aggregate-paginate-v2</a>
-<ul>
-<li><code>yarn add mongoose-aggregate-paginate-v2</code></li>
-</ul>
-</li>
-<li>Deal with Date Object with <a href="https://day.js.org/">Day.js</a></li>
-<li>Git hooks with <a href="https://typicode.github.io/husky/#/">husky</a></li>
-<li>Linting with <a href="http://eslint.org/">ESLint</a></li>
-<li>Format with <a href="https://prettier.io/">Prettier</a></li>
-<li>Consistent coding styles with <a href="https://editorconfig.org/">EditorConfig</a></li>
-<li>Tests with <a href="https://mochajs.org/">mocha</a>, <a href="https://www.chaijs.com/">chai</a> and <a href="https://sinonjs.org/">sinon</a></li>
-<li>Code coverage with <a href="https://istanbul.js.org/">Istanbul</a> and <a href="https://coveralls.io/">coveralls</a></li>
-<li>Continuous integration support with <a href="https://travis-ci.org/">Travis CI</a></li>
-<li>Docker support</li>
-<li>Monitoring with <a href="https://pm2.keymetrics.io/">pm2</a></li>
-<li>Logging system using <a href="https://github.com/winstonjs/winston">Winston</a>
-<ul>
-<li><code>yarn add winston</code></li>
-<li>With Winston, you can have multiple transports configured at different levels.</li>
-</ul>
-</li>
-<li>API documentation generation with <a href="https://apidocjs.com/">apidoc</a></li>
-<li></li>
-<li>Image uploading with <a href="https://aws.amazon.com/tr/s3/">AWS S3 Client</a></li>
-<li>Email sending by using <a href="https://sendgrid.com/">SendGrid</a> and <a href="https://aws.amazon.com/tr/ses/">AWS SES</a></li>
-<li>SMS sending by using <a href="https://www.twilio.com/">Twilio</a></li>
-<li>Multilanguage Support using <a href="https://www.npmjs.com/package/i18n-js">i18n</a></li>
-</ul>
-
-
-			
-			
-		</div>
-
-	</article>
- 
-	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-		<div class="meta">
-			<div class="date">
 				<time datetime="2022-01-30T23:25:54-08:00" itemprop="datePublished">01/30/2022</time>
 			</div>
 			<div class="tags">posted in 
@@ -595,34 +659,6 @@ Default options are read from the following files in the given order:
 <h3><a id="docker-command" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>docker command</h3>
 <p>lsns -t net|pid<br />
 ls -la /proc/{pid}/ns</p>
-
-
-			
-			
-		</div>
-
-	</article>
- 
-	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-		<div class="meta">
-			<div class="date">
-				<time datetime="2019-06-27T18:45:13-07:00" itemprop="datePublished">06/27/2019</time>
-			</div>
-			<div class="tags">posted in 
-			
-			    <a class='category' href='mac-dev-env.html'>Mac开发环境</a>&nbsp;
-			 
-			</div>
-		</div>
-		<h1 class="title" itemprop="name"><a href="15616863130414.html" itemprop="url">
-		MAC使用技巧</a></h1>
-		<div class="entry-content" itemprop="articleBody">
-			
-			<ul>
-<li>Command+Shift+. 可以显示隐藏文件、文件夹，再按一次，恢复隐藏；</li>
-<li>finder下使用Command+Shift+G 可以前往任何文件夹，包括隐藏文件夹；</li>
-<li>恢复备份时的默认密码是：0000</li>
-</ul>
 
 
 			

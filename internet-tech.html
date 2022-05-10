@@ -141,12 +141,13 @@
 			</div>
 		</div>
 		<h1 class="title" itemprop="name"><a href="16433325024079.html" itemprop="url">
-		What is a good Node.js Restful API Template in 2022</a></h1>
+		What is a good Node.js Template in 2022</a></h1>
 		<div class="entry-content" itemprop="articleBody">
 			
 			<ul>
 <li>Uses <a href="https://yarnpkg.com/">yarn</a></li>
-<li>Organize code structure with Clean Architecturef</li>
+<li>Organize code structure with <a href="https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html">Clean Architecturef</a></li>
+<li>Demonstrates the <a href="https://12factor.net/">twelve-factor</a> methodology</li>
 <li>ES2017 latest features like Async/Await</li>
 <li>Watch code changes and restart for development using <a href="https://nodemon.io/">nodemon</a>
 <ul>
@@ -165,14 +166,16 @@
 </ul>
 </li>
 <li>Customize request logs with express middleware <a href="https://expressjs.com/en/resources/middleware/morgan.html">morgan</a>, which can be integrated with Winston.</li>
-<li>Validate input with express middleware <a href="https://express-validator.github.io/docs/">express-validator</a>
+<li>Set some HTTP headers for security with <a href="https://github.com/helmetjs/helmet">helmet</a>
 <ul>
-<li><code>yarn install express-validator</code></li>
+<li><code>yarn add helmet</code></li>
+<li><code>import helmet from 'helmet';</code></li>
+<li><code>const app = express();</code></li>
+<li><code>app.use(helmet());</code></li>
 </ul>
 </li>
 </ul>
 </li>
-<li>Set some HTTP headers for security with <a href="https://github.com/helmetjs/helmet">helmet</a></li>
 <li>Request validation with <a href="https://joi.dev/">joi</a></li>
 <li>Authentication and Authorization with <a href="https://www.passportjs.org/">Passport</a>
 <ul>
