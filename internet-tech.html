@@ -132,6 +132,55 @@
 	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
 		<div class="meta">
 			<div class="date">
+				<time datetime="2022-05-19T21:47:03-07:00" itemprop="datePublished">05/19/2022</time>
+			</div>
+			<div class="tags">posted in 
+			
+			    <a class='category' href='internet-tech.html'>后端技术</a>&nbsp;
+			 
+			</div>
+		</div>
+		<h1 class="title" itemprop="name"><a href="16530220234994.html" itemprop="url">
+		nginx配置文件解析算法</a></h1>
+		<div class="entry-content" itemprop="articleBody">
+			
+			<p>当一个请求到达时，nginx通过如下算法确定最终用哪一个block来serve这次请求。</p>
+<ol>
+<li>listen匹配，nginx会先把所有server的ip:port用默认值补全，然后和目标请求的ip:port匹配，匹配优先级如下
+<ol>
+<li>唯一完全匹配——直接选中server</li>
+<li>最高匹配度的一批server——比较server_name</li>
+</ol>
+</li>
+<li>server_name匹配
+<ol>
+<li>完全匹配——直接选中server</li>
+<li>尝试把请求host的第前一级域名变成*号到配置中去匹配——选中server</li>
+<li>尝试把请求host的最后一级域名变成*号到配置中去匹配——选中server</li>
+<li>尝试把请求host与配置中正则表达式的server_name去匹配——选中server</li>
+<li>选中default server</li>
+</ol>
+</li>
+<li>location匹配
+<ol>
+<li>带有 = 修饰符，能完全匹配的location——直接选中</li>
+<li>寻找最长的前缀匹配结果，如存在，且带有 ^~ 修饰符，直接选中，若不带修饰符，暂存，然后看正则表达式location匹配结果</li>
+<li>如果前缀匹配location的暂存结果中，有能匹配到的正则表达式location，则那个location优先级置顶，最终优先级最高的location被选中</li>
+<li>如果没有正则表达式location被选中，之前暂存的前缀location被选中</li>
+</ol>
+</li>
+</ol>
+
+
+			
+			
+		</div>
+
+	</article>
+ 
+	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+		<div class="meta">
+			<div class="date">
 				<time datetime="2022-01-27T17:15:02-08:00" itemprop="datePublished">01/27/2022</time>
 			</div>
 			<div class="tags">posted in 

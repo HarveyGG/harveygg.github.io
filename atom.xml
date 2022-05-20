@@ -4,7 +4,7 @@
   <title><![CDATA[Harvey's Tech Site]]></title>
   <link href="https://blog.luckyowl.tech/atom.xml" rel="self"/>
   <link href="https://blog.luckyowl.tech/"/>
-  <updated>2022-05-09T23:30:18-07:00</updated>
+  <updated>2022-05-19T22:10:56-07:00</updated>
   <id>https://blog.luckyowl.tech/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -12,6 +12,42 @@
   </author>
   <generator uri="http://www.coderforart.com/">CoderForArt</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[nginx配置文件解析算法]]></title>
+    <link href="https://blog.luckyowl.tech/16530220234994.html"/>
+    <updated>2022-05-19T21:47:03-07:00</updated>
+    <id>https://blog.luckyowl.tech/16530220234994.html</id>
+    <content type="html"><![CDATA[
+<p>当一个请求到达时，nginx通过如下算法确定最终用哪一个block来serve这次请求。</p>
+<ol>
+<li>listen匹配，nginx会先把所有server的ip:port用默认值补全，然后和目标请求的ip:port匹配，匹配优先级如下
+<ol>
+<li>唯一完全匹配——直接选中server</li>
+<li>最高匹配度的一批server——比较server_name</li>
+</ol>
+</li>
+<li>server_name匹配
+<ol>
+<li>完全匹配——直接选中server</li>
+<li>尝试把请求host的第前一级域名变成*号到配置中去匹配——选中server</li>
+<li>尝试把请求host的最后一级域名变成*号到配置中去匹配——选中server</li>
+<li>尝试把请求host与配置中正则表达式的server_name去匹配——选中server</li>
+<li>选中default server</li>
+</ol>
+</li>
+<li>location匹配
+<ol>
+<li>带有 = 修饰符，能完全匹配的location——直接选中</li>
+<li>寻找最长的前缀匹配结果，如存在，且带有 ^~ 修饰符，直接选中，若不带修饰符，暂存，然后看正则表达式location匹配结果</li>
+<li>如果前缀匹配location的暂存结果中，有能匹配到的正则表达式location，则那个location优先级置顶，最终优先级最高的location被选中</li>
+<li>如果没有正则表达式location被选中，之前暂存的前缀location被选中</li>
+</ol>
+</li>
+</ol>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Setting up Windows Command-Line Working Env for Linux-like OS guys]]></title>
@@ -1685,30 +1721,6 @@ ordercontext.domain
 <pre><code class="language-shell">pred='process matches &quot;.*(ocker|vpnkit).*&quot;
   || (process in {&quot;taskgated-helper&quot;, &quot;launchservicesd&quot;, &quot;kernel&quot;} &amp;&amp; eventMessage contains[c] &quot;docker&quot;)'
 /usr/bin/log stream --style syslog --level=debug --color=always --predicate &quot;$pred&quot;
-</code></pre>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[中国大陆地区安装minikube]]></title>
-    <link href="https://blog.luckyowl.tech/15764895526219.html"/>
-    <updated>2019-12-16T01:45:52-08:00</updated>
-    <id>https://blog.luckyowl.tech/15764895526219.html</id>
-    <content type="html"><![CDATA[
-<p>由于众所周知的原因官方minikube在中国大陆地区运行会碰到网络问题。</p>
-<p>阿里云对官方minikube做了修改，使它默认使用国内镜像仓库。安装和启动参考文档如下：</p>
-<blockquote>
-<p><a href="https://yq.aliyun.com/articles/221687">Minikube - Kubernetes本地实验环境</a></p>
-</blockquote>
-<p>但是文中的参数任然有问题，如下命令可以正常启动，操作系统Mac</p>
-<pre><code class="language-shell">minikube start --image-mirror-country cn \
-    --iso-url=https://kubernetes.oss-cn-hangzhou.aliyuncs.com/minikube/iso/minikube-v1.5.1.iso \
-    --registry-mirror=https://xxxxxx.mirror.aliyuncs.com \
-    --image-repository=registry.cn-hangzhou.aliyuncs.com/google_containers
-</code></pre>
-<p>其中<code>--registry-mirror</code>参数中的&quot;xxxxxx&quot;是个人阿里云镜像加速地址，查询地址：</p>
-<pre><code class="language-plain_text">https://cr.console.aliyun.com/cn-hangzhou/instances/mirrors
 </code></pre>
 
 ]]></content>
