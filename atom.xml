@@ -4,7 +4,7 @@
   <title><![CDATA[Harvey's Tech Site]]></title>
   <link href="https://blog.luckyowl.tech/atom.xml" rel="self"/>
   <link href="https://blog.luckyowl.tech/"/>
-  <updated>2022-05-19T22:10:56-07:00</updated>
+  <updated>2022-06-17T20:13:12-07:00</updated>
   <id>https://blog.luckyowl.tech/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -12,6 +12,41 @@
   </author>
   <generator uri="http://www.coderforart.com/">CoderForArt</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[How to investigate root cause of MySQL dead lock]]></title>
+    <link href="https://blog.luckyowl.tech/16555208316588.html"/>
+    <updated>2022-06-17T19:53:51-07:00</updated>
+    <id>https://blog.luckyowl.tech/16555208316588.html</id>
+    <content type="html"><![CDATA[
+<p>Try these useful commands:</p>
+<h2><a id="1-list-all-transactions-in-progress" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>1. list all transactions in progress</h2>
+<pre><code class="language-SQL">mysql&gt; SELECT * FROM INFORMATION_SCHEMA.INNODB_TRX\G
+</code></pre>
+<p>Output:<br />
+<img src="https://i.imgur.com/WHaed3z.jpg" alt="" /></p>
+<p>Normally, the output should be empty.</p>
+<p>Kill locked process</p>
+<pre><code class="language-SQL">mysql&gt; kill {trx_mysql_thread_id}
+</code></pre>
+<h2><a id="2-list-all-running-processes" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>2. list all running processes</h2>
+<pre><code class="language-SQL">mysql&gt; show processlist;
+</code></pre>
+<p>Output:<br />
+<img src="https://i.imgur.com/LnPaNpt.jpg" alt="" /></p>
+<p>Kill the locked process</p>
+<pre><code class="language-SQL">mysql&gt; kill {id}
+</code></pre>
+<h2><a id="3-check-whether-there-are-locked-tables" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>3. check whether there are locked tables</h2>
+<pre><code class="language-SQL">mysql&gt; show OPEN TABLES where In_use &gt; 0;
+</code></pre>
+<p>Output:<br />
+<img src="https://i.imgur.com/4bBfJ3R.jpg" alt="" /></p>
+<p>Normally, the output should be empty.</p>
+<p>Hope these helpful commands will help you recover your locked MySQL. Good luck!</p>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[nginx配置文件解析算法]]></title>
@@ -1708,20 +1743,6 @@ ordercontext.domain
 <li>jmap -dump:format=b,file=name.dump java_pid  导出dump文件</li>
 <li>用visualVM分析dump文件</li>
 </ul>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Docker Desktop for Mac 启动Kubernetes时查看日志方法]]></title>
-    <link href="https://blog.luckyowl.tech/15769237630512.html"/>
-    <updated>2019-12-21T02:22:43-08:00</updated>
-    <id>https://blog.luckyowl.tech/15769237630512.html</id>
-    <content type="html"><![CDATA[
-<pre><code class="language-shell">pred='process matches &quot;.*(ocker|vpnkit).*&quot;
-  || (process in {&quot;taskgated-helper&quot;, &quot;launchservicesd&quot;, &quot;kernel&quot;} &amp;&amp; eventMessage contains[c] &quot;docker&quot;)'
-/usr/bin/log stream --style syslog --level=debug --color=always --predicate &quot;$pred&quot;
-</code></pre>
 
 ]]></content>
   </entry>

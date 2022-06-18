@@ -132,6 +132,54 @@
 	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
 		<div class="meta">
 			<div class="date">
+				<time datetime="2022-06-17T19:53:51-07:00" itemprop="datePublished">06/17/2022</time>
+			</div>
+			<div class="tags">posted in 
+			
+			    <a class='category' href='internet-tech.html'>后端技术</a>&nbsp;
+			 
+			</div>
+		</div>
+		<h1 class="title" itemprop="name"><a href="16555208316588.html" itemprop="url">
+		How to investigate root cause of MySQL dead lock</a></h1>
+		<div class="entry-content" itemprop="articleBody">
+			
+			<p>Try these useful commands:</p>
+<h2><a id="1-list-all-transactions-in-progress" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>1. list all transactions in progress</h2>
+<pre><code class="language-SQL">mysql&gt; SELECT * FROM INFORMATION_SCHEMA.INNODB_TRX\G
+</code></pre>
+<p>Output:<br />
+<img src="https://i.imgur.com/WHaed3z.jpg" alt="" /></p>
+<p>Normally, the output should be empty.</p>
+<p>Kill locked process</p>
+<pre><code class="language-SQL">mysql&gt; kill {trx_mysql_thread_id}
+</code></pre>
+<h2><a id="2-list-all-running-processes" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>2. list all running processes</h2>
+<pre><code class="language-SQL">mysql&gt; show processlist;
+</code></pre>
+<p>Output:<br />
+<img src="https://i.imgur.com/LnPaNpt.jpg" alt="" /></p>
+<p>Kill the locked process</p>
+<pre><code class="language-SQL">mysql&gt; kill {id}
+</code></pre>
+<h2><a id="3-check-whether-there-are-locked-tables" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>3. check whether there are locked tables</h2>
+<pre><code class="language-SQL">mysql&gt; show OPEN TABLES where In_use &gt; 0;
+</code></pre>
+<p>Output:<br />
+<img src="https://i.imgur.com/4bBfJ3R.jpg" alt="" /></p>
+<p>Normally, the output should be empty.</p>
+<p>Hope these helpful commands will help you recover your locked MySQL. Good luck!</p>
+
+
+			
+			
+		</div>
+
+	</article>
+ 
+	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+		<div class="meta">
+			<div class="date">
 				<time datetime="2022-05-19T21:47:03-07:00" itemprop="datePublished">05/19/2022</time>
 			</div>
 			<div class="tags">posted in 
@@ -625,48 +673,6 @@ $ brew --cache  # 打印brew下载包存放位置
 
 
 			
-			
-		</div>
-
-	</article>
- 
-	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-		<div class="meta">
-			<div class="date">
-				<time datetime="2021-12-05T12:32:52-08:00" itemprop="datePublished">12/05/2021</time>
-			</div>
-			<div class="tags">posted in 
-			
-			    <a class='category' href='mac-dev-env.html'>Mac开发环境</a>&nbsp;
-			 
-			</div>
-		</div>
-		<h1 class="title" itemprop="name"><a href="16387363723416.html" itemprop="url">
-		My Mac Env</a></h1>
-		<div class="entry-content" itemprop="articleBody">
-			
-			<h1><a id="1-fundamental-env" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>1. Fundamental Env</h1>
-<h2><a id="home-brew" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>home brew</h2>
-<p><a href="https://brew.sh">Homebrew</a></p>
-<h2><a id="iterm2" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>iterm2</h2>
-<p><a href="http://blog.luckyowl.tech/15588383364141.html">(2) MAC开发环境--终端+Shell</a></p>
-<p>Preferences→Appearance→General→Theme→Minimal</p>
-<p>Preferences→Profiles→Session→Status bar enabled</p>
-<h2><a id="git" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>git</h2>
-<p>built-in</p>
-<h2><a id="ruby" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Ruby</h2>
-<p>built-in</p>
-<h2><a id="curl" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>curl</h2>
-<p>built-in</p>
-<h2><a id="postman" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Postman</h2>
-<p><a href="https://www.postman.com/downloads/">Download Postman | Get Started for Free</a></p>
-<h2><a id="testmate" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Testmate</h2>
-<p><a href="https://macromates.com/download">Download</a></p>
-
-
-			 
-			<a href="16387363723416.html#more" class="more-link">Read on &rarr;</a>
-    		
 			
 		</div>
 
