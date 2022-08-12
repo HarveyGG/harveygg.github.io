@@ -162,7 +162,10 @@ Please google its configuration details. It's up to you how deeply custom config
 <h3><a id="4-install-oh-my-posh" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>4. Install Oh-My-Posh</h3>
 <p>With the previous 3 steps, you are now having a modern terminal in Windows. Now it's time that we customize the command line prompt to make the terminal working environment more powerful. Oh-My-Posh is a custom prompt engine for any shell that has the ability to adjust the prompt string with a function or variable.<br />
 Get Oh-My-Posh and its documentation from its <a href="https://ohmyposh.dev/">official website</a><br />
-Now, you can use the full-colour set of your terminal, adjust existing themes or create your own, and keep track of git status automatically.</p>
+Now, you can use the full-colour set of your terminal, adjust existing themes or create your own, and keep track of git status automatically.<br />
+To switch between the pre-defined themes, execute the following command and replace <code>theme_name</code> with your favourite theme.</p>
+<pre><code class="language-plain_text">oh-my-posh init pwsh --config C:\Users\wharvey\AppData\Local\Programs\oh-my-posh\themes\{theme_name}.omp.json | Invoke-Expression
+</code></pre>
 <h2><a id="conclusion" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Conclusion</h2>
 <p>With the power of <code>WSL</code>, we can now use Linux tools in Windows directly.<br />
 Windows Terminal is a modern terminal tool enabling developers to use tabs, multiple panes, background images and much other advanced functionality. Windows Terminal is based on command-line shell instances, such as PowerShell.<br />
@@ -207,6 +210,8 @@ Theme by <a href="http://shashankmehta.in/archive/2012/greyshade.html">Shashank 
 
 
 
+
+<script src="asset/prism.js"></script>
 
 
 <style type="text/css">
