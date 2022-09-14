@@ -132,6 +132,35 @@
 	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
 		<div class="meta">
 			<div class="date">
+				<time datetime="2022-09-14T09:34:47-07:00" itemprop="datePublished">09/14/2022</time>
+			</div>
+			<div class="tags">posted in 
+			
+			    <a class='category' href='mac-dev-env.html'>Mac开发环境</a>&nbsp;
+			 
+			</div>
+		</div>
+		<h1 class="title" itemprop="name"><a href="16631732871567.html" itemprop="url">
+		git is lost after upgrading Mac OS</a></h1>
+		<div class="entry-content" itemprop="articleBody">
+			
+			<p>I realized my git was not working when I executed `git status. It was all of a sudden to me because I did nothing, and I was in the middle of an important job. I have to complain about this to Apple.</p>
+<p>I got this popup message &quot;The &quot;git&quot; command requires the command line developer tools...&quot;. And when I successfully installed the Command Line Developer Tools again, it won't resolve this problem. The popup message will pop up again and again. I tried to download the &quot;Command Line Developer Tools&quot; from Apple's website and install it manually with no luck.</p>
+<p>After searching online, I noticed that other people ran into this issue in the past too. That means this case happens not only on this version (Monterey) but also on previous versions.</p>
+<p>Finally, I found this work for me.</p>
+<pre><code class="language-plain_text">sudo xcode-select -switch /Library/Developer/CommandLineTools
+</code></pre>
+
+
+			
+			
+		</div>
+
+	</article>
+ 
+	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+		<div class="meta">
+			<div class="date">
 				<time datetime="2022-05-09T17:55:22-07:00" itemprop="datePublished">05/09/2022</time>
 			</div>
 			<div class="tags">posted in 
@@ -645,34 +674,6 @@ $ brew --cache  # 打印brew下载包存放位置
 <pre><code class="language-shell">$ ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/uninstall)
 </code></pre>
 <p>Download the uninstall script and run ./uninstall --help to view more uninstall options.</p>
-
-
-			
-			
-		</div>
-
-	</article>
- 
-	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-		<div class="meta">
-			<div class="date">
-				<time datetime="2022-01-30T23:25:54-08:00" itemprop="datePublished">01/30/2022</time>
-			</div>
-			<div class="tags">posted in 
-			
-			    <a class='category' href='internet-tech.html'>后端技术</a>&nbsp;
-			 
-			</div>
-		</div>
-		<h1 class="title" itemprop="name"><a href="16436139545729.html" itemprop="url">
-		Node.js 后端代码架构最佳实践</a></h1>
-		<div class="entry-content" itemprop="articleBody">
-			
-			<ul>
-<li>routes按业务分成多个文件，index.js通过router.use()组合多个业务routes</li>
-<li>各业务routes文件中只做把路由映射到controller的动作</li>
-<li>routes按版本组织</li>
-</ul>
 
 
 			

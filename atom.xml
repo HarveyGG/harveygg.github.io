@@ -4,7 +4,7 @@
   <title><![CDATA[Harvey's Tech Site]]></title>
   <link href="https://blog.luckyowl.tech/atom.xml" rel="self"/>
   <link href="https://blog.luckyowl.tech/"/>
-  <updated>2022-08-12T10:14:05-07:00</updated>
+  <updated>2022-09-14T09:44:48-07:00</updated>
   <id>https://blog.luckyowl.tech/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -12,6 +12,22 @@
   </author>
   <generator uri="http://www.coderforart.com/">CoderForArt</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[git is lost after upgrading Mac OS]]></title>
+    <link href="https://blog.luckyowl.tech/16631732871567.html"/>
+    <updated>2022-09-14T09:34:47-07:00</updated>
+    <id>https://blog.luckyowl.tech/16631732871567.html</id>
+    <content type="html"><![CDATA[
+<p>I realized my git was not working when I executed `git status. It was all of a sudden to me because I did nothing, and I was in the middle of an important job. I have to complain about this to Apple.</p>
+<p>I got this popup message &quot;The &quot;git&quot; command requires the command line developer tools...&quot;. And when I successfully installed the Command Line Developer Tools again, it won't resolve this problem. The popup message will pop up again and again. I tried to download the &quot;Command Line Developer Tools&quot; from Apple's website and install it manually with no luck.</p>
+<p>After searching online, I noticed that other people ran into this issue in the past too. That means this case happens not only on this version (Monterey) but also on previous versions.</p>
+<p>Finally, I found this work for me.</p>
+<pre><code class="language-plain_text">sudo xcode-select -switch /Library/Developer/CommandLineTools
+</code></pre>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Setting up Windows Command-Line Working Env for Linux-like OS guys]]></title>
@@ -1723,29 +1739,6 @@ ordercontext.domain
              北
 </code></pre>
 <p>乾三连、坤六段、震仰盂、艮覆碗、离中虚、坎中满、兑上缺、巽下断</p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[问题定位]]></title>
-    <link href="https://blog.luckyowl.tech/15771157345073.html"/>
-    <updated>2019-12-23T07:42:14-08:00</updated>
-    <id>https://blog.luckyowl.tech/15771157345073.html</id>
-    <content type="html"><![CDATA[
-<h2><a id="%E6%9F%A5%E6%89%BE%E9%97%AE%E9%A2%98%E7%BA%BF%E7%A8%8B" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>查找问题线程</h2>
-<ul>
-<li>top 查看问题进程 pid</li>
-<li>top -Hp pid 查看进程中有问题线程pid tid</li>
-<li>printf '%x/n' tid 转化为十六进制</li>
-<li>jstack pid |grep tid的十六进制 -A 30 查看线程堆栈信息</li>
-</ul>
-<h2><a id="%E5%86%85%E5%AD%98%E6%BA%A2%E5%87%BA%E9%97%AE%E9%A2%98" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>内存溢出问题</h2>
-<ul>
-<li>jstat -gcutil java_pid 刷新时间间隔 查看分区占用情况和gc状况</li>
-<li>jmap -dump:format=b,file=name.dump java_pid  导出dump文件</li>
-<li>用visualVM分析dump文件</li>
-</ul>
 
 ]]></content>
   </entry>

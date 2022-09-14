@@ -132,6 +132,59 @@
 	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
 		<div class="meta">
 			<div class="date">
+				<time datetime="2019-11-28T00:12:08-08:00" itemprop="datePublished">11/28/2019</time>
+			</div>
+			<div class="tags">posted in 
+			
+			    <a class='category' href='dev-ops.html'>DevOps</a>&nbsp;
+			 
+			</div>
+		</div>
+		<h1 class="title" itemprop="name"><a href="15749287286754.html" itemprop="url">
+		Immutable Infrastructure</a></h1>
+		<div class="entry-content" itemprop="articleBody">
+			
+			<h2><a id="%E4%BB%80%E4%B9%88%E6%98%AFmutable-infrastructure" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>什么是Mutable Infrastructure</h2>
+<p>传统物理服务器时代，企业倾向于对服务器做修改以实现商业目的。如，更换配件，原地更新软件包(upgrade app)，修改配置(update configuration)，打补丁(ad-hoc fixes)，微调(tweaks)。这些操作渐渐把一个服务器变得独一无二(<a href="https://martinfowler.com/bliki/SnowflakeServer.html">SnowflakeServer</a>)。这使得它难以被替换，难以维护，难以复制。你越来越无法理解其上面的某个配置这样配的原因。而这一切之所以会这样发展，是因为物理服务器时代服务器更新的难度大，成本高，周期长。所以企业在服务器更新上发展出很多技术，但都是围绕着原地升级的思路发展的。</p>
+<h2><a id="%E4%BB%80%E4%B9%88%E6%98%AFimmutable-infrastructure" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>什么是Immutable Infrastructure</h2>
+<p>到了虚拟化时代，虚拟服务器变得可以被轻易替换(disposable)，整个服务器可以在秒级被重新构建。这使得使用服务器被整体替换的方式更新服务器比原地升级服务器来的更划算。服务器一旦部署完就不再被修改，服务器需要升级时，是基于一个基线重新构建然后替换原有服务器。这使得服务器的复制，替换变得轻而易举。这种服务器也叫<a href="https://martinfowler.com/bliki/PhoenixServer.html">PhoenixServer</a>。这样的基础架构无疑更加健壮，可维护。</p>
+<h2><a id="%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0immutable-infrastructure" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>如何实现Immutable Infrastructure</h2>
+<ul>
+<li>禁止人工登录服务器做任何修改</li>
+<li>使用虚拟化技术</li>
+<li>服务器可以基于镜像快速构建，</li>
+<li>服务器的生命周期管理由软件自动化实现
+<ul>
+<li>服务器目标状态由文档定义</li>
+<li>文档由VCS管理</li>
+<li>服务器更新由自动化工具基于VCS里文档的更新触发，并最终实现目标状态</li>
+</ul>
+</li>
+<li>一个无状态，变化频繁的应用层</li>
+<li>一个数据持久层
+<ul>
+<li>日志中心，记录服务器的每次变更</li>
+<li>外部数据存储，无状态应用层服务器被频繁替换，数据必须存储在外部</li>
+</ul>
+</li>
+<li>开发和运维无间合作(DevOps)</li>
+<li>使用混沌工程工具验证服务的健壮性</li>
+</ul>
+<h2><a id="%E7%90%86%E6%83%B3%E5%BE%88%E4%B8%B0%E6%BB%A1%EF%BC%8C%E7%8E%B0%E5%AE%9E%E5%BE%88%E9%AA%A8%E6%84%9F" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>理想很丰满，现实很骨感</h2>
+<p>如果在物理服务器上利用严格规范和自动化工具是否能打造Immutable Infrastructure呢？理论上可以，但现实是物理服务器很多场景下难以实现批量统一的更新，因为物理服务器太大，上面跑的东西太多。<br />
+那么是不是使用了虚拟化技术，就一定能实现Immutable Infrastructure？答案是否定的。国内很多大厂，甚至是云计算提供商，其内部服务虽然使用了虚拟机，甚至容器，但是其运维范式仍然遵循传统原地升级模式，仍然会登录到虚拟机或容器内部做一些修改，或者只有部分技术栈（如服务软件包，基础软件包）实现了基线化管理，而其他技术栈（如操作系统配置，网络配置）还是通过其他途径手动升级，整体效果仍然和传统Mutable Infrastructure一样。举个例子，应用扩容一台机器，而防火墙没有同步更新，导致新扩容的服务器和其他服务器之间网络不通，需要人工修改网络配置才能打通网络。<br />
+所以说，真正的Immutable Infrastructure的落地，是依赖强有力的运维能力的，而这样的运维能力又依赖配套的组织架构关系和DevOps文化和极强的规范化。</p>
+
+
+			
+			
+		</div>
+
+	</article>
+ 
+	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+		<div class="meta">
+			<div class="date">
 				<time datetime="2019-08-25T22:58:51-07:00" itemprop="datePublished">08/25/2019</time>
 			</div>
 			<div class="tags">posted in 
@@ -216,7 +269,7 @@
 </ul>
 <h2><a id="kafka%E6%9C%AF%E8%AF%AD" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Kafka术语</h2>
 <h3><a id="%E4%B8%80%E5%BC%A0%E5%9B%BE%E8%AF%B4%E6%98%8Ekafka%E6%9C%AF%E8%AF%AD" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>一张图说明Kafka术语</h3>
-<p><img src="http://image.harveygg.wang/mweb/15621685649048.jpg" alt="-w1171" /></p>
+<p><img src="http://image.harveygg.wang/mweb/15621685649048.jpg" alt="" style="width:1171px;" /></p>
 <ul>
 <li>消息（Record）：消息引擎处理的主要对象</li>
 <li>主题（Topic）：承载消息的逻辑容器，具体使用中用于区分业务</li>
