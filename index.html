@@ -132,6 +132,42 @@
 	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
 		<div class="meta">
 			<div class="date">
+				<time datetime="2022-11-06T16:39:37-08:00" itemprop="datePublished">11/06/2022</time>
+			</div>
+			<div class="tags">posted in 
+			
+			    <a class='category' href='dev-ops.html'>DevOps</a>&nbsp;
+			 
+			</div>
+		</div>
+		<h1 class="title" itemprop="name"><a href="16677815774881.html" itemprop="url">
+		Troubleshooting MySQL slow queries</a></h1>
+		<div class="entry-content" itemprop="articleBody">
+			
+			<pre><code class="language-plain_text">mysql -u root -p
+</code></pre>
+<pre><code class="language-plain_text">SET GLOBAL slow_query_log = 'ON';
+</code></pre>
+<pre><code class="language-plain_text">SET GLOBAL slow_query_log_file = '/path/filename';
+</code></pre>
+<p>typically, the slow query log file is located at <code>/var/lib/mysql/{hostname}-slow.log</code>.</p>
+<pre><code class="language-plain_text">SELECT SLEEP(X);
+</code></pre>
+<p>test whether slow query log is working</p>
+<pre><code class="language-plain_text">SET GLOBAL slow_query_log = 'OFF';
+</code></pre>
+<p>turn off slow query log when you are done troubleshooting</p>
+
+
+			
+			
+		</div>
+
+	</article>
+ 
+	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+		<div class="meta">
+			<div class="date">
 				<time datetime="2022-09-14T09:34:47-07:00" itemprop="datePublished">09/14/2022</time>
 			</div>
 			<div class="tags">posted in 
@@ -229,7 +265,7 @@ Enjoy this toolset!</p>
 			</div>
 			<div class="tags">posted in 
 			
-			    <a class='category' href='internet-tech.html'>后端技术</a>&nbsp;
+			    <a class='category' href='dev-ops.html'>DevOps</a>&nbsp;
 			 
 			</div>
 		</div>
@@ -612,68 +648,6 @@ $ echo &quot;source ${(q-)PWD}/zsh-syntax-highlighting/zsh-syntax-highlighting.z
 <blockquote>
 <p>Maybe you also want to try <a href="https://jmolivas.weknowinc.com/improve-your-shell-using-fish-and-oh-my-fish">this</a></p>
 </blockquote>
-
-
-			
-			
-		</div>
-
-	</article>
- 
-	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-		<div class="meta">
-			<div class="date">
-				<time datetime="2019-05-25T06:46:47-07:00" itemprop="datePublished">05/25/2019</time>
-			</div>
-			<div class="tags">posted in 
-			
-			    <a class='category' href='mac-dev-env.html'>Mac开发环境</a>&nbsp;
-			 
-			</div>
-		</div>
-		<h1 class="title" itemprop="name"><a href="15587920075778.html" itemprop="url">
-		(1) MAC开发环境——软件包管理</a></h1>
-		<div class="entry-content" itemprop="articleBody">
-			
-			<hr />
-<h2><a id="homebrew-https-brew-sh" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="https://brew.sh/">Homebrew</a></h2>
-<ul>
-<li>使用 Homebrew 安装 Apple 没有预装，但你需要的东西。</li>
-<li>brew管理命令行工具，三方库，会先下载源码，编译，安装，最后link到/usr/local/bin中，如：<code>brew install wget</code></li>
-<li>brew cask管理Mac应用，会直接下载二进制，然后安装，是AppStore的补充，如：<code>brew cask install chrome</code></li>
-<li>推荐所有软件<strong>先考虑AppStore</strong>，如果没有<strong>再考虑Homebrew</strong>，再没有<strong>再去官网下载</strong>，方便后面管理</li>
-</ul>
-<h3><a id="install-homebrew" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Install Homebrew</h3>
-<pre><code class="language-shell">$ /usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;
-</code></pre>
-<h3><a id="homebrew%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Homebrew 常用命令</h3>
-<pre><code class="language-shell">$ brew search /wge*/  # 搜索软件,后面是正则表达式
-$ brew info wget    # 查看软件信息
-$ brew install wget  # 安装 wget
-$ brew list wget    # 列出该软件安装后的文件
-$ brew uninstall wget  # 卸载 wget
-</code></pre>
-<h3><a id="%E8%8E%B7%E5%8F%96homebrew-cask" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>获取Homebrew-Cask</h3>
-<pre><code class="language-shell">$ brew tap caskroom/cask
-</code></pre>
-<h3><a id="homebrew-cask%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Homebrew Cask常用命令</h3>
-<pre><code class="language-shell"># brew cask 和 brew 的命令基本一致，search, info, list, install, uninstall 子命令都一样
-$ brew cask install java  # 安装 Java
-$ brew cask uninstall java  # 卸载 Java
-$ brew cask install --force $(brew cask outdated | awk '{print $1}' | xargs)  # 更新Cask
-</code></pre>
-<h3><a id="homebrew%E6%9B%B4%E5%A4%9A%E5%91%BD%E4%BB%A4" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Homebrew 更多命令</h3>
-<pre><code class="language-shell">$ brew cleanup  # 卸载旧版本软件，Homebrew升级时是全新安装，不卸载旧版，需要手动卸载旧版本软件
-$ brew update  # 更新Homebrew
-$ brew upgrade  # 更新所有过期软件
-$ brew doctor  # brew自检
-$ brew outdated  # 列出所有过期软件
-$ brew --cache  # 打印brew下载包存放位置
-</code></pre>
-<h3><a id="%E5%8D%B8%E8%BD%BDhomebrew" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>卸载Homebrew</h3>
-<pre><code class="language-shell">$ ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/uninstall)
-</code></pre>
-<p>Download the uninstall script and run ./uninstall --help to view more uninstall options.</p>
 
 
 			

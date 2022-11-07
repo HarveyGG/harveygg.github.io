@@ -132,6 +132,90 @@
 	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
 		<div class="meta">
 			<div class="date">
+				<time datetime="2022-11-06T16:39:37-08:00" itemprop="datePublished">11/06/2022</time>
+			</div>
+			<div class="tags">posted in 
+			
+			    <a class='category' href='dev-ops.html'>DevOps</a>&nbsp;
+			 
+			</div>
+		</div>
+		<h1 class="title" itemprop="name"><a href="16677815774881.html" itemprop="url">
+		Troubleshooting MySQL slow queries</a></h1>
+		<div class="entry-content" itemprop="articleBody">
+			
+			<pre><code class="language-plain_text">mysql -u root -p
+</code></pre>
+<pre><code class="language-plain_text">SET GLOBAL slow_query_log = 'ON';
+</code></pre>
+<pre><code class="language-plain_text">SET GLOBAL slow_query_log_file = '/path/filename';
+</code></pre>
+<p>typically, the slow query log file is located at <code>/var/lib/mysql/{hostname}-slow.log</code>.</p>
+<pre><code class="language-plain_text">SELECT SLEEP(X);
+</code></pre>
+<p>test whether slow query log is working</p>
+<pre><code class="language-plain_text">SET GLOBAL slow_query_log = 'OFF';
+</code></pre>
+<p>turn off slow query log when you are done troubleshooting</p>
+
+
+			
+			
+		</div>
+
+	</article>
+ 
+	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+		<div class="meta">
+			<div class="date">
+				<time datetime="2022-06-17T19:53:51-07:00" itemprop="datePublished">06/17/2022</time>
+			</div>
+			<div class="tags">posted in 
+			
+			    <a class='category' href='dev-ops.html'>DevOps</a>&nbsp;
+			 
+			</div>
+		</div>
+		<h1 class="title" itemprop="name"><a href="16555208316588.html" itemprop="url">
+		How to investigate root cause of MySQL dead lock</a></h1>
+		<div class="entry-content" itemprop="articleBody">
+			
+			<p>Try these useful commands:</p>
+<h2><a id="1-list-all-transactions-in-progress" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>1. list all transactions in progress</h2>
+<pre><code class="language-SQL">mysql&gt; SELECT * FROM INFORMATION_SCHEMA.INNODB_TRX\G
+</code></pre>
+<p>Output:<br />
+<img src="https://i.imgur.com/WHaed3z.jpg" alt="" /></p>
+<p>Normally, the output should be empty.</p>
+<p>Kill locked process</p>
+<pre><code class="language-SQL">mysql&gt; kill {trx_mysql_thread_id}
+</code></pre>
+<h2><a id="2-list-all-running-processes" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>2. list all running processes</h2>
+<pre><code class="language-SQL">mysql&gt; show processlist;
+</code></pre>
+<p>Output:<br />
+<img src="https://i.imgur.com/LnPaNpt.jpg" alt="" /></p>
+<p>Kill the locked process</p>
+<pre><code class="language-SQL">mysql&gt; kill {id}
+</code></pre>
+<h2><a id="3-check-whether-there-are-locked-tables" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>3. check whether there are locked tables</h2>
+<pre><code class="language-SQL">mysql&gt; show OPEN TABLES where In_use &gt; 0;
+</code></pre>
+<p>Output:<br />
+<img src="https://i.imgur.com/4bBfJ3R.jpg" alt="" /></p>
+<p>Normally, the output should be empty.</p>
+<p>Hope these helpful commands will help you recover your locked MySQL. Good luck!</p>
+
+
+			
+			
+		</div>
+
+	</article>
+ 
+	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+		<div class="meta">
+			<div class="date">
 				<time datetime="2021-06-15T11:00:13-07:00" itemprop="datePublished">06/15/2021</time>
 			</div>
 			<div class="tags">posted in 

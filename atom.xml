@@ -4,7 +4,7 @@
   <title><![CDATA[Harvey's Tech Site]]></title>
   <link href="https://blog.luckyowl.tech/atom.xml" rel="self"/>
   <link href="https://blog.luckyowl.tech/"/>
-  <updated>2022-09-14T09:44:48-07:00</updated>
+  <updated>2022-11-06T16:42:40-08:00</updated>
   <id>https://blog.luckyowl.tech/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -12,6 +12,29 @@
   </author>
   <generator uri="http://www.coderforart.com/">CoderForArt</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Troubleshooting MySQL slow queries]]></title>
+    <link href="https://blog.luckyowl.tech/16677815774881.html"/>
+    <updated>2022-11-06T16:39:37-08:00</updated>
+    <id>https://blog.luckyowl.tech/16677815774881.html</id>
+    <content type="html"><![CDATA[
+<pre><code class="language-plain_text">mysql -u root -p
+</code></pre>
+<pre><code class="language-plain_text">SET GLOBAL slow_query_log = 'ON';
+</code></pre>
+<pre><code class="language-plain_text">SET GLOBAL slow_query_log_file = '/path/filename';
+</code></pre>
+<p>typically, the slow query log file is located at <code>/var/lib/mysql/{hostname}-slow.log</code>.</p>
+<pre><code class="language-plain_text">SELECT SLEEP(X);
+</code></pre>
+<p>test whether slow query log is working</p>
+<pre><code class="language-plain_text">SET GLOBAL slow_query_log = 'OFF';
+</code></pre>
+<p>turn off slow query log when you are done troubleshooting</p>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[git is lost after upgrading Mac OS]]></title>
@@ -1720,25 +1743,6 @@ ordercontext.domain
 </tr>
 </tbody>
 </table>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[先天八卦]]></title>
-    <link href="https://blog.luckyowl.tech/15667988442443.html"/>
-    <updated>2019-08-25T22:54:04-07:00</updated>
-    <id>https://blog.luckyowl.tech/15667988442443.html</id>
-    <content type="html"><![CDATA[
-<pre><code class="language-plain_text">            南
-            乾1
-        兑2      巽5
-   东 离3     9      坎6 西        
-        震4      艮7
-             坤8
-             北
-</code></pre>
-<p>乾三连、坤六段、震仰盂、艮覆碗、离中虚、坎中满、兑上缺、巽下断</p>
 
 ]]></content>
   </entry>

@@ -132,6 +132,68 @@
 	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
 		<div class="meta">
 			<div class="date">
+				<time datetime="2019-05-25T06:46:47-07:00" itemprop="datePublished">05/25/2019</time>
+			</div>
+			<div class="tags">posted in 
+			
+			    <a class='category' href='mac-dev-env.html'>Mac开发环境</a>&nbsp;
+			 
+			</div>
+		</div>
+		<h1 class="title" itemprop="name"><a href="15587920075778.html" itemprop="url">
+		(1) MAC开发环境——软件包管理</a></h1>
+		<div class="entry-content" itemprop="articleBody">
+			
+			<hr />
+<h2><a id="homebrew-https-brew-sh" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="https://brew.sh/">Homebrew</a></h2>
+<ul>
+<li>使用 Homebrew 安装 Apple 没有预装，但你需要的东西。</li>
+<li>brew管理命令行工具，三方库，会先下载源码，编译，安装，最后link到/usr/local/bin中，如：<code>brew install wget</code></li>
+<li>brew cask管理Mac应用，会直接下载二进制，然后安装，是AppStore的补充，如：<code>brew cask install chrome</code></li>
+<li>推荐所有软件<strong>先考虑AppStore</strong>，如果没有<strong>再考虑Homebrew</strong>，再没有<strong>再去官网下载</strong>，方便后面管理</li>
+</ul>
+<h3><a id="install-homebrew" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Install Homebrew</h3>
+<pre><code class="language-shell">$ /usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;
+</code></pre>
+<h3><a id="homebrew%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Homebrew 常用命令</h3>
+<pre><code class="language-shell">$ brew search /wge*/  # 搜索软件,后面是正则表达式
+$ brew info wget    # 查看软件信息
+$ brew install wget  # 安装 wget
+$ brew list wget    # 列出该软件安装后的文件
+$ brew uninstall wget  # 卸载 wget
+</code></pre>
+<h3><a id="%E8%8E%B7%E5%8F%96homebrew-cask" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>获取Homebrew-Cask</h3>
+<pre><code class="language-shell">$ brew tap caskroom/cask
+</code></pre>
+<h3><a id="homebrew-cask%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Homebrew Cask常用命令</h3>
+<pre><code class="language-shell"># brew cask 和 brew 的命令基本一致，search, info, list, install, uninstall 子命令都一样
+$ brew cask install java  # 安装 Java
+$ brew cask uninstall java  # 卸载 Java
+$ brew cask install --force $(brew cask outdated | awk '{print $1}' | xargs)  # 更新Cask
+</code></pre>
+<h3><a id="homebrew%E6%9B%B4%E5%A4%9A%E5%91%BD%E4%BB%A4" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Homebrew 更多命令</h3>
+<pre><code class="language-shell">$ brew cleanup  # 卸载旧版本软件，Homebrew升级时是全新安装，不卸载旧版，需要手动卸载旧版本软件
+$ brew update  # 更新Homebrew
+$ brew upgrade  # 更新所有过期软件
+$ brew doctor  # brew自检
+$ brew outdated  # 列出所有过期软件
+$ brew --cache  # 打印brew下载包存放位置
+</code></pre>
+<h3><a id="%E5%8D%B8%E8%BD%BDhomebrew" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>卸载Homebrew</h3>
+<pre><code class="language-shell">$ ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/uninstall)
+</code></pre>
+<p>Download the uninstall script and run ./uninstall --help to view more uninstall options.</p>
+
+
+			
+			
+		</div>
+
+	</article>
+ 
+	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+		<div class="meta">
+			<div class="date">
 				<time datetime="2022-01-30T23:25:54-08:00" itemprop="datePublished">01/30/2022</time>
 			</div>
 			<div class="tags">posted in 
@@ -581,33 +643,6 @@ yarn global add react-devtools</p>
 <li>:tabnew 新建标签页</li>
 <li>:gt, :gT 切换标签页</li>
 </ul>
-
-
-			
-			
-		</div>
-
-	</article>
- 
-	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-		<div class="meta">
-			<div class="date">
-				<time datetime="2019-11-29T04:55:01-08:00" itemprop="datePublished">11/29/2019</time>
-			</div>
-			<div class="tags">posted in 
-			
-			    <a class='category' href='mac-dev-env.html'>Mac开发环境</a>&nbsp;
-			 
-			</div>
-		</div>
-		<h1 class="title" itemprop="name"><a href="15750321018543.html" itemprop="url">
-		安全和隐私中“任何来源”找回办法</a></h1>
-		<div class="entry-content" itemprop="articleBody">
-			
-			<p>苹果发布了<code>MacOS Sierra 10.12</code>版本之后，原来需要用于安装从网上下载的软件的功能不见了，即系统中“任何来源”选项。可以使用如下方法找回“任何来源”的选项。</p>
-<p>在终端中输入</p>
-<pre><code class="language-shell">sudo spctl --master-disable
-</code></pre>
 
 
 			
