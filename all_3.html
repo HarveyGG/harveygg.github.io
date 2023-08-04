@@ -132,6 +132,43 @@
 	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
 		<div class="meta">
 			<div class="date">
+				<time datetime="2019-12-16T01:45:52-08:00" itemprop="datePublished">12/16/2019</time>
+			</div>
+			<div class="tags">posted in 
+			
+			    <a class='category' href='dev-ops.html'>DevOps</a>&nbsp;
+			 
+			</div>
+		</div>
+		<h1 class="title" itemprop="name"><a href="15764895526219.html" itemprop="url">
+		中国大陆地区安装minikube</a></h1>
+		<div class="entry-content" itemprop="articleBody">
+			
+			<p>由于众所周知的原因官方minikube在中国大陆地区运行会碰到网络问题。</p>
+<p>阿里云对官方minikube做了修改，使它默认使用国内镜像仓库。安装和启动参考文档如下：</p>
+<blockquote>
+<p><a href="https://yq.aliyun.com/articles/221687">Minikube - Kubernetes本地实验环境</a></p>
+</blockquote>
+<p>但是文中的参数任然有问题，如下命令可以正常启动，操作系统Mac</p>
+<pre><code class="language-shell">minikube start --image-mirror-country cn \
+    --iso-url=https://kubernetes.oss-cn-hangzhou.aliyuncs.com/minikube/iso/minikube-v1.5.1.iso \
+    --registry-mirror=https://xxxxxx.mirror.aliyuncs.com \
+    --image-repository=registry.cn-hangzhou.aliyuncs.com/google_containers
+</code></pre>
+<p>其中<code>--registry-mirror</code>参数中的&quot;xxxxxx&quot;是个人阿里云镜像加速地址，查询地址：</p>
+<pre><code class="language-plain_text">https://cr.console.aliyun.com/cn-hangzhou/instances/mirrors
+</code></pre>
+
+
+			
+			
+		</div>
+
+	</article>
+ 
+	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+		<div class="meta">
+			<div class="date">
 				<time datetime="2019-11-29T18:18:08-08:00" itemprop="datePublished">11/29/2019</time>
 			</div>
 			<div class="tags">posted in 
