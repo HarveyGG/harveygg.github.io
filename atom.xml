@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Harvey's Tech Site]]></title>
-  <link href="https://blog.luckyowl.tech/atom.xml" rel="self"/>
-  <link href="https://blog.luckyowl.tech/"/>
-  <updated>2023-08-04T16:48:11-07:00</updated>
-  <id>https://blog.luckyowl.tech/</id>
+  <link href="https://blog.luckyowl.me/atom.xml" rel="self"/>
+  <link href="https://blog.luckyowl.me/"/>
+  <updated>2024-07-02T10:54:13-07:00</updated>
+  <id>https://blog.luckyowl.me/</id>
   <author>
     <name><![CDATA[]]></name>
     
@@ -14,10 +14,39 @@
 
   
   <entry>
+    <title type="html"><![CDATA[Troubleshooting MySQL slow queries]]></title>
+    <link href="https://blog.luckyowl.me/16677815774881.html"/>
+    <updated>2022-11-06T16:39:37-08:00</updated>
+    <id>https://blog.luckyowl.me/16677815774881.html</id>
+    <content type="html"><![CDATA[
+<pre><code class="language-SQL">mysql -u root -p
+</code></pre>
+<pre><code class="language-SQL">SHOW VARIABLES LIKE 'slow_query_log';
+</code></pre>
+<pre><code class="language-SQL">SHOW VARIABLES LIKE 'slow_query_log_file';
+</code></pre>
+<pre><code class="language-SQL">SHOW VARIABLES LIKE 'long_query_time';
+</code></pre>
+<pre><code class="language-plain_text">SET GLOBAL slow_query_log = 'ON';
+</code></pre>
+<pre><code class="language-plain_text">SET GLOBAL slow_query_log_file = '/path/filename';
+</code></pre>
+<p>typically, the slow query log file is located at <code>/var/lib/mysql/{hostname}-slow.log</code>.</p>
+<pre><code class="language-plain_text">SELECT SLEEP(X);
+</code></pre>
+<p>test whether slow query log is working</p>
+<pre><code class="language-plain_text">SET GLOBAL slow_query_log = 'OFF';
+</code></pre>
+<p>turn off slow query log when you are done troubleshooting</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[Rotate log files automatically using `pm2-logrotate`]]></title>
-    <link href="https://blog.luckyowl.tech/16911904976668.html"/>
+    <link href="https://blog.luckyowl.me/16911904976668.html"/>
     <updated>2023-08-04T16:08:17-07:00</updated>
-    <id>https://blog.luckyowl.tech/16911904976668.html</id>
+    <id>https://blog.luckyowl.me/16911904976668.html</id>
     <content type="html"><![CDATA[
 <ol>
 <li>Install this module</li>
@@ -59,9 +88,9 @@
   
   <entry>
     <title type="html"><![CDATA[微服务设计规范]]></title>
-    <link href="https://blog.luckyowl.tech/15533542897748.html"/>
+    <link href="https://blog.luckyowl.me/15533542897748.html"/>
     <updated>2019-03-23T08:18:09-07:00</updated>
-    <id>https://blog.luckyowl.tech/15533542897748.html</id>
+    <id>https://blog.luckyowl.me/15533542897748.html</id>
     <content type="html"><![CDATA[
 <h2><a id="%E4%B8%80%E3%80%81%E5%85%AD%E5%A4%A7%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>一、六大设计原则</h2>
 <h3><a id="1-1%E5%BC%80%E9%97%AD%E5%8E%9F%E5%88%99%EF%BC%88-open-closed-principle-ocp%EF%BC%89" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>1.1 开闭原则（Open-Closed Principle, OCP）</h3>
@@ -392,33 +421,10 @@
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Troubleshooting MySQL slow queries]]></title>
-    <link href="https://blog.luckyowl.tech/16677815774881.html"/>
-    <updated>2022-11-06T16:39:37-08:00</updated>
-    <id>https://blog.luckyowl.tech/16677815774881.html</id>
-    <content type="html"><![CDATA[
-<pre><code class="language-plain_text">mysql -u root -p
-</code></pre>
-<pre><code class="language-plain_text">SET GLOBAL slow_query_log = 'ON';
-</code></pre>
-<pre><code class="language-plain_text">SET GLOBAL slow_query_log_file = '/path/filename';
-</code></pre>
-<p>typically, the slow query log file is located at <code>/var/lib/mysql/{hostname}-slow.log</code>.</p>
-<pre><code class="language-plain_text">SELECT SLEEP(X);
-</code></pre>
-<p>test whether slow query log is working</p>
-<pre><code class="language-plain_text">SET GLOBAL slow_query_log = 'OFF';
-</code></pre>
-<p>turn off slow query log when you are done troubleshooting</p>
-
-]]></content>
-  </entry>
-  
-  <entry>
     <title type="html"><![CDATA[git is lost after upgrading Mac OS]]></title>
-    <link href="https://blog.luckyowl.tech/16631732871567.html"/>
+    <link href="https://blog.luckyowl.me/16631732871567.html"/>
     <updated>2022-09-14T09:34:47-07:00</updated>
-    <id>https://blog.luckyowl.tech/16631732871567.html</id>
+    <id>https://blog.luckyowl.me/16631732871567.html</id>
     <content type="html"><![CDATA[
 <p>I realized my git was not working when I executed `git status. It was all of a sudden to me because I did nothing, and I was in the middle of an important job. I have to complain about this to Apple.</p>
 <p>I got this popup message &quot;The &quot;git&quot; command requires the command line developer tools...&quot;. And when I successfully installed the Command Line Developer Tools again, it won't resolve this problem. The popup message will pop up again and again. I tried to download the &quot;Command Line Developer Tools&quot; from Apple's website and install it manually with no luck.</p>
@@ -432,9 +438,9 @@
   
   <entry>
     <title type="html"><![CDATA[Setting up Windows Command-Line Working Env for Linux-like OS guys]]></title>
-    <link href="https://blog.luckyowl.tech/16521441223749.html"/>
+    <link href="https://blog.luckyowl.me/16521441223749.html"/>
     <updated>2022-05-09T17:55:22-07:00</updated>
-    <id>https://blog.luckyowl.tech/16521441223749.html</id>
+    <id>https://blog.luckyowl.me/16521441223749.html</id>
     <content type="html"><![CDATA[
 <h2><a id="motivation" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Motivation</h2>
 <p>For developers who are accustomed to Linux-like OS systems, Windows 10 is not a productive working environment. This toolset will make their eyes shine. Because it is providing an equivalent experience to working in Mac OS with iTerms2+Oh-my-zsh equipped.</p>
@@ -483,9 +489,9 @@ Enjoy this toolset!</p>
   
   <entry>
     <title type="html"><![CDATA[How to investigate root cause of MySQL dead lock]]></title>
-    <link href="https://blog.luckyowl.tech/16555208316588.html"/>
+    <link href="https://blog.luckyowl.me/16555208316588.html"/>
     <updated>2022-06-17T19:53:51-07:00</updated>
-    <id>https://blog.luckyowl.tech/16555208316588.html</id>
+    <id>https://blog.luckyowl.me/16555208316588.html</id>
     <content type="html"><![CDATA[
 <p>Try these useful commands:</p>
 <h2><a id="1-list-all-transactions-in-progress" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>1. list all transactions in progress</h2>
@@ -518,9 +524,9 @@ Enjoy this toolset!</p>
   
   <entry>
     <title type="html"><![CDATA[nginx配置文件解析算法]]></title>
-    <link href="https://blog.luckyowl.tech/16530220234994.html"/>
+    <link href="https://blog.luckyowl.me/16530220234994.html"/>
     <updated>2022-05-19T21:47:03-07:00</updated>
-    <id>https://blog.luckyowl.tech/16530220234994.html</id>
+    <id>https://blog.luckyowl.me/16530220234994.html</id>
     <content type="html"><![CDATA[
 <p>当一个请求到达时，nginx通过如下算法确定最终用哪一个block来serve这次请求。</p>
 <ol>
@@ -554,9 +560,9 @@ Enjoy this toolset!</p>
   
   <entry>
     <title type="html"><![CDATA[What is a good Node.js Template in 2022]]></title>
-    <link href="https://blog.luckyowl.tech/16433325024079.html"/>
+    <link href="https://blog.luckyowl.me/16433325024079.html"/>
     <updated>2022-01-27T17:15:02-08:00</updated>
-    <id>https://blog.luckyowl.tech/16433325024079.html</id>
+    <id>https://blog.luckyowl.me/16433325024079.html</id>
     <content type="html"><![CDATA[
 <ul>
 <li>Uses <a href="https://yarnpkg.com/">yarn</a></li>
@@ -635,9 +641,9 @@ Enjoy this toolset!</p>
   
   <entry>
     <title type="html"><![CDATA[一些终端下更好用的替代工具]]></title>
-    <link href="https://blog.luckyowl.tech/15949090783980.html"/>
+    <link href="https://blog.luckyowl.me/15949090783980.html"/>
     <updated>2020-07-16T07:17:58-07:00</updated>
-    <id>https://blog.luckyowl.tech/15949090783980.html</id>
+    <id>https://blog.luckyowl.me/15949090783980.html</id>
     <content type="html"><![CDATA[
 <h2><a id="ls%E7%9A%84%E6%9B%BF%E4%BB%A3%E5%B7%A5%E5%85%B7" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>ls的替代工具</h2>
 <pre><code class="language-plain_text"># brew info exa
@@ -693,9 +699,9 @@ Enjoy this toolset!</p>
   
   <entry>
     <title type="html"><![CDATA[(2) MAC开发环境——终端+Shell]]></title>
-    <link href="https://blog.luckyowl.tech/15588383364141.html"/>
+    <link href="https://blog.luckyowl.me/15588383364141.html"/>
     <updated>2019-05-25T19:38:56-07:00</updated>
-    <id>https://blog.luckyowl.tech/15588383364141.html</id>
+    <id>https://blog.luckyowl.me/15588383364141.html</id>
     <content type="html"><![CDATA[
 <p><img src="https://i.imgur.com/YQ9qFFq.jpg" alt="Jietu20190526-225814" /></p>
 <p>最终效果！</p>
@@ -816,9 +822,9 @@ $ echo &quot;source ${(q-)PWD}/zsh-syntax-highlighting/zsh-syntax-highlighting.z
   
   <entry>
     <title type="html"><![CDATA[(1) MAC开发环境——软件包管理]]></title>
-    <link href="https://blog.luckyowl.tech/15587920075778.html"/>
+    <link href="https://blog.luckyowl.me/15587920075778.html"/>
     <updated>2019-05-25T06:46:47-07:00</updated>
-    <id>https://blog.luckyowl.tech/15587920075778.html</id>
+    <id>https://blog.luckyowl.me/15587920075778.html</id>
     <content type="html"><![CDATA[
 <hr />
 <h2><a id="homebrew-https-brew-sh" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="https://brew.sh/">Homebrew</a></h2>
@@ -865,9 +871,9 @@ $ brew --cache  # 打印brew下载包存放位置
   
   <entry>
     <title type="html"><![CDATA[Node.js 后端代码架构最佳实践]]></title>
-    <link href="https://blog.luckyowl.tech/16436139545729.html"/>
+    <link href="https://blog.luckyowl.me/16436139545729.html"/>
     <updated>2022-01-30T23:25:54-08:00</updated>
-    <id>https://blog.luckyowl.tech/16436139545729.html</id>
+    <id>https://blog.luckyowl.me/16436139545729.html</id>
     <content type="html"><![CDATA[
 <ul>
 <li>routes按业务分成多个文件，index.js通过router.use()组合多个业务routes</li>
@@ -880,9 +886,9 @@ $ brew --cache  # 打印brew下载包存放位置
   
   <entry>
     <title type="html"><![CDATA[My Mac Env]]></title>
-    <link href="https://blog.luckyowl.tech/16387363723416.html"/>
+    <link href="https://blog.luckyowl.me/16387363723416.html"/>
     <updated>2021-12-05T12:32:52-08:00</updated>
-    <id>https://blog.luckyowl.tech/16387363723416.html</id>
+    <id>https://blog.luckyowl.me/16387363723416.html</id>
     <content type="html"><![CDATA[
 <h1><a id="1-fundamental-env" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>1. Fundamental Env</h1>
 <h2><a id="home-brew" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>home brew</h2>
@@ -957,9 +963,9 @@ $ brew --cache  # 打印brew下载包存放位置
   
   <entry>
     <title type="html"><![CDATA[Linux运维常用命令组合]]></title>
-    <link href="https://blog.luckyowl.tech/16237800130779.html"/>
+    <link href="https://blog.luckyowl.me/16237800130779.html"/>
     <updated>2021-06-15T11:00:13-07:00</updated>
-    <id>https://blog.luckyowl.tech/16237800130779.html</id>
+    <id>https://blog.luckyowl.me/16237800130779.html</id>
     <content type="html"><![CDATA[
 <h3><a id="lsof-i-port" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>lsof -i:port</h3>
 <p>根据监听端口号找进程PID</p>
@@ -988,9 +994,9 @@ ls -la /proc/{pid}/ns</p>
   
   <entry>
     <title type="html"><![CDATA[MAC使用技巧]]></title>
-    <link href="https://blog.luckyowl.tech/15616863130414.html"/>
+    <link href="https://blog.luckyowl.me/15616863130414.html"/>
     <updated>2019-06-27T18:45:13-07:00</updated>
-    <id>https://blog.luckyowl.tech/15616863130414.html</id>
+    <id>https://blog.luckyowl.me/15616863130414.html</id>
     <content type="html"><![CDATA[
 <ul>
 <li>Command+Shift+. 可以显示隐藏文件、文件夹，再按一次，恢复隐藏；</li>
@@ -1003,9 +1009,9 @@ ls -la /proc/{pid}/ns</p>
   
   <entry>
     <title type="html"><![CDATA[各种Branching Model，workflow的比较思路和推荐小团队使用的精简有效的workflow]]></title>
-    <link href="https://blog.luckyowl.tech/16143819545361.html"/>
+    <link href="https://blog.luckyowl.me/16143819545361.html"/>
     <updated>2021-02-26T15:25:54-08:00</updated>
-    <id>https://blog.luckyowl.tech/16143819545361.html</id>
+    <id>https://blog.luckyowl.me/16143819545361.html</id>
     <content type="html"><![CDATA[
 <h2><a id="%E4%B8%80%E3%80%81%E5%88%86%E6%94%AF%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9E%8B%E9%80%89%E5%9E%8B" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>一、分支管理模型选型</h2>
 <p>Branching Model在业界有多种规范，如：<a href="https://nvie.com/posts/a-successful-git-branching-model/">Gitflow</a>、AoneFlow、<a href="https://www.endoflineblog.com/oneflow-a-git-branching-model-and-workflow">OneFlow</a>等，Branching Model的复杂程度取决于实际开发团队和代码规模，自动化程度等因素，实际使用时需要结合当前具体情况精简。但随着情况变化，当前的Model可能会不适用，需要定期Review并优化模型选型。</p>
@@ -1150,9 +1156,9 @@ $ git branch -d hotfix/x.y.1
   
   <entry>
     <title type="html"><![CDATA[(3) 我的MAC开发环境]]></title>
-    <link href="https://blog.luckyowl.tech/16129809371350.html"/>
+    <link href="https://blog.luckyowl.me/16129809371350.html"/>
     <updated>2021-02-10T10:15:37-08:00</updated>
-    <id>https://blog.luckyowl.tech/16129809371350.html</id>
+    <id>https://blog.luckyowl.me/16129809371350.html</id>
     <content type="html"><![CDATA[
 <p>iterm2<br />
 brew<br />
@@ -1172,9 +1178,9 @@ yarn global add react-devtools</p>
   
   <entry>
     <title type="html"><![CDATA[vim实用高级命令]]></title>
-    <link href="https://blog.luckyowl.tech/15961083014557.html"/>
+    <link href="https://blog.luckyowl.me/15961083014557.html"/>
     <updated>2020-07-30T04:25:01-07:00</updated>
-    <id>https://blog.luckyowl.tech/15961083014557.html</id>
+    <id>https://blog.luckyowl.me/15961083014557.html</id>
     <content type="html"><![CDATA[
 <h2><a id="%E5%85%89%E6%A0%87%E7%A7%BB%E5%8A%A8" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>光标移动</h2>
 <ul>
@@ -1282,9 +1288,9 @@ yarn global add react-devtools</p>
   
   <entry>
     <title type="html"><![CDATA[安全和隐私中“任何来源”找回办法]]></title>
-    <link href="https://blog.luckyowl.tech/15750321018543.html"/>
+    <link href="https://blog.luckyowl.me/15750321018543.html"/>
     <updated>2019-11-29T04:55:01-08:00</updated>
-    <id>https://blog.luckyowl.tech/15750321018543.html</id>
+    <id>https://blog.luckyowl.me/15750321018543.html</id>
     <content type="html"><![CDATA[
 <p>苹果发布了<code>MacOS Sierra 10.12</code>版本之后，原来需要用于安装从网上下载的软件的功能不见了，即系统中“任何来源”选项。可以使用如下方法找回“任何来源”的选项。</p>
 <p>在终端中输入</p>
@@ -1296,9 +1302,9 @@ yarn global add react-devtools</p>
   
   <entry>
     <title type="html"><![CDATA[人类能否造出真正智能的机器人？]]></title>
-    <link href="https://blog.luckyowl.tech/15763252898733.html"/>
+    <link href="https://blog.luckyowl.me/15763252898733.html"/>
     <updated>2019-12-14T04:08:09-08:00</updated>
-    <id>https://blog.luckyowl.tech/15763252898733.html</id>
+    <id>https://blog.luckyowl.me/15763252898733.html</id>
     <content type="html"><![CDATA[
 <p>机器人是什么？<br />
 是计算机。<br />
