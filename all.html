@@ -132,6 +132,32 @@
 	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
 		<div class="meta">
 			<div class="date">
+				<time datetime="2024-09-20T09:57:48-07:00" itemprop="datePublished">09/20/2024</time>
+			</div>
+			<div class="tags">posted in 
+			
+			    <a class='category' href='dev-ops.html'>DevOps</a>&nbsp;
+			 
+			</div>
+		</div>
+		<h1 class="title" itemprop="name"><a href="17268514682353.html" itemprop="url">
+		Command to Locate the Most Disk Space consuming Files</a></h1>
+		<div class="entry-content" itemprop="articleBody">
+			
+			<pre><code class="language-bash">find . -type f -size +100M -exec du -h {} + | sort -rh
+
+</code></pre>
+
+
+			
+			
+		</div>
+
+	</article>
+ 
+	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+		<div class="meta">
+			<div class="date">
 				<time datetime="2022-11-06T16:39:37-08:00" itemprop="datePublished">11/06/2022</time>
 			</div>
 			<div class="tags">posted in 
@@ -764,100 +790,6 @@ Enjoy this toolset!</p>
 		</div>
 
 	</article>
- 
-	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-		<div class="meta">
-			<div class="date">
-				<time datetime="2022-01-27T17:15:02-08:00" itemprop="datePublished">01/27/2022</time>
-			</div>
-			<div class="tags">posted in 
-			
-			    <a class='category' href='internet-tech.html'>后端技术</a>&nbsp;
-			 
-			</div>
-		</div>
-		<h1 class="title" itemprop="name"><a href="16433325024079.html" itemprop="url">
-		What is a good Node.js Template in 2022</a></h1>
-		<div class="entry-content" itemprop="articleBody">
-			
-			<ul>
-<li>Uses <a href="https://yarnpkg.com/">yarn</a></li>
-<li>Organize code structure with <a href="https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html">Clean Architecturef</a></li>
-<li>Demonstrates the <a href="https://12factor.net/">twelve-factor</a> methodology</li>
-<li>ES2017 latest features like Async/Await</li>
-<li>Watch code changes and restart for development using <a href="https://nodemon.io/">nodemon</a>
-<ul>
-<li><code>yarn add nodemon --dev</code></li>
-</ul>
-</li>
-<li>Load environment variables from .env files with <a href="https://www.npmjs.com/package/dotenv">dotenv</a></li>
-<li>Web framework using <a href="https://expressjs.com/">Express</a> with middlewares as follows
-<ul>
-<li><code>yarn add express</code></li>
-<li>Support CORS with express middleware <a href="https://expressjs.com/en/resources/middleware/cors.html">cors</a></li>
-<li>Gzip compression with express middleware <a href="http://expressjs.com/en/resources/middleware/compression.html">compression</a></li>
-<li>Parsing cookies with express middleware <a href="https://www.npmjs.com/package/cookie-parser">cookie-parser</a>
-<ul>
-<li><code>yarn add cookie-parser</code></li>
-</ul>
-</li>
-<li>Customize request logs with express middleware <a href="https://expressjs.com/en/resources/middleware/morgan.html">morgan</a>, which can be integrated with Winston.</li>
-<li>Set some HTTP headers for security with <a href="https://github.com/helmetjs/helmet">helmet</a>
-<ul>
-<li><code>yarn add helmet</code></li>
-<li><code>import helmet from 'helmet';</code></li>
-<li><code>const app = express();</code></li>
-<li><code>app.use(helmet());</code></li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Request validation with <a href="https://joi.dev/">joi</a></li>
-<li>Authentication and Authorization with <a href="https://www.passportjs.org/">Passport</a>
-<ul>
-<li><code>yarn add passport</code></li>
-</ul>
-</li>
-<li>MongoDB Modeling Lib with <a href="https://mongoosejs.com/">Mongoose</a>
-<ul>
-<li><code>yarn add mongoose</code></li>
-</ul>
-</li>
-<li>Support pagination with <a href="https://www.npmjs.com/package/mongoose-aggregate-paginate-v2">Mongoose-aggregate-paginate-v2</a>
-<ul>
-<li><code>yarn add mongoose-aggregate-paginate-v2</code></li>
-</ul>
-</li>
-<li>Deal with Date Object with <a href="https://day.js.org/">Day.js</a></li>
-<li>Git hooks with <a href="https://typicode.github.io/husky/#/">husky</a></li>
-<li>Linting with <a href="http://eslint.org/">ESLint</a></li>
-<li>Format with <a href="https://prettier.io/">Prettier</a></li>
-<li>Consistent coding styles with <a href="https://editorconfig.org/">EditorConfig</a></li>
-<li>Tests with <a href="https://mochajs.org/">mocha</a>, <a href="https://www.chaijs.com/">chai</a> and <a href="https://sinonjs.org/">sinon</a></li>
-<li>Code coverage with <a href="https://istanbul.js.org/">Istanbul</a> and <a href="https://coveralls.io/">coveralls</a></li>
-<li>Continuous integration support with <a href="https://travis-ci.org/">Travis CI</a></li>
-<li>Docker support</li>
-<li>Monitoring with <a href="https://pm2.keymetrics.io/">pm2</a></li>
-<li>Logging system using <a href="https://github.com/winstonjs/winston">Winston</a>
-<ul>
-<li><code>yarn add winston</code></li>
-<li>With Winston, you can have multiple transports configured at different levels.</li>
-</ul>
-</li>
-<li>API documentation generation with <a href="https://apidocjs.com/">apidoc</a></li>
-<li></li>
-<li>Image uploading with <a href="https://aws.amazon.com/tr/s3/">AWS S3 Client</a></li>
-<li>Email sending by using <a href="https://sendgrid.com/">SendGrid</a> and <a href="https://aws.amazon.com/tr/ses/">AWS SES</a></li>
-<li>SMS sending by using <a href="https://www.twilio.com/">Twilio</a></li>
-<li>Multilanguage Support using <a href="https://www.npmjs.com/package/i18n-js">i18n</a></li>
-</ul>
-
-
-			
-			
-		</div>
-
-	</article>
   
 
 </div>
@@ -881,6 +813,7 @@ Theme by <a href="http://shashankmehta.in/archive/2012/greyshade.html">Shashank 
 	</div>
 
 
+<script>(n=>{"use strict";let s,r,e;const l=["cdn.jsdelivr.net","fastly.jsdelivr.net","gcore.jsdelivr.net","cdn.zenless.top","testingcf.jsdelivr.net"],t="//",i=l[0],o=Date.now(),a=2e3,c="jsdelivr-auto-fallback",f="/gh/PipecraftNet/jsdelivr-auto-fallback@main/empty.css?",d=e=>e&&e.includes(t+i),m=e=>e.replace(t+i,t+s),u=window.setTimeout,v=n.querySelectorAll.bind(n),b=()=>{let e,t;for(e of v('link[rel="stylesheet"]'))t=e.href,d(t)&&!t.includes(f)&&(e.href=m(t));for(e of v("script"))if(t=e.src,d(t)){const s=n.createElement("script");s.src=m(t),e.defer=!0,e.src="",e.before(s),e.remove()}for(e of v("img"))t=e.src,d(t)&&(e.src="",e.src=m(t));for(e of v("*[style]"))t=e.getAttribute("style"),d(t)&&e.setAttribute("style",m(t));for(e of v("style"))t=e.innerHTML,d(t)&&(e.innerHTML=m(t))},h=()=>{!e&&r&&s&&(console.warn(i+" is not available. Use "+s),e=!0,u(b,0),u(b,20),setInterval(b,500))},g=(()=>{try{return Object.assign({},JSON.parse(localStorage.getItem(c)||"{}"))}catch{return{}}})(),y=()=>{g.time=o,g.failed=!1,g.fastNode=null;for(const t of l)((e,t)=>{let s;const r=n.createElement("link"),l=e=>{s&&(clearTimeout(s),s=0,e||(r.href="data:text/css;base64,"),r.remove(),t(e))};s=u(l,a),r.addEventListener("error",()=>l(!1)),r.addEventListener("load",()=>l(!0)),r.rel="stylesheet",r.text="text/css",r.href=e+f+o,n.head.insertAdjacentElement("afterbegin",r)})("https://"+t,e=>{e||t!==i||(r=!0,g.failed=!0),e&&!s&&(s=t),e&&!g.fastNode&&(g.fastNode=t),h()});u(()=>{r&&!s&&(s=l[1],h()),localStorage.setItem(c,JSON.stringify(g))},a+100)};if(g.time&&o-g.time<36e5&&g.failed&&g.fastNode)r=!0,s=g.fastNode,h(),u(y,1e3);else if(n.head)y();else{const j=new MutationObserver(()=>{n.head&&(j.disconnect(),y())});j.observe(n,{childList:!0,subtree:!0})}})(document);</script>
 <style>.mweb-charts{background:#fff;}
 body{ box-sizing: border-box;
     margin: 0 auto;}

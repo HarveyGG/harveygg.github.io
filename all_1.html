@@ -132,6 +132,100 @@
 	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
 		<div class="meta">
 			<div class="date">
+				<time datetime="2022-01-27T17:15:02-08:00" itemprop="datePublished">01/27/2022</time>
+			</div>
+			<div class="tags">posted in 
+			
+			    <a class='category' href='internet-tech.html'>后端技术</a>&nbsp;
+			 
+			</div>
+		</div>
+		<h1 class="title" itemprop="name"><a href="16433325024079.html" itemprop="url">
+		What is a good Node.js Template in 2022</a></h1>
+		<div class="entry-content" itemprop="articleBody">
+			
+			<ul>
+<li>Uses <a href="https://yarnpkg.com/">yarn</a></li>
+<li>Organize code structure with <a href="https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html">Clean Architecturef</a></li>
+<li>Demonstrates the <a href="https://12factor.net/">twelve-factor</a> methodology</li>
+<li>ES2017 latest features like Async/Await</li>
+<li>Watch code changes and restart for development using <a href="https://nodemon.io/">nodemon</a>
+<ul>
+<li><code>yarn add nodemon --dev</code></li>
+</ul>
+</li>
+<li>Load environment variables from .env files with <a href="https://www.npmjs.com/package/dotenv">dotenv</a></li>
+<li>Web framework using <a href="https://expressjs.com/">Express</a> with middlewares as follows
+<ul>
+<li><code>yarn add express</code></li>
+<li>Support CORS with express middleware <a href="https://expressjs.com/en/resources/middleware/cors.html">cors</a></li>
+<li>Gzip compression with express middleware <a href="http://expressjs.com/en/resources/middleware/compression.html">compression</a></li>
+<li>Parsing cookies with express middleware <a href="https://www.npmjs.com/package/cookie-parser">cookie-parser</a>
+<ul>
+<li><code>yarn add cookie-parser</code></li>
+</ul>
+</li>
+<li>Customize request logs with express middleware <a href="https://expressjs.com/en/resources/middleware/morgan.html">morgan</a>, which can be integrated with Winston.</li>
+<li>Set some HTTP headers for security with <a href="https://github.com/helmetjs/helmet">helmet</a>
+<ul>
+<li><code>yarn add helmet</code></li>
+<li><code>import helmet from 'helmet';</code></li>
+<li><code>const app = express();</code></li>
+<li><code>app.use(helmet());</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Request validation with <a href="https://joi.dev/">joi</a></li>
+<li>Authentication and Authorization with <a href="https://www.passportjs.org/">Passport</a>
+<ul>
+<li><code>yarn add passport</code></li>
+</ul>
+</li>
+<li>MongoDB Modeling Lib with <a href="https://mongoosejs.com/">Mongoose</a>
+<ul>
+<li><code>yarn add mongoose</code></li>
+</ul>
+</li>
+<li>Support pagination with <a href="https://www.npmjs.com/package/mongoose-aggregate-paginate-v2">Mongoose-aggregate-paginate-v2</a>
+<ul>
+<li><code>yarn add mongoose-aggregate-paginate-v2</code></li>
+</ul>
+</li>
+<li>Deal with Date Object with <a href="https://day.js.org/">Day.js</a></li>
+<li>Git hooks with <a href="https://typicode.github.io/husky/#/">husky</a></li>
+<li>Linting with <a href="http://eslint.org/">ESLint</a></li>
+<li>Format with <a href="https://prettier.io/">Prettier</a></li>
+<li>Consistent coding styles with <a href="https://editorconfig.org/">EditorConfig</a></li>
+<li>Tests with <a href="https://mochajs.org/">mocha</a>, <a href="https://www.chaijs.com/">chai</a> and <a href="https://sinonjs.org/">sinon</a></li>
+<li>Code coverage with <a href="https://istanbul.js.org/">Istanbul</a> and <a href="https://coveralls.io/">coveralls</a></li>
+<li>Continuous integration support with <a href="https://travis-ci.org/">Travis CI</a></li>
+<li>Docker support</li>
+<li>Monitoring with <a href="https://pm2.keymetrics.io/">pm2</a></li>
+<li>Logging system using <a href="https://github.com/winstonjs/winston">Winston</a>
+<ul>
+<li><code>yarn add winston</code></li>
+<li>With Winston, you can have multiple transports configured at different levels.</li>
+</ul>
+</li>
+<li>API documentation generation with <a href="https://apidocjs.com/">apidoc</a></li>
+<li></li>
+<li>Image uploading with <a href="https://aws.amazon.com/tr/s3/">AWS S3 Client</a></li>
+<li>Email sending by using <a href="https://sendgrid.com/">SendGrid</a> and <a href="https://aws.amazon.com/tr/ses/">AWS SES</a></li>
+<li>SMS sending by using <a href="https://www.twilio.com/">Twilio</a></li>
+<li>Multilanguage Support using <a href="https://www.npmjs.com/package/i18n-js">i18n</a></li>
+</ul>
+
+
+			
+			
+		</div>
+
+	</article>
+ 
+	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+		<div class="meta">
+			<div class="date">
 				<time datetime="2020-07-16T07:17:58-07:00" itemprop="datePublished">07/16/2020</time>
 			</div>
 			<div class="tags">posted in 
@@ -539,166 +633,6 @@ ls -la /proc/{pid}/ns</p>
 		</div>
 
 	</article>
- 
-	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-		<div class="meta">
-			<div class="date">
-				<time datetime="2021-02-26T15:25:54-08:00" itemprop="datePublished">02/26/2021</time>
-			</div>
-			<div class="tags">posted in 
-			
-			    <a class='category' href='architecture-designing.html'>架构设计</a>&nbsp;
-			 
-			</div>
-		</div>
-		<h1 class="title" itemprop="name"><a href="16143819545361.html" itemprop="url">
-		各种Branching Model，workflow的比较思路和推荐小团队使用的精简有效的workflow</a></h1>
-		<div class="entry-content" itemprop="articleBody">
-			
-			<h2><a id="%E4%B8%80%E3%80%81%E5%88%86%E6%94%AF%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9E%8B%E9%80%89%E5%9E%8B" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>一、分支管理模型选型</h2>
-<p>Branching Model在业界有多种规范，如：<a href="https://nvie.com/posts/a-successful-git-branching-model/">Gitflow</a>、AoneFlow、<a href="https://www.endoflineblog.com/oneflow-a-git-branching-model-and-workflow">OneFlow</a>等，Branching Model的复杂程度取决于实际开发团队和代码规模，自动化程度等因素，实际使用时需要结合当前具体情况精简。但随着情况变化，当前的Model可能会不适用，需要定期Review并优化模型选型。</p>
-<h2><a id="%E4%BA%8C%E3%80%81branching-model%E7%9A%84%E9%80%89%E5%9E%8B%E4%BE%9D%E6%8D%AE%E5%8F%82%E8%80%83" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>二、Branching Model的选型依据参考</h2>
-<ol>
-<li>是否一个Repository同时有多人在分别开发不同feature，或者做bugfix，且需要同时deploy到不同环境。eg. dev, pre, production, grayscale etc.
-<ul>
-<li>解决方案：每个环境需要一个对应的branch或tag</li>
-</ul>
-</li>
-<li>是否需要同时维护多个长期版本
-<ul>
-<li>解决方案：需要多个base branch</li>
-</ul>
-</li>
-<li>是否需要一个branch来记录latest stable version，这个version和production environment上deploy的内容完全一致
-<ul>
-<li>解决方案：需要一个mark branch</li>
-</ul>
-</li>
-<li>是否需要在发布新版本到生产环境前冻结代码进行控制
-<ul>
-<li>解决方案：需要对应一个branch，此branch开发无权限merge，代码被merge到此branch之后开始做集成测试</li>
-</ul>
-</li>
-<li>是否有CI/CD自动化工具
-<ul>
-<li>解决方案：CI/CD自动化工具可以简化开发对git的操作</li>
-</ul>
-</li>
-</ol>
-<h2><a id="%E4%B8%89%E3%80%81%E5%B0%8F%E5%9E%8B%E5%9B%A2%E9%98%9F%E9%80%89%E5%9E%8B%E7%BB%93%E8%AE%BA" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>三、小型团队选型结论</h2>
-<ol>
-<li>存在多个开发在一个Repository上开发不同feature然后合并到一起测试和同时deploy到production environment的场景</li>
-<li>不需要维护多个长期版本</li>
-<li>不需要一个单端的branch来记录production environment上deploy的内容</li>
-<li>不必要deploy前冻结代码</li>
-<li>无CI/CD自动化工具</li>
-</ol>
-<h3><a id="%E7%BB%93%E8%AE%BA%EF%BC%9A" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>结论：</h3>
-<p>用到的branch（尽量少）：</p>
-<ul>
-<li>develop branch</li>
-<li>release branch</li>
-<li>feature branch</li>
-</ul>
-<h2><a id="%E5%9B%9B%E3%80%81branching-model-workflow" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>四、branching model &amp; workflow</h2>
-<ul>
-<li>使用long live的develop branch来记录最新的代码</li>
-<li>使用short live的release branch来记录next version的代码，并且使用release branch部署test和production environment</li>
-<li>使用Tag来记录latest的production environment内容</li>
-<li>在最新的Tag上创建short live的bugfix branch用来修production environment的bug</li>
-</ul>
-<p>具体的workflow如下：</p>
-<h3><a id="4-1-working-on-a-feature-branch" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>4.1 working on a feature branch</h3>
-<ol>
-<li>Fetch develop branch so as to make it up to date</li>
-</ol>
-<pre><code class="language-plain_text">$ git fetch develop
-</code></pre>
-<ol start="2">
-<li>Start a new feature branch</li>
-</ol>
-<pre><code class="language-plain_text">$ git checkout -b feature/${customized_feature_name} origin/develop
-</code></pre>
-<ol start="3">
-<li>Implement feature and commit several times</li>
-</ol>
-<pre><code class="language-plain_text">$ git commit -a --amend
-</code></pre>
-<ol start="4">
-<li>Merge with latest develop branch</li>
-</ol>
-<pre><code class="language-plain_text">$ git fetch develop
-$ git rebase origin/develop
-</code></pre>
-<ol start="5">
-<li>Self-testing</li>
-<li>Push your branch. Make sure you have only one commit for your feature before push</li>
-</ol>
-<pre><code class="language-plain_text">$ git log
-$ git rebase -i hash
-$ git push origin feature/${customized_feature_name}
-</code></pre>
-<ol start="7">
-<li>Open your browser and visit the &quot;pull request url&quot; printed on your console, then finish committing a PR on your browser with detailed test cases in your comment.</li>
-</ol>
-<h3><a id="4-2-working-on-a-release-branch" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>4.2 working on a release branch</h3>
-<p>You need a release branch when you decide to deploy a new release to production environment.</p>
-<ol>
-<li>Fetch develop branch so as to make it up to date</li>
-</ol>
-<pre><code class="language-plain_text">$ git fetch develop
-</code></pre>
-<ol start="2">
-<li>Start a release branch</li>
-</ol>
-<pre><code class="language-plain_text">$ git log origin/develop
-$ git checkout -b release/x.y.z hash
-</code></pre>
-<ol start="3">
-<li>Deploy to test environment based on release/x.y.z branch</li>
-<li>Test thoroughly &amp; Bug fixing(There should be only one commit for all bugs)</li>
-<li>Deploy to production environment based on release/x.y.z branch's latest commit &amp; Test</li>
-<li>Squash commits &amp; Tag the commit</li>
-</ol>
-<pre><code class="language-plain_text">$ git rebase -i hash
-$ git tag x.y.z
-</code></pre>
-<ol start="7">
-<li>Merge to develop branch and push</li>
-</ol>
-<pre><code class="language-plain_text">$ git checkout develop
-$ git pull origin develop
-$ git merge release/x.y.z
-$ git push --tags origin develop
-$ git branch -d release/x.y.z
-</code></pre>
-<h3><a id="4-3-working-on-a-hotfix-branch" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>4.3 working on a hotfix branch</h3>
-<ol>
-<li>Start a bugfix branch</li>
-</ol>
-<pre><code class="language-plain_text">$ git checkout -b hotfix/x.y.1 x.y.0
-</code></pre>
-<ol>
-<li>Code and fix bugs</li>
-<li>Finish a bugfix branch</li>
-</ol>
-<pre><code class="language-plain_text">$ git checkout develop
-$ git pull origin develop
-$ git merge hotfix/x.y.1
-$ git push --tags origin develop
-$ git branch -d hotfix/x.y.1
-</code></pre>
-<p>rebase -i用法参考</p>
-<blockquote>
-<p><a href="https://git-scm.com/book/en/v2/Git-Tools-Rewriting-History">Rewriting History Chapter from Pro Git SCM book</a></p>
-</blockquote>
-
-
-			
-			
-		</div>
-
-	</article>
   
 
 </div>
@@ -722,6 +656,7 @@ Theme by <a href="http://shashankmehta.in/archive/2012/greyshade.html">Shashank 
 	</div>
 
 
+<script>(n=>{"use strict";let s,r,e;const l=["cdn.jsdelivr.net","fastly.jsdelivr.net","gcore.jsdelivr.net","cdn.zenless.top","testingcf.jsdelivr.net"],t="//",i=l[0],o=Date.now(),a=2e3,c="jsdelivr-auto-fallback",f="/gh/PipecraftNet/jsdelivr-auto-fallback@main/empty.css?",d=e=>e&&e.includes(t+i),m=e=>e.replace(t+i,t+s),u=window.setTimeout,v=n.querySelectorAll.bind(n),b=()=>{let e,t;for(e of v('link[rel="stylesheet"]'))t=e.href,d(t)&&!t.includes(f)&&(e.href=m(t));for(e of v("script"))if(t=e.src,d(t)){const s=n.createElement("script");s.src=m(t),e.defer=!0,e.src="",e.before(s),e.remove()}for(e of v("img"))t=e.src,d(t)&&(e.src="",e.src=m(t));for(e of v("*[style]"))t=e.getAttribute("style"),d(t)&&e.setAttribute("style",m(t));for(e of v("style"))t=e.innerHTML,d(t)&&(e.innerHTML=m(t))},h=()=>{!e&&r&&s&&(console.warn(i+" is not available. Use "+s),e=!0,u(b,0),u(b,20),setInterval(b,500))},g=(()=>{try{return Object.assign({},JSON.parse(localStorage.getItem(c)||"{}"))}catch{return{}}})(),y=()=>{g.time=o,g.failed=!1,g.fastNode=null;for(const t of l)((e,t)=>{let s;const r=n.createElement("link"),l=e=>{s&&(clearTimeout(s),s=0,e||(r.href="data:text/css;base64,"),r.remove(),t(e))};s=u(l,a),r.addEventListener("error",()=>l(!1)),r.addEventListener("load",()=>l(!0)),r.rel="stylesheet",r.text="text/css",r.href=e+f+o,n.head.insertAdjacentElement("afterbegin",r)})("https://"+t,e=>{e||t!==i||(r=!0,g.failed=!0),e&&!s&&(s=t),e&&!g.fastNode&&(g.fastNode=t),h()});u(()=>{r&&!s&&(s=l[1],h()),localStorage.setItem(c,JSON.stringify(g))},a+100)};if(g.time&&o-g.time<36e5&&g.failed&&g.fastNode)r=!0,s=g.fastNode,h(),u(y,1e3);else if(n.head)y();else{const j=new MutationObserver(()=>{n.head&&(j.disconnect(),y())});j.observe(n,{childList:!0,subtree:!0})}})(document);</script>
 <style>.mweb-charts{background:#fff;}
 body{ box-sizing: border-box;
     margin: 0 auto;}
