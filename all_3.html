@@ -132,6 +132,42 @@
 	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
 		<div class="meta">
 			<div class="date">
+				<time datetime="2019-12-23T07:42:14-08:00" itemprop="datePublished">12/23/2019</time>
+			</div>
+			<div class="tags">posted in 
+			
+			    <a class='category' href='java.html'>Java</a>&nbsp;
+			 
+			</div>
+		</div>
+		<h1 class="title" itemprop="name"><a href="15771157345073.html" itemprop="url">
+		问题定位</a></h1>
+		<div class="entry-content" itemprop="articleBody">
+			
+			<h2><a id="%E6%9F%A5%E6%89%BE%E9%97%AE%E9%A2%98%E7%BA%BF%E7%A8%8B" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>查找问题线程</h2>
+<ul>
+<li>top 查看问题进程 pid</li>
+<li>top -Hp pid 查看进程中有问题线程pid tid</li>
+<li>printf '%x/n' tid 转化为十六进制</li>
+<li>jstack pid |grep tid的十六进制 -A 30 查看线程堆栈信息</li>
+</ul>
+<h2><a id="%E5%86%85%E5%AD%98%E6%BA%A2%E5%87%BA%E9%97%AE%E9%A2%98" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>内存溢出问题</h2>
+<ul>
+<li>jstat -gcutil java_pid 刷新时间间隔 查看分区占用情况和gc状况</li>
+<li>jmap -dump:format=b,file=name.dump java_pid  导出dump文件</li>
+<li>用visualVM分析dump文件</li>
+</ul>
+
+
+			
+			
+		</div>
+
+	</article>
+ 
+	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+		<div class="meta">
+			<div class="date">
 				<time datetime="2019-12-21T02:22:43-08:00" itemprop="datePublished">12/21/2019</time>
 			</div>
 			<div class="tags">posted in 
