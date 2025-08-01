@@ -403,6 +403,166 @@
 	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
 		<div class="meta">
 			<div class="date">
+				<time datetime="2021-02-26T15:25:54-08:00" itemprop="datePublished">02/26/2021</time>
+			</div>
+			<div class="tags">posted in 
+			
+			    <a class='category' href='architecture-designing.html'>架构设计</a>&nbsp;
+			 
+			</div>
+		</div>
+		<h1 class="title" itemprop="name"><a href="16143819545361.html" itemprop="url">
+		各种Branching Model，workflow的比较思路和推荐小团队使用的精简有效的workflow</a></h1>
+		<div class="entry-content" itemprop="articleBody">
+			
+			<h2><a id="%E4%B8%80%E3%80%81%E5%88%86%E6%94%AF%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9E%8B%E9%80%89%E5%9E%8B" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>一、分支管理模型选型</h2>
+<p>Branching Model在业界有多种规范，如：<a href="https://nvie.com/posts/a-successful-git-branching-model/">Gitflow</a>、AoneFlow、<a href="https://www.endoflineblog.com/oneflow-a-git-branching-model-and-workflow">OneFlow</a>等，Branching Model的复杂程度取决于实际开发团队和代码规模，自动化程度等因素，实际使用时需要结合当前具体情况精简。但随着情况变化，当前的Model可能会不适用，需要定期Review并优化模型选型。</p>
+<h2><a id="%E4%BA%8C%E3%80%81branching-model%E7%9A%84%E9%80%89%E5%9E%8B%E4%BE%9D%E6%8D%AE%E5%8F%82%E8%80%83" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>二、Branching Model的选型依据参考</h2>
+<ol>
+<li>是否一个Repository同时有多人在分别开发不同feature，或者做bugfix，且需要同时deploy到不同环境。eg. dev, pre, production, grayscale etc.
+<ul>
+<li>解决方案：每个环境需要一个对应的branch或tag</li>
+</ul>
+</li>
+<li>是否需要同时维护多个长期版本
+<ul>
+<li>解决方案：需要多个base branch</li>
+</ul>
+</li>
+<li>是否需要一个branch来记录latest stable version，这个version和production environment上deploy的内容完全一致
+<ul>
+<li>解决方案：需要一个mark branch</li>
+</ul>
+</li>
+<li>是否需要在发布新版本到生产环境前冻结代码进行控制
+<ul>
+<li>解决方案：需要对应一个branch，此branch开发无权限merge，代码被merge到此branch之后开始做集成测试</li>
+</ul>
+</li>
+<li>是否有CI/CD自动化工具
+<ul>
+<li>解决方案：CI/CD自动化工具可以简化开发对git的操作</li>
+</ul>
+</li>
+</ol>
+<h2><a id="%E4%B8%89%E3%80%81%E5%B0%8F%E5%9E%8B%E5%9B%A2%E9%98%9F%E9%80%89%E5%9E%8B%E7%BB%93%E8%AE%BA" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>三、小型团队选型结论</h2>
+<ol>
+<li>存在多个开发在一个Repository上开发不同feature然后合并到一起测试和同时deploy到production environment的场景</li>
+<li>不需要维护多个长期版本</li>
+<li>不需要一个单端的branch来记录production environment上deploy的内容</li>
+<li>不必要deploy前冻结代码</li>
+<li>无CI/CD自动化工具</li>
+</ol>
+<h3><a id="%E7%BB%93%E8%AE%BA%EF%BC%9A" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>结论：</h3>
+<p>用到的branch（尽量少）：</p>
+<ul>
+<li>develop branch</li>
+<li>release branch</li>
+<li>feature branch</li>
+</ul>
+<h2><a id="%E5%9B%9B%E3%80%81branching-model-workflow" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>四、branching model &amp; workflow</h2>
+<ul>
+<li>使用long live的develop branch来记录最新的代码</li>
+<li>使用short live的release branch来记录next version的代码，并且使用release branch部署test和production environment</li>
+<li>使用Tag来记录latest的production environment内容</li>
+<li>在最新的Tag上创建short live的bugfix branch用来修production environment的bug</li>
+</ul>
+<p>具体的workflow如下：</p>
+<h3><a id="4-1-working-on-a-feature-branch" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>4.1 working on a feature branch</h3>
+<ol>
+<li>Fetch develop branch so as to make it up to date</li>
+</ol>
+<pre><code class="language-plain_text">$ git fetch develop
+</code></pre>
+<ol start="2">
+<li>Start a new feature branch</li>
+</ol>
+<pre><code class="language-plain_text">$ git checkout -b feature/${customized_feature_name} origin/develop
+</code></pre>
+<ol start="3">
+<li>Implement feature and commit several times</li>
+</ol>
+<pre><code class="language-plain_text">$ git commit -a --amend
+</code></pre>
+<ol start="4">
+<li>Merge with latest develop branch</li>
+</ol>
+<pre><code class="language-plain_text">$ git fetch develop
+$ git rebase origin/develop
+</code></pre>
+<ol start="5">
+<li>Self-testing</li>
+<li>Push your branch. Make sure you have only one commit for your feature before push</li>
+</ol>
+<pre><code class="language-plain_text">$ git log
+$ git rebase -i hash
+$ git push origin feature/${customized_feature_name}
+</code></pre>
+<ol start="7">
+<li>Open your browser and visit the &quot;pull request url&quot; printed on your console, then finish committing a PR on your browser with detailed test cases in your comment.</li>
+</ol>
+<h3><a id="4-2-working-on-a-release-branch" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>4.2 working on a release branch</h3>
+<p>You need a release branch when you decide to deploy a new release to production environment.</p>
+<ol>
+<li>Fetch develop branch so as to make it up to date</li>
+</ol>
+<pre><code class="language-plain_text">$ git fetch develop
+</code></pre>
+<ol start="2">
+<li>Start a release branch</li>
+</ol>
+<pre><code class="language-plain_text">$ git log origin/develop
+$ git checkout -b release/x.y.z hash
+</code></pre>
+<ol start="3">
+<li>Deploy to test environment based on release/x.y.z branch</li>
+<li>Test thoroughly &amp; Bug fixing(There should be only one commit for all bugs)</li>
+<li>Deploy to production environment based on release/x.y.z branch's latest commit &amp; Test</li>
+<li>Squash commits &amp; Tag the commit</li>
+</ol>
+<pre><code class="language-plain_text">$ git rebase -i hash
+$ git tag x.y.z
+</code></pre>
+<ol start="7">
+<li>Merge to develop branch and push</li>
+</ol>
+<pre><code class="language-plain_text">$ git checkout develop
+$ git pull origin develop
+$ git merge release/x.y.z
+$ git push --tags origin develop
+$ git branch -d release/x.y.z
+</code></pre>
+<h3><a id="4-3-working-on-a-hotfix-branch" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>4.3 working on a hotfix branch</h3>
+<ol>
+<li>Start a bugfix branch</li>
+</ol>
+<pre><code class="language-plain_text">$ git checkout -b hotfix/x.y.1 x.y.0
+</code></pre>
+<ol>
+<li>Code and fix bugs</li>
+<li>Finish a bugfix branch</li>
+</ol>
+<pre><code class="language-plain_text">$ git checkout develop
+$ git pull origin develop
+$ git merge hotfix/x.y.1
+$ git push --tags origin develop
+$ git branch -d hotfix/x.y.1
+</code></pre>
+<p>rebase -i用法参考</p>
+<blockquote>
+<p><a href="https://git-scm.com/book/en/v2/Git-Tools-Rewriting-History">Rewriting History Chapter from Pro Git SCM book</a></p>
+</blockquote>
+
+
+			
+			
+		</div>
+
+	</article>
+ 
+	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+		<div class="meta">
+			<div class="date">
 				<time datetime="2019-12-23T18:29:27-08:00" itemprop="datePublished">12/23/2019</time>
 			</div>
 			<div class="tags">posted in 
@@ -883,6 +1043,53 @@ ordercontext.domain
 	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
 		<div class="meta">
 			<div class="date">
+				<time datetime="2019-12-14T04:08:09-08:00" itemprop="datePublished">12/14/2019</time>
+			</div>
+			<div class="tags">posted in 
+			
+			    <a class='category' href='architecture-designing.html'>架构设计</a>&nbsp;
+			 
+			</div>
+		</div>
+		<h1 class="title" itemprop="name"><a href="15763252898733.html" itemprop="url">
+		人类能否造出真正智能的机器人？</a></h1>
+		<div class="entry-content" itemprop="articleBody">
+			
+			<p>机器人是什么？<br />
+是计算机。<br />
+计算机是什么？<br />
+冯诺依曼结构的计算机可以抽象为“输入”、“计算”和“输出”三部分。<br />
+计算机的智能体现在其扩展能力上。<br />
+其输入从最早的打孔纸带扩展到现在的键盘，鼠标、语音，传感器等。<br />
+其计算能力可以通过编程来扩展。<br />
+其输出从最初的显示器扩展到现在的扬声器、打印机、投影仪等。<br />
+机器人的智能体现在，对于不同输入都可以给出“智能”的输出。这个“智能”体现在其处理逻辑会随着处理其他输入而自动升级。表现出会学习的特征。<br />
+何为非真正智能的机器人？<br />
+不会主动“思考”、“学习”的机器人就不是真正智能的机器人。<br />
+如果机器人能够主动的“思考”、“学习”了之后，他和人类有什么区别？<br />
+他应该从能力上超过人类。<br />
+为了想清楚机器人是否可能最终成为真正“智能”的机器人，我们需要把机器人和人类做一下对比。<br />
+然而我认为人类其实也是遵循冯诺依曼结构工作的！<br />
+人类刚出生时对于绝大多数输入是没有反应的，即还不具备对输入的计算能力。<br />
+随着被动学习，对于固定输入的计算逻辑建立起来了。此时开始模仿，即对于给定的输入，其计算逻辑始终不变，只是越算越快，这是一个熟练过程。<br />
+然而人类刚出生也不是对所有输入都没有计算能力的，比如对于疼痛的计算，对于饥饿的计算，对于光线的计算……<br />
+随着年龄长大，逐渐体现出对于一些输入会输出嫉妒、气愤、喜欢……<br />
+这些其实是人类的基因决定的。<br />
+那基因是什么？<br />
+其实就是随着人类从远古到现代的进化中积累下来的计算逻辑。比如，人类有攀比心，其实是对于比自己好这个输入的计算，其输出是我要超过他的激素刺激。<br />
+正是因为人类天生具备七宗罪的天性基因，才让人类得以主动思考，主动学习。<br />
+所以，如果可以破解人类基因，并且给机器人输入这些基因程序，则机器人就可以和人类一样智能。在不给机器人任何输入的情况下，机器人也会基于这个“没有任何输入”的信号，并结合之前的记忆去计算然后表现出机器人在“思考”……</p>
+
+
+			
+			
+		</div>
+
+	</article>
+ 
+	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+		<div class="meta">
+			<div class="date">
 				<time datetime="2019-03-23T08:18:09-07:00" itemprop="datePublished">03/23/2019</time>
 			</div>
 			<div class="tags">posted in 
@@ -1219,213 +1426,6 @@ ordercontext.domain
 </tr>
 </tbody>
 </table>
-
-
-			
-			
-		</div>
-
-	</article>
- 
-	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-		<div class="meta">
-			<div class="date">
-				<time datetime="2021-02-26T15:25:54-08:00" itemprop="datePublished">02/26/2021</time>
-			</div>
-			<div class="tags">posted in 
-			
-			    <a class='category' href='architecture-designing.html'>架构设计</a>&nbsp;
-			 
-			</div>
-		</div>
-		<h1 class="title" itemprop="name"><a href="16143819545361.html" itemprop="url">
-		各种Branching Model，workflow的比较思路和推荐小团队使用的精简有效的workflow</a></h1>
-		<div class="entry-content" itemprop="articleBody">
-			
-			<h2><a id="%E4%B8%80%E3%80%81%E5%88%86%E6%94%AF%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9E%8B%E9%80%89%E5%9E%8B" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>一、分支管理模型选型</h2>
-<p>Branching Model在业界有多种规范，如：<a href="https://nvie.com/posts/a-successful-git-branching-model/">Gitflow</a>、AoneFlow、<a href="https://www.endoflineblog.com/oneflow-a-git-branching-model-and-workflow">OneFlow</a>等，Branching Model的复杂程度取决于实际开发团队和代码规模，自动化程度等因素，实际使用时需要结合当前具体情况精简。但随着情况变化，当前的Model可能会不适用，需要定期Review并优化模型选型。</p>
-<h2><a id="%E4%BA%8C%E3%80%81branching-model%E7%9A%84%E9%80%89%E5%9E%8B%E4%BE%9D%E6%8D%AE%E5%8F%82%E8%80%83" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>二、Branching Model的选型依据参考</h2>
-<ol>
-<li>是否一个Repository同时有多人在分别开发不同feature，或者做bugfix，且需要同时deploy到不同环境。eg. dev, pre, production, grayscale etc.
-<ul>
-<li>解决方案：每个环境需要一个对应的branch或tag</li>
-</ul>
-</li>
-<li>是否需要同时维护多个长期版本
-<ul>
-<li>解决方案：需要多个base branch</li>
-</ul>
-</li>
-<li>是否需要一个branch来记录latest stable version，这个version和production environment上deploy的内容完全一致
-<ul>
-<li>解决方案：需要一个mark branch</li>
-</ul>
-</li>
-<li>是否需要在发布新版本到生产环境前冻结代码进行控制
-<ul>
-<li>解决方案：需要对应一个branch，此branch开发无权限merge，代码被merge到此branch之后开始做集成测试</li>
-</ul>
-</li>
-<li>是否有CI/CD自动化工具
-<ul>
-<li>解决方案：CI/CD自动化工具可以简化开发对git的操作</li>
-</ul>
-</li>
-</ol>
-<h2><a id="%E4%B8%89%E3%80%81%E5%B0%8F%E5%9E%8B%E5%9B%A2%E9%98%9F%E9%80%89%E5%9E%8B%E7%BB%93%E8%AE%BA" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>三、小型团队选型结论</h2>
-<ol>
-<li>存在多个开发在一个Repository上开发不同feature然后合并到一起测试和同时deploy到production environment的场景</li>
-<li>不需要维护多个长期版本</li>
-<li>不需要一个单端的branch来记录production environment上deploy的内容</li>
-<li>不必要deploy前冻结代码</li>
-<li>无CI/CD自动化工具</li>
-</ol>
-<h3><a id="%E7%BB%93%E8%AE%BA%EF%BC%9A" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>结论：</h3>
-<p>用到的branch（尽量少）：</p>
-<ul>
-<li>develop branch</li>
-<li>release branch</li>
-<li>feature branch</li>
-</ul>
-<h2><a id="%E5%9B%9B%E3%80%81branching-model-workflow" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>四、branching model &amp; workflow</h2>
-<ul>
-<li>使用long live的develop branch来记录最新的代码</li>
-<li>使用short live的release branch来记录next version的代码，并且使用release branch部署test和production environment</li>
-<li>使用Tag来记录latest的production environment内容</li>
-<li>在最新的Tag上创建short live的bugfix branch用来修production environment的bug</li>
-</ul>
-<p>具体的workflow如下：</p>
-<h3><a id="4-1-working-on-a-feature-branch" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>4.1 working on a feature branch</h3>
-<ol>
-<li>Fetch develop branch so as to make it up to date</li>
-</ol>
-<pre><code class="language-plain_text">$ git fetch develop
-</code></pre>
-<ol start="2">
-<li>Start a new feature branch</li>
-</ol>
-<pre><code class="language-plain_text">$ git checkout -b feature/${customized_feature_name} origin/develop
-</code></pre>
-<ol start="3">
-<li>Implement feature and commit several times</li>
-</ol>
-<pre><code class="language-plain_text">$ git commit -a --amend
-</code></pre>
-<ol start="4">
-<li>Merge with latest develop branch</li>
-</ol>
-<pre><code class="language-plain_text">$ git fetch develop
-$ git rebase origin/develop
-</code></pre>
-<ol start="5">
-<li>Self-testing</li>
-<li>Push your branch. Make sure you have only one commit for your feature before push</li>
-</ol>
-<pre><code class="language-plain_text">$ git log
-$ git rebase -i hash
-$ git push origin feature/${customized_feature_name}
-</code></pre>
-<ol start="7">
-<li>Open your browser and visit the &quot;pull request url&quot; printed on your console, then finish committing a PR on your browser with detailed test cases in your comment.</li>
-</ol>
-<h3><a id="4-2-working-on-a-release-branch" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>4.2 working on a release branch</h3>
-<p>You need a release branch when you decide to deploy a new release to production environment.</p>
-<ol>
-<li>Fetch develop branch so as to make it up to date</li>
-</ol>
-<pre><code class="language-plain_text">$ git fetch develop
-</code></pre>
-<ol start="2">
-<li>Start a release branch</li>
-</ol>
-<pre><code class="language-plain_text">$ git log origin/develop
-$ git checkout -b release/x.y.z hash
-</code></pre>
-<ol start="3">
-<li>Deploy to test environment based on release/x.y.z branch</li>
-<li>Test thoroughly &amp; Bug fixing(There should be only one commit for all bugs)</li>
-<li>Deploy to production environment based on release/x.y.z branch's latest commit &amp; Test</li>
-<li>Squash commits &amp; Tag the commit</li>
-</ol>
-<pre><code class="language-plain_text">$ git rebase -i hash
-$ git tag x.y.z
-</code></pre>
-<ol start="7">
-<li>Merge to develop branch and push</li>
-</ol>
-<pre><code class="language-plain_text">$ git checkout develop
-$ git pull origin develop
-$ git merge release/x.y.z
-$ git push --tags origin develop
-$ git branch -d release/x.y.z
-</code></pre>
-<h3><a id="4-3-working-on-a-hotfix-branch" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>4.3 working on a hotfix branch</h3>
-<ol>
-<li>Start a bugfix branch</li>
-</ol>
-<pre><code class="language-plain_text">$ git checkout -b hotfix/x.y.1 x.y.0
-</code></pre>
-<ol>
-<li>Code and fix bugs</li>
-<li>Finish a bugfix branch</li>
-</ol>
-<pre><code class="language-plain_text">$ git checkout develop
-$ git pull origin develop
-$ git merge hotfix/x.y.1
-$ git push --tags origin develop
-$ git branch -d hotfix/x.y.1
-</code></pre>
-<p>rebase -i用法参考</p>
-<blockquote>
-<p><a href="https://git-scm.com/book/en/v2/Git-Tools-Rewriting-History">Rewriting History Chapter from Pro Git SCM book</a></p>
-</blockquote>
-
-
-			
-			
-		</div>
-
-	</article>
- 
-	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-		<div class="meta">
-			<div class="date">
-				<time datetime="2019-12-14T04:08:09-08:00" itemprop="datePublished">12/14/2019</time>
-			</div>
-			<div class="tags">posted in 
-			
-			    <a class='category' href='architecture-designing.html'>架构设计</a>&nbsp;
-			 
-			</div>
-		</div>
-		<h1 class="title" itemprop="name"><a href="15763252898733.html" itemprop="url">
-		人类能否造出真正智能的机器人？</a></h1>
-		<div class="entry-content" itemprop="articleBody">
-			
-			<p>机器人是什么？<br />
-是计算机。<br />
-计算机是什么？<br />
-冯诺依曼结构的计算机可以抽象为“输入”、“计算”和“输出”三部分。<br />
-计算机的智能体现在其扩展能力上。<br />
-其输入从最早的打孔纸带扩展到现在的键盘，鼠标、语音，传感器等。<br />
-其计算能力可以通过编程来扩展。<br />
-其输出从最初的显示器扩展到现在的扬声器、打印机、投影仪等。<br />
-机器人的智能体现在，对于不同输入都可以给出“智能”的输出。这个“智能”体现在其处理逻辑会随着处理其他输入而自动升级。表现出会学习的特征。<br />
-何为非真正智能的机器人？<br />
-不会主动“思考”、“学习”的机器人就不是真正智能的机器人。<br />
-如果机器人能够主动的“思考”、“学习”了之后，他和人类有什么区别？<br />
-他应该从能力上超过人类。<br />
-为了想清楚机器人是否可能最终成为真正“智能”的机器人，我们需要把机器人和人类做一下对比。<br />
-然而我认为人类其实也是遵循冯诺依曼结构工作的！<br />
-人类刚出生时对于绝大多数输入是没有反应的，即还不具备对输入的计算能力。<br />
-随着被动学习，对于固定输入的计算逻辑建立起来了。此时开始模仿，即对于给定的输入，其计算逻辑始终不变，只是越算越快，这是一个熟练过程。<br />
-然而人类刚出生也不是对所有输入都没有计算能力的，比如对于疼痛的计算，对于饥饿的计算，对于光线的计算……<br />
-随着年龄长大，逐渐体现出对于一些输入会输出嫉妒、气愤、喜欢……<br />
-这些其实是人类的基因决定的。<br />
-那基因是什么？<br />
-其实就是随着人类从远古到现代的进化中积累下来的计算逻辑。比如，人类有攀比心，其实是对于比自己好这个输入的计算，其输出是我要超过他的激素刺激。<br />
-正是因为人类天生具备七宗罪的天性基因，才让人类得以主动思考，主动学习。<br />
-所以，如果可以破解人类基因，并且给机器人输入这些基因程序，则机器人就可以和人类一样智能。在不给机器人任何输入的情况下，机器人也会基于这个“没有任何输入”的信号，并结合之前的记忆去计算然后表现出机器人在“思考”……</p>
 
 
 			

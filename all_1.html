@@ -132,268 +132,6 @@
 	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
 		<div class="meta">
 			<div class="date">
-				<time datetime="2022-06-17T19:53:51-07:00" itemprop="datePublished">06/17/2022</time>
-			</div>
-			<div class="tags">posted in 
-			
-			    <a class='category' href='dev-ops.html'>DevOps</a>&nbsp;
-			 
-			</div>
-		</div>
-		<h1 class="title" itemprop="name"><a href="16555208316588.html" itemprop="url">
-		How to investigate root cause of MySQL dead lock</a></h1>
-		<div class="entry-content" itemprop="articleBody">
-			
-			<p>Try these useful commands:</p>
-<h2><a id="1-list-all-transactions-in-progress" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>1. list all transactions in progress</h2>
-<pre><code class="language-SQL">mysql&gt; SELECT * FROM INFORMATION_SCHEMA.INNODB_TRX\G
-</code></pre>
-<p>Output:<br />
-<img src="https://i.imgur.com/WHaed3z.jpg" alt="" /></p>
-<p>Normally, the output should be empty.</p>
-<p>Kill locked process</p>
-<pre><code class="language-SQL">mysql&gt; kill {trx_mysql_thread_id}
-</code></pre>
-<h2><a id="2-list-all-running-processes" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>2. list all running processes</h2>
-<pre><code class="language-SQL">mysql&gt; show processlist;
-</code></pre>
-<p>Output:<br />
-<img src="https://i.imgur.com/LnPaNpt.jpg" alt="" /></p>
-<p>Kill the locked process</p>
-<pre><code class="language-SQL">mysql&gt; kill {id}
-</code></pre>
-<h2><a id="3-check-whether-there-are-locked-tables" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>3. check whether there are locked tables</h2>
-<pre><code class="language-SQL">mysql&gt; show OPEN TABLES where In_use &gt; 0;
-</code></pre>
-<p>Output:<br />
-<img src="https://i.imgur.com/4bBfJ3R.jpg" alt="" /></p>
-<p>Normally, the output should be empty.</p>
-<p>Hope these helpful commands will help you recover your locked MySQL. Good luck!</p>
-
-
-			
-			
-		</div>
-
-	</article>
- 
-	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-		<div class="meta">
-			<div class="date">
-				<time datetime="2022-05-19T21:47:03-07:00" itemprop="datePublished">05/19/2022</time>
-			</div>
-			<div class="tags">posted in 
-			
-			    <a class='category' href='internet-tech.html'>后端技术</a>&nbsp;
-			 
-			</div>
-		</div>
-		<h1 class="title" itemprop="name"><a href="16530220234994.html" itemprop="url">
-		nginx配置文件解析算法</a></h1>
-		<div class="entry-content" itemprop="articleBody">
-			
-			<p>当一个请求到达时，nginx通过如下算法确定最终用哪一个block来serve这次请求。</p>
-<ol>
-<li>listen匹配，nginx会先把所有server的ip:port用默认值补全，然后和目标请求的ip:port匹配，匹配优先级如下
-<ol>
-<li>唯一完全匹配——直接选中server</li>
-<li>最高匹配度的一批server——比较server_name</li>
-</ol>
-</li>
-<li>server_name匹配
-<ol>
-<li>完全匹配——直接选中server</li>
-<li>尝试把请求host的第前一级域名变成*号到配置中去匹配——选中server</li>
-<li>尝试把请求host的最后一级域名变成*号到配置中去匹配——选中server</li>
-<li>尝试把请求host与配置中正则表达式的server_name去匹配——选中server</li>
-<li>选中default server</li>
-</ol>
-</li>
-<li>location匹配
-<ol>
-<li>带有 = 修饰符，能完全匹配的location——直接选中</li>
-<li>寻找最长的前缀匹配结果，如存在，且带有 ^~ 修饰符，直接选中，若不带修饰符，暂存，然后看正则表达式location匹配结果</li>
-<li>如果前缀匹配location的暂存结果中，有能匹配到的正则表达式location，则那个location优先级置顶，最终优先级最高的location被选中</li>
-<li>如果没有正则表达式location被选中，之前暂存的前缀location被选中</li>
-</ol>
-</li>
-</ol>
-
-
-			
-			
-		</div>
-
-	</article>
- 
-	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-		<div class="meta">
-			<div class="date">
-				<time datetime="2022-01-27T17:15:02-08:00" itemprop="datePublished">01/27/2022</time>
-			</div>
-			<div class="tags">posted in 
-			
-			    <a class='category' href='internet-tech.html'>后端技术</a>&nbsp;
-			 
-			</div>
-		</div>
-		<h1 class="title" itemprop="name"><a href="16433325024079.html" itemprop="url">
-		What is a good Node.js Template in 2022</a></h1>
-		<div class="entry-content" itemprop="articleBody">
-			
-			<ul>
-<li>Uses <a href="https://yarnpkg.com/">yarn</a></li>
-<li>Organize code structure with <a href="https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html">Clean Architecturef</a></li>
-<li>Demonstrates the <a href="https://12factor.net/">twelve-factor</a> methodology</li>
-<li>ES2017 latest features like Async/Await</li>
-<li>Watch code changes and restart for development using <a href="https://nodemon.io/">nodemon</a>
-<ul>
-<li><code>yarn add nodemon --dev</code></li>
-</ul>
-</li>
-<li>Load environment variables from .env files with <a href="https://www.npmjs.com/package/dotenv">dotenv</a></li>
-<li>Web framework using <a href="https://expressjs.com/">Express</a> with middlewares as follows
-<ul>
-<li><code>yarn add express</code></li>
-<li>Support CORS with express middleware <a href="https://expressjs.com/en/resources/middleware/cors.html">cors</a></li>
-<li>Gzip compression with express middleware <a href="http://expressjs.com/en/resources/middleware/compression.html">compression</a></li>
-<li>Parsing cookies with express middleware <a href="https://www.npmjs.com/package/cookie-parser">cookie-parser</a>
-<ul>
-<li><code>yarn add cookie-parser</code></li>
-</ul>
-</li>
-<li>Customize request logs with express middleware <a href="https://expressjs.com/en/resources/middleware/morgan.html">morgan</a>, which can be integrated with Winston.</li>
-<li>Set some HTTP headers for security with <a href="https://github.com/helmetjs/helmet">helmet</a>
-<ul>
-<li><code>yarn add helmet</code></li>
-<li><code>import helmet from 'helmet';</code></li>
-<li><code>const app = express();</code></li>
-<li><code>app.use(helmet());</code></li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Request validation with <a href="https://joi.dev/">joi</a></li>
-<li>Authentication and Authorization with <a href="https://www.passportjs.org/">Passport</a>
-<ul>
-<li><code>yarn add passport</code></li>
-</ul>
-</li>
-<li>MongoDB Modeling Lib with <a href="https://mongoosejs.com/">Mongoose</a>
-<ul>
-<li><code>yarn add mongoose</code></li>
-</ul>
-</li>
-<li>Support pagination with <a href="https://www.npmjs.com/package/mongoose-aggregate-paginate-v2">Mongoose-aggregate-paginate-v2</a>
-<ul>
-<li><code>yarn add mongoose-aggregate-paginate-v2</code></li>
-</ul>
-</li>
-<li>Deal with Date Object with <a href="https://day.js.org/">Day.js</a></li>
-<li>Git hooks with <a href="https://typicode.github.io/husky/#/">husky</a></li>
-<li>Linting with <a href="http://eslint.org/">ESLint</a></li>
-<li>Format with <a href="https://prettier.io/">Prettier</a></li>
-<li>Consistent coding styles with <a href="https://editorconfig.org/">EditorConfig</a></li>
-<li>Tests with <a href="https://mochajs.org/">mocha</a>, <a href="https://www.chaijs.com/">chai</a> and <a href="https://sinonjs.org/">sinon</a></li>
-<li>Code coverage with <a href="https://istanbul.js.org/">Istanbul</a> and <a href="https://coveralls.io/">coveralls</a></li>
-<li>Continuous integration support with <a href="https://travis-ci.org/">Travis CI</a></li>
-<li>Docker support</li>
-<li>Monitoring with <a href="https://pm2.keymetrics.io/">pm2</a></li>
-<li>Logging system using <a href="https://github.com/winstonjs/winston">Winston</a>
-<ul>
-<li><code>yarn add winston</code></li>
-<li>With Winston, you can have multiple transports configured at different levels.</li>
-</ul>
-</li>
-<li>API documentation generation with <a href="https://apidocjs.com/">apidoc</a></li>
-<li></li>
-<li>Image uploading with <a href="https://aws.amazon.com/tr/s3/">AWS S3 Client</a></li>
-<li>Email sending by using <a href="https://sendgrid.com/">SendGrid</a> and <a href="https://aws.amazon.com/tr/ses/">AWS SES</a></li>
-<li>SMS sending by using <a href="https://www.twilio.com/">Twilio</a></li>
-<li>Multilanguage Support using <a href="https://www.npmjs.com/package/i18n-js">i18n</a></li>
-</ul>
-
-
-			
-			
-		</div>
-
-	</article>
- 
-	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-		<div class="meta">
-			<div class="date">
-				<time datetime="2020-07-16T07:17:58-07:00" itemprop="datePublished">07/16/2020</time>
-			</div>
-			<div class="tags">posted in 
-			
-			    <a class='category' href='mac-dev-env.html'>Mac开发环境</a>&nbsp;
-			 
-			</div>
-		</div>
-		<h1 class="title" itemprop="name"><a href="15949090783980.html" itemprop="url">
-		一些终端下更好用的替代工具</a></h1>
-		<div class="entry-content" itemprop="articleBody">
-			
-			<h2><a id="ls%E7%9A%84%E6%9B%BF%E4%BB%A3%E5%B7%A5%E5%85%B7" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>ls的替代工具</h2>
-<pre><code class="language-plain_text"># brew info exa
-</code></pre>
-<pre><code class="language-plain_text"># exa -l --tree -L 1
-</code></pre>
-<p>用列表加树状展示一级目录下的目录和文件</p>
-<h2><a id="cat%E7%9A%84%E6%9B%BF%E4%BB%A3%E5%B7%A5%E5%85%B7" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>cat的替代工具</h2>
-<pre><code class="language-plain_text"># brew info bat
-</code></pre>
-<pre><code class="language-plain_text"># bat README.md
-</code></pre>
-<p>比cat增加高亮和对git状态的支持</p>
-<h2><a id="find%E7%9A%84%E6%9B%BF%E4%BB%A3%E5%B7%A5%E5%85%B7" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>find的替代工具</h2>
-<pre><code class="language-plain_text"># brew info fd
-</code></pre>
-<pre><code class="language-plain_text"># fd README.md
-</code></pre>
-<p>语法比find简单，默认忽略.gitignore里的文件和隐藏文件</p>
-<h2><a id="grep%E7%9A%84%E6%9B%BF%E4%BB%A3%E5%B7%A5%E5%85%B7" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>grep的替代工具</h2>
-<pre><code class="language-plain_text"># brew info rg
-</code></pre>
-<pre><code class="language-plain_text"># rg xxx
-</code></pre>
-<p>显示漂亮，默认忽略.gitignore文件和隐藏文件，默认递归所有子文件夹，可以指定文件类型</p>
-<h2><a id="cd%E7%9A%84%E6%9B%BF%E4%BB%A3%E5%B7%A5%E5%85%B7" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>cd的替代工具</h2>
-<pre><code class="language-plain_text"># brew info z
-</code></pre>
-<pre><code class="language-plain_text"># z de [Tab]
-</code></pre>
-<p>自动基于历史访问过的以de开头的目录进行补全</p>
-<pre><code class="language-plain_text"># brew info fzf
-</code></pre>
-<pre><code class="language-plain_text"># cd $(find * -type d | fzf)
-</code></pre>
-<p>通过上下键选择需要访问的目录，回车进入。</p>
-<p>fzf会把标准输出变成交互式下拉列表共用户选择。</p>
-<h2><a id="%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E7%9A%84%E6%9B%BF%E4%BB%A3%E5%B7%A5%E5%85%B7" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>文件管理的替代工具</h2>
-<pre><code class="language-plain_text"># brew info nnn
-</code></pre>
-<h2><a id="%E7%9C%8B%E6%97%A5%E5%BF%97tail%E7%9A%84%E6%9B%BF%E4%BB%A3%E5%B7%A5%E5%85%B7" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>看日志tail的替代工具</h2>
-<pre><code class="language-plain_text"># brew info lnav
-</code></pre>
-<p>支持各种日志的高亮显示，支持正则匹配</p>
-<h2><a id="man%E7%9A%84%E6%9B%BF%E4%BB%A3%E5%B7%A5%E5%85%B7" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>man的替代工具</h2>
-<pre><code class="language-plain_text"># brew info
-</code></pre>
-<hr />
-<p><img src="http://image.harveygg.wang/mweb/15951458383567.jpg" alt="" /></p>
-
-
-			
-			
-		</div>
-
-	</article>
- 
-	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-		<div class="meta">
-			<div class="date">
 				<time datetime="2019-05-25T19:38:56-07:00" itemprop="datePublished">05/25/2019</time>
 			</div>
 			<div class="tags">posted in 
@@ -592,6 +330,112 @@ $ brew --cache  # 打印brew下载包存放位置
 	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
 		<div class="meta">
 			<div class="date">
+				<time datetime="2023-08-04T16:08:17-07:00" itemprop="datePublished">08/04/2023</time>
+			</div>
+			<div class="tags">posted in 
+			
+			    <a class='category' href='internet-tech.html'>后端技术</a>&nbsp;
+			 
+			</div>
+		</div>
+		<h1 class="title" itemprop="name"><a href="16911904976668.html" itemprop="url">
+		Rotate log files automatically using `pm2-logrotate`</a></h1>
+		<div class="entry-content" itemprop="articleBody">
+			
+			<ol>
+<li>Install this module</li>
+</ol>
+<pre><code class="language-bash">pm2 install pm2-logrotate
+</code></pre>
+<ol start="2">
+<li>Config this module</li>
+</ol>
+<p>The following is an example of configuring pm2-logrotate. Other configuration items are similar to being configured. Please check current configuration or pm2 official documentation for detailed configuration items.</p>
+<pre><code class="language-plain_text">pm2 set pm2-logrotate:max_size 100M
+</code></pre>
+<ol start="3">
+<li>Check whether this module is active</li>
+</ol>
+<pre><code class="language-plain_text">pm2 list
+</code></pre>
+<p>If this module is working you should be able to see its status in the &quot;Module&quot; section.</p>
+<p><img src="https://i.imgur.com/P7bKfE3.jpg" alt="" /></p>
+<ol start="4">
+<li>Check current configuration of this module</li>
+</ol>
+<pre><code class="language-bash">pm2 conf pm2-logrotate
+</code></pre>
+<p><img src="https://i.imgur.com/EyRcKL7.jpg" alt="" /></p>
+<ol start="5">
+<li>Check logs of pm2-logrotate</li>
+</ol>
+<pre><code class="language-plain_text">pm2 logs pm2-logrotate
+</code></pre>
+<ol start="6">
+<li>Reload pm2-logrotate</li>
+</ol>
+<pre><code class="language-plain_text">pm2 reload pm2-logrotate
+</code></pre>
+
+
+			
+			
+		</div>
+
+	</article>
+ 
+	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+		<div class="meta">
+			<div class="date">
+				<time datetime="2022-05-19T21:47:03-07:00" itemprop="datePublished">05/19/2022</time>
+			</div>
+			<div class="tags">posted in 
+			
+			    <a class='category' href='internet-tech.html'>后端技术</a>&nbsp;
+			 
+			</div>
+		</div>
+		<h1 class="title" itemprop="name"><a href="16530220234994.html" itemprop="url">
+		nginx配置文件解析算法</a></h1>
+		<div class="entry-content" itemprop="articleBody">
+			
+			<p>当一个请求到达时，nginx通过如下算法确定最终用哪一个block来serve这次请求。</p>
+<ol>
+<li>listen匹配，nginx会先把所有server的ip:port用默认值补全，然后和目标请求的ip:port匹配，匹配优先级如下
+<ol>
+<li>唯一完全匹配——直接选中server</li>
+<li>最高匹配度的一批server——比较server_name</li>
+</ol>
+</li>
+<li>server_name匹配
+<ol>
+<li>完全匹配——直接选中server</li>
+<li>尝试把请求host的第前一级域名变成*号到配置中去匹配——选中server</li>
+<li>尝试把请求host的最后一级域名变成*号到配置中去匹配——选中server</li>
+<li>尝试把请求host与配置中正则表达式的server_name去匹配——选中server</li>
+<li>选中default server</li>
+</ol>
+</li>
+<li>location匹配
+<ol>
+<li>带有 = 修饰符，能完全匹配的location——直接选中</li>
+<li>寻找最长的前缀匹配结果，如存在，且带有 ^~ 修饰符，直接选中，若不带修饰符，暂存，然后看正则表达式location匹配结果</li>
+<li>如果前缀匹配location的暂存结果中，有能匹配到的正则表达式location，则那个location优先级置顶，最终优先级最高的location被选中</li>
+<li>如果没有正则表达式location被选中，之前暂存的前缀location被选中</li>
+</ol>
+</li>
+</ol>
+
+
+			
+			
+		</div>
+
+	</article>
+ 
+	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+		<div class="meta">
+			<div class="date">
 				<time datetime="2022-01-30T23:25:54-08:00" itemprop="datePublished">01/30/2022</time>
 			</div>
 			<div class="tags">posted in 
@@ -620,40 +464,277 @@ $ brew --cache  # 打印brew下载包存放位置
 	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
 		<div class="meta">
 			<div class="date">
-				<time datetime="2021-12-05T12:32:52-08:00" itemprop="datePublished">12/05/2021</time>
+				<time datetime="2022-01-27T17:15:02-08:00" itemprop="datePublished">01/27/2022</time>
 			</div>
 			<div class="tags">posted in 
 			
-			    <a class='category' href='mac-dev-env.html'>Mac开发环境</a>&nbsp;
+			    <a class='category' href='internet-tech.html'>后端技术</a>&nbsp;
 			 
 			</div>
 		</div>
-		<h1 class="title" itemprop="name"><a href="16387363723416.html" itemprop="url">
-		My Mac Env</a></h1>
+		<h1 class="title" itemprop="name"><a href="16433325024079.html" itemprop="url">
+		What is a good Node.js Template in 2022</a></h1>
 		<div class="entry-content" itemprop="articleBody">
 			
-			<h1><a id="1-fundamental-env" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>1. Fundamental Env</h1>
-<h2><a id="home-brew" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>home brew</h2>
-<p><a href="https://brew.sh">Homebrew</a></p>
-<h2><a id="iterm2" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>iterm2</h2>
-<p><a href="http://blog.luckyowl.tech/15588383364141.html">(2) MAC开发环境--终端+Shell</a></p>
-<p>Preferences→Appearance→General→Theme→Minimal</p>
-<p>Preferences→Profiles→Session→Status bar enabled</p>
-<h2><a id="git" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>git</h2>
-<p>built-in</p>
-<h2><a id="ruby" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Ruby</h2>
-<p>built-in</p>
-<h2><a id="curl" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>curl</h2>
-<p>built-in</p>
-<h2><a id="postman" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Postman</h2>
-<p><a href="https://www.postman.com/downloads/">Download Postman | Get Started for Free</a></p>
-<h2><a id="testmate" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Testmate</h2>
-<p><a href="https://macromates.com/download">Download</a></p>
+			<ul>
+<li>Uses <a href="https://yarnpkg.com/">yarn</a></li>
+<li>Organize code structure with <a href="https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html">Clean Architecturef</a></li>
+<li>Demonstrates the <a href="https://12factor.net/">twelve-factor</a> methodology</li>
+<li>ES2017 latest features like Async/Await</li>
+<li>Watch code changes and restart for development using <a href="https://nodemon.io/">nodemon</a>
+<ul>
+<li><code>yarn add nodemon --dev</code></li>
+</ul>
+</li>
+<li>Load environment variables from .env files with <a href="https://www.npmjs.com/package/dotenv">dotenv</a></li>
+<li>Web framework using <a href="https://expressjs.com/">Express</a> with middlewares as follows
+<ul>
+<li><code>yarn add express</code></li>
+<li>Support CORS with express middleware <a href="https://expressjs.com/en/resources/middleware/cors.html">cors</a></li>
+<li>Gzip compression with express middleware <a href="http://expressjs.com/en/resources/middleware/compression.html">compression</a></li>
+<li>Parsing cookies with express middleware <a href="https://www.npmjs.com/package/cookie-parser">cookie-parser</a>
+<ul>
+<li><code>yarn add cookie-parser</code></li>
+</ul>
+</li>
+<li>Customize request logs with express middleware <a href="https://expressjs.com/en/resources/middleware/morgan.html">morgan</a>, which can be integrated with Winston.</li>
+<li>Set some HTTP headers for security with <a href="https://github.com/helmetjs/helmet">helmet</a>
+<ul>
+<li><code>yarn add helmet</code></li>
+<li><code>import helmet from 'helmet';</code></li>
+<li><code>const app = express();</code></li>
+<li><code>app.use(helmet());</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Request validation with <a href="https://joi.dev/">joi</a></li>
+<li>Authentication and Authorization with <a href="https://www.passportjs.org/">Passport</a>
+<ul>
+<li><code>yarn add passport</code></li>
+</ul>
+</li>
+<li>MongoDB Modeling Lib with <a href="https://mongoosejs.com/">Mongoose</a>
+<ul>
+<li><code>yarn add mongoose</code></li>
+</ul>
+</li>
+<li>Support pagination with <a href="https://www.npmjs.com/package/mongoose-aggregate-paginate-v2">Mongoose-aggregate-paginate-v2</a>
+<ul>
+<li><code>yarn add mongoose-aggregate-paginate-v2</code></li>
+</ul>
+</li>
+<li>Deal with Date Object with <a href="https://day.js.org/">Day.js</a></li>
+<li>Git hooks with <a href="https://typicode.github.io/husky/#/">husky</a></li>
+<li>Linting with <a href="http://eslint.org/">ESLint</a></li>
+<li>Format with <a href="https://prettier.io/">Prettier</a></li>
+<li>Consistent coding styles with <a href="https://editorconfig.org/">EditorConfig</a></li>
+<li>Tests with <a href="https://mochajs.org/">mocha</a>, <a href="https://www.chaijs.com/">chai</a> and <a href="https://sinonjs.org/">sinon</a></li>
+<li>Code coverage with <a href="https://istanbul.js.org/">Istanbul</a> and <a href="https://coveralls.io/">coveralls</a></li>
+<li>Continuous integration support with <a href="https://travis-ci.org/">Travis CI</a></li>
+<li>Docker support</li>
+<li>Monitoring with <a href="https://pm2.keymetrics.io/">pm2</a></li>
+<li>Logging system using <a href="https://github.com/winstonjs/winston">Winston</a>
+<ul>
+<li><code>yarn add winston</code></li>
+<li>With Winston, you can have multiple transports configured at different levels.</li>
+</ul>
+</li>
+<li>API documentation generation with <a href="https://apidocjs.com/">apidoc</a></li>
+<li></li>
+<li>Image uploading with <a href="https://aws.amazon.com/tr/s3/">AWS S3 Client</a></li>
+<li>Email sending by using <a href="https://sendgrid.com/">SendGrid</a> and <a href="https://aws.amazon.com/tr/ses/">AWS SES</a></li>
+<li>SMS sending by using <a href="https://www.twilio.com/">Twilio</a></li>
+<li>Multilanguage Support using <a href="https://www.npmjs.com/package/i18n-js">i18n</a></li>
+</ul>
 
 
+			
+			
+		</div>
+
+	</article>
+ 
+	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+		<div class="meta">
+			<div class="date">
+				<time datetime="2019-07-03T08:24:19-07:00" itemprop="datePublished">07/03/2019</time>
+			</div>
+			<div class="tags">posted in 
+			
+			    <a class='category' href='internet-tech.html'>后端技术</a>&nbsp;
 			 
-			<a href="16387363723416.html#more" class="more-link">Read on &rarr;</a>
-    		
+			</div>
+		</div>
+		<h1 class="title" itemprop="name"><a href="15621674595097.html" itemprop="url">
+		Kafka学习笔记</a></h1>
+		<div class="entry-content" itemprop="articleBody">
+			
+			<h2><a id="kafka%E5%90%8D%E5%AD%97%E6%9D%A5%E6%BA%90" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Kafka名字来源</h2>
+<p>Kafka作者之一Jay Kreps曾经谈及过命名的原因：</p>
+<blockquote>
+<p>因为 Kafka 系统的写性能很强，所以找了个作家的名字来命名似乎是一个好主意。大学期间我上了很多文学课，非常喜欢 Franz Kafka 这个作家，另外为开源软件起这个名字听上去很酷。</p>
+</blockquote>
+<h2><a id="kafka%E7%9A%84%E5%AE%9A%E4%BD%8D" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Kafka的定位</h2>
+<p>Kafka 是 LinkedIn 公司内部孵化的项目。</p>
+<p>Kafka 在设计之初就旨在提供三个方面的特性：</p>
+<ul>
+<li>提供一套 API 实现生产者和消费者；</li>
+<li>降低网络传输和磁盘存储开销；</li>
+<li>实现高伸缩性架构。</li>
+</ul>
+<p>Kafka既是消息引擎系统，也是一个分布式流处理平台。</p>
+<h3><a id="kafka%E4%BD%9C%E4%B8%BA%E6%B5%81%E5%A4%84%E7%90%86%E5%B9%B3%E5%8F%B0%E5%92%8C%E5%85%B6%E4%BB%96%E4%B8%BB%E6%B5%81%E8%AE%A1%E7%AE%97%E6%A1%86%E6%9E%B6%E7%9B%B8%E6%AF%94%E7%9A%84%E4%BC%98%E5%8A%BF" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Kafka作为流处理平台和其他主流计算框架相比的优势</h3>
+<ul>
+<li>更容易实现端到端的正确性（精确一次处理语义）</li>
+<li>Kafka Streams宣称自己是一个用于搭建流处理的客户端库，而非完整功能系统，有利于区别其他框架的目标市场（瞄准小公司）</li>
+</ul>
+<h2><a id="kafka%E6%9C%AF%E8%AF%AD" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Kafka术语</h2>
+<h3><a id="%E4%B8%80%E5%BC%A0%E5%9B%BE%E8%AF%B4%E6%98%8Ekafka%E6%9C%AF%E8%AF%AD" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>一张图说明Kafka术语</h3>
+<p><img src="http://image.harveygg.wang/mweb/15621685649048.jpg" alt="" style="width:1171px;" /></p>
+<ul>
+<li>消息（Record）：消息引擎处理的主要对象</li>
+<li>主题（Topic）：承载消息的逻辑容器，具体使用中用于区分业务</li>
+<li>分区（Partition）：一个有序的消息队列，一个主题下可以有多个分区</li>
+<li>消息位移（Offset）：表示分区中每条消息的位置，是一个单调递增不变的值</li>
+<li>副本（Replica）：Kafka中一条消息可以被复制到多个地方实现数据冗余，这些地方就是副本。副本还分leader副本和follower副本。副本在分区的层级下，一个分区可以配置多个副本实现数据高可靠</li>
+<li>生产者（Producer）：向主题发布新消息的应用程序</li>
+<li>消费者（Consumer）：从主题订阅新消息的应用程序</li>
+<li>消费者位移（Consumer Offset）：表征消费者的消费进度，每个消费者都有自己的消费者位移</li>
+<li>消费者组（Consumer Group）：多个消费者实例共同构成一个组，同时消费多个分区实现高吞吐</li>
+<li>重平衡（Rebalance）：消费者组内一个消费者实例挂掉后，其他消费者自动重新分配订阅主题分区的过程。Rebalance是Kafka实现消费者端高可用的手段</li>
+</ul>
+<h2><a id="%E4%B8%8D%E8%83%BD%E4%BF%9D%E6%8C%81%E9%BB%98%E8%AE%A4%E5%80%BC%E7%9A%84%E5%8F%82%E6%95%B0" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>不能保持默认值的参数</h2>
+<h3><a id="broker%E7%AB%AF%E5%8F%82%E6%95%B0" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Broker端参数</h3>
+<ul>
+<li>log.dirs：没有默认值，必须手动指定。CVS格式指定多个路径，且多个路径最好分布在不同磁盘上，提供读写性能和提高可用性</li>
+<li>listeners：监听器，告诉外部连接者要用什么协议访问主机和端口开放的Kafka服务</li>
+<li>advertised.listeners：这组监听器是Broker用于对外发布的</li>
+<li>auto.create.topics.enable：配置为true时表示，当收到消息，发现所属主题不存在时则自动创建，建议生产配置false</li>
+<li>unclean.leader.election.enable：是否允许unclean leader选举。是指落后最新消息的partition被选举为leader的许可。若配置为true，则有可能导致消息丢失</li>
+<li>auto.leader.rebalance.enable：是否允许定期重新选举leader，没必要，且对生产环境影响非常大，建议配置false</li>
+<li>log.retention.{hour|minutes|ms}：三个配置都是用来控制一条消息被保存多长时间，ms优先级最高，hour最低</li>
+<li>log.retention.bytes：指Broker为消息保存的总磁盘容量大小，默认值-1，标识存多少都行</li>
+<li>message.max.bytes：Broker能接收的最大消息大小</li>
+</ul>
+<h3><a id="topic%E7%BA%A7%E5%8F%82%E6%95%B0" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Topic级参数</h3>
+<ul>
+<li>retention.ms：规定了该topic消息被保存的时长，默认7天，优先级高于Broker配置</li>
+<li>retention.bytes：规定了该topic预留多少磁盘空间</li>
+<li>message.max.bytes：该topic下单条消息最大尺寸，可用于不同业务不同配置</li>
+</ul>
+<h3><a id="producer%E7%AB%AF%E5%8F%82%E6%95%B0" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Producer端参数</h3>
+<h3><a id="consumer%E7%AB%AF%E5%8F%82%E6%95%B0" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Consumer端参数</h3>
+<h3><a id="jvm%E5%8F%82%E6%95%B0" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>JVM参数</h3>
+<blockquote>
+<p>设置环境变量，提高JVM堆大小，业界公认最佳配置为6G，修改GC算法</p>
+</blockquote>
+<ul>
+<li>KAFKA_HEAP_OPTS：堆大小</li>
+<li>KAFKA_JVM_PERFORMANCE_OPTS：GC算法</li>
+</ul>
+<pre><code class="language-shell">$&gt; export KAFKA_HEAP_OPTS=--Xms6g  --Xmx6g
+$&gt; export  KAFKA_JVM_PERFORMANCE_OPTS= -server -XX:+UseG1GC -XX:MaxGCPauseMillis=20 -XX:InitiatingHeapOccupancyPercent=35 -XX:+ExplicitGCInvokesConcurrent -Djava.awt.headless=true
+$&gt; bin/kafka-server-start.sh config/server.properties
+
+</code></pre>
+<h3><a id="%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8F%82%E6%95%B0" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>操作系统参数</h3>
+<ul>
+<li>文件描述符限制调大</li>
+<li>文件系统类型：根据官网的测试报告，XFS 的性能要强于 ext4，<a href="https://www.confluent.io/kafka-summit-sf18/kafka-on-zfs">ZFS</a>性能貌似更好</li>
+<li>Swap修改成1：改成0容易导致内存溢出来不及处理</li>
+<li>文件刷盘时间间隔：消息写到页缓存上即算成功，减小刷盘间隔可以提高可用性，但是降低吞吐量</li>
+</ul>
+<h2><a id="%E5%AE%9E%E7%8E%B0%E6%97%A0%E6%B6%88%E6%81%AF%E4%B8%A2%E5%A4%B1" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>实现无消息丢失</h2>
+<h3><a id="%E9%85%8D%E7%BD%AE%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>配置最佳实践</h3>
+<ol>
+<li>不要使用 producer.send(msg)，而要使用 producer.send(msg, callback)。</li>
+<li>设置 acks = all。acks 是 Producer的一个参数，代表了你对“已提交”消息的定义。如果设置成 all，则表明所有副本 Broker 都要接收到消息，该消息才算是“已提交”。这是最高等级的“已提交”定义。</li>
+<li>设置 retries 为一个较大的值。这里的 retries同样是 Producer 的参数，对应前面提到的 Producer 自动重试。当出现网络的瞬时抖动时，消息发送可能会失败，此时配置了 retries &gt; 0 的 Producer 能够自动重试消息发送，避免消息丢失。</li>
+<li>设置 unclean.leader.election.enable = false。这是 Broker 端的参数，它控制的是哪些 Broker 有资格竞选分区的 Leader。如果一个 Broker 落后原先的 Leader 太多，那么它一旦成为新的 Leader，必然会造成消息的丢失。故一般都要将该参数设置成 false，即不允许这种情况的发生。</li>
+<li>设置 replication.factor &gt;= 3。这也是Broker 端的参数。其实这里想表述的是，最好将消息多保存几份，毕竟目前防止消息丢失的主要机制就是冗余。</li>
+<li>设置 min.insync.replicas &gt; 1。这依然是 Broker 端参数，控制的是消息至少要被写入到多少个副本才算是“已提交”。设置成大于 1 可以提升消息持久性。在实际环境中千万不要使用默认值 1。</li>
+<li>确保 replication.factor &gt; min.insync.replicas。如果两者相等，那么只要有一个副本挂机，整个分区就无法正常工作了。我们不仅要改善消息的持久性，防止数据丢失，还要在不降低可用性的基础上完成。推荐设置成 replication.factor = min.insync.replicas + 1。</li>
+<li>确保消息消费完成再提交。Consumer 端有个参数 enable.auto.commit，最好把它设置成 false，并采用手动提交位移的方式。就像前面说的，这对于单 Consumer 多线程处理的场景而言是至关重要的。</li>
+</ol>
+<h3><a id="%E5%B8%B8%E8%A7%81%E4%B8%A2%E6%B6%88%E6%81%AF%E6%A1%88%E4%BE%8B" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>常见丢消息案例</h3>
+
+
+			
+			
+		</div>
+
+	</article>
+ 
+	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+		<div class="meta">
+			<div class="date">
+				<time datetime="2019-06-21T19:52:23-07:00" itemprop="datePublished">06/21/2019</time>
+			</div>
+			<div class="tags">posted in 
+			
+			    <a class='category' href='internet-tech.html'>后端技术</a>&nbsp;
+			 
+			</div>
+		</div>
+		<h1 class="title" itemprop="name"><a href="15611719436274.html" itemprop="url">
+		域名解析</a></h1>
+		<div class="entry-content" itemprop="articleBody">
+			
+			<h2><a id="dns%E5%9F%9F%E5%90%8D%E8%A7%84%E8%8C%83" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>DNS域名规范</h2>
+<ul>
+<li>域名中的标号由英文和数字组成，标号中除连字符“-”外不能使用其他的标点符号，不区分大小写字母</li>
+<li>每一个标号不超过63个字符</li>
+<li>级别最低的域名写在最左边，而级别最高的字符写在最右边</li>
+<li>由多个标号组成的完整域名总共不超过255个字符</li>
+<li>DNS既不规定一个域名需要包含多少个下级域名，也不规定每一级域名代表什么意思。</li>
+<li>各级域名由其上一级的域名管理机构管理，而最高的顶级域名则由ICANN进行管理</li>
+</ul>
+<h2><a id="%E5%9F%9F%E5%90%8D%E7%AE%A1%E7%90%86" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>域名管理</h2>
+<ul>
+<li>
+<p>顶级域名分三大类</p>
+<ul>
+<li><strong>国家顶级域名nTLD</strong>：采用ISO3166的规定。如：cn代表中国，us代表美国，uk代表英国，等等。国家域名又常记为ccTLD(cc表示国家代码contry-code)</li>
+<li><strong>通用顶级域名gTLD</strong>：最常见的通用顶级域名有7个，即：com(公司企业)，net(网络服务机构)，org(非营利组织)，int(国际组织)，gov(美国的政府部门)，mil(美国的军事部门)</li>
+<li><strong>基础结构域名(infrastructure domain)</strong>：只有一个arpa，用于反向域名解析，因此成为反向域名</li>
+</ul>
+<p><img src="http://image.harveygg.wang/mweb/15611724903244.jpg" alt="xxx" /></p>
+</li>
+</ul>
+<h2><a id="%E5%9F%9F%E5%90%8D%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E5%88%86%E7%B1%BB" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>域名服务器的分类</h2>
+<ul>
+<li>根域名服务器：记录顶级域名服务器</li>
+<li>顶级域名服务器：管理在该顶级域名服务器注册的二级域名</li>
+<li>权威域名服务器(authoritative domain name system)：负责一个zone的域名解析</li>
+<li>本地域名服务器：不在域名服务器树结构中，但是很重要，域名解析首先发给本地域名服务器</li>
+</ul>
+<h2><a id="%E5%9F%9F%E5%90%8D%E8%A7%A3%E6%9E%90%E8%BF%87%E7%A8%8B" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>域名解析过程</h2>
+<ol>
+<li>请求本地域名服务器</li>
+<li>本地域名服务器返回解析结果或想根域名服务器请求</li>
+<li>根域名服务器返回顶级域名服务器的地址</li>
+<li>本地域名服务器请求顶级域名服务器</li>
+<li>顶级域名服务器返回权威域名服务器的地址</li>
+<li>本地域名服务器请求权威域名服务器</li>
+<li>权威域名服务器返回解析结果或报错</li>
+<li>本地域名服务器返回解析结果或报错</li>
+</ol>
+<h2><a id="dns%E8%AE%B0%E5%BD%95%E7%B1%BB%E5%9E%8B" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>DNS记录类型</h2>
+<ul>
+<li>A记录：将域名指向IPv4地址</li>
+<li>AAAA：将域名指向IPv6地址（例如：ff06:0:0:0:0:0:0:c3）</li>
+<li>CNAME：将域名指向另一个域名</li>
+<li>TXT：在这里可以填写任何东西，长度限制255字符。绝大多数的TXT记录是用来做SPF记录（反垃圾邮件）</li>
+<li>NS：授权其他域名服务器解析域名</li>
+<li>MX：指向邮箱服务器</li>
+<li>SOA：SOA叫做起始授权机构记录，表明负责一个zone的多台权威DNS服务器（由NS记录标记）之间的关系，SOA指向的DNS有修改权，其他DNS从SOA同步数据</li>
+<li>SRV记录：记录提供特定服务的服务器，SRV记录了哪台计算机提供了哪个服务。格式为：服务的名字.协议的类型（例如：_example-server._tcp）</li>
+<li>PTR记录：PTR记录是A记录的逆向记录，又称做IP反查记录或指针记录，负责将IP反向解析为域名</li>
+</ul>
+
+
+			
 			
 		</div>
 
