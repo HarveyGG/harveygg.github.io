@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<title>  
 	  
-  	(1) MAC开发环境——软件包管理 - Harvey's Tech Site
+  	服务器 SSH 加固与最小权限部署账户（步骤与验证） - Harvey's Tech Site
   	
 	</title>
 
@@ -132,47 +132,93 @@
 			<div class="mid-col-container"> <div id="content" class="inner">
 
 	<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
-		<h1 class="title" itemprop="name">(1) MAC开发环境——软件包管理</h1>
+		<h1 class="title" itemprop="name">服务器 SSH 加固与最小权限部署账户（步骤与验证）</h1>
 		<div class="entry-content" itemprop="articleBody">
-			<hr />
-<h2><a id="homebrew-https-brew-sh" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="https://brew.sh/">Homebrew</a></h2>
+			<h2><a id="0%E5%89%8D%E6%8F%90" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>0) 前提</h2>
+<p>已可用密钥登录当前服务器（ed25519）<br />
+具备 root 权限（首次执行用 root 登录）</p>
+<h2><a id="1%E5%A4%87%E4%BB%BD%E5%B9%B6%E5%8A%A0%E5%9B%BA-ssh%E9%85%8D%E7%BD%AE" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>1) 备份并加固 SSH 配置</h2>
+<pre><code class="language-bash">### 备份
+sudo cp -a /etc/ssh/sshd_config /etc/ssh/sshd_config.bak.$(date +%s)
+
+### 禁用密码类登录，仅允许密钥
+sudo sed -i 's/^#\?PasswordAuthentication.*/PasswordAuthentication no/' /etc/ssh/sshd_config
+sudo sed -i 's/^#\?KbdInteractiveAuthentication.*/KbdInteractiveAuthentication no/' /etc/ssh/sshd_config || true
+sudo sed -i 's/^#\?ChallengeResponseAuthentication.*/ChallengeResponseAuthentication no/' /etc/ssh/sshd_config || true
+
+### root 仅允许密钥登录（若后续要彻底禁用 root 远程登录，可改为 PermitRootLogin no）
+if grep -q '^PermitRootLogin' /etc/ssh/sshd_config; then
+  sudo sed -i 's/^PermitRootLogin.*/PermitRootLogin prohibit-password/' /etc/ssh/sshd_config
+else
+  echo 'PermitRootLogin prohibit-password' | sudo tee -a /etc/ssh/sshd_config
+fi
+
+### 锁定 root 密码（无密码登录）
+sudo passwd -l root
+
+### 重载 SSH 服务
+sudo systemctl reload sshd || sudo service ssh reload
+</code></pre>
+<h2><a id="2%E5%88%9B%E5%BB%BA%E6%9C%80%E5%B0%8F%E6%9D%83%E9%99%90%E9%83%A8%E7%BD%B2%E7%94%A8%E6%88%B7" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>2) 创建最小权限部署用户</h2>
+<pre><code class="language-bash"># 创建用户并加入 docker 组
+sudo useradd -m -s /bin/bash deploy || true
+sudo getent group docker &gt;/dev/null || sudo groupadd docker
+sudo usermod -aG docker deploy
+
+# 安装公钥（二选一）
+
+# A) 复用 root 的 authorized_keys
+sudo install -d -m 700 -o deploy -g deploy /home/deploy/.ssh
+sudo cp /root/.ssh/authorized_keys /home/deploy/.ssh/authorized_keys
+sudo chown deploy:deploy /home/deploy/.ssh/authorized_keys
+sudo chmod 600 /home/deploy/.ssh/authorized_keys
+
+# B) 或者手动粘贴你的公钥
+# sudo install -d -m 700 -o deploy -g deploy /home/deploy/.ssh
+# echo 'ssh-ed25519 AAAA... your_key' | sudo tee /home/deploy/.ssh/authorized_keys &gt;/dev/null
+# sudo chown deploy:deploy /home/deploy/.ssh/authorized_keys
+# sudo chmod 600 /home/deploy/.ssh/authorized_keys
+
+# 配置最小 sudo 权限（仅允许 docker/docker-compose）
+echo 'deploy ALL=(root) NOPASSWD:/usr/bin/docker,/usr/local/bin/docker-compose,/usr/bin/docker-compose' \
+| sudo tee /etc/sudoers.d/deploy &gt;/dev/null
+sudo chmod 440 /etc/sudoers.d/deploy
+</code></pre>
+<h2><a id="3%E9%AA%8C%E8%AF%81" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>3) 验证</h2>
+<pre><code class="language-bash"># 使用密钥登录 deploy
+ssh -i ~/.ssh/id_ed25519 deploy@&lt;SERVER_IP&gt; 'whoami; id'
+
+# 验证最小 sudo 权限可用
+ssh -i ~/.ssh/id_ed25519 deploy@&lt;SERVER_IP&gt; \
+  'sudo docker ps --format &quot;table {{.Names}}\t{{.Image}}\t{{.Status}}&quot; || true'
+
+# 可选：验证 root 密码登录已禁用（不要在生产上做危险测试）
+# ssh root@&lt;SERVER_IP&gt;    # 应拒绝密码，密钥仍可用
+</code></pre>
+<h2><a id="4%E5%8F%AF%E9%80%89%E5%8A%A0%E5%BC%BA%E9%A1%B9" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>4) 可选加强项</h2>
+<pre><code class="language-bash"># 若后续决定完全禁用 root 远程登录（推荐在确认 deploy 完全可用后执行）
+sudo sed -i 's/^PermitRootLogin.*/PermitRootLogin no/' /etc/ssh/sshd_config
+sudo systemctl reload sshd || sudo service ssh reload
+</code></pre>
+<h2><a id="5%EF%BC%88%E5%8F%AF%E9%80%89%EF%BC%89-env%E6%9C%AC%E5%9C%B0%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>5) （可选）.env 本地文件权限</h2>
+<pre><code class="language-bash"># 保留 /opt/echoflow/.env 便于 docker-compose 使用，确保权限最小
+sudo chmod 600 /opt/echoflow/.env
+sudo chown root:root /opt/echoflow/.env
+
+# 若采用“零驻留”，部署成功后清理（下次部署/重启前需先解密再生成）
+# sudo shred -u /opt/echoflow/.env || sudo rm -f /opt/echoflow/.env
+</code></pre>
+<p>已完成配置的状态应满足：</p>
 <ul>
-<li>使用 Homebrew 安装 Apple 没有预装，但你需要的东西。</li>
-<li>brew管理命令行工具，三方库，会先下载源码，编译，安装，最后link到/usr/local/bin中，如：<code>brew install wget</code></li>
-<li>brew cask管理Mac应用，会直接下载二进制，然后安装，是AppStore的补充，如：<code>brew cask install chrome</code></li>
-<li>推荐所有软件<strong>先考虑AppStore</strong>，如果没有<strong>再考虑Homebrew</strong>，再没有<strong>再去官网下载</strong>，方便后面管理</li>
+<li>服务器仅支持密钥登录，root 无法用密码登录</li>
+<li>日常部署用 deploy 用户，具备 docker/docker-compose 的 NOPASSWD 最小 sudo 权限</li>
 </ul>
-<h3><a id="install-homebrew" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Install Homebrew</h3>
-<pre><code class="language-shell">$ /usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;
-</code></pre>
-<h3><a id="homebrew%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Homebrew 常用命令</h3>
-<pre><code class="language-shell">$ brew search /wge*/  # 搜索软件,后面是正则表达式
-$ brew info wget    # 查看软件信息
-$ brew install wget  # 安装 wget
-$ brew list wget    # 列出该软件安装后的文件
-$ brew uninstall wget  # 卸载 wget
-</code></pre>
-<h3><a id="%E8%8E%B7%E5%8F%96homebrew-cask" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>获取Homebrew-Cask</h3>
-<pre><code class="language-shell">$ brew tap caskroom/cask
-</code></pre>
-<h3><a id="homebrew-cask%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Homebrew Cask常用命令</h3>
-<pre><code class="language-shell"># brew cask 和 brew 的命令基本一致，search, info, list, install, uninstall 子命令都一样
-$ brew cask install java  # 安装 Java
-$ brew cask uninstall java  # 卸载 Java
-$ brew cask install --force $(brew cask outdated | awk '{print $1}' | xargs)  # 更新Cask
-</code></pre>
-<h3><a id="homebrew%E6%9B%B4%E5%A4%9A%E5%91%BD%E4%BB%A4" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Homebrew 更多命令</h3>
-<pre><code class="language-shell">$ brew cleanup  # 卸载旧版本软件，Homebrew升级时是全新安装，不卸载旧版，需要手动卸载旧版本软件
-$ brew update  # 更新Homebrew
-$ brew upgrade  # 更新所有过期软件
-$ brew doctor  # brew自检
-$ brew outdated  # 列出所有过期软件
-$ brew --cache  # 打印brew下载包存放位置
-</code></pre>
-<h3><a id="%E5%8D%B8%E8%BD%BDhomebrew" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>卸载Homebrew</h3>
-<pre><code class="language-shell">$ ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/uninstall)
-</code></pre>
-<p>Download the uninstall script and run ./uninstall --help to view more uninstall options.</p>
+<p>简要验证清单:</p>
+<ul>
+<li>使用 deploy 登录成功</li>
+<li>sudo docker ps 正常</li>
+<li>root 密码登录不可用（保留 root 密钥或彻底禁用 root 远程登录按需选择）</li>
+</ul>
 
 		</div>
 	</article>
@@ -278,7 +324,7 @@ div.code-toolbar > .toolbar > .toolbar-item > span:focus {
   color: inherit;
   text-decoration: none;
 }
-</style><script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script><script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script><script>!function(){if("undefined"!=typeof Prism&&"undefined"!=typeof document){var e=[],t={},n=function(){};Prism.plugins.toolbar={};var a=Prism.plugins.toolbar.registerButton=function(n,a){var r;r="function"==typeof a?a:function(e){var t;return"function"==typeof a.onClick?((t=document.createElement("button")).type="button",t.addEventListener("click",(function(){a.onClick.call(this,e)}))):"string"==typeof a.url?(t=document.createElement("a")).href=a.url:t=document.createElement("span"),a.className&&t.classList.add(a.className),t.textContent=a.text,t},n in t?console.warn('There is a button with the key "'+n+'" registered already.'):e.push(t[n]=r)},r=Prism.plugins.toolbar.hook=function(a){var r=a.element.parentNode;var l=a.element.classList;if(l.contains('language-mermaid') || l.contains('language-echarts') || l.contains('language-plantuml')){return;} if(r&&/pre/i.test(r.nodeName)&&!r.parentNode.classList.contains("code-toolbar")){var o=document.createElement("div");o.classList.add("code-toolbar"),r.parentNode.insertBefore(o,r),o.appendChild(r);var i=document.createElement("div");i.classList.add("toolbar");var l=e,d=function(e){for(;e;){var t=e.getAttribute("data-toolbar-order");if(null!=t)return(t=t.trim()).length?t.split(/\s*,\s*/g):[];e=e.parentElement}}(a.element);d&&(l=d.map((function(e){return t[e]||n}))),l.forEach((function(e){var t=e(a);if(t){var n=document.createElement("div");n.classList.add("toolbar-item"),n.appendChild(t),i.appendChild(n)}})),o.appendChild(i)}};a("label",(function(e){var t=e.element.parentNode;if(t&&/pre/i.test(t.nodeName)&&t.hasAttribute("data-label")){var n,a,r=t.getAttribute("data-label");try{a=document.querySelector("template#"+r)}catch(e){}return a?n=a.content:(t.hasAttribute("data-url")?(n=document.createElement("a")).href=t.getAttribute("data-url"):n=document.createElement("span"),n.textContent=r),n}})),Prism.hooks.add("complete",r)}}();</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/toolbar/prism-toolbar.min.css"><script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script><script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script><style>div.code-toolbar > .toolbar > .toolbar-item > a, div.code-toolbar > .toolbar > .toolbar-item > button, div.code-toolbar > .toolbar > .toolbar-item > span {padding: 4px .5em; background: #f5f2f0; background: rgba(224, 224, 224, 0.4);}</style><script>window.MathJax = {     tex: { tags: 'ams', displayMath: [ ['\\[', '\\]'] ] } ,     startup: {     pageReady() {       return MathJax.startup.defaultPageReady().then(function () {          window.mweb_mathjax_ready_val = 'yes';          if(window.mweb_mathjax_ready !== undefined){ mweb_mathjax_ready(); }       });     }   }};document.addEventListener('DOMContentLoaded', function(event) {    if (typeof Prism != 'undefined') {         Prism.highlightAll();     }});window.mweb_mathjax_ready_val = '';function theMWebMathJaxRenderIsReady(key){ return window.mweb_mathjax_ready_val; }</script><script>window.MathJax = { tex: { tags: 'ams', displayMath: [ ['\\[', '\\]'] ] } }; </script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"></script>
+</style><script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script><script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script><script>!function(){if("undefined"!=typeof Prism&&"undefined"!=typeof document){var e=[],t={},n=function(){};Prism.plugins.toolbar={};var a=Prism.plugins.toolbar.registerButton=function(n,a){var r;r="function"==typeof a?a:function(e){var t;return"function"==typeof a.onClick?((t=document.createElement("button")).type="button",t.addEventListener("click",(function(){a.onClick.call(this,e)}))):"string"==typeof a.url?(t=document.createElement("a")).href=a.url:t=document.createElement("span"),a.className&&t.classList.add(a.className),t.textContent=a.text,t},n in t?console.warn('There is a button with the key "'+n+'" registered already.'):e.push(t[n]=r)},r=Prism.plugins.toolbar.hook=function(a){var r=a.element.parentNode;var l=a.element.classList;if(l.contains('language-mermaid') || l.contains('language-echarts') || l.contains('language-plantuml')){return;} if(r&&/pre/i.test(r.nodeName)&&!r.parentNode.classList.contains("code-toolbar")){var o=document.createElement("div");o.classList.add("code-toolbar"),r.parentNode.insertBefore(o,r),o.appendChild(r);var i=document.createElement("div");i.classList.add("toolbar");var l=e,d=function(e){for(;e;){var t=e.getAttribute("data-toolbar-order");if(null!=t)return(t=t.trim()).length?t.split(/\s*,\s*/g):[];e=e.parentElement}}(a.element);d&&(l=d.map((function(e){return t[e]||n}))),l.forEach((function(e){var t=e(a);if(t){var n=document.createElement("div");n.classList.add("toolbar-item"),n.appendChild(t),i.appendChild(n)}})),o.appendChild(i)}};a("label",(function(e){var t=e.element.parentNode;if(t&&/pre/i.test(t.nodeName)&&t.hasAttribute("data-label")){var n,a,r=t.getAttribute("data-label");try{a=document.querySelector("template#"+r)}catch(e){}return a?n=a.content:(t.hasAttribute("data-url")?(n=document.createElement("a")).href=t.getAttribute("data-url"):n=document.createElement("span"),n.textContent=r),n}})),Prism.hooks.add("complete",r)}}();</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/toolbar/prism-toolbar.min.css"><script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script><script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script><style>div.code-toolbar > .toolbar > .toolbar-item > a, div.code-toolbar > .toolbar > .toolbar-item > button, div.code-toolbar > .toolbar > .toolbar-item > span {padding: 4px .5em; background: #f5f2f0; background: rgba(224, 224, 224, 0.4);}</style>
 
 <style type="text/css">
 figure{margin: 1em 0;padding: 0;}

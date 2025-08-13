@@ -95,6 +95,8 @@
 						
 						  <li id=""><a target="_self" href="architecture-designing.html">架构设计</a></li>
 						
+						  <li id=""><a target="_self" href="dev-ops">DevOps</a></li>
+						
 						  <li id=""><a target="_blank" href="resume.html">My Resume</a></li>
 						
 						  <li id=""><a target="_blank" href="publishing.html">关于网站发布</a></li>
@@ -1522,7 +1524,7 @@ ordercontext.domain
 	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
 		<div class="meta">
 			<div class="date">
-				<time datetime="2024-09-20T09:57:48-07:00" itemprop="datePublished">09/20/2024</time>
+				<time datetime="2025-08-08T14:15:12-07:00" itemprop="datePublished">08/08/2025</time>
 			</div>
 			<div class="tags">posted in 
 			
@@ -1530,15 +1532,95 @@ ordercontext.domain
 			 
 			</div>
 		</div>
-		<h1 class="title" itemprop="name"><a href="17268514682353.html" itemprop="url">
-		Command to Locate the Most Disk Space consuming Files</a></h1>
+		<h1 class="title" itemprop="name"><a href="17546877126096.html" itemprop="url">
+		服务器 SSH 加固与最小权限部署账户（步骤与验证）</a></h1>
 		<div class="entry-content" itemprop="articleBody">
 			
-			<pre><code class="language-bash">find . -type f -size +100M -exec du -h {} + | sort -rh
+			<h2><a id="0%E5%89%8D%E6%8F%90" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>0) 前提</h2>
+<p>已可用密钥登录当前服务器（ed25519）<br />
+具备 root 权限（首次执行用 root 登录）</p>
+<h2><a id="1%E5%A4%87%E4%BB%BD%E5%B9%B6%E5%8A%A0%E5%9B%BA-ssh%E9%85%8D%E7%BD%AE" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>1) 备份并加固 SSH 配置</h2>
+<pre><code class="language-bash">### 备份
+sudo cp -a /etc/ssh/sshd_config /etc/ssh/sshd_config.bak.$(date +%s)
 
+### 禁用密码类登录，仅允许密钥
+sudo sed -i 's/^#\?PasswordAuthentication.*/PasswordAuthentication no/' /etc/ssh/sshd_config
+sudo sed -i 's/^#\?KbdInteractiveAuthentication.*/KbdInteractiveAuthentication no/' /etc/ssh/sshd_config || true
+sudo sed -i 's/^#\?ChallengeResponseAuthentication.*/ChallengeResponseAuthentication no/' /etc/ssh/sshd_config || true
+
+### root 仅允许密钥登录（若后续要彻底禁用 root 远程登录，可改为 PermitRootLogin no）
+if grep -q '^PermitRootLogin' /etc/ssh/sshd_config; then
+  sudo sed -i 's/^PermitRootLogin.*/PermitRootLogin prohibit-password/' /etc/ssh/sshd_config
+else
+  echo 'PermitRootLogin prohibit-password' | sudo tee -a /etc/ssh/sshd_config
+fi
+
+### 锁定 root 密码（无密码登录）
+sudo passwd -l root
+
+### 重载 SSH 服务
+sudo systemctl reload sshd || sudo service ssh reload
 </code></pre>
-<pre><code class="language-bash">du -ahx / | sort -rh | head -20
+<h2><a id="2%E5%88%9B%E5%BB%BA%E6%9C%80%E5%B0%8F%E6%9D%83%E9%99%90%E9%83%A8%E7%BD%B2%E7%94%A8%E6%88%B7" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>2) 创建最小权限部署用户</h2>
+<pre><code class="language-bash"># 创建用户并加入 docker 组
+sudo useradd -m -s /bin/bash deploy || true
+sudo getent group docker &gt;/dev/null || sudo groupadd docker
+sudo usermod -aG docker deploy
+
+# 安装公钥（二选一）
+
+# A) 复用 root 的 authorized_keys
+sudo install -d -m 700 -o deploy -g deploy /home/deploy/.ssh
+sudo cp /root/.ssh/authorized_keys /home/deploy/.ssh/authorized_keys
+sudo chown deploy:deploy /home/deploy/.ssh/authorized_keys
+sudo chmod 600 /home/deploy/.ssh/authorized_keys
+
+# B) 或者手动粘贴你的公钥
+# sudo install -d -m 700 -o deploy -g deploy /home/deploy/.ssh
+# echo 'ssh-ed25519 AAAA... your_key' | sudo tee /home/deploy/.ssh/authorized_keys &gt;/dev/null
+# sudo chown deploy:deploy /home/deploy/.ssh/authorized_keys
+# sudo chmod 600 /home/deploy/.ssh/authorized_keys
+
+# 配置最小 sudo 权限（仅允许 docker/docker-compose）
+echo 'deploy ALL=(root) NOPASSWD:/usr/bin/docker,/usr/local/bin/docker-compose,/usr/bin/docker-compose' \
+| sudo tee /etc/sudoers.d/deploy &gt;/dev/null
+sudo chmod 440 /etc/sudoers.d/deploy
 </code></pre>
+<h2><a id="3%E9%AA%8C%E8%AF%81" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>3) 验证</h2>
+<pre><code class="language-bash"># 使用密钥登录 deploy
+ssh -i ~/.ssh/id_ed25519 deploy@&lt;SERVER_IP&gt; 'whoami; id'
+
+# 验证最小 sudo 权限可用
+ssh -i ~/.ssh/id_ed25519 deploy@&lt;SERVER_IP&gt; \
+  'sudo docker ps --format &quot;table {{.Names}}\t{{.Image}}\t{{.Status}}&quot; || true'
+
+# 可选：验证 root 密码登录已禁用（不要在生产上做危险测试）
+# ssh root@&lt;SERVER_IP&gt;    # 应拒绝密码，密钥仍可用
+</code></pre>
+<h2><a id="4%E5%8F%AF%E9%80%89%E5%8A%A0%E5%BC%BA%E9%A1%B9" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>4) 可选加强项</h2>
+<pre><code class="language-bash"># 若后续决定完全禁用 root 远程登录（推荐在确认 deploy 完全可用后执行）
+sudo sed -i 's/^PermitRootLogin.*/PermitRootLogin no/' /etc/ssh/sshd_config
+sudo systemctl reload sshd || sudo service ssh reload
+</code></pre>
+<h2><a id="5%EF%BC%88%E5%8F%AF%E9%80%89%EF%BC%89-env%E6%9C%AC%E5%9C%B0%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>5) （可选）.env 本地文件权限</h2>
+<pre><code class="language-bash"># 保留 /opt/echoflow/.env 便于 docker-compose 使用，确保权限最小
+sudo chmod 600 /opt/echoflow/.env
+sudo chown root:root /opt/echoflow/.env
+
+# 若采用“零驻留”，部署成功后清理（下次部署/重启前需先解密再生成）
+# sudo shred -u /opt/echoflow/.env || sudo rm -f /opt/echoflow/.env
+</code></pre>
+<p>已完成配置的状态应满足：</p>
+<ul>
+<li>服务器仅支持密钥登录，root 无法用密码登录</li>
+<li>日常部署用 deploy 用户，具备 docker/docker-compose 的 NOPASSWD 最小 sudo 权限</li>
+</ul>
+<p>简要验证清单:</p>
+<ul>
+<li>使用 deploy 登录成功</li>
+<li>sudo docker ps 正常</li>
+<li>root 密码登录不可用（保留 root 密钥或彻底禁用 root 远程登录按需选择）</li>
+</ul>
 
 
 			

@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<title>  
 	  
-  	(1) MAC开发环境——软件包管理 - Harvey's Tech Site
+  	DevOps - Harvey's Tech Site
   	
 	</title>
 
@@ -130,63 +130,76 @@
 		</div>	
 		<div class="mid-col">
 			<div class="mid-col-container"> <div id="content" class="inner">
+<div itemscope itemtype="http://schema.org/Blog">
 
-	<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
-		<h1 class="title" itemprop="name">(1) MAC开发环境——软件包管理</h1>
-		<div class="entry-content" itemprop="articleBody">
-			<hr />
-<h2><a id="homebrew-https-brew-sh" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="https://brew.sh/">Homebrew</a></h2>
-<ul>
-<li>使用 Homebrew 安装 Apple 没有预装，但你需要的东西。</li>
-<li>brew管理命令行工具，三方库，会先下载源码，编译，安装，最后link到/usr/local/bin中，如：<code>brew install wget</code></li>
-<li>brew cask管理Mac应用，会直接下载二进制，然后安装，是AppStore的补充，如：<code>brew cask install chrome</code></li>
-<li>推荐所有软件<strong>先考虑AppStore</strong>，如果没有<strong>再考虑Homebrew</strong>，再没有<strong>再去官网下载</strong>，方便后面管理</li>
-</ul>
-<h3><a id="install-homebrew" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Install Homebrew</h3>
-<pre><code class="language-shell">$ /usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;
-</code></pre>
-<h3><a id="homebrew%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Homebrew 常用命令</h3>
-<pre><code class="language-shell">$ brew search /wge*/  # 搜索软件,后面是正则表达式
-$ brew info wget    # 查看软件信息
-$ brew install wget  # 安装 wget
-$ brew list wget    # 列出该软件安装后的文件
-$ brew uninstall wget  # 卸载 wget
-</code></pre>
-<h3><a id="%E8%8E%B7%E5%8F%96homebrew-cask" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>获取Homebrew-Cask</h3>
-<pre><code class="language-shell">$ brew tap caskroom/cask
-</code></pre>
-<h3><a id="homebrew-cask%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Homebrew Cask常用命令</h3>
-<pre><code class="language-shell"># brew cask 和 brew 的命令基本一致，search, info, list, install, uninstall 子命令都一样
-$ brew cask install java  # 安装 Java
-$ brew cask uninstall java  # 卸载 Java
-$ brew cask install --force $(brew cask outdated | awk '{print $1}' | xargs)  # 更新Cask
-</code></pre>
-<h3><a id="homebrew%E6%9B%B4%E5%A4%9A%E5%91%BD%E4%BB%A4" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Homebrew 更多命令</h3>
-<pre><code class="language-shell">$ brew cleanup  # 卸载旧版本软件，Homebrew升级时是全新安装，不卸载旧版，需要手动卸载旧版本软件
-$ brew update  # 更新Homebrew
-$ brew upgrade  # 更新所有过期软件
-$ brew doctor  # brew自检
-$ brew outdated  # 列出所有过期软件
-$ brew --cache  # 打印brew下载包存放位置
-</code></pre>
-<h3><a id="%E5%8D%B8%E8%BD%BDhomebrew" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>卸载Homebrew</h3>
-<pre><code class="language-shell">$ ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/uninstall)
-</code></pre>
-<p>Download the uninstall script and run ./uninstall --help to view more uninstall options.</p>
 
+	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+		<div class="meta">
+			<div class="date">
+				<time datetime="2019-11-28T00:12:08-08:00" itemprop="datePublished">11/28/2019</time>
+			</div>
+			<div class="tags">posted in 
+			
+			    <a class='category' href='dev-ops.html'>DevOps</a>&nbsp;
+			 
+			</div>
 		</div>
+		<h1 class="title" itemprop="name"><a href="15749287286754.html" itemprop="url">
+		Immutable Infrastructure</a></h1>
+		<div class="entry-content" itemprop="articleBody">
+			
+			<h2><a id="%E4%BB%80%E4%B9%88%E6%98%AFmutable-infrastructure" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>什么是Mutable Infrastructure</h2>
+<p>传统物理服务器时代，企业倾向于对服务器做修改以实现商业目的。如，更换配件，原地更新软件包(upgrade app)，修改配置(update configuration)，打补丁(ad-hoc fixes)，微调(tweaks)。这些操作渐渐把一个服务器变得独一无二(<a href="https://martinfowler.com/bliki/SnowflakeServer.html">SnowflakeServer</a>)。这使得它难以被替换，难以维护，难以复制。你越来越无法理解其上面的某个配置这样配的原因。而这一切之所以会这样发展，是因为物理服务器时代服务器更新的难度大，成本高，周期长。所以企业在服务器更新上发展出很多技术，但都是围绕着原地升级的思路发展的。</p>
+<h2><a id="%E4%BB%80%E4%B9%88%E6%98%AFimmutable-infrastructure" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>什么是Immutable Infrastructure</h2>
+<p>到了虚拟化时代，虚拟服务器变得可以被轻易替换(disposable)，整个服务器可以在秒级被重新构建。这使得使用服务器被整体替换的方式更新服务器比原地升级服务器来的更划算。服务器一旦部署完就不再被修改，服务器需要升级时，是基于一个基线重新构建然后替换原有服务器。这使得服务器的复制，替换变得轻而易举。这种服务器也叫<a href="https://martinfowler.com/bliki/PhoenixServer.html">PhoenixServer</a>。这样的基础架构无疑更加健壮，可维护。</p>
+<h2><a id="%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0immutable-infrastructure" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>如何实现Immutable Infrastructure</h2>
+<ul>
+<li>禁止人工登录服务器做任何修改</li>
+<li>使用虚拟化技术</li>
+<li>服务器可以基于镜像快速构建，</li>
+<li>服务器的生命周期管理由软件自动化实现
+<ul>
+<li>服务器目标状态由文档定义</li>
+<li>文档由VCS管理</li>
+<li>服务器更新由自动化工具基于VCS里文档的更新触发，并最终实现目标状态</li>
+</ul>
+</li>
+<li>一个无状态，变化频繁的应用层</li>
+<li>一个数据持久层
+<ul>
+<li>日志中心，记录服务器的每次变更</li>
+<li>外部数据存储，无状态应用层服务器被频繁替换，数据必须存储在外部</li>
+</ul>
+</li>
+<li>开发和运维无间合作(DevOps)</li>
+<li>使用混沌工程工具验证服务的健壮性</li>
+</ul>
+<h2><a id="%E7%90%86%E6%83%B3%E5%BE%88%E4%B8%B0%E6%BB%A1%EF%BC%8C%E7%8E%B0%E5%AE%9E%E5%BE%88%E9%AA%A8%E6%84%9F" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>理想很丰满，现实很骨感</h2>
+<p>如果在物理服务器上利用严格规范和自动化工具是否能打造Immutable Infrastructure呢？理论上可以，但现实是物理服务器很多场景下难以实现批量统一的更新，因为物理服务器太大，上面跑的东西太多。<br />
+那么是不是使用了虚拟化技术，就一定能实现Immutable Infrastructure？答案是否定的。国内很多大厂，甚至是云计算提供商，其内部服务虽然使用了虚拟机，甚至容器，但是其运维范式仍然遵循传统原地升级模式，仍然会登录到虚拟机或容器内部做一些修改，或者只有部分技术栈（如服务软件包，基础软件包）实现了基线化管理，而其他技术栈（如操作系统配置，网络配置）还是通过其他途径手动升级，整体效果仍然和传统Mutable Infrastructure一样。举个例子，应用扩容一台机器，而防火墙没有同步更新，导致新扩容的服务器和其他服务器之间网络不通，需要人工修改网络配置才能打通网络。<br />
+所以说，真正的Immutable Infrastructure的落地，是依赖强有力的运维能力的，而这样的运维能力又依赖配套的组织架构关系和DevOps文化和极强的规范化。</p>
+
+
+			
+			
+		</div>
+
 	</article>
-	<div class="share-comment">
-	 
+  
 
-	  
-	    <div id="disqus_thread"></div>
-	  
+</div>
+<nav id="pagenavi">
+	 <a class="prev" href="dev-ops.html">Prev</a>  
+	
+	<div class="center"><a href="archives.html">Blog Archives</a></div>
 
-	  
+</nav>
 
-	</div>
-</div>        </div>
+</div>
+
+
+
+        </div>
 			<footer id="footer" class="inner">Copyright &copy; 2014
 Powered by <a target="_blank" href="http://www.mweb.im">MWeb</a> &nbsp;&nbsp; 
 Theme by <a href="http://shashankmehta.in/archive/2012/greyshade.html">Shashank Mehta</a>
@@ -195,7 +208,6 @@ Theme by <a href="http://shashankmehta.in/archive/2012/greyshade.html">Shashank 
 	</div>
 
 
-<script>(n=>{"use strict";let s,r,e;const l=["cdn.jsdelivr.net","fastly.jsdelivr.net","gcore.jsdelivr.net","cdn.zenless.top","testingcf.jsdelivr.net"],t="//",i=l[0],o=Date.now(),a=2e3,c="jsdelivr-auto-fallback",f="/gh/PipecraftNet/jsdelivr-auto-fallback@main/empty.css?",d=e=>e&&e.includes(t+i),m=e=>e.replace(t+i,t+s),u=window.setTimeout,v=n.querySelectorAll.bind(n),b=()=>{let e,t;for(e of v('link[rel="stylesheet"]'))t=e.href,d(t)&&!t.includes(f)&&(e.href=m(t));for(e of v("script"))if(t=e.src,d(t)){const s=n.createElement("script");s.src=m(t),e.defer=!0,e.src="",e.before(s),e.remove()}for(e of v("img"))t=e.src,d(t)&&(e.src="",e.src=m(t));for(e of v("*[style]"))t=e.getAttribute("style"),d(t)&&e.setAttribute("style",m(t));for(e of v("style"))t=e.innerHTML,d(t)&&(e.innerHTML=m(t))},h=()=>{!e&&r&&s&&(console.warn(i+" is not available. Use "+s),e=!0,u(b,0),u(b,20),setInterval(b,500))},g=(()=>{try{return Object.assign({},JSON.parse(localStorage.getItem(c)||"{}"))}catch{return{}}})(),y=()=>{g.time=o,g.failed=!1,g.fastNode=null;for(const t of l)((e,t)=>{let s;const r=n.createElement("link"),l=e=>{s&&(clearTimeout(s),s=0,e||(r.href="data:text/css;base64,"),r.remove(),t(e))};s=u(l,a),r.addEventListener("error",()=>l(!1)),r.addEventListener("load",()=>l(!0)),r.rel="stylesheet",r.text="text/css",r.href=e+f+o,n.head.insertAdjacentElement("afterbegin",r)})("https://"+t,e=>{e||t!==i||(r=!0,g.failed=!0),e&&!s&&(s=t),e&&!g.fastNode&&(g.fastNode=t),h()});u(()=>{r&&!s&&(s=l[1],h()),localStorage.setItem(c,JSON.stringify(g))},a+100)};if(g.time&&o-g.time<36e5&&g.failed&&g.fastNode)r=!0,s=g.fastNode,h(),u(y,1e3);else if(n.head)y();else{const j=new MutationObserver(()=>{n.head&&(j.disconnect(),y())});j.observe(n,{childList:!0,subtree:!0})}})(document);</script>
 <style>.mweb-charts{background:#fff;}
 body{ box-sizing: border-box;
     margin: 0 auto;}
@@ -278,7 +290,7 @@ div.code-toolbar > .toolbar > .toolbar-item > span:focus {
   color: inherit;
   text-decoration: none;
 }
-</style><script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script><script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script><script>!function(){if("undefined"!=typeof Prism&&"undefined"!=typeof document){var e=[],t={},n=function(){};Prism.plugins.toolbar={};var a=Prism.plugins.toolbar.registerButton=function(n,a){var r;r="function"==typeof a?a:function(e){var t;return"function"==typeof a.onClick?((t=document.createElement("button")).type="button",t.addEventListener("click",(function(){a.onClick.call(this,e)}))):"string"==typeof a.url?(t=document.createElement("a")).href=a.url:t=document.createElement("span"),a.className&&t.classList.add(a.className),t.textContent=a.text,t},n in t?console.warn('There is a button with the key "'+n+'" registered already.'):e.push(t[n]=r)},r=Prism.plugins.toolbar.hook=function(a){var r=a.element.parentNode;var l=a.element.classList;if(l.contains('language-mermaid') || l.contains('language-echarts') || l.contains('language-plantuml')){return;} if(r&&/pre/i.test(r.nodeName)&&!r.parentNode.classList.contains("code-toolbar")){var o=document.createElement("div");o.classList.add("code-toolbar"),r.parentNode.insertBefore(o,r),o.appendChild(r);var i=document.createElement("div");i.classList.add("toolbar");var l=e,d=function(e){for(;e;){var t=e.getAttribute("data-toolbar-order");if(null!=t)return(t=t.trim()).length?t.split(/\s*,\s*/g):[];e=e.parentElement}}(a.element);d&&(l=d.map((function(e){return t[e]||n}))),l.forEach((function(e){var t=e(a);if(t){var n=document.createElement("div");n.classList.add("toolbar-item"),n.appendChild(t),i.appendChild(n)}})),o.appendChild(i)}};a("label",(function(e){var t=e.element.parentNode;if(t&&/pre/i.test(t.nodeName)&&t.hasAttribute("data-label")){var n,a,r=t.getAttribute("data-label");try{a=document.querySelector("template#"+r)}catch(e){}return a?n=a.content:(t.hasAttribute("data-url")?(n=document.createElement("a")).href=t.getAttribute("data-url"):n=document.createElement("span"),n.textContent=r),n}})),Prism.hooks.add("complete",r)}}();</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/toolbar/prism-toolbar.min.css"><script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script><script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script><style>div.code-toolbar > .toolbar > .toolbar-item > a, div.code-toolbar > .toolbar > .toolbar-item > button, div.code-toolbar > .toolbar > .toolbar-item > span {padding: 4px .5em; background: #f5f2f0; background: rgba(224, 224, 224, 0.4);}</style><script>window.MathJax = {     tex: { tags: 'ams', displayMath: [ ['\\[', '\\]'] ] } ,     startup: {     pageReady() {       return MathJax.startup.defaultPageReady().then(function () {          window.mweb_mathjax_ready_val = 'yes';          if(window.mweb_mathjax_ready !== undefined){ mweb_mathjax_ready(); }       });     }   }};document.addEventListener('DOMContentLoaded', function(event) {    if (typeof Prism != 'undefined') {         Prism.highlightAll();     }});window.mweb_mathjax_ready_val = '';function theMWebMathJaxRenderIsReady(key){ return window.mweb_mathjax_ready_val; }</script><script>window.MathJax = { tex: { tags: 'ams', displayMath: [ ['\\[', '\\]'] ] } }; </script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"></script>
+</style>
 
 <style type="text/css">
 figure{margin: 1em 0;padding: 0;}

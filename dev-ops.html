@@ -95,6 +95,8 @@
 						
 						  <li id=""><a target="_self" href="architecture-designing.html">架构设计</a></li>
 						
+						  <li id=""><a target="_self" href="dev-ops">DevOps</a></li>
+						
 						  <li id=""><a target="_blank" href="resume.html">My Resume</a></li>
 						
 						  <li id=""><a target="_blank" href="publishing.html">关于网站发布</a></li>
@@ -131,6 +133,114 @@
 <div itemscope itemtype="http://schema.org/Blog">
 
 
+	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+		<div class="meta">
+			<div class="date">
+				<time datetime="2025-08-08T14:15:12-07:00" itemprop="datePublished">08/08/2025</time>
+			</div>
+			<div class="tags">posted in 
+			
+			    <a class='category' href='dev-ops.html'>DevOps</a>&nbsp;
+			 
+			</div>
+		</div>
+		<h1 class="title" itemprop="name"><a href="17546877126096.html" itemprop="url">
+		服务器 SSH 加固与最小权限部署账户（步骤与验证）</a></h1>
+		<div class="entry-content" itemprop="articleBody">
+			
+			<h2><a id="0%E5%89%8D%E6%8F%90" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>0) 前提</h2>
+<p>已可用密钥登录当前服务器（ed25519）<br />
+具备 root 权限（首次执行用 root 登录）</p>
+<h2><a id="1%E5%A4%87%E4%BB%BD%E5%B9%B6%E5%8A%A0%E5%9B%BA-ssh%E9%85%8D%E7%BD%AE" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>1) 备份并加固 SSH 配置</h2>
+<pre><code class="language-bash">### 备份
+sudo cp -a /etc/ssh/sshd_config /etc/ssh/sshd_config.bak.$(date +%s)
+
+### 禁用密码类登录，仅允许密钥
+sudo sed -i 's/^#\?PasswordAuthentication.*/PasswordAuthentication no/' /etc/ssh/sshd_config
+sudo sed -i 's/^#\?KbdInteractiveAuthentication.*/KbdInteractiveAuthentication no/' /etc/ssh/sshd_config || true
+sudo sed -i 's/^#\?ChallengeResponseAuthentication.*/ChallengeResponseAuthentication no/' /etc/ssh/sshd_config || true
+
+### root 仅允许密钥登录（若后续要彻底禁用 root 远程登录，可改为 PermitRootLogin no）
+if grep -q '^PermitRootLogin' /etc/ssh/sshd_config; then
+  sudo sed -i 's/^PermitRootLogin.*/PermitRootLogin prohibit-password/' /etc/ssh/sshd_config
+else
+  echo 'PermitRootLogin prohibit-password' | sudo tee -a /etc/ssh/sshd_config
+fi
+
+### 锁定 root 密码（无密码登录）
+sudo passwd -l root
+
+### 重载 SSH 服务
+sudo systemctl reload sshd || sudo service ssh reload
+</code></pre>
+<h2><a id="2%E5%88%9B%E5%BB%BA%E6%9C%80%E5%B0%8F%E6%9D%83%E9%99%90%E9%83%A8%E7%BD%B2%E7%94%A8%E6%88%B7" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>2) 创建最小权限部署用户</h2>
+<pre><code class="language-bash"># 创建用户并加入 docker 组
+sudo useradd -m -s /bin/bash deploy || true
+sudo getent group docker &gt;/dev/null || sudo groupadd docker
+sudo usermod -aG docker deploy
+
+# 安装公钥（二选一）
+
+# A) 复用 root 的 authorized_keys
+sudo install -d -m 700 -o deploy -g deploy /home/deploy/.ssh
+sudo cp /root/.ssh/authorized_keys /home/deploy/.ssh/authorized_keys
+sudo chown deploy:deploy /home/deploy/.ssh/authorized_keys
+sudo chmod 600 /home/deploy/.ssh/authorized_keys
+
+# B) 或者手动粘贴你的公钥
+# sudo install -d -m 700 -o deploy -g deploy /home/deploy/.ssh
+# echo 'ssh-ed25519 AAAA... your_key' | sudo tee /home/deploy/.ssh/authorized_keys &gt;/dev/null
+# sudo chown deploy:deploy /home/deploy/.ssh/authorized_keys
+# sudo chmod 600 /home/deploy/.ssh/authorized_keys
+
+# 配置最小 sudo 权限（仅允许 docker/docker-compose）
+echo 'deploy ALL=(root) NOPASSWD:/usr/bin/docker,/usr/local/bin/docker-compose,/usr/bin/docker-compose' \
+| sudo tee /etc/sudoers.d/deploy &gt;/dev/null
+sudo chmod 440 /etc/sudoers.d/deploy
+</code></pre>
+<h2><a id="3%E9%AA%8C%E8%AF%81" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>3) 验证</h2>
+<pre><code class="language-bash"># 使用密钥登录 deploy
+ssh -i ~/.ssh/id_ed25519 deploy@&lt;SERVER_IP&gt; 'whoami; id'
+
+# 验证最小 sudo 权限可用
+ssh -i ~/.ssh/id_ed25519 deploy@&lt;SERVER_IP&gt; \
+  'sudo docker ps --format &quot;table {{.Names}}\t{{.Image}}\t{{.Status}}&quot; || true'
+
+# 可选：验证 root 密码登录已禁用（不要在生产上做危险测试）
+# ssh root@&lt;SERVER_IP&gt;    # 应拒绝密码，密钥仍可用
+</code></pre>
+<h2><a id="4%E5%8F%AF%E9%80%89%E5%8A%A0%E5%BC%BA%E9%A1%B9" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>4) 可选加强项</h2>
+<pre><code class="language-bash"># 若后续决定完全禁用 root 远程登录（推荐在确认 deploy 完全可用后执行）
+sudo sed -i 's/^PermitRootLogin.*/PermitRootLogin no/' /etc/ssh/sshd_config
+sudo systemctl reload sshd || sudo service ssh reload
+</code></pre>
+<h2><a id="5%EF%BC%88%E5%8F%AF%E9%80%89%EF%BC%89-env%E6%9C%AC%E5%9C%B0%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>5) （可选）.env 本地文件权限</h2>
+<pre><code class="language-bash"># 保留 /opt/echoflow/.env 便于 docker-compose 使用，确保权限最小
+sudo chmod 600 /opt/echoflow/.env
+sudo chown root:root /opt/echoflow/.env
+
+# 若采用“零驻留”，部署成功后清理（下次部署/重启前需先解密再生成）
+# sudo shred -u /opt/echoflow/.env || sudo rm -f /opt/echoflow/.env
+</code></pre>
+<p>已完成配置的状态应满足：</p>
+<ul>
+<li>服务器仅支持密钥登录，root 无法用密码登录</li>
+<li>日常部署用 deploy 用户，具备 docker/docker-compose 的 NOPASSWD 最小 sudo 权限</li>
+</ul>
+<p>简要验证清单:</p>
+<ul>
+<li>使用 deploy 登录成功</li>
+<li>sudo docker ps 正常</li>
+<li>root 密码登录不可用（保留 root 密钥或彻底禁用 root 远程登录按需选择）</li>
+</ul>
+
+
+			
+			
+		</div>
+
+	</article>
+ 
 	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
 		<div class="meta">
 			<div class="date">
@@ -407,65 +517,12 @@ ls -la /proc/{pid}/ns</p>
 		</div>
 
 	</article>
- 
-	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-		<div class="meta">
-			<div class="date">
-				<time datetime="2019-11-28T00:12:08-08:00" itemprop="datePublished">11/28/2019</time>
-			</div>
-			<div class="tags">posted in 
-			
-			    <a class='category' href='dev-ops.html'>DevOps</a>&nbsp;
-			 
-			</div>
-		</div>
-		<h1 class="title" itemprop="name"><a href="15749287286754.html" itemprop="url">
-		Immutable Infrastructure</a></h1>
-		<div class="entry-content" itemprop="articleBody">
-			
-			<h2><a id="%E4%BB%80%E4%B9%88%E6%98%AFmutable-infrastructure" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>什么是Mutable Infrastructure</h2>
-<p>传统物理服务器时代，企业倾向于对服务器做修改以实现商业目的。如，更换配件，原地更新软件包(upgrade app)，修改配置(update configuration)，打补丁(ad-hoc fixes)，微调(tweaks)。这些操作渐渐把一个服务器变得独一无二(<a href="https://martinfowler.com/bliki/SnowflakeServer.html">SnowflakeServer</a>)。这使得它难以被替换，难以维护，难以复制。你越来越无法理解其上面的某个配置这样配的原因。而这一切之所以会这样发展，是因为物理服务器时代服务器更新的难度大，成本高，周期长。所以企业在服务器更新上发展出很多技术，但都是围绕着原地升级的思路发展的。</p>
-<h2><a id="%E4%BB%80%E4%B9%88%E6%98%AFimmutable-infrastructure" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>什么是Immutable Infrastructure</h2>
-<p>到了虚拟化时代，虚拟服务器变得可以被轻易替换(disposable)，整个服务器可以在秒级被重新构建。这使得使用服务器被整体替换的方式更新服务器比原地升级服务器来的更划算。服务器一旦部署完就不再被修改，服务器需要升级时，是基于一个基线重新构建然后替换原有服务器。这使得服务器的复制，替换变得轻而易举。这种服务器也叫<a href="https://martinfowler.com/bliki/PhoenixServer.html">PhoenixServer</a>。这样的基础架构无疑更加健壮，可维护。</p>
-<h2><a id="%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0immutable-infrastructure" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>如何实现Immutable Infrastructure</h2>
-<ul>
-<li>禁止人工登录服务器做任何修改</li>
-<li>使用虚拟化技术</li>
-<li>服务器可以基于镜像快速构建，</li>
-<li>服务器的生命周期管理由软件自动化实现
-<ul>
-<li>服务器目标状态由文档定义</li>
-<li>文档由VCS管理</li>
-<li>服务器更新由自动化工具基于VCS里文档的更新触发，并最终实现目标状态</li>
-</ul>
-</li>
-<li>一个无状态，变化频繁的应用层</li>
-<li>一个数据持久层
-<ul>
-<li>日志中心，记录服务器的每次变更</li>
-<li>外部数据存储，无状态应用层服务器被频繁替换，数据必须存储在外部</li>
-</ul>
-</li>
-<li>开发和运维无间合作(DevOps)</li>
-<li>使用混沌工程工具验证服务的健壮性</li>
-</ul>
-<h2><a id="%E7%90%86%E6%83%B3%E5%BE%88%E4%B8%B0%E6%BB%A1%EF%BC%8C%E7%8E%B0%E5%AE%9E%E5%BE%88%E9%AA%A8%E6%84%9F" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>理想很丰满，现实很骨感</h2>
-<p>如果在物理服务器上利用严格规范和自动化工具是否能打造Immutable Infrastructure呢？理论上可以，但现实是物理服务器很多场景下难以实现批量统一的更新，因为物理服务器太大，上面跑的东西太多。<br />
-那么是不是使用了虚拟化技术，就一定能实现Immutable Infrastructure？答案是否定的。国内很多大厂，甚至是云计算提供商，其内部服务虽然使用了虚拟机，甚至容器，但是其运维范式仍然遵循传统原地升级模式，仍然会登录到虚拟机或容器内部做一些修改，或者只有部分技术栈（如服务软件包，基础软件包）实现了基线化管理，而其他技术栈（如操作系统配置，网络配置）还是通过其他途径手动升级，整体效果仍然和传统Mutable Infrastructure一样。举个例子，应用扩容一台机器，而防火墙没有同步更新，导致新扩容的服务器和其他服务器之间网络不通，需要人工修改网络配置才能打通网络。<br />
-所以说，真正的Immutable Infrastructure的落地，是依赖强有力的运维能力的，而这样的运维能力又依赖配套的组织架构关系和DevOps文化和极强的规范化。</p>
-
-
-			
-			
-		</div>
-
-	</article>
   
 
 </div>
 <nav id="pagenavi">
 	 
-	
+	 <a class="next" href="dev-ops_1.html">Next</a> 
 	<div class="center"><a href="archives.html">Blog Archives</a></div>
 
 </nav>
