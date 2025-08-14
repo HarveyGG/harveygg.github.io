@@ -136,6 +136,125 @@
 	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
 		<div class="meta">
 			<div class="date">
+				<time datetime="2025-08-14T15:53:58-07:00" itemprop="datePublished">08/14/2025</time>
+			</div>
+			<div class="tags">posted in 
+			
+			    <a class='category' href='dev-ops.html'>DevOps</a>&nbsp;
+			 
+			</div>
+		</div>
+		<h1 class="title" itemprop="name"><a href="17552120384898.html" itemprop="url">
+		Release 分支晋级流程（RBP: Release Branch Promotion）</a></h1>
+		<div class="entry-content" itemprop="articleBody">
+			
+			<ul>
+<li>常驻分支：<code>main</code>、<code>release/*</code>（每期一个）、临时 <code>hotfix/*</code>。没有长期 <code>dev</code>。</li>
+<li>环境：每个 PR 一个预览环境；Staging 只跟随当前 <code>release/*</code>；Prod 只接“已签名的 release tag”。</li>
+<li>构建哲学：<strong>构建一次（在 release 上），Staging 和 Prod 都晋级同一份产物</strong>，绝不重建。</li>
+</ul>
+<hr />
+<h2><a id="sprint%E7%AC%AC-1%E2%80%938%E5%A4%A9%EF%BC%9A%E5%BC%80%E5%8F%91%E6%9C%9F" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Sprint 第 1–8 天：开发期</h2>
+<ul>
+<li>开发分支 → PR → 合 <code>main</code>。</li>
+<li><code>main</code> 合并依赖 <strong>merge queue</strong>：单测、契约测、集成测、静态扫描、迁移脚本干跑全绿才合。</li>
+<li>每个 PR 自动起<strong>预览环境</strong>给前端/QA点验，通过就销毁。</li>
+<li>可选最小开关：全局 Kill Switch + 环境级开关两颗，够用就行。</li>
+</ul>
+<p>产出：一堆通过所有检查的提交在 <code>main</code>，但还没承诺“本期必上”。</p>
+<hr />
+<h2><a id="%E7%AC%AC9%E5%A4%A9%EF%BC%9A%E5%86%BB%E7%BB%93%E6%97%A5%EF%BC%88%E5%88%87%E5%80%99%E9%80%89%E7%89%88%E6%9C%AC%EF%BC%89" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>第 9 天：冻结日（切候选版本）</h2>
+<ul>
+<li>从 <code>main</code> 切出 <code>release/2025.08.S12</code>（名字随你，关键是唯一）。</li>
+<li>在 <code>release/*</code> 上<strong>构建一次</strong>产物：镜像/包打不可变 tag（如 <code>app:2025.08.S12-rc.1</code>），记录 digest、SBOM，并<strong>签名</strong>。</li>
+<li>部署到 Staging，开始全链路验证（E2E、回放/影子流量、性能冒烟、迁移脚本干跑或小流量实跑）。</li>
+</ul>
+<p>注意：冻结后 <code>release/*</code> 只收 <strong>fix</strong> 类 PR。带 <code>refactor/deps/migration/public-api-change</code> 标签的一律被 CI 拒收。</p>
+<hr />
+<h2><a id="%E7%AC%AC10%E2%80%9314%E5%A4%A9%EF%BC%9A%E6%94%B6%E6%95%9B%E6%9C%9F%EF%BC%88%E5%8F%AA%E6%94%B6%E4%BF%AE%EF%BC%89" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>第 10–14 天：收敛期（只收修）</h2>
+<ul>
+<li>
+<p>需要修的 bug：</p>
+<ul>
+<li>方案 A（推荐）：在 <code>main</code> 修，打 <code>backport:release/2025.08.S12</code> 标签，机器人自动 <strong>cherry-pick -x</strong> 回 <code>release/*</code>，重跑 Staging 验证。</li>
+<li>方案 B（紧急）：直接在 <code>release/*</code> 修，同时 <strong>反向合回</strong> <code>main</code>，保持主线干净。</li>
+</ul>
+</li>
+<li>
+<p>若发现“混了重构”的提交：在 <code>release/*</code> 上 <code>git revert -m 1 &lt;merge-commit&gt;</code>，重出 <code>rc.2</code>，继续测。<strong>主线不动</strong>。</p>
+</li>
+<li>
+<p>DB 迁移遵循 expand/contract：</p>
+<ul>
+<li>expand（加列/兼容写）只能在前一班或本班早期就位；</li>
+<li>contract（删旧列/切流）排到下一班。冻结期不做 contract。</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h2><a id="%E5%8F%91%E7%89%88%E6%97%A5%EF%BC%9A%E6%99%8B%E7%BA%A7%EF%BC%8C%E4%B8%8D%E9%87%8D%E5%BB%BA" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>发版日：晋级，不重建</h2>
+<ul>
+<li>给 <code>release/*</code> 当前 commit 打<strong>签名 tag</strong>：<code>v2025.08.S12</code>，指向已在 Staging 验证过的<strong>同一产物</strong>。</li>
+<li>Prod 流水线只接受这个签名 tag，直接<strong>晋级</strong>同一 digest 到生产。</li>
+<li>打产物不可变别名：<code>app:2025.08.S12</code> → 指向那个 digest。记录 SBOM、变更单、审批人，审计闭环。</li>
+</ul>
+<hr />
+<h2><a id="hotfix%EF%BC%9A%E4%B8%A4%E5%88%97%E8%BD%A6%E4%BA%92%E4%B8%8D%E6%B1%A1%E6%9F%93" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Hotfix：两列车互不污染</h2>
+<ul>
+<li>
+<p>从“线上最近一次<strong>生产 tag</strong>”切 <code>hotfix/XYZ</code>，修完：</p>
+<ol>
+<li>在 hotfix 分支构建 <code>v2025.08.S12-p1</code>，可先在短暂 Staging 或金丝雀验证；</li>
+<li>晋级到生产；</li>
+<li><strong>回填</strong>到正在维护的 <code>release/*</code> 和 <code>main</code>。</li>
+</ol>
+</li>
+<li>
+<p>不去动任何“下一班”的 <code>release/*</code>。候选车和现网车各开各的。</p>
+</li>
+</ul>
+<hr />
+<h2><a id="%E5%9B%9E%E6%BB%9A%EF%BC%9A%E4%B8%80%E9%94%AE%E9%80%80%E5%9B%9E%E4%B8%8A%E4%B8%AA%E7%89%88%E6%9C%AC" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>回滚：一键退回上个版本</h2>
+<ul>
+<li>直接把生产<strong>晋级回上一个签名 tag</strong>（同一 digest）。</li>
+<li>若需要“功能层面”止血，拉下 Kill Switch。</li>
+<li>DB 回滚只在使用了可逆脚本时执行；否则依赖 expand/contract 的前向兼容性先熬过去。</li>
+</ul>
+<hr />
+<h2><a id="%E6%9D%83%E9%99%90%E4%B8%8E%E6%8A%A4%E6%A0%8F%EF%BC%88%E9%98%B2%E4%BD%9C%E6%AD%BB%E4%B8%89%E4%BB%B6%E5%A5%97%EF%BC%89" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>权限与护栏（防作死三件套）</h2>
+<ul>
+<li>生产流水线的<strong>部署来源</strong>只允许 <code>release/*</code> 的签名 tag，技术上禁止从任意分支 HEAD 部署。</li>
+<li>冻结后 <code>release/*</code> 的 CI Gate：仅放 <code>type=fix</code> 且触达面与行数低于阈值的 PR，其他一律 fail。</li>
+<li><code>main</code> 的合并必须经 merge queue，合并后<strong>不会</strong>自动部署到 Staging；Staging 只吃 <code>release/*</code>。</li>
+</ul>
+<hr />
+<h2><a id="%E6%9C%80%E5%B0%8F%E5%B7%A5%E5%85%B7%E6%B8%85%E5%8D%95%EF%BC%88%E5%A4%9F%E7%94%A8%E5%8D%B3%E5%8F%AF%EF%BC%89" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>最小工具清单（够用即可）</h2>
+<ul>
+<li>镜像/包签名与 SBOM：cosign/slsa + 你们的制品库。</li>
+<li>Backport 机器人：现成的 backport-bot 或 GitHub Actions 模板。</li>
+<li>影子流量/回放：一条读路径回放管道；写请求在 Staging NOP。</li>
+<li>开关：自建 DB 表都行，至少有“全局关”和“按环境关”。</li>
+</ul>
+<hr />
+<h2><a id="%E5%B8%B8%E8%A7%81%E6%83%85%E6%99%AF%E5%AF%B9%E7%85%A7" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>常见情景对照</h2>
+<ul>
+<li>“第 11 天线上爆 P1”：按 hotfix 流走，不碰下一班 <code>release/*</code>；发完补回。</li>
+<li>“冻结后发现某 PR 混重构”：在 <code>release/*</code> 上 revert，另起干净 fix；<code>main</code> 不动。</li>
+<li>“A/B 契约要成对上”：Gate 强制 A、B 都绿才放 <code>release/*</code>，没齐就下一班。</li>
+<li>“审计要证据链”：产物 digest、签名 tag、Staging 与 Prod 的部署记录一致，截图即证。</li>
+</ul>
+<p>就这么简单：<strong>主线做演化，release 做交付，产物做真相</strong>。别再把 prod 当工作台，别再让提交当发布单位。你要的是确定性，不是惊喜。</p>
+
+
+			
+			
+		</div>
+
+	</article>
+ 
+	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+		<div class="meta">
+			<div class="date">
 				<time datetime="2025-08-08T14:15:12-07:00" itemprop="datePublished">08/08/2025</time>
 			</div>
 			<div class="tags">posted in 
@@ -459,57 +578,6 @@ ls -la /proc/{pid}/ns</p>
 <p>其中<code>--registry-mirror</code>参数中的&quot;xxxxxx&quot;是个人阿里云镜像加速地址，查询地址：</p>
 <pre><code class="language-plain_text">https://cr.console.aliyun.com/cn-hangzhou/instances/mirrors
 </code></pre>
-
-
-			
-			
-		</div>
-
-	</article>
- 
-	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-		<div class="meta">
-			<div class="date">
-				<time datetime="2019-11-29T18:18:08-08:00" itemprop="datePublished">11/29/2019</time>
-			</div>
-			<div class="tags">posted in 
-			
-			    <a class='category' href='dev-ops.html'>DevOps</a>&nbsp;
-			 
-			</div>
-		</div>
-		<h1 class="title" itemprop="name"><a href="15750802883724.html" itemprop="url">
-		平台到底是什么概念</a></h1>
-		<div class="entry-content" itemprop="articleBody">
-			
-			<h2><a id="%E4%B8%80%E8%88%AC%E5%AE%9A%E4%B9%89" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>一般定义</h2>
-<p>平台能为产品团队提供可复用能力支撑（赋能），它是一个操作环境，可以让产品团队在其上把产品特性快速交付到客户手中。ThoughtWorks开发出一个五维模型来描述平台的重要特征：</p>
-<ul>
-<li>支持端到端交付的基础设施</li>
-<li>API和架构自愈</li>
-<li>提供自助服务</li>
-<li>支持实验的基础设施</li>
-<li>提供用户触点技术</li>
-</ul>
-<h2><a id="%E5%85%88%E6%9D%A5%E7%9C%8B%E7%9C%8B%E4%BB%80%E4%B9%88%E4%B8%8D%E6%98%AF%E4%B8%80%E4%B8%AA%E5%B9%B3%E5%8F%B0" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>先来看看什么不是一个平台</h2>
-<h3><a id="%E6%8C%89%E6%8A%80%E6%9C%AF%E9%A2%86%E5%9F%9F%E5%88%92%E5%88%86%E5%9B%A2%E9%98%9F" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>按技术领域划分团队</h3>
-<p>有的企业花大力气构建自动化能力，但是往往会根据技术划分团队。比如，负责中间件管理的团队，负责操作系统管理的团队，负责DB管理的团队，负责LB管理的团队，另外还会有一个专门负责自动化的效能团队，往往能力上只是负责编排。</p>
-<p>这些团队，每个都在自己的管理架构下有独立的工作方式，每个团队都在各自的技术领域范围内实现高效率管理，集中专业化，外包非差异化功能，应用治理，并降低成本。但就是没人去衡量客户需求端到端的交付效率。</p>
-<p>一个客户需求的交付往往穿越多个团队，端到端交付效率极差。</p>
-<p>时间长了，产品和基础设施的质量逐渐下降。环境和配置上会出现很多细微的不一致。产品团队不得不降低交付速度，减少一次交付包含的特性。甚至不敢去做任何改动较大的提升动作或重构动作，而这些动作本来是用来改善问题的。</p>
-<h3><a id="%E5%BD%BC%E6%AD%A4%E4%BE%9D%E8%B5%96%E7%9A%84%E5%BE%85%E5%8A%9E%E4%BA%8B%E9%A1%B9" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>彼此依赖的待办事项</h3>
-<p>一个特性的交付往往在一个团队内无法独立完成，于是一个团队的待办事项会依赖其他团队的待办事项，彼此耦合。而往往不同团队有不同的目标，各自的待办事项优先级不同。于是一个团队的待办事项无法落地的原因往往就是依赖另一个团队的待办事项，而另一个团队迟迟不能完成。这就造成了团队之间的隔阂和互相之间的不信任，甚至扯皮、推诿，丧失责任感和创造力。最终使端到端交付的效率变得极低。</p>
-<p>显然，一个好的平台的一个重要特征是，他必须能减少待办事项耦合。该平台必须能够支持自助服务。</p>
-<h2><a id="%E4%BB%80%E4%B9%88%E6%98%AF%E4%B8%80%E4%B8%AA%E5%B9%B3%E5%8F%B0" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>什么是一个平台</h2>
-<p>AWS就是一个平台。</p>
-<h2><a id="%E5%A6%82%E4%BD%95%E6%9E%84%E5%BB%BA%E4%B8%80%E4%B8%AA%E5%B9%B3%E5%8F%B0" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>如何构建一个平台</h2>
-<ol>
-<li>调整组织架构，给每个产品团队增加5%的运维职责，节省平台团队200%的运维职责。&quot;you build it, you run it.&quot;</li>
-<li>平台自己也要承担从开发到运行的所有责任，避免平台自身的开发团队只管开发，运维团队管运行。同样要坚守：&quot;you build it, you run it.&quot;</li>
-<li>划清平台和产品团队的职责边界，产品团队负责自己产品的构建，部署，监控等；平台团队负责平台的构建，部署，监控等；设计抽象，对外暴露自助服务；平台不应该关心它上面跑的是什么业务，产品不应该关心平台使用的技术。</li>
-<li>除了提供API之外，还要提供文档，guideline, template code, on call, 布道等。</li>
-<li>最初落地时不知道需要提供哪些能力，可以从产品团队了解需求，从解决最迫切的需求开始。</li>
-</ol>
 
 
 			
