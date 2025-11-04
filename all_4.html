@@ -136,6 +136,94 @@
 	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
 		<div class="meta">
 			<div class="date">
+				<time datetime="2019-12-16T01:45:52-08:00" itemprop="datePublished">12/16/2019</time>
+			</div>
+			<div class="tags">posted in 
+			
+			    <a class='category' href='dev-ops.html'>DevOps</a>&nbsp;
+			 
+			</div>
+		</div>
+		<h1 class="title" itemprop="name"><a href="15764895526219.html" itemprop="url">
+		中国大陆地区安装minikube</a></h1>
+		<div class="entry-content" itemprop="articleBody">
+			
+			<p>由于众所周知的原因官方minikube在中国大陆地区运行会碰到网络问题。</p>
+<p>阿里云对官方minikube做了修改，使它默认使用国内镜像仓库。安装和启动参考文档如下：</p>
+<blockquote>
+<p><a href="https://yq.aliyun.com/articles/221687">Minikube - Kubernetes本地实验环境</a></p>
+</blockquote>
+<p>但是文中的参数任然有问题，如下命令可以正常启动，操作系统Mac</p>
+<pre><code class="language-shell">minikube start --image-mirror-country cn \
+    --iso-url=https://kubernetes.oss-cn-hangzhou.aliyuncs.com/minikube/iso/minikube-v1.5.1.iso \
+    --registry-mirror=https://xxxxxx.mirror.aliyuncs.com \
+    --image-repository=registry.cn-hangzhou.aliyuncs.com/google_containers
+</code></pre>
+<p>其中<code>--registry-mirror</code>参数中的&quot;xxxxxx&quot;是个人阿里云镜像加速地址，查询地址：</p>
+<pre><code class="language-plain_text">https://cr.console.aliyun.com/cn-hangzhou/instances/mirrors
+</code></pre>
+
+
+			
+			
+		</div>
+
+	</article>
+ 
+	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+		<div class="meta">
+			<div class="date">
+				<time datetime="2019-11-29T18:18:08-08:00" itemprop="datePublished">11/29/2019</time>
+			</div>
+			<div class="tags">posted in 
+			
+			    <a class='category' href='dev-ops.html'>DevOps</a>&nbsp;
+			 
+			</div>
+		</div>
+		<h1 class="title" itemprop="name"><a href="15750802883724.html" itemprop="url">
+		平台到底是什么概念</a></h1>
+		<div class="entry-content" itemprop="articleBody">
+			
+			<h2><a id="%E4%B8%80%E8%88%AC%E5%AE%9A%E4%B9%89" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>一般定义</h2>
+<p>平台能为产品团队提供可复用能力支撑（赋能），它是一个操作环境，可以让产品团队在其上把产品特性快速交付到客户手中。ThoughtWorks开发出一个五维模型来描述平台的重要特征：</p>
+<ul>
+<li>支持端到端交付的基础设施</li>
+<li>API和架构自愈</li>
+<li>提供自助服务</li>
+<li>支持实验的基础设施</li>
+<li>提供用户触点技术</li>
+</ul>
+<h2><a id="%E5%85%88%E6%9D%A5%E7%9C%8B%E7%9C%8B%E4%BB%80%E4%B9%88%E4%B8%8D%E6%98%AF%E4%B8%80%E4%B8%AA%E5%B9%B3%E5%8F%B0" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>先来看看什么不是一个平台</h2>
+<h3><a id="%E6%8C%89%E6%8A%80%E6%9C%AF%E9%A2%86%E5%9F%9F%E5%88%92%E5%88%86%E5%9B%A2%E9%98%9F" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>按技术领域划分团队</h3>
+<p>有的企业花大力气构建自动化能力，但是往往会根据技术划分团队。比如，负责中间件管理的团队，负责操作系统管理的团队，负责DB管理的团队，负责LB管理的团队，另外还会有一个专门负责自动化的效能团队，往往能力上只是负责编排。</p>
+<p>这些团队，每个都在自己的管理架构下有独立的工作方式，每个团队都在各自的技术领域范围内实现高效率管理，集中专业化，外包非差异化功能，应用治理，并降低成本。但就是没人去衡量客户需求端到端的交付效率。</p>
+<p>一个客户需求的交付往往穿越多个团队，端到端交付效率极差。</p>
+<p>时间长了，产品和基础设施的质量逐渐下降。环境和配置上会出现很多细微的不一致。产品团队不得不降低交付速度，减少一次交付包含的特性。甚至不敢去做任何改动较大的提升动作或重构动作，而这些动作本来是用来改善问题的。</p>
+<h3><a id="%E5%BD%BC%E6%AD%A4%E4%BE%9D%E8%B5%96%E7%9A%84%E5%BE%85%E5%8A%9E%E4%BA%8B%E9%A1%B9" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>彼此依赖的待办事项</h3>
+<p>一个特性的交付往往在一个团队内无法独立完成，于是一个团队的待办事项会依赖其他团队的待办事项，彼此耦合。而往往不同团队有不同的目标，各自的待办事项优先级不同。于是一个团队的待办事项无法落地的原因往往就是依赖另一个团队的待办事项，而另一个团队迟迟不能完成。这就造成了团队之间的隔阂和互相之间的不信任，甚至扯皮、推诿，丧失责任感和创造力。最终使端到端交付的效率变得极低。</p>
+<p>显然，一个好的平台的一个重要特征是，他必须能减少待办事项耦合。该平台必须能够支持自助服务。</p>
+<h2><a id="%E4%BB%80%E4%B9%88%E6%98%AF%E4%B8%80%E4%B8%AA%E5%B9%B3%E5%8F%B0" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>什么是一个平台</h2>
+<p>AWS就是一个平台。</p>
+<h2><a id="%E5%A6%82%E4%BD%95%E6%9E%84%E5%BB%BA%E4%B8%80%E4%B8%AA%E5%B9%B3%E5%8F%B0" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>如何构建一个平台</h2>
+<ol>
+<li>调整组织架构，给每个产品团队增加5%的运维职责，节省平台团队200%的运维职责。&quot;you build it, you run it.&quot;</li>
+<li>平台自己也要承担从开发到运行的所有责任，避免平台自身的开发团队只管开发，运维团队管运行。同样要坚守：&quot;you build it, you run it.&quot;</li>
+<li>划清平台和产品团队的职责边界，产品团队负责自己产品的构建，部署，监控等；平台团队负责平台的构建，部署，监控等；设计抽象，对外暴露自助服务；平台不应该关心它上面跑的是什么业务，产品不应该关心平台使用的技术。</li>
+<li>除了提供API之外，还要提供文档，guideline, template code, on call, 布道等。</li>
+<li>最初落地时不知道需要提供哪些能力，可以从产品团队了解需求，从解决最迫切的需求开始。</li>
+</ol>
+
+
+			
+			
+		</div>
+
+	</article>
+ 
+	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+		<div class="meta">
+			<div class="date">
 				<time datetime="2019-11-28T00:12:08-08:00" itemprop="datePublished">11/28/2019</time>
 			</div>
 			<div class="tags">posted in 
@@ -992,6 +1080,141 @@ DB_NAME=echoflow      # 数据库名
 <li>🚀 安全执行</li>
 </ul>
 <p>这确保了<strong>数据库schema与代码始终保持同步</strong>，无需手动维护迁移清单! 🎉</p>
+
+
+			
+			
+		</div>
+
+	</article>
+ 
+	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+		<div class="meta">
+			<div class="date">
+				<time datetime="2025-11-04T09:39:23-08:00" itemprop="datePublished">11/04/2025</time>
+			</div>
+			<div class="tags">posted in 
+			
+			    <a class='category' href='%E7%A0%B4%E8%A7%A3%E6%9D%82%E8%B0%88.html'>破解杂谈</a>&nbsp;
+			 
+			</div>
+		</div>
+		<h1 class="title" itemprop="name"><a href="17622779634459.html" itemprop="url">
+		macOS 上同时运行两个微信实例的曲折之路</a></h1>
+		<div class="entry-content" itemprop="articleBody">
+			
+			<h2><a id="%E5%BC%80%E7%AF%87%EF%BC%9A%E4%B8%80%E4%B8%AA%E7%9C%8B%E4%BC%BC%E7%AE%80%E5%8D%95%E7%9A%84%E9%9C%80%E6%B1%82" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>开篇：一个看似简单的需求</h2>
+<p>作为一个经常需要在工作和个人微信之间切换的 Mac 用户，我突发奇想：能不能在 macOS 上同时运行两个微信实例？这样就不用频繁切换账号了。</p>
+<p>想法很美好，现实却很骨感。我简单地复制了 <code>/Applications/WeChat.app</code> 到桌面，改名为 <code>WeChat2.app</code>，并修改了 <code>Info.plist</code> 中的 bundle ID 为 <code>com.eflabs.talk</code>。然后，我满怀期待地双击了这个新应用...</p>
+<p><strong>砰！</strong> 系统无情地抛出了一个错误：</p>
+<pre><code class="language-plain_text">Launch failed. Launchd job spawn failed. (Error Code: 153)
+</code></pre>
+<h2><a id="%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%9D%91%EF%BC%9A%E7%AD%BE%E5%90%8D%E9%97%AE%E9%A2%98" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>第一个坑：签名问题</h2>
+<p>作为一个有经验的开发者，我立刻意识到这可能是签名问题。macOS 要求所有应用都必须经过代码签名才能运行，而我复制的应用还保留着原始开发者的签名。</p>
+<p>于是我尝试重新签名：</p>
+<pre><code class="language-bash">codesign --force --deep --sign - ~/Desktop/WeChat2.app
+</code></pre>
+<p>结果，另一个错误接踵而至：</p>
+<pre><code class="language-plain_text">resource fork, Finder information, or similar detritus not allowed
+</code></pre>
+<h2><a id="%E7%AC%AC%E4%BA%8C%E4%B8%AA%E5%9D%91%EF%BC%9Afinder%E7%9A%84%E7%A4%BC%E7%89%A9" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>第二个坑：Finder 的&quot;礼物&quot;</h2>
+<p>这个错误信息很明确：代码签名工具检测到了 Finder 留下的&quot;垃圾数据&quot;。当我们复制文件时，Finder 会顺手添加一些扩展属性（extended attributes），比如：</p>
+<ul>
+<li><code>com.apple.FinderInfo</code>：Finder 的元数据</li>
+<li><code>com.apple.fileprovider.fpfs#P</code>：文件提供者的信息</li>
+<li>Resource fork：传统 macOS 文件系统的资源分叉</li>
+</ul>
+<p>这些&quot;额外信息&quot;在代码签名时是不被允许的，因为它们可能会影响签名的完整性验证。</p>
+<h2><a id="%E6%BC%AB%E9%95%BF%E7%9A%84%E6%8E%A2%E7%B4%A2%EF%BC%9A%E5%90%84%E7%A7%8D%E5%B0%9D%E8%AF%95" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>漫长的探索：各种尝试</h2>
+<h3><a id="%E5%B0%9D%E8%AF%951%EF%BC%9A%E6%B8%85%E7%90%86%E6%89%A9%E5%B1%95%E5%B1%9E%E6%80%A7" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>尝试 1：清理扩展属性</h3>
+<p>我的第一反应是清理这些扩展属性：</p>
+<pre><code class="language-bash">xattr -rc ~/Desktop/WeChat2.app
+</code></pre>
+<p>清理完成！再次签名... 还是失败。</p>
+<h3><a id="%E5%B0%9D%E8%AF%952%EF%BC%9A%E5%88%A0%E9%99%A4-resource-fork" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>尝试 2：删除 resource fork</h3>
+<p>既然扩展属性清理了，那可能是 resource fork 的问题。我检查了文件，发现确实有很多文件包含 resource fork：</p>
+<pre><code class="language-bash">find ~/Desktop/WeChat2.app -type f -exec sh -c 'test -e &quot;$1/..namedfork/rsrc&quot; &amp;&amp; echo &quot;$1 has resource fork&quot;' _ {} \;
+</code></pre>
+<p>我尝试删除这些 resource fork，但依然无济于事。</p>
+<h3><a id="%E5%B0%9D%E8%AF%953%EF%BC%9A%E4%BD%BF%E7%94%A8-cp-rx%E9%87%8D%E6%96%B0%E5%A4%8D%E5%88%B6" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>尝试 3：使用 cp -RX 重新复制</h3>
+<p><code>cp -RX</code> 可以排除 resource fork 进行复制。我重新复制了整个应用：</p>
+<pre><code class="language-bash">cp -RX /Applications/WeChat.app ~/Desktop/WeChat2.app
+</code></pre>
+<p>但问题依然存在。</p>
+<h3><a id="%E5%B0%9D%E8%AF%954%EF%BC%9A%E4%BD%BF%E7%94%A8-ditto%E9%87%8D%E6%96%B0%E5%A4%8D%E5%88%B6" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>尝试 4：使用 ditto 重新复制</h3>
+<p><code>ditto</code> 命令据说可以更好地处理文件系统元数据。我尝试了：</p>
+<pre><code class="language-bash">ditto /Applications/WeChat.app ~/Desktop/WeChat2.app
+</code></pre>
+<p>还是没有解决问题。</p>
+<h2><a id="%E5%85%B3%E9%94%AE%E6%97%B6%E5%88%BB%EF%BC%9A%E6%89%BE%E5%88%B0%E7%9C%9F%E6%AD%A3%E7%9A%84%E5%8E%9F%E5%9B%A0" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>关键时刻：找到真正的原因</h2>
+<p>在经历了无数次的失败后，我决定使用更详细的调试信息。我使用了 <code>codesign</code> 的详细输出模式：</p>
+<pre><code class="language-bash">codesign --force --sign - --verbose=4 ~/Desktop/WeChat2.app/Contents/PlugIns/WeChatMacShare.appex
+</code></pre>
+<p>这次，错误信息更具体了：</p>
+<pre><code class="language-plain_text">file with invalid attached data: Disallowed xattr com.apple.FinderInfo found on /Users/harvey/Desktop/WeChat2.app/Contents/PlugIns/WeChatMacShare.appex
+</code></pre>
+<p><strong>啊哈！</strong> 问题出在<strong>目录本身</strong>的扩展属性，而不仅仅是文件。我之前的清理操作可能没有完全清理目录级别的扩展属性。</p>
+<h2><a id="%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%EF%BC%9A%E7%B3%BB%E7%BB%9F%E5%8C%96%E7%9A%84%E6%B8%85%E7%90%86%E5%92%8C%E7%AD%BE%E5%90%8D" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>解决方案：系统化的清理和签名</h2>
+<p>找到了根本原因，解决方案就清晰了。关键是要：</p>
+<ol>
+<li><strong>彻底清理所有扩展属性</strong>：包括文件和目录</li>
+<li><strong>逐个签名组件</strong>：先签名所有子组件（.app、.appex、.framework），再签名主应用</li>
+<li><strong>使用 --preserve-metadata 选项</strong>：保留必要的元数据（entitlements、requirements 等）</li>
+</ol>
+<h3><a id="%E5%AE%8C%E6%95%B4%E7%9A%84%E8%A7%A3%E5%86%B3%E8%84%9A%E6%9C%AC" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>完整的解决脚本</h3>
+<pre><code class="language-bash"># 1. 重新复制应用（排除 resource fork）
+cp -RX /Applications/WeChat.app ~/Desktop/WeChat2.app
+
+# 2. 修改 bundle ID
+/usr/libexec/PlistBuddy -c &quot;Set :CFBundleIdentifier com.eflabs.talk&quot; ~/Desktop/WeChat2.app/Contents/Info.plist
+
+# 3. 彻底清理所有扩展属性（文件和目录）
+xattr -rc ~/Desktop/WeChat2.app
+find ~/Desktop/WeChat2.app -type d -exec xattr -c {} \; 2&gt;/dev/null
+
+# 4. 移除所有现有签名
+codesign --remove-signature ~/Desktop/WeChat2.app 2&gt;/dev/null
+find ~/Desktop/WeChat2.app -type d \( -name &quot;*.app&quot; -o -name &quot;*.appex&quot; -o -name &quot;*.framework&quot; \) -exec codesign --remove-signature {} \; 2&gt;/dev/null
+
+# 5. 逐个签名所有组件（从最内层开始）
+find ~/Desktop/WeChat2.app -type d \( -name &quot;*.app&quot; -o -name &quot;*.appex&quot; -o -name &quot;*.framework&quot; \) | sort -r | while read dir; do
+    xattr -c &quot;$dir&quot; 2&gt;/dev/null
+    codesign --force --sign - --preserve-metadata=entitlements,requirements,flags,runtime &quot;$dir&quot; 2&gt;&amp;1
+done
+
+# 6. 最后签名主应用
+xattr -c ~/Desktop/WeChat2.app
+codesign --force --sign - --preserve-metadata=entitlements,requirements,flags,runtime ~/Desktop/WeChat2.app
+</code></pre>
+<h3><a id="%E5%85%B3%E9%94%AE%E6%8A%80%E5%B7%A7" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>关键技巧</h3>
+<ol>
+<li><strong><code>sort -r</code></strong>：确保从最内层的组件开始签名（依赖关系）</li>
+<li><strong><code>--preserve-metadata</code></strong>：保留 entitlements 等信息，避免应用功能受限</li>
+<li><strong>清理后立即签名</strong>：防止系统在签名过程中重新添加扩展属性</li>
+</ol>
+<h2><a id="%E6%88%90%E5%8A%9F%E6%97%B6%E5%88%BB%EF%BC%9A%E4%B8%A4%E4%B8%AA%E5%BE%AE%E4%BF%A1%E5%90%8C%E6%97%B6%E8%BF%90%E8%A1%8C" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>成功时刻：两个微信同时运行</h2>
+<p>执行完上述步骤后，我小心翼翼地尝试启动应用：</p>
+<pre><code class="language-bash">open -n ~/Desktop/WeChat2.app
+</code></pre>
+<p><strong>成功了！</strong> 应用正常启动，并且我看到两个微信进程同时在运行：</p>
+<ul>
+<li>原始微信：<code>com.tencent.xinWeChat</code> (来自 <code>/Applications/WeChat.app</code>)</li>
+<li>新微信：<code>com.eflabs.talk</code> (来自 <code>~/Desktop/WeChat2.app</code>)</li>
+</ul>
+<p>它们使用不同的 bundle ID 和独立的数据目录，完全不会互相干扰。</p>
+<h2><a id="%E7%BB%8F%E9%AA%8C%E6%80%BB%E7%BB%93" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>经验总结</h2>
+<ol>
+<li><strong>macOS 的代码签名非常严格</strong>：不仅仅是文件内容，连文件系统元数据也会被检查</li>
+<li><strong>Finder 会&quot;好心&quot;地添加元数据</strong>：复制文件时要注意清理扩展属性</li>
+<li><strong>签名顺序很重要</strong>：必须从最内层的依赖组件开始签名</li>
+<li><strong>使用详细输出模式调试</strong>：<code>--verbose=4</code> 可以帮助定位具体问题</li>
+<li><strong><code>--preserve-metadata</code> 选项很关键</strong>：避免丢失重要的应用配置信息</li>
+</ol>
+<h2><a id="%E5%90%8E%E8%AE%B0" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>后记</h2>
+<p>这个看似简单的需求，实际上涉及了 macOS 的安全机制、文件系统特性、代码签名等多个方面。虽然过程曲折，但最终成功解决了问题，也让我对 macOS 的应用签名机制有了更深入的理解。</p>
+<p>现在，我可以愉快地同时使用两个微信账号了！🎉</p>
+<hr />
+<p><em>本文记录了在 macOS 15.6 上同时运行两个微信实例的完整解决方案。如果遇到类似问题，希望这篇文章能帮助你少走弯路。</em></p>
 
 
 			

@@ -136,6 +136,169 @@
 	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
 		<div class="meta">
 			<div class="date">
+				<time datetime="2025-10-04T21:02:37-07:00" itemprop="datePublished">10/04/2025</time>
+			</div>
+			<div class="tags">posted in 
+			
+			    <a class='category' href='mac-dev-env.html'>Mac开发环境</a>&nbsp;
+			 
+			</div>
+		</div>
+		<h1 class="title" itemprop="name"><a href="17596369578102.html" itemprop="url">
+		iOS Frontend Environment Debugging Retrospective (M1/arm64, Xcode 16)</a></h1>
+		<div class="entry-content" itemprop="articleBody">
+			
+			<h2><a id="tl-dr" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>TL;DR</h2>
+<p>I repeatedly failed building a React Native 0.81 + RNFirebase Messaging iOS app on an Apple Silicon (M1/arm64) machine due to a combination of:</p>
+<ul>
+<li>C/C++ header include-order pitfalls (RCT-Folly, Yoga, glog) amplified by custom header tweaks</li>
+<li>CocoaPods quirks (bundled version vs system pod, encoding)</li>
+<li>Firebase module map exposure (missing modular headers)</li>
+</ul>
+<p>The final green build came from reverting to standard RN 0.81 Pod settings, keeping architecture defaults, and enabling modular headers for GoogleUtilities, FirebaseCoreInternal, and FirebaseCore — plus using the system <code>pod</code> to avoid a known Bundler/CocoaPods issue.</p>
+<hr />
+<h2><a id="environment" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Environment</h2>
+<ul>
+<li>Machine: Apple Silicon (M1, arm64)</li>
+<li>macOS: 15.6.x (Darwin 24.6.0)</li>
+<li>Xcode: 16.1 (Build 17A400), iPhoneSimulator SDK 26.0</li>
+<li>React Native: 0.81.x (Hermes enabled)</li>
+<li>CocoaPods:
+<ul>
+<li>Bundled pod had an intermittent “pathname contains null byte” bug</li>
+<li>System <code>pod</code> worked reliably</li>
+</ul>
+</li>
+<li>iOS Deployment Target: 15.1</li>
+<li>Firebase: RNFirebase (App + Messaging)</li>
+</ul>
+<hr />
+<h2><a id="symptoms-observed" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Symptoms Observed</h2>
+<ol>
+<li>Yoga headers not found, e.g. <code>'yoga/Yoga.h' file not found</code>.</li>
+<li>RCT-Folly errors referencing <code>&lt;cstdio&gt;/&lt;cstring&gt;/&lt;cmath&gt;</code> with C headers taking precedence over libc++ wrappers (leading to <code>FILE</code>/<code>pthread</code> issues).</li>
+<li>glog mutex-related build breaks (<code>mutex.h</code>/pthread macros).</li>
+<li>CocoaPods “pathname contains null byte” during <code>pod install</code> with the bundled Ruby/CocoaPods.</li>
+<li>Firebase compile errors: <code>Module 'FirebaseCore' not found</code> in <code>FirebaseInstallations</code> sources.</li>
+<li>Intermittent Xcode/Ruby locale hiccups (resolved by ensuring UTF-8 env and re-running).</li>
+</ol>
+<hr />
+<h2><a id="root-causes" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Root Causes</h2>
+<ul>
+<li>Over-customized header search paths for Pods (global <code>HEADER_SEARCH_PATHS</code>, <code>SYSTEM_HEADER_SEARCH_PATHS</code>, <code>OTHER_CPLUSPLUSFLAGS</code>, <code>-isystem</code>) changed include order, making C headers shadow libc++ and breaking RCT-Folly.</li>
+<li>Attempting to “fix” headers globally (Pods + App target) unintentionally polluted multiple targets (glog, Yoga, Folly, React-*), causing cascading failures.</li>
+<li>Using frameworks / modular header toggles globally introduced module map mismatches for Swift pods and RNFirebase transitive deps.</li>
+<li>Bundled CocoaPods path/encoding edge-case (“pathname contains null byte”) blocked deterministic installs.</li>
+<li>FirebaseCore module was not exposed as a modular header in our setup, causing <code>Module 'FirebaseCore' not found</code>.</li>
+</ul>
+<hr />
+<h2><a id="what-actually-fixed-it" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>What Actually Fixed It</h2>
+<ul>
+<li>Reset Podfile to the standard RN 0.81 shape; don’t globally alter header search paths or C++ flags.</li>
+<li>Keep Legacy Architecture (disable New Architecture explicitly) and target iOS 15.1 to satisfy React Native codegen.</li>
+<li>Avoid forcing <code>use_frameworks!</code>; stick to default static libraries.</li>
+<li>Make only the necessary Firebase pods modular:
+<ul>
+<li><code>GoogleUtilities</code>, <code>FirebaseCoreInternal</code>, and critically <code>FirebaseCore</code>.</li>
+</ul>
+</li>
+<li>Use system <code>pod install</code> (not Bundler) to avoid the “pathname contains null byte” error.</li>
+<li>Build on an arm64 simulator (M1 host), letting headermap/modulemaps drive includes.</li>
+<li>Do not add Yoga paths manually; rely on Yoga’s own modulemap and RN defaults.</li>
+<li>Only if needed: for glog, ensure pthread defines via target-specific settings (but avoid global hacks).</li>
+</ul>
+<p>Result: Build succeeded. App runs, and FCM token logs as expected.</p>
+<hr />
+<h2><a id="minimal-podfile-working-shape" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Minimal Podfile (Working Shape)</h2>
+<pre><code class="language-ruby"># Resolve react_native_pods.rb with node to allow for hoisting
+require Pod::Executable.execute_command('node', ['-p',
+  'require.resolve(
+    &quot;react-native/scripts/react_native_pods.rb&quot;,
+    {paths: [process.argv[1]]},
+  )', __dir__]).strip
+
+platform :ios, '15.1'
+ENV['RCT_NEW_ARCH_ENABLED'] = '0'
+prepare_react_native_project!
+
+target 'EchoReadApp' do
+  config = use_native_modules!
+
+  use_react_native!(
+    :path =&gt; config[:reactNativePath],
+    :app_path =&gt; &quot;#{Pod::Config.instance.installation_root}/..&quot;
+  )
+
+  # Ensure Swift pods expose module maps for Firebase
+  pod 'GoogleUtilities', :modular_headers =&gt; true
+  pod 'FirebaseCoreInternal', :modular_headers =&gt; true
+  pod 'FirebaseCore', :modular_headers =&gt; true
+
+  post_install do |installer|
+    react_native_post_install(
+      installer,
+      config[:reactNativePath],
+      :mac_catalyst_enabled =&gt; false
+    )
+    # No global header/cxx overrides here. Keep RN defaults.
+  end
+end
+</code></pre>
+<p>Key point: No global <code>use_frameworks!</code>, no global <code>HEADER_SEARCH_PATHS</code>/<code>SYSTEM_HEADER_SEARCH_PATHS</code> hacks, no project-wide <code>-isystem</code> injections.</p>
+<hr />
+<h2><a id="verified-working-build-path" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Verified Working Build Path</h2>
+<ol>
+<li>Clean CocoaPods integration
+<pre><code class="language-bash">cd ios
+pod deintegrate
+rm -rf build Pods Podfile.lock
+</code></pre>
+</li>
+<li>Install with system CocoaPods
+<pre><code class="language-bash">pod install
+</code></pre>
+</li>
+<li>Xcode clean + build (arm64 simulator)
+<pre><code class="language-bash">xcodebuild \
+  -workspace EchoReadApp.xcworkspace \
+  -scheme EchoReadApp \
+  -sdk iphonesimulator \
+  -configuration Debug \
+  -destination 'platform=iOS Simulator,name=iPhone 17 Pro' \
+  ONLY_ACTIVE_ARCH=YES \
+  build
+</code></pre>
+</li>
+<li>Run the app (will print FCM token on first launch after permission)
+<pre><code class="language-bash"># ensure Metro is running
+npm start   # or: npx react-native start
+
+# then run on simulator
+npx react-native run-ios --simulator &quot;iPhone 17 Pro&quot;
+</code></pre>
+</li>
+</ol>
+<hr />
+<h2><a id="guidance-for-future-changes" class="anchor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Guidance for Future Changes</h2>
+<ul>
+<li>Prefer target-scoped tweaks over global Podfile-wide settings.</li>
+<li>Let RN’s <code>react_native_post_install</code> do the heavy lifting; avoid overriding header maps.</li>
+<li>For Firebase on RN iOS, keep <code>GoogleUtilities</code>, <code>FirebaseCoreInternal</code>, and <code>FirebaseCore</code> as modular headers when using static libs.</li>
+<li>On Apple Silicon, prefer arm64 simulators and avoid x86_64-specific workarounds.</li>
+<li>If <code>pod install</code> misbehaves under Bundler, try system <code>pod</code> as a fallback.</li>
+<li>Treat any “fix” that alters global include order with suspicion; verify by reverting to defaults first.</li>
+</ul>
+
+
+			
+			
+		</div>
+
+	</article>
+ 
+	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+		<div class="meta">
+			<div class="date">
 				<time datetime="2022-09-14T09:34:47-07:00" itemprop="datePublished">09/14/2022</time>
 			</div>
 			<div class="tags">posted in 
@@ -516,34 +679,6 @@ yarn global add react-devtools</p>
 <p>在终端中输入</p>
 <pre><code class="language-shell">sudo spctl --master-disable
 </code></pre>
-
-
-			
-			
-		</div>
-
-	</article>
- 
-	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-		<div class="meta">
-			<div class="date">
-				<time datetime="2019-06-27T18:45:13-07:00" itemprop="datePublished">06/27/2019</time>
-			</div>
-			<div class="tags">posted in 
-			
-			    <a class='category' href='mac-dev-env.html'>Mac开发环境</a>&nbsp;
-			 
-			</div>
-		</div>
-		<h1 class="title" itemprop="name"><a href="15616863130414.html" itemprop="url">
-		MAC使用技巧</a></h1>
-		<div class="entry-content" itemprop="articleBody">
-			
-			<ul>
-<li>Command+Shift+. 可以显示隐藏文件、文件夹，再按一次，恢复隐藏；</li>
-<li>finder下使用Command+Shift+G 可以前往任何文件夹，包括隐藏文件夹；</li>
-<li>恢复备份时的默认密码是：0000</li>
-</ul>
 
 
 			
